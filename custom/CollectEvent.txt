@@ -1,0 +1,303 @@
+payon,175,195,3	script	WOE Preparation	109,{
+
+mes "[WOE Preparation]";
+mes "Hi there i can make some items for you come check it";
+next;
+mes "[WOE Preparation]";
+mes "This items are very usefull for you.";
+next;
+menu "^FE2E2E"+getitemname(25009)+" ^000000",Q_1,	"^FE2E2E"+getitemname(25010)+"^000000",Q_2,	"^FE2E2E"+getitemname(25011)+"^000000",Q_3,	"^FE2E2E"+getitemname(25012)+"^000000",Q_4,	"^FE2E2E"+getitemname(25019)+"^000000",Q_5,	"^FE2E2E"+getitemname(25020)+"^000000",Q_6,	"^FE2E2E"+getitemname(25021)+"^000000",Q_7,	"^FE2E2E"+getitemname(25023)+"^000000",Q_8,	"^FE2E2E"+getitemname(25024)+"^000000",Q_9,	"^FE2E2E"+getitemname(25025)+"^000000",Q_10, "^FE2E2E"+getitemname(25022)+"^000000",Q_11	;
+
+Q_1:
+mes "I can give you 1 Pcs ^FE2E2E[Silf Manteau Box 1D]^000000";
+mes "Item Requirements:";
+mes "Feather of Birds 100 Pcs";
+mes "Shoulders Protector 50 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+	
+case 1:
+if (countitem(916) < 100 || countitem(7196) < 50 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep11){
+#woeprep11 = true;
+delitem 916,100;	// feather of birds
+delitem 7196,50;			// Shoulders Protector
+Zeny=Zeny-100000;
+getitembound 25009,1,Bound_Account;    // Sylphid manteau
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_2:
+mes "I can give you 1 Pcs ^FE2E2E[Refresh Shoes Box 1D]^000000";
+mes "Item Requirements:";
+mes "White Herbs 50 Pcs";
+mes "Striped Socks 50 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(509) < 100 || countitem(7219) < 50 || Zeny < 100000) goto REQ_MISS;
+if (!#woeprep21){
+#woeprep21 =true;
+delitem 509,100;    //white herbs
+delitem 7219,50;    //Striped socks
+Zeny=Zeny-100000;
+getitembound 25010,1,Bound_Account;    //    Refresh Shoes
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_3:
+mes "I can give you 1 Pcs ^FE2E2E[Refined Bunny Band Box 1D]^000000";
+mes "Item Requirements:";
+mes "Feather 50 Pcs";
+mes "Spring Rabbit Card 1 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(949) < 50 || countitem(4227) < 1 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep31){
+#woeprep31 =true;
+delitem 949,50;    //feather
+delitem 4227,1;    //springrabbitcard
+Zeny=Zeny-100000;
+getitembound 25011,1,Bound_Account;    //    bunny band
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_4:
+mes "I can give you 1 Pcs ^FE2E2E[Spiritual Tunic Box 1D]^000000";
+mes "Item Requirements:";
+mes "Iron 75 Pcs";
+mes "Undershirt 2 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(998) < 75 || countitem(2522) < 2 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep41){
+#woeprep41 =true;
+delitem 998,75;    //iron
+delitem 2522,2;    //undershirt
+Zeny=Zeny-100000;
+getitembound 25012,1,Bound_Account;    //    tunic
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_5:
+mes "I can give you 1 Pcs ^FE2E2E[Refined Earring Box 1D]^000000";
+mes "Item Requirements:";
+mes "Jubilee 75 Pcs";
+mes "Fine Sand 45 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(7312) < 75 || countitem(7043) < 45 || Zeny < 100000) goto REQ_MISS;
+if (!#woeprep51){
+#woeprep51 =true;
+delitem 7312,75;    //jubilee
+delitem 7043,45;    //Fine sand
+Zeny=Zeny-100000;
+getitembound 25019,1,Bound_Account;    //    acc
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_6:
+mes "I can give you 1 Pcs ^FE2E2E[Refined Ring Box 1D]^000000";
+mes "Item Requirements:";
+mes "Nose Ring 75 Pcs";
+mes "Grit 75 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(941) < 75 || countitem(1056) < 75 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep61){
+#woeprep61 =true;
+delitem 941,75;    //nosering
+delitem 1056,75;    //grit
+Zeny=Zeny-100000;
+getitembound 25020,1,Bound_Account;    //    acc
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_7:
+mes "I can give you 1 Pcs ^FE2E2E[Refined Necklace Box 1D]^000000";
+mes "Item Requirements:";
+mes "Fine Sand 50 Pcs";
+mes "Grit 75 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(7043) < 50 || countitem(1056) < 75 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep71){
+#woeprep71 =true;
+delitem 7043,50;    //Fine sand
+delitem 1056,75;    //grit
+Zeny=Zeny-100000;
+getitembound 25021,1,Bound_Account;    //    acc
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_8:
+mes "I can give you 1 Pcs ^FE2E2E[Refined Brooch Box 1D]^000000";
+mes "Item Requirements:";
+mes "Rotten Bandage 75 Pcs";
+mes "Coal 50 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(930) < 75 || countitem(1003) < 50 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep81){
+#woeprep81 =true;
+delitem 930,75;    //rotten bandage
+delitem 1003,50;    //coal
+Zeny=Zeny-100000;
+getitembound 25023,1,Bound_Account;   //    acc
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_9:
+mes "I can give you 1 Pcs ^FE2E2E[Refined Rosary Box 1D]^000000";
+mes "Item Requirements:";
+mes "Wild Rose Card 2 Pcs";
+mes "Star Dust 75 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(4257) < 2 || countitem(1001) < 75 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep91){
+#woeprep91 =true;
+delitem 4257,2;    //wild rose card
+delitem 1001,75;   //star dust
+Zeny=Zeny-100000;
+getitembound 25024,1,Bound_Account;    //    acc
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_10:
+mes "I can give you 1 Pcs ^FE2E2E[Blush of Groom Box 1D]^000000";
+mes "Item Requirements:";
+mes "Clover 100 Pcs";
+mes "Shinobi Sash 1 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(705) < 100 || countitem(2654) < 1 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep101){
+#woeprep101 =true;
+delitem 705,100;    //clover
+delitem 2654,1;     //Shinobi Sash
+Zeny=Zeny-100000;
+getitembound 25025,1,Bound_Account;    //    acc
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+Q_11:
+mes "I can give you 1 Pcs ^FE2E2E[Refined Glove 1D]^000000";
+mes "Item Requirements:";
+mes "Royal Jelly 50 Pcs";
+mes "Memento 100 Pcs";
+mes "and";
+mes "Zeny 100.000";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+if (countitem(934) < 100 || countitem(526) < 50 || Zeny < 100000 ) goto REQ_MISS;
+if (!#woeprep111){
+#woeprep111 =true;
+delitem 934,100;     // Memento
+delitem 526,50;     // Royal Jelly
+Zeny=Zeny-100000;
+getitembound 25022,1,Bound_Account;    //    acc
+end;
+}
+mes "[WOE Preparation]";
+mes "Oh sorry, I just can give you 1 per item";
+end;
+
+case 2:
+end;
+}
+REQ_MISS: 
+mes "[WOE Preparation]";
+mes "Oh, dear. Your Requirements is incomplete";
+end;
+
+}

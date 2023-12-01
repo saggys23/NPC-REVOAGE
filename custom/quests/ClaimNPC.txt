@@ -1,0 +1,223 @@
+payon,166,221,3	script	Claim Event	833,{
+
+
+
+setarray .@topmvp1$,"King","GM-Aesir";
+setarray .@topmvp2$,"Azithromycin","GM-Aesir";
+setarray .@topmvp3$,"Siebzig","GM-Aesir";
+
+setarray .@toppvp1$,"Live","GM-Aesir";
+setarray .@toppvp2$,"FAIR","GM-Aesir";
+setarray .@toppvp3$,"Cotto","GM-Aesir";	
+	
+setarray .@topcvc1$,"Nouxt","GM-Aesir";
+setarray .@topcvc2$,"FRzThrn","GM-Aesir";
+setarray .@topcvc3$,"IzzyStradlin","GM-Aesir";	
+
+setarray .@pvpevent2$,"CHENMAKLIN","GM-Aesir";
+setarray .@pvpevent3$,"Shirayuri","GM-Aesir";
+/*
+setarray .@cvcrank1$,"Nouxt","GMTESTING";
+setarray .@cvcrank2$,"Eina","GMTESTING";
+setarray .@cvcrank3$,"IzzyStradlin","GMTESTING";
+
+setarray .@horror1$,"Jejeh","GMTESTING";
+setarray .@horror2$,"MamangKurma","GMTESTING";
+setarray .@horror3$,"YANTO","GMTESTING";
+setarray .@horrorparticipant$,"Jejeh" ,"MamangKurma" ,"YANTO" ,"syandrakupret","GMTESTING";
+
+setarray .@topmvp1$,"Siebzig","King","Azithromycin";
+setarray .@toppvp1$,"CORE","Spectr","Eina";
+setarray .@hnsshare1$,"RRRR","Audrey","Bongek","GMdummy";
+setarray .@puzzle$,"Crusder","GM-Aesir","RocketCoaster","BreezzJr","knyy","Sadge","Mijon","Claymore","Elleanor","YANTO","Pilus","Tohru","Amiya","MASKLOWOR","Persephone","Nihsnavri","Zinn","KINGKWOK","Milly","Resyu","Hehe666x","Doyokoyod","Cyclone","SelectiveHearing","Cirio","MamangKurma","Caim","Ardelle","Audrey","Clismino","ubud","Cokiin","Renatta","rdw666","Cindy","Live","Secret","Gign","INDOMIEGORENGKUAH","Avkash","Lounge","Mihuna","Siebzig","bahboh","Linukuro","Nobody","Yours","Hmmm","Oyakodon","Jovin","Bongek","URUTORAMAN","budak2","ReaLMe","STRIKERIST","baboyski";
+setarray .@likeshare$,"YANTO","Pedagang","BrezzJr","INDOMIEGORENGKUAH","SkuttDlahoya","Elleanor","Cirio","Liliya","Harumichi","GM-Aesir","Ardelle","baboyski","Pilus","Milly","Bubblegum","Tsubasa","SNAPDRAGON","Avkash","Bongek","DiscHohnzz3285","Doyokoyod","Lvinez","Literally","ChenMingFei","Niaga","9TAILS","SIN7","Jasper","ggbijo","REKKLES","fbcom4brgaming","CORE","Thalhah","Aksara","Seyo","UNNY","Deva","Schwein","Thessa","Getsu","STRIKERIST","Mirajane","HiKz","ParaPending","Kimmy","PornStar","PukulPuki","CIOBEDYL","KiMiSo";
+*/
+.@nickname$ = strcharinfo(0);
+if (!checkweight(1483,10)) {
+mes "Please Check ur Weight";
+end;
+}
+if (strcharinfo(2) == "Eden" ) {
+if ( $geseason1 < 30 && !#claimgeseason1){
+rentitem 38039,(30*24*60*60);
+$geseason1 += 1;
+#claimgeseason1 = 1;
+}
+}
+if(!#pvpevent && inarray(.@pvpevent2$,.@nickname$) != -1){
+	getitembound 6456,1,Bound_Account;
+	#pvpevent = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rewards !";
+}
+if(!#pvpevent && inarray(.@pvpevent3$,.@nickname$) != -1){
+	getitembound 6457,1,Bound_Account;
+	#pvpevent = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rewards !";
+}
+/*
+if(!#rankcvc2 && inarray(.@topcvc1$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 300000;
+	getitembound 20033,1,Bound_Account;
+	#rankcvc2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your CVC Rank Rewards !";
+}
+if(!#rankcvc2 && inarray(.@topcvc2$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 200000;
+	getitembound 20033,1,Bound_Account;
+	#rankcvc2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your CVC Rank Rewards !";
+}
+if(!#rankcvc2 && inarray(.@topcvc3$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 100000;
+	getitembound 20033,1,Bound_Account;
+	#rankcvc2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your CVC Rank Rewards !";
+}
+
+
+if(!#rankpvp2 && inarray(.@toppvp1$,.@nickname$) != -1){
+	getitem 6235,3;
+	getitem 6231,3;
+	getitembound 31373,1,Bound_Account;
+	#rankpvp2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rank Rewards !";
+}
+if(!#rankpvp2 && inarray(.@toppvp2$,.@nickname$) != -1){
+	getitem 6235,2;
+	getitem 6231,2;
+	getitembound 31373,1,Bound_Account;
+	#rankpvp2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rank Rewards !";
+}
+if(!#rankpvp2 && inarray(.@toppvp3$,.@nickname$) != -1){
+	getitem 6235,1;
+	getitem 6231,1;
+	getitembound 31373,1,Bound_Account;
+	#rankpvp2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rank Rewards !";
+}
+
+
+
+if(!#rankmvp2 && inarray(.@topmvp1$,.@nickname$) != -1){
+	getitem 12246,1;			//mca
+	//35003			//sealed card albm
+	//12103			//bdb
+	getitembound 31488,1,Bound_Account;
+	#rankmvp2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your MVP Rank Rewards !";
+}
+if(!#rankmvp2 && inarray(.@topmvp2$,.@nickname$) != -1){
+	//12246			//mca
+	getitem 35003,1;			//sealed card albm
+	//12103			//bdb
+	getitembound 31488,1,Bound_Account;
+	#rankmvp2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your MVP Rank Rewards !";
+}
+if(!#rankmvp2 && inarray(.@topmvp3$,.@nickname$) != -1){
+	//getitem 12246,1;			//mca
+	//35003			//sealed card albm
+	getitem 12103,10;			//bdb
+	getitembound 31488,1,Bound_Account;
+	#rankmvp2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your MVP Rank Rewards !";
+}
+
+//HORROR
+if(!#horrorseason && inarray(.@horror1$,.@nickname$) != -1){
+getitem 20798,1;
+message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	#horrorseason = true;
+}
+if(!#horrorseason && inarray(.@horror2$,.@nickname$) != -1){
+getitem 6235,1;
+getitem 6231,1;
+message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	#horrorseason = true;
+}
+if(!#horrorseason && inarray(.@horror3$,.@nickname$) != -1){
+getitem 35007,5;
+message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	#horrorseason = true;
+}
+
+if(!#horrorpart && inarray(.@horror3$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 50000;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your reward : 50.000 Cash HORROR!";
+	#horrorpart = true;
+}
+
+//CVC 
+if(!#cvcseason2 && inarray(.@cvcrank1$,.@nickname$) != -1){
+rentitem 31719,(28*24*60*60);
+getitem 8001,1;
+getitem 8005,1;
+getitem 8013,1;
+getitem 6235,1;
+getitem 6231,1;
+getitem 6240,3;
+getitem 6241,3;
+message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	#cvcseason2 = true;
+}
+if(!#cvcseason2 && inarray(.@cvcrank2$,.@nickname$) != -1){
+getitem 8001,1;
+getitem 8005,1;
+getitem 8012,1;
+getitem 6456,1;
+getitem 6457,1;
+message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	#cvcseason2 = true;
+}
+if(!#cvcseason2 && inarray(.@cvcrank3$,.@nickname$) != -1){
+getitem 8001,1;
+getitem 8005,1;
+getitem 6240,1;
+getitem 6241,1;
+message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	#cvcseason2 = true;
+}
+*/
+
+
+
+
+
+/*
+if(!#pvprank1 && inarray(.@toppvp1$,.@nickname$) != -1){
+	getitembound 31373,1,Bound_Account;
+	#pvprank1 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	}
+if(!#mvprank1 && inarray(.@topmvp1$,.@nickname$) != -1){
+	getitembound 31488,1,Bound_Account;
+	#mvprank1 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	}
+if(!#hnsshare && inarray(.@hnsshare1$,.@nickname$) != -1){
+	getitembound 35006,1,Bound_Account;
+	getitembound 3001,1,Bound_Account;
+	#hnsshare = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	}
+
+if(!#likeshare && inarray(.@likeshare$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 10000;
+	#likeshare = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	}
+
+if(!#puzzle2 && inarray(.@puzzle$,.@nickname$) != -1){
+	getitembound 3001,1,Bound_Account;
+	getitembound 35006,2,Bound_Account;
+	#puzzle2 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your reward !";
+	}
+*/
+	end;
+}
+
+
+
+

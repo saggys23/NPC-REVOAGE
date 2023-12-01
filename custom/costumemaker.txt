@@ -1,0 +1,62 @@
+vip,50,55,4	script	Costumer#cs_0	646,{
+	mes "[ "+strnpcinfo(1)+" ]";
+	mes "^ff0000Warning!^000000";
+	mes "Converted item will lose all defense, refine, cards and abilities permanently!";
+	mes "You can create Costume from RENTAL, but remember! It will be DISAPPEAR as rental item time EXPIRED.";																										   
+	next;
+	mes "I also charge a modest service fee of 1 Coupun Costume Maker and 2 million zeny.";
+	mes "Costume Has no Effect at all, only description bug.";
+	next;
+	mes "Restricted Item List : ";
+	mes "Fricca's Circlet [0]";
+	mes "Ulle's Cap [1]  ";
+	mes "Valkyrie Helm [1] ";
+	mes "Morrigane's Helm [0]";
+	mes "Skull Cap [1]";
+	mes "Red Winghat [0]";
+	mes "And some updated Gear";
+	next;
+	setarray .@Position$[1],"Top","Mid","Low";
+	setarray .@Position[1],EQI_HEAD_TOP , EQI_HEAD_MID,EQI_HEAD_LOW;
+	set .@Menu$,"";
+	for( set .@i, 1; .@i < 4; set .@i, .@i + 1 )
+	{
+		if( getequipisequiped(.@Position[.@i]) )
+		set .@Menu$, .@Menu$ + .@Position$[.@i] + "-" + "[" + getequipname(.@Position[.@i]) + "]";
+		set .@Menu$, .@Menu$ + ":";
+	}
+	set .@Part, .@Position[ select(.@Menu$) ];
+	setarray .@restrict,5690,5124,18539,5127,5171,5123,18536,18573,42001,5462,5446,18909;
+	if( !getequipisequiped(.@Part) )
+	{
+		mes "[ " + strnpcinfo(1) + " ]";
+		mes "You are not wearing anything there...";
+		close;
+	}
+	.@eqid = getequipid(.@Part);
+	mes "[ "+strnpcinfo(1)+" ]";
+	mes "You want to Costume your "+ getitemname(.@eqid) +"?";
+	next;
+	if (inarray(.@restrict,.@eqid) != -1) {	
+		mes " This item restricted.";
+		end;
+	}	
+	if( select("Yes, proceed:No, I am sorry.") == 2 )
+	{
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "Need some time to think about it, huh?";
+		mes "Alright, I can understand.";
+		close;
+	}
+	if (Zeny<2000000) { mes "You didn't bring enough money!"; close; }
+	if (Countitem(3107)<1) { mes "You didn't bring the Coupon!"; close; }
+	//if (Countitem(972)<30) { mes "You didn't bring enough Karvodailnirol!"; close; }
+	Zeny = Zeny - 2000000;
+	delitem 3107,1;
+	//delitem 972,30;
+	costume .@Part; // Convert the Headgear
+	mes "[ "+strnpcinfo(1)+" ]";
+	mes "Done, enjoy your costume headgear.";
+	close;
+
+}

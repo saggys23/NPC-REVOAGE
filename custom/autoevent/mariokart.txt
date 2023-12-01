@@ -1,0 +1,388 @@
+coliseum,150,170,6	script	Mario_warper	45,2,2,{
+    end;
+
+OnTouch:
+    doevent "mario_kart_main::OnEnter";
+end;
+}
+
+function	script	dispell	{
+	while ( .@STATUS < 297 ) {
+		if (	
+			.@STATUS != SC_WEIGHT50 &&
+			.@STATUS != SC_WEIGHT90 &&
+			.@STATUS != SC_NOCHAT &&
+			.@STATUS != SC_XMAS &&
+			.@STATUS != SC_SUMMER &&
+			.@STATUS != SC_JAILED &&
+			.@STATUS != SC_STRFOOD &&
+			.@STATUS != SC_AGIFOOD &&
+			.@STATUS != SC_VITFOOD &&
+			.@STATUS != SC_INTFOOD &&
+			.@STATUS != SC_DEXFOOD &&
+			.@STATUS != SC_LUKFOOD &&
+			.@STATUS != SC_FLEEFOOD &&
+			.@STATUS != SC_BATKFOOD &&
+			.@STATUS != SC_WATKFOOD &&
+			.@STATUS != SC_MATKFOOD &&
+			.@STATUS != SC_SCRESIST &&
+			.@STATUS != SC_EXPBOOST &&
+			.@STATUS != SC_ITEMBOOST &&
+			.@STATUS != SC_BOSSMAPINFO &&
+			.@STATUS != SC_LIFEINSURANCE &&
+			.@STATUS != SC_JEXPBOOST
+		)
+		sc_end .@STATUS;
+		set .@STATUS, .@STATUS+1;
+	}
+return;
+}
+
+r_road,157,193,3	script	RM Race	893,{
+
+	mes "Do yo want to go out?";
+	if(select("Yes:No") == 2) close;
+	
+	for(.@i = 0; .@i <= (getarraysize($@items))-1; .@i++)
+	{
+		if(countitem($@items[.@i]) >= 1)
+		{
+			delitem $@items[.@i],1;
+		}
+	}	
+	setunmount();
+	warp "payon",155,220;
+
+	emotion ET_GO;
+	end;
+}
+
+-	script	mario_kart_main	-1,{
+end;
+
+OnWhisperGlobal:
+	if(getgmlevel() >= 10 && @whispervar0$ == "start")
+		.activado = 1;
+		doevent "mario_kart_main::OnMarioStart";
+end;
+
+	OnFinishRound:
+		if(.status == 2)
+		{
+			@checkpoint = 0; // Inicia de 
+			@round_count++;
+			
+			if(@round_count >= .round)
+			{
+				.total_winner_count++;
+				switch(.total_winner_count)
+				{
+					case 1:
+						getitem $@item_premio,5;
+					break;
+					
+					case 2:
+						getitem $@item_premio,5;
+					break;
+					
+					case 3:
+						getitem $@item_premio,5;
+					break;
+					
+					default:
+						getitem $@item_premio,5;
+					break;	
+				}
+				.@name$ = strcharinfo(0);
+				.@second = getnpctimer(0);
+				
+				mes "You're the "+F_GetNumSuffix( .total_winner_count )+" players who finished the RM Race!.";
+				mapannounce .mario_map$,.@name$+" - "+F_GetNumSuffix( .total_winner_count )+" players finished the tracks. ( times: "+sprintf( "%d.%03d",( .@second / 1000 ),( .@second % 1000 ) )+" seconds )",bc_map;			
+				setunmount();
+				for(.@i = 0; .@i < @hotkey_count; .@i++){
+					updatehotkey(@hotkey_type[.@i],@hotkey_id[.@i],@hotkey_lv[.@i],@hotkey_pos[.@i]);
+				}
+				warp "payon",155,220;
+				
+				if(getmapusers(.mario_map$) == 0)
+				{
+					.status = 0;
+					.activado = 0;
+					announce "[RM Race] The event is over.",bc_all;
+				}
+				
+				end;
+			}else {
+				announce "[RM Race]: Round "+@round_count+" / "+.round+" ",bc_self;
+			
+			}
+		}
+	end;
+	
+	OnInit:
+		// Items 
+			setarray $@items[0],54000,54001,54002,54003,54004,54005,54006,54007,54008;
+
+	
+		// Evento desactivado al iniciar
+		.activado = 0;
+		
+		// Numero de vueltas
+		.round = 1;
+		
+		// Item de premio
+		$@item_premio = 3105;
+		
+		// Avisos
+		setarray .announce$,
+			"The event is simple, reach the goal before the others, along the way you will find items that can affect the journey of who is in front of you",
+			"The first place will receive 5 Mini Event Coupon, the second 5, and the third 5", "Of course, we do not forget the PARTICIPANTS, for participating you will given 5 Mini Event Coupon if you Finish Race !",
+			"There are shortcuts all over the map, but be careful where you click, you may fall!!...","If you fall, you will be disqualified and you will not be entitled to the Event Coins for not finishing the race.",
+			"Use smartly the items that you will find on the Race, we recommend not having MERCY, because they will not have it.";
+		
+		.anounce_size = getarraysize(.announce$);
+		getmapxy( .mario_map$,.npc_x,.npc_y,BL_NPC,"RM Race" );
+		setmapflag .mario_map$, MF_NOSKILL;
+		setmapflag .mario_map$, MF_NOTELEPORT;
+		setmapflag .mario_map$, MF_NOMEMO;
+		setmapflag .mario_map$, MF_NOCOMMAND;
+		setmapflag .mario_map$, MF_NOSAVE;
+		hideonnpc "Mario_warper";
+		disablenpc "Mario_warper";
+		
+	OnMarioStart:
+			if(!.status && .activado == 1)
+			{
+				mapwarp .mario_map$,"payon",155,220;
+				.status = 1;
+				.total_winner_count = 0;
+				setwall .mario_map$,150,196,8,6,0,"Mario_wall";
+				setwall .mario_map$,150,191,8,6,0,"Mario_wall2";
+				hideoffnpc "Mario_warper";
+				enablenpc "Mario_warper";
+				for(.@i = 3 ; .@i > 1; .@i--)
+				{
+					announce "[RM]: Mario Kart - The event will start in "+.@i+" minutes, warp in Coliseum [NOVICE Only]!",bc_all;
+					
+					sleep 57000;
+				}
+				for( .@i = 0; .@i < .anounce_size; .@i++)
+				{
+					announce "[RM Race]:"+.announce$[.@i],bc_all;
+					sleep 3000;
+				}
+				announce "[RM]: Mario Kart - The event will start in 1 minutes, warp in Coliseum!",bc_all;
+				sleep 57000;			//change to 1mins
+				mapannounce .mario_map$,"[RM Race]: Oke GET READY !!!" ,bc_map;	
+				disablenpc "Mario_warper";
+				sleep 4000;
+				for( .@i = 5; .@i > 0; .@i--)
+				{
+					mapannounce .mario_map$,"[RM Race]:"+.@i,bc_map;
+					sleep 1000;
+				}
+				mapannounce .mario_map$,"[RM Race]: GO!!",bc_map;
+				npctalk "GO!!";
+				emotion ET_GO;
+				delwall "Mario_wall";
+				delwall "Mario_wall2";
+				
+				.status = 2;
+				initnpctimer;
+				
+			}
+			end;
+			
+	OnTimer300000: // 5 Minutos	
+		.status = 0; // A la verga el evento APAGADO
+		.activado = 0;
+		stopnpctimer;
+		mapannounce .mario_map$, "[RM]: The event is over, seems like your mounts have been failed!",bc_all;
+		sleep 3000;
+		mapannounce .mario_map$, "[RM]: I will warp you back, just relog if u want to unmount!",bc_all;
+		sleep 5000;
+		mapwarp .mario_map$,"payon",155,220;
+	end;
+	
+		
+	OnEnter:
+		if(.status == 1)
+		{
+			if ( BaseLevel > 10 || Class != 0 ) {
+			dispbottom "[RM Race]: Novice maks lvl 10 to play this event.";
+			}
+			else if ( ismounting() || checkcart()){
+				dispbottom "[RM Race]: "+(ismounting()? "Can't enter with mount": "Can't enter with cart")+"";
+			}
+			else if( checkriding() ){
+				dispbottom "[RM Race] Please remove your monunt";
+			}
+			
+			else {
+				//if ( arthurdev_map_multicount( "r_road" ) > 0 ) // Anti Double Login
+					//mclose "You cannot double login on this map";
+				//atcommand "@storeall";
+				callfunc("dispell");
+				setmounting();
+				@checkpoint = 0;
+				@round_count = 0;
+				gethotkeys();
+				warp .mario_map$,.npc_x,.npc_y;
+			}
+		}	
+		end;	
+}
+
+
+
+-	script	Checkpoint	858,4,4,{
+		.@checkpoints = atoi(strnpcinfo(2));// get the # of npc
+		if(getvariableofnpc(.status,"mario_kart_main") == 2){ // Si estᠡctivo el evento
+			
+			if ( @checkpoint >= .@checkpoints ) { // Ya ah pasado por este checkpoint
+				dispbottom "You have reached this Checkpoint # "+( ( .@checkpoints != 0 )? .@checkpoints:( @round_count == 0 ) ? 0:.max_checkpoint )+" previously.";
+			} else if( @checkpoint != (.@checkpoints - 1)){ 
+				mes "You didnt reach Checkpoint # "+( ( .@checkpoints == 0 )? .max_checkpoint:( .@checkpoints-1 ) )+".";
+				close2;
+			} else {
+				.@next =  .@checkpoints + 1;
+				@checkpoint = .@next - 1;
+								
+				announce "You reached "+F_GetNumSuffix( .@checkpoints )+" Checkpoint go to the "+F_GetNumSuffix( .@next == 0 ? .max_checkpoint:.@next )+" Checkpoint",bc_self|bc_blue;
+			
+				if ( @checkpoint == 6 ) { // Termina la carrera
+					doevent "mario_kart_main::OnFinishRound";
+				}
+			
+			}
+		
+		
+		}
+	
+	OnInit:
+		.max_checkpoint++;
+	end;
+		
+}
+r_road,241,270,4	duplicate(Checkpoint)	Checkpoint#1	HIDDEN_NPC,4,4,
+r_road,199,379,4	duplicate(Checkpoint)	Checkpoint#2	HIDDEN_NPC,4,4,
+r_road,68,148,4	duplicate(Checkpoint)	Checkpoint#3	HIDDEN_NPC,4,4,
+r_road,59,355,4	duplicate(Checkpoint)	Checkpoint#4	HIDDEN_NPC,4,4,
+r_road,160,158,4	duplicate(Checkpoint)	Checkpoint#5	HIDDEN_NPC,4,4,
+r_road,153,187,4	duplicate(Checkpoint)	Checkpoint#6	HIDDEN_NPC,4,4,
+
+
+
+r_road,206,265,6	script	Incognite Box	858,8,8,{	
+if (@item > gettimetick(2)) {
+	message strcharinfo(0),"Take item " + (@item - gettimetick(2))  + " seconds cooldown."; end;
+	}
+	setarray $@items[0],54000,54001,54002,54003,54004,54005,54006,54007,54008;
+	.rand = rand(0,8);
+	tempVar = 1;
+
+		for(.@i = 0; .@i <= (getarraysize($@items))-1; .@i++)
+		{
+			if(countitem($@items[.@i]) >= 1)
+			{
+				dispbottom "You already have an item, use it";
+				tempVar = 0;
+				break;
+			}
+		}
+	
+	if(tempVar){
+		getitem $@items[.rand],1;
+		@item = gettimetick(2) + 10;
+		updatehotkey(0,$@items[.rand],1,0);
+		end;
+	}
+OnInit:
+	delwaitingroom;
+	waitingroom "[Incognite Box]",0;
+end;	
+
+}
+r_road,238,305,6	duplicate(Incognite Box)	Incognite Box#01	858,4,4,
+r_road,262,340,6	duplicate(Incognite Box)	Incognite Box#02	858,4,4,
+r_road,189,376,6	duplicate(Incognite Box)	Incognite Box#03	858,4,4,
+r_road,95,117,6	duplicate(Incognite Box)	Incognite Box#04	858,8,8,
+r_road,64,205,6	duplicate(Incognite Box)	Incognite Box#05	858,8,8,
+r_road,43,324,6	duplicate(Incognite Box)	Incognite Box#06	858,8,8
+r_road,189,94,6	duplicate(Incognite Box)	Incognite Box#07	858,8,8,
+r_road,169,127,6	duplicate(Incognite Box)	Incognite Box#08	858,8,8,
+r_road,71,277,6	duplicate(Incognite Box)	Incognite Box#09	858,8,8,
+r_road,173,157,6	duplicate(Incognite Box)	Incognite Box#10	858,8,8,
+// === Warps
+r_road,210,359,0	warp	mario2ndvuelta	1,1,r_road,76,88
+r_road,67,374,6	warp	mario2ndvuelta2	1,1,r_road,185,72 
+
+
+-	script	disqualification	-1,0,0,{
+    end;
+		setarray $@items[0],54000,54001,54002,54003,54004,54005,54006,54007,54008;
+	
+OnTouch:
+		for(.@i = 0; .@i <= (getarraysize($@items))-1; .@i++)
+		{
+			if(countitem($@items[.@i]) >= 1)
+			{
+				delitem $@items[.@i],1;
+			}
+		}
+
+    dispbottom "No!!!! Kamu didiskualifikasi.";
+    setunmount();
+    warp "payon",155,220;
+end;
+}
+
+
+r_road,175,126,6	duplicate(disqualification)	disqualification#01	HIDDEN_NPC,0,0,
+r_road,178,127,6	duplicate(disqualification)	disqualification#02	HIDDEN_NPC,0,0,
+r_road,177,126,6	duplicate(disqualification)	disqualification#03	HIDDEN_NPC,0,0,
+r_road,176,126,6	duplicate(disqualification)	disqualification#04	HIDDEN_NPC,0,0,
+r_road,176,139,6	duplicate(disqualification)	disqualification#05	HIDDEN_NPC,0,7,
+r_road,177,139,6	duplicate(disqualification)	disqualification#06	HIDDEN_NPC,0,7,
+r_road,238,335,6	duplicate(disqualification)	disqualification#07	HIDDEN_NPC,0,3,
+r_road,239,335,6	duplicate(disqualification)	disqualification#08	HIDDEN_NPC,0,3,
+r_road,245,332,6	duplicate(disqualification)	disqualification#09	HIDDEN_NPC,3,0,
+r_road,244,333,6	duplicate(disqualification)	disqualification#10	HIDDEN_NPC,2,0,
+r_road,245,335,6	duplicate(disqualification)	disqualification#11	HIDDEN_NPC,1,0,
+r_road,244,334,6	duplicate(disqualification)	disqualification#12	HIDDEN_NPC,0,0,
+r_road,240,336,6	duplicate(disqualification)	disqualification#13	HIDDEN_NPC,1,0,
+r_road,240,337,6	duplicate(disqualification)	disqualification#14	HIDDEN_NPC,1,1,
+r_road,242,338,6	duplicate(disqualification)	disqualification#15	HIDDEN_NPC,1,0,
+r_road,241,339,6	duplicate(disqualification)	disqualification#16	HIDDEN_NPC,2,0,
+r_road,239,340,6	duplicate(disqualification)	disqualification#17	HIDDEN_NPC,0,3,
+r_road,245,342,6	duplicate(disqualification)	disqualification#18	HIDDEN_NPC,3,0,
+r_road,242,344,6	duplicate(disqualification)	disqualification#19	HIDDEN_NPC,0,2,
+r_road,241,346,6	duplicate(disqualification)	disqualification#20	HIDDEN_NPC,1,0,
+r_road,245,347,6	duplicate(disqualification)	disqualification#21	HIDDEN_NPC,5,0,
+r_road,243,283,6	duplicate(disqualification)	disqualification#22	HIDDEN_NPC,3,0,
+r_road,243,282,6	duplicate(disqualification)	disqualification#23	HIDDEN_NPC,3,0,
+r_road,243,281,6	duplicate(disqualification)	disqualification#24	HIDDEN_NPC,3,0,
+r_road,242,279,6	duplicate(disqualification)	disqualification#25	HIDDEN_NPC,3,0,
+r_road,237,281,6	duplicate(disqualification)	disqualification#26	HIDDEN_NPC,0,1,
+r_road,39,325,6	duplicate(disqualification)	disqualification#27	HIDDEN_NPC,0,8,
+
+function	script	F_Rand2	{
+	return getarg(rand(getargcount()));
+}
+
+
+-	script	unmount	-1,{
+end;
+OnPCLoginEvent:
+		if ( BaseLevel > 10 || Class != 0 ) end;
+		setarray $@items[0],54000,54001,54002,54003,54004,54005,54006,54007,54008;
+		for(.@i = 0; .@i <= (getarraysize($@items))-1; .@i++)
+		{
+			if(countitem($@items[.@i]) >= 1)
+			{
+				delitem $@items[.@i],1;
+			}
+		}	
+	if(ismounting()) setunmount();
+end;
+}

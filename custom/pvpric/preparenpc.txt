@@ -1,0 +1,753 @@
+
+
+
+// Right Side Warp NPC
+2012rwc_02,289,129,6	script	NPC Ransum	4_MAL_KAFRA,{
+if (@ransum){ mes "You already take for this round !"; end;}
+	switch(select("Take Ransum:Cancel")){
+	case 1:
+		if (Class == 7){
+			set @ransum,1;
+			getitembound 11501,250,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 657,10,Bound_Account;
+			}
+		if (Class == 8){
+			set @ransum,1;
+			getitembound 11501,200,Bound_Account;
+			getitembound 11502,80,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 645,5,Bound_Account;
+			getitembound 717,50,Bound_Account;
+			getitembound 523,30,Bound_Account;
+			}
+		if (Class == 9){
+			set @ransum,1;
+			getitembound 11501,180,Bound_Account;
+			getitembound 11502,80,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 657,10,Bound_Account;
+			getitembound 717,50,Bound_Account;
+			getitembound 716,50,Bound_Account;
+			}
+		if (Class == 10){
+			set @ransum,1;
+			getitembound 11501,250,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 657,10,Bound_Account;
+			}
+		if (Class == 11){
+			set @ransum,1;
+			getitembound 11501,150,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 12006,2,Bound_Account;
+			getitembound 1065,50,Bound_Account;
+			getitembound 1759,100,Bound_Account;
+			getitembound 1769,100,Bound_Account;
+			getitembound 1768,100,Bound_Account;
+			getitembound 1758,100,Bound_Account;
+			getitembound 1761,100,Bound_Account;
+			}
+		if (Class == 12){
+			set @ransum,1;
+			getitembound 11501,200,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 656,10,Bound_Account;
+			getitembound 716,30,Bound_Account;
+			}
+		if (Class == 14){
+			set @ransum,1;
+			getitembound 11501,350,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 657,10,Bound_Account;
+			}
+		if (Class == 15){
+			set @ransum,1;
+			getitembound 11501,200,Bound_Account;
+			getitembound 11502,150,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 656,10,Bound_Account;
+			}
+		if (Class == 16){
+			set @ransum,1;
+			getitembound 11501,200,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 656,10,Bound_Account;
+			getitembound 717,100,Bound_Account;
+			getitembound 716,50,Bound_Account;
+			getitembound 715,150,Bound_Account;
+			}
+		if (Class == 17){
+			set @ransum,1;
+			getitembound 11501,250,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 657,10,Bound_Account;
+			getitembound 12006,2,Bound_Account;
+			getitembound 1759,100,Bound_Account;
+			getitembound 1769,100,Bound_Account;
+			getitembound 1768,100,Bound_Account;
+			getitembound 1758,100,Bound_Account;
+			getitembound 1761,100,Bound_Account;
+			}
+		if (Class == 18){
+			set @ransum,1;
+			getitembound 11501,200,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 657,10,Bound_Account;
+			getitembound 7136,30,Bound_Account;
+			getitembound 7135,20,Bound_Account;
+			getitembound 7139,10,Bound_Account;
+			getitembound 7137,10,Bound_Account;
+			}
+		if (Class == 19){
+			set @ransum,1;
+			getitembound 11501,250,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 645,5,Bound_Account;
+			getitembound 1759,100,Bound_Account;
+			getitembound 1769,100,Bound_Account;
+			getitembound 1768,100,Bound_Account;
+			getitembound 1758,100,Bound_Account;
+			getitembound 1761,100,Bound_Account;
+			}
+		if (Class == 20){
+			set @ransum,1;
+			getitembound 11501,250,Bound_Account;
+			getitembound 11502,100,Bound_Account;
+			getitembound 506,20,Bound_Account;
+			getitembound 645,20,Bound_Account;
+			getitembound 1759,100,Bound_Account;
+			getitembound 1769,100,Bound_Account;
+			getitembound 1768,100,Bound_Account;
+			getitembound 1758,100,Bound_Account;
+			getitembound 1761,100,Bound_Account;
+			}
+		end;
+		
+	case 2:
+		mes "Good luck ! ";
+			
+			}
+ end; 
+}
+
+//rentitem2 <item id>,<time>,<identify>,<refine>,<attribute>,<card1>,<card2>,<card3>,<card4>{,<account_id>};
+//rentitem2 2310,(168*60*60),1,4,0,4105,0,0,0;
+	
+2012rwc_02,292,132,5	script	NPC Equip Rental	51,{
+
+setarray .@cardid,4002,4072,4035,4094,4024,4055,4057,4076,4086,4115,4092;
+setarray .@cardname$,"Fabre Card","Golem Card","Hydra Card","Archer Skeleton Card","Plankton Card","Marina Card","Metaller Card","Magnolia Card","Soldier Skeleton Card","Hunter Fly Card","Skel Worker Card";
+
+setarray .@cardid1,4031,4008,4042,4061,4099,4089,4119,4114,4101,4098;
+setarray .@cardname1$,"Pecopeco Card","Picky Card","Steel Chonchon Card","Cornutus Card","Pasana Card","Swordfish Card","Bathory Card","Argiope Card","Sandman Card","Dokebi Card";
+
+setarray .@cardid2,4041,4052,4112,4122,4127 ;
+setarray .@cardname2$,"Coco Card","Elder Wilow Card","Marduk Card","Deviruchi Card","Nightmare Card";
+
+setarray .@cardid3,4045,4058 ;
+setarray .@cardname3$,"Horn Card","Thara Frog Card";
+
+setarray .@cardid4,4133,4334,4088 ;
+setarray .@cardname4$,"Raydric Card","Noxious Card","Frilldora Card";
+
+setarray .@cardid5,4097,4100,4107 ;
+setarray .@cardname5$,"Matyr Card","Sohee Card","Verit Card";
+
+setarray .@cardid6,4027,4051,4079,4091,4022,4252,4064 ;
+setarray .@cardname6$,"Kukre Card","Yoyo Card","Mantis Card","Kobold Card","Spore Card","Alligator Card","Zerom Card";
+
+	set @eac, eaclass();
+	.@refine = 0;
+	setarray .@slot, 0,0,0,0;
+	mes "Please Choose Equip Type: ";
+	next;
+	switch(select("Weapon:Armor:Headger:Shield:Muffler:Shoes:Accessory")){
+	//Weapon
+
+	case 1:
+	if (Class == 7){
+switch(select("SABER [3]:TWO-HANDED SWORD [2]:PIKE[4]:KATANA[4]:TRIDENT[3]")) {
+	case 1:
+		.@weapon = 40301;
+		.@slotcard = 3;
+		.@refine = 5;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40304;
+		.@slotcard = 2;
+		.@refine = 5;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40305;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 4:
+		.@weapon = 40303;
+		.@slotcard = 4;
+		.@refine = 6;
+		goto CardWeapon;
+	case 5:
+		.@weapon = 40306;
+		.@slotcard = 3;
+		.@refine = 5;
+		goto CardWeapon;
+	
+}
+end;
+}
+
+	if (Class == 8){
+switch(select("LONGMACE:BOOK [3]:ROD[4]")) {
+	case 1:
+		.@weapon = 40320;
+		.@slotcard = 0;
+		.@refine = 4;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40315;
+		.@slotcard = 3;
+		.@refine = 6;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40311;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+
+}
+end;
+}
+
+	if (Class == 9){
+switch(select("ROD [4]:WIZARDY STAFF:ARC WAND [2]")) {
+	case 1:
+		.@weapon = 40311;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40313;
+		.@slotcard = 0;
+		.@refine = 4;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40312;
+		.@slotcard = 2;
+		.@refine = 5;
+		goto CardWeapon;
+}
+end;
+}
+
+	if (Class == 10){
+switch(select("BATTLE AXE [4]: TWO-HANDED AXE [2]:MACE [4]")) {
+	case 1:
+		.@weapon = 40307;
+		.@slotcard = 4;
+		.@refine = 6;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40308;
+		.@slotcard = 2;
+		.@refine = 5;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40309;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 11){
+switch(select("COMPOSITE BOW[4]:ORC ARCHER BOW:MAIN GAUCHE[4]")) {
+	case 1:
+		.@weapon = 40314;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40321;
+		.@slotcard = 0;
+		.@refine = 4;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40302;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 12){
+switch(select("INFILTRATOR[1]:MAIN GAUCHE [4]:GLADIUS[3]")) {
+	case 1:
+		.@weapon = 40316;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40302;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40322;
+		.@slotcard = 3;
+		.@refine = 5;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 14){
+switch(select("MAIN GAUCHE[4]:MACE[4]:PIKE[4]:TRIDENT[3]")) {
+	case 1:
+		.@weapon = 40302;
+		.@slotcard = 3;
+		.@refine = 7;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40309;
+		.@slotcard = 2;
+		.@refine = 7;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40305;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 4:
+		.@weapon = 40306;
+		.@slotcard = 3;
+		.@refine = 5;
+		goto CardWeapon;
+}
+end;
+}
+
+	if (Class == 15){
+switch(select("STUNNER[2]:MACE[4]:LONGMACE")) {
+	case 1:
+		.@weapon = 40310;
+		.@slotcard = 2;
+		.@refine = 5;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40309;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40320;
+		.@slotcard = 0;
+		.@refine = 4;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 16){
+switch(select("BOOK[3]:ROD[4]")) {
+	case 1:
+		.@weapon = 40315;
+		.@slotcard = 3;
+		.@refine = 6;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40311;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 17){
+switch(select("GLADIUS[3]:MAIN GAUCHE[4]:SABER[3]:ORC ARCHER BOW")) {
+	case 1:
+		.@weapon = 40322;
+		.@slotcard = 3;
+		.@refine = 5;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40302;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40301;
+		.@slotcard = 3;
+		.@refine = 5;
+		goto CardWeapon;
+	case 4:
+		.@weapon = 40321;
+		.@slotcard = 0;
+		.@refine = 4;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 18){
+switch(select("SABER[3]:MACE[4]:TWO-HANDED AXE[2]")) {
+	case 1:
+		.@weapon = 40301;
+		.@slotcard = 3;
+		.@refine = 5;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40309;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40308;
+		.@slotcard = 2;
+		.@refine = 5;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 19){
+switch(select("VIOLIN[4]:MAIN GAUCHE[4]:COMPOSITE BOW[4]")) {
+	case 1:
+		.@weapon = 40319;
+		.@slotcard = 4;
+		.@refine = 6;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40302;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40314;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+}
+end;
+}
+	if (Class == 20){
+switch(select("ROPE[4]:MAIN GAUCHE[4]:COMPOSITE BOW[4]")) {
+	case 1:
+		.@weapon = 40318;
+		.@slotcard = 4;
+		.@refine = 6;
+		goto CardWeapon;
+	case 2:
+		.@weapon = 40302;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+	case 3:
+		.@weapon = 40314;
+		.@slotcard = 4;
+		.@refine = 7;
+		goto CardWeapon;
+}
+end;
+}
+end;
+
+
+	//Armor
+	case 2:
+switch(select("Tight [1]:Silk Robe [1]:Saint Robe [1]:Full Plate [1]:Chain Mail [1]:Thief Clothes [1]:Formal Suit [1]")) {
+		case 1:
+		.@weapon = 40349;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardArmor;
+		case 2:
+		.@weapon = 40350;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardArmor;
+		case 3:
+		.@weapon = 40351;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardArmor;
+		case 4:
+		.@weapon = 40352;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardArmor;
+		case 5:
+		.@weapon = 40353;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardArmor;
+		case 6:
+		.@weapon = 40354;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardArmor;
+		case 7:
+		.@weapon = 40355;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardArmor;
+		}
+	end;
+	
+	//Headger
+	case 3:
+switch(select("Poopoo Hat:Cat Ears Beret [1]:Red Pom Band [1]:Purpe Cowboy Hat [1]:Ship Captain's Hat [1]:Curupira hat [1]:Note Headphone [1]")) {
+		case 1:
+		.@weapon = 40323;
+		.@slotcard = 0;
+		.@refine = 0;
+		goto CardHead;
+		case 2:
+		.@weapon = 40324;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardHead;
+		case 3:
+		.@weapon = 40325;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardHead;
+		case 4:
+		.@weapon = 40326;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardHead;
+		case 5:
+		.@weapon = 40327;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardHead;
+		case 6:
+		.@weapon = 40328;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardHead;
+		case 7:
+		.@weapon = 40329;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardHead;
+		}
+	end;
+	
+	//Shield
+	case 4:
+switch(select("Guard[1]:Buckler[1]:Shield[1]:Mirror Shield[1]")) {
+		case 1:
+		.@weapon = 40330;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardShield;
+		case 2:
+		.@weapon = 40331;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardShield;
+		case 3:
+		.@weapon = 40332;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardShield;
+		case 4:
+		.@weapon = 40333;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardShield;
+		}
+	end;
+	
+	//Garment
+	case 5:
+switch(select("Muffler [1]:Manteau [1]:Ragamuffin Manteu[0]")) {
+		case 1:
+		.@weapon = 40334;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardGarment;
+		case 2:
+		.@weapon = 40335;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardGarment;
+		case 3:
+		.@weapon = 40336;
+		.@slotcard = 0;
+		.@refine = 4;
+		goto CardGarment;
+		}
+	end;
+	//Shoes
+	case 6:
+switch(select("Shoes[1]:Boots[1]:Crystal Pump")) {
+		case 1:
+		.@weapon = 40337;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardShoes;
+		case 2:
+		.@weapon = 40338;
+		.@slotcard = 1;
+		.@refine = 4;
+		goto CardShoes;
+		case 3:
+		.@weapon = 40339;
+		.@slotcard = 0;
+		.@refine = 4;
+		goto CardShoes;
+		}
+	end;
+	//Accessory
+	case 7:
+switch(select("School Bag [1]:Clip [1]:Ring [1]:Earring [1]:Necklace [1]:Glove [1]:Brooch [1]:Rosary [1]")) {
+		case 1:
+		.@weapon = 40341;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 2:
+		.@weapon = 40342;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 3:
+		.@weapon = 40343;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 4:
+		.@weapon = 40344;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 5:
+		.@weapon = 40345;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 6:
+		.@weapon = 40346;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 7:
+		.@weapon = 40347;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 8:
+		.@weapon = 40348;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		}
+	end;
+	}
+	end;
+
+
+
+CardWeapon:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname$[.@i];
+	setarray .@slot[.@c], .@cardid[.@i];
+	next;
+	}
+rentitem2 .@weapon,(7*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+end;
+
+CardArmor:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname1$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname1$[.@i];
+	setarray .@slot[.@c], .@cardid1[.@i];
+	next;
+	}
+rentitem2 .@weapon,(7*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+end;
+
+CardHead:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname2$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname2$[.@i];
+	setarray .@slot[.@c], .@cardid2[.@i];
+	next;
+	}
+rentitem2 .@weapon,(7*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+end;
+
+CardShield:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname3$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname3$[.@i];
+	setarray .@slot[.@c], .@cardid3[.@i];
+	next;
+	}
+rentitem2 .@weapon,(7*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+end;
+
+CardGarment:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname4$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname4$[.@i];
+	setarray .@slot[.@c], .@cardid4[.@i];
+	next;
+	}
+rentitem2 .@weapon,(7*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+end;
+
+CardShoes:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname5$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname5$[.@i];
+	setarray .@slot[.@c], .@cardid5[.@i];
+	next;
+	}
+rentitem2 .@weapon,(7*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+end;
+
+CardAcc:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname6$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname6$[.@i];
+	setarray .@slot[.@c], .@cardid6[.@i];
+	next;
+	}
+rentitem2 .@weapon,(7*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+end;
+
+
+}
+
+2012rwc_02,289,125,4	script	NPC Reset	4_MAL_KAFRA,{
+	switch(select("Take Ransum:Cancel")){
+	case 1:
+			set @ransum,0;
+			}
+ end; 
+}

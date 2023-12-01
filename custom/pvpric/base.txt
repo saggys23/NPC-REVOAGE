@@ -1,0 +1,106 @@
+// KICK IF ITEM WARP MAP
+//if( strcharinfo(3) == "geffen" && !( countitem(501) -1 ) ) warp "prontera",156,191;   
+
+//Mapflag
+lasagna	mapflag	nomemo
+lasagna	mapflag	noteleport
+lasagna	mapflag	nosave
+lasagna	mapflag	nobranch
+lasagna	mapflag	noexppenalty
+lasagna	mapflag	nowarp
+lasagna	mapflag	nowarpto
+lasagna	mapflag	nocostume
+2012rwc_02	mapflag	nocostume
+
+lasagna,227,191,4	shop	Sell Junk	88,909:-1	//toolshop junksell
+
+// Barricades
+lasagna,213,180,0	script	#bar01	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,181,0	script	#bar02	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,182,0	script	#bar03	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,183,0	script	#bar04	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,184,0	script	#bar05	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,185,0	script	#bar06	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,186,0	script	#bar07	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,187,0	script	#bar08	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,187,0	script	#bar09	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,186,0	script	#bar010	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,185,0	script	#bar011	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,184,0	script	#bar012	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,183,0	script	#bar013	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,182,0	script	#bar014	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,181,0	script	#bar015	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+lasagna,213,180,0	script	#bar016	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+
+-	script	baseric	-1,{
+OnInit:
+	for ( .@j = 1; .@j < 17; .@j++ )
+		enablenpc "#bar0"+.@j;
+	setwall "lasagna", 213, 180, 4, DIR_NORTH, 0, "wonderwall_5";
+	setwall "lasagna", 213, 187, 4, DIR_SOUTH, 0, "wonderwall_6";
+	end;
+	}
+
+// Kafra 
+//============================================================
+lasagna,230,190,4	script	Kafra Employee::kaf_pvpric	4_MAL_KAFRA,{
+	callfunc "F_Kafra",0,5,2,0,700;
+	callfunc "F_KafEnd",2,0,0;
+}
+
+// Left Side Warp NPC
+lasagna,222,184,4	script	NPC [A] Left Side	4_MAL_KAFRA,{
+	mes "[NPC [A] Left Side]";
+	mes "Pastikan Berat bawaan 0 dan Sesuai Intruksi GM, kamu ingin ke sisi Kiri? ";
+	next ;
+	switch(select("Warp to Prepare Room:Cancel")){
+	case 1:
+		    if (checkcart()){ mes "Remove ur Cart before get in !"; end;}
+			if ( Weight > 6 || BaseLevel < 90) {
+				mes "Minimal Level 90 And ";
+				mes "You need store all your items first.";
+				end;
+			}
+			set @ransum,1;
+			percentheal 100,100;
+			sc_end SC_ALL;
+			warp "2012rwc_02",35,155;
+			}
+ end; 
+ OnInit: disablenpc strnpcinfo(0);
+}
+// Right Side Warp NPC
+lasagna,237,184,4	script	NPC [B] Right Side	4_MAL_KAFRA,{
+	mes "[NPC [B] Right Side]";
+	mes "Pastikan Berat bawaan 0 dan Sesuai Intruksi GM, kamu ingin ke sisi Kanan? ";
+		next ;
+	switch(select("Warp to Prepare Room:Cancel")){
+	case 1:
+	    if (checkcart()){ mes "Remove ur Cart before get in !"; end;}
+			if ( Weight > 6  || BaseLevel < 90) {
+				mes "Minimal Level 90 And ";
+				mes "You need store all your items first.";
+				end;
+			}
+			set @ransum,1;
+			percentheal 100,100;
+			sc_end SC_ALL;
+			warp "2012rwc_02",295,125;
+			}
+ end; 
+ OnInit: disablenpc strnpcinfo(0);
+}
+
+-	script	warpric	-1,{
+OnInit:
+	bindatcmd "warponric", strnpcinfo(0)+"::OnSpawn",99,99;
+	bindatcmd "warpoffric", strnpcinfo(0)+"::OnDisable",99,99;	end;
+	OnSpawn:
+		enablenpc "NPC [A] Left Side";
+		enablenpc "NPC [B] Right Side";
+		end;
+	OnDisable:
+		disablenpc "NPC [A] Left Side";
+		disablenpc "NPC [B] Right Side";
+		end;
+	}

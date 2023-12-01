@@ -1,0 +1,111 @@
+cell_game	mapflag	nomemo
+cell_game	mapflag	noteleport
+cell_game	mapflag	nosave
+cell_game	mapflag	nobranch
+cell_game	mapflag	noexppenalty
+cell_game	mapflag	nowarp
+cell_game	mapflag	pvp_noguild		
+cell_game	mapflag	noequip
+cell_game	mapflag	restricted	1	
+	
+-	script	cvcwall	-1,{
+OnInit:
+
+		setcell "cell_game",130,163,169,124,cell_basilica, 1;
+		setcell "cell_game",140,152,159,135,cell_basilica,0;
+	setwall "cell_game", 139, 153, 20, DIR_SOUTH, 0, "cvc1";
+	setwall "cell_game", 140, 153, 20, DIR_EAST, 0, "cvc2";
+	setwall "cell_game", 160, 153, 20, DIR_SOUTH, 0, "cvc3";
+	setwall "cell_game", 140, 134, 20, DIR_EAST, 0, "cvc4";
+	end;
+}
+
+// Barricades
+
+cell_game,139,134,0	script	#cvc02	649,{}
+cell_game,139,135,0	script	#cvc03	649,{}
+cell_game,139,136,0	script	#cvc04	649,{}
+cell_game,139,137,0	script	#cvc05	649,{}
+cell_game,139,138,0	script	#cvc06	649,{}
+cell_game,139,139,0	script	#cvc07	649,{}
+cell_game,139,140,0	script	#cvc08	649,{}
+cell_game,139,141,0	script	#cvc09	649,{}
+cell_game,139,142,0	script	#cvc10	649,{}
+cell_game,139,143,0	script	#cvc11	649,{}
+cell_game,139,144,0	script	#cvc12	649,{}
+cell_game,139,145,0	script	#cvc13	649,{}
+cell_game,139,146,0	script	#cvc14	649,{}
+cell_game,139,147,0	script	#cvc15	649,{}
+cell_game,139,148,0	script	#cvc16	649,{}
+cell_game,139,149,0	script	#cvc17	649,{}
+cell_game,139,150,0	script	#cvc18	649,{}
+cell_game,139,151,0	script	#cvc19	649,{}
+cell_game,139,152,0	script	#cvc20	649,{}
+cell_game,139,153,0	script	#cvc21	649,{}
+
+//============================================
+
+cell_game,160,134,0	script	#dvc02	649,{}
+cell_game,160,135,0	script	#dvc03	649,{}
+cell_game,160,136,0	script	#dvc04	649,{}
+cell_game,160,137,0	script	#dvc05	649,{}
+cell_game,160,138,0	script	#dvc06	649,{}
+cell_game,160,139,0	script	#dvc07	649,{}
+cell_game,160,140,0	script	#dvc08	649,{}
+cell_game,160,141,0	script	#dvc09	649,{}
+cell_game,160,142,0	script	#dvc10	649,{}
+cell_game,160,143,0	script	#dvc11	649,{}
+cell_game,160,144,0	script	#dvc12	649,{}
+cell_game,160,145,0	script	#dvc13	649,{}
+cell_game,160,146,0	script	#dvc14	649,{}
+cell_game,160,147,0	script	#dvc15	649,{}
+cell_game,160,148,0	script	#dvc16	649,{}
+cell_game,160,149,0	script	#dvc17	649,{}
+cell_game,160,150,0	script	#dvc18	649,{}
+cell_game,160,151,0	script	#dvc19	649,{}
+cell_game,160,152,0	script	#dvc20	649,{}
+cell_game,160,153,0	script	#dvc21	649,{}
+
+//============================================
+cell_game,140,153,0	script	#efc01	649,{}
+cell_game,141,153,0	script	#efc02	649,{}
+cell_game,142,153,0	script	#efc03	649,{}
+cell_game,143,153,0	script	#efc04	649,{}
+cell_game,144,153,0	script	#efc05	649,{}
+cell_game,145,153,0	script	#efc06	649,{}
+cell_game,146,153,0	script	#efc07	649,{}
+cell_game,147,153,0	script	#efc08	649,{}
+cell_game,148,153,0	script	#efc09	649,{}
+cell_game,149,153,0	script	#efc10	649,{}
+cell_game,150,153,0	script	#efc11	649,{}
+cell_game,151,153,0	script	#efc12	649,{}
+cell_game,152,153,0	script	#efc13	649,{}
+cell_game,153,153,0	script	#efc14	649,{}
+cell_game,154,153,0	script	#efc15	649,{}
+cell_game,155,153,0	script	#efc16	649,{}
+cell_game,156,153,0	script	#efc17	649,{}
+cell_game,157,153,0	script	#efc18	649,{}
+cell_game,158,153,0	script	#efc19	649,{}
+cell_game,159,153,0	script	#efc20	649,{}
+
+//============================================
+cell_game,140,134,0	script	#ffc01	649,{}
+cell_game,141,134,0	script	#ffc02	649,{}
+cell_game,142,134,0	script	#ffc03	649,{}
+cell_game,143,134,0	script	#ffc04	649,{}
+cell_game,144,134,0	script	#ffc05	649,{}
+cell_game,145,134,0	script	#ffc06	649,{}
+cell_game,146,134,0	script	#ffc07	649,{}
+cell_game,147,134,0	script	#ffc08	649,{}
+cell_game,148,134,0	script	#ffc09	649,{}
+cell_game,149,134,0	script	#ffc10	649,{}
+cell_game,150,134,0	script	#ffc11	649,{}
+cell_game,151,134,0	script	#ffc12	649,{}
+cell_game,152,134,0	script	#ffc13	649,{}
+cell_game,153,134,0	script	#ffc14	649,{}
+cell_game,154,134,0	script	#ffc15	649,{}
+cell_game,155,134,0	script	#ffc16	649,{}
+cell_game,156,134,0	script	#ffc17	649,{}
+cell_game,157,134,0	script	#ffc18	649,{}
+cell_game,158,134,0	script	#ffc19	649,{}
+cell_game,159,134,0	script	#ffc20	649,{}

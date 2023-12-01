@@ -1,0 +1,232 @@
+payon,163,213,3	script	Independence Collect	580,{
+	if (checkweight(714,5) == 0) {
+		mes "- Please Check yours weight limit -";
+		close;
+	}
+	
+mes "[MERDEKA!! MERDEKA!! MERDEKA!!]";
+mes	"[Happy 77th Independence Day of Indonesia!]";
+mes	"[In order to cellebrate the Independence day of Indonesia, I would like to give you special headgear and costume]";
+mes	"[Please choose which headgear or costume you want and bring me the items as change!]";
+next;
+menu "^FE2E2E"+getitemname(5321)+" ^000000",Q_1,	
+	 "^FE2E2E"+getitemname(18792)+"^000000",Q_2,	
+	 "^FE2E2E"+getitemname(20458)+"^000000",Q_5,	
+	 "^FE2E2E"+getitemname(48011)+"^000000",Q_6,	
+	 "^FE2E2E"+getitemname(31097)+"^000000",Q_7,	
+	 "^FE2E2E"+getitemname(31122)+"^000000",Q_8,	
+	 "^FE2E2E"+getitemname(20306)+"^000000",Q_9	;
+
+Q_1: //bandana merah putih
+mes "Item Requirements:";
+mes " > 5 Pcs every Name Card :";
+mes " > "+getitemname(7399)+"";
+mes " > "+getitemname(7400)+"";
+mes " > "+getitemname(7401)+"";
+mes " > "+getitemname(7402)+""; 
+mes " > "+getitemname(7403)+""; 
+mes " > "+getitemname(7404)+"";
+mes " > 777x "+getitemname(7150)+"";
+mes	" > 1x "+getitemname(2275)+"";
+mes	" > 178x "+getitemname(7063)+"";
+mes	" > 3x "+getitemname(2289)+"";
+mes "and";
+mes "Zeny 1.781.945";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+	if (countitem(7399) < 5 || countitem(7400) < 5 ||countitem(7401) < 5 ||countitem(7402) < 5 ||countitem(7403) < 5 ||countitem(7404) < 5 || Zeny < 1781945 ) goto REQ_MISS;
+	if (countitem(7150) < 777 ||countitem(2275) < 1 ||countitem(7063) < 178 ||countitem(2289) < 3 ) goto REQ_MISS;
+	for (.@i = 7399; .@i < 7405; .@i++){
+		delitem .@i,5;
+	}
+	delitem 7150,777;
+	delitem 2275,1;
+	delitem 7063,178;
+	delitem 2289,3;
+	Zeny=Zeny-1781945;
+	getitem 5321,1; 
+	end;
+	}
+	
+Q_2:	// Indonesia sakkat
+mes "Item Requirements:";
+mes " > 5 Pcs every Name Card :";
+mes " > "+getitemname(7399)+""; 
+mes " > "+getitemname(7400)+"";
+mes " > "+getitemname(7401)+"";
+mes " > "+getitemname(7402)+""; 
+mes " > "+getitemname(7403)+""; 
+mes " > "+getitemname(7404)+"";
+mes " > 777x "+getitemname(1019)+""; 
+mes " > 3x "+getitemname(2280)+"";
+mes "and";
+mes "Zeny 1.781.945";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+	if (countitem(7399) < 5 || countitem(7400) < 5 ||countitem(7401) < 5 ||countitem(7402) < 5 ||countitem(7403) < 5 ||countitem(7404) < 5 || Zeny < 1781945 ) goto REQ_MISS;
+	if (countitem(1019) < 777 ||countitem(2280) < 3  ) goto REQ_MISS;
+	for (.@i = 7399; .@i < 7405; .@i++){
+		delitem .@i,5;
+	}
+	delitem 1019,777;
+	delitem 2280,3;
+	Zeny=Zeny-1781945;
+	getitem 18792,1; 
+	end;
+	}
+	
+Q_5:	// costume wild poring
+mes "Item Requirements:";
+mes " > 3 Pcs every Name Card :";
+mes " > "+getitemname(7399)+""; 
+mes " > "+getitemname(7400)+"";
+mes " > "+getitemname(7401)+"";
+mes " > "+getitemname(7402)+""; 
+mes " > "+getitemname(7403)+""; 
+mes " > "+getitemname(7404)+"";
+mes " > 1x "+getitemname(2244)+"";
+mes " > 4x "+getitemname(4001)+"";
+mes " > 777x "+getitemname(7053)+"";
+mes "and";
+mes "Zeny 1.781.945";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+	if (countitem(7399) < 3 || countitem(7400) < 3 ||countitem(7401) < 3 ||countitem(7402) < 3 ||countitem(7403) < 3 ||countitem(7404) < 3 || Zeny < 1781945 ) goto REQ_MISS;
+	if (countitem(2244) < 1 ||countitem(4001) < 4 ||countitem(7053) < 777 ) goto REQ_MISS;
+	for (.@i = 7399; .@i < 7405; .@i++){
+		delitem .@i,3;
+	}
+	delitem 2244,1;
+	delitem 4001,4;
+	delitem 7053,777;
+	Zeny=Zeny-1781945;
+	getitem 20458,1; 
+	end;
+	}
+	
+Q_6:	// costume advent bag
+mes "Item Requirements:";
+mes " > 7 Pcs every Name Card :";
+mes " > "+getitemname(7399)+""; 
+mes " > "+getitemname(7400)+"";
+mes " > "+getitemname(7401)+"";
+mes " > "+getitemname(7402)+""; 
+mes " > "+getitemname(7403)+""; 
+mes " > "+getitemname(7404)+"";
+mes " > 817x "+getitemname(919)+"";
+mes " > 178x "+getitemname(7063)+"";
+mes " > 87x "+getitemname(748)+"";
+mes " > 777x "+getitemname(942)+"";
+mes "and";
+mes "Zeny 17.081.945";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+	if (countitem(7399) < 7 || countitem(7400) < 7 ||countitem(7401) < 7 ||countitem(7402) < 7 ||countitem(7403) < 7 ||countitem(7404) < 7 || Zeny < 17081945 ) goto REQ_MISS;
+	if (countitem(919) < 817 ||countitem(7063) < 178 || countitem(748) < 87 ||countitem(942) < 777 ) goto REQ_MISS;
+	for (.@i = 7399; .@i < 7405; .@i++){
+		delitem .@i,7;
+	}
+	Zeny=Zeny-17081945;
+	delitem 942,777;
+	delitem 748,87;
+	delitem 7063,178;
+	delitem 919,817;
+	getitem 48011,1; 
+	end;
+	}
+	
+Q_7:	// costume bunny ears of minnie
+mes "Item Requirements:";
+mes " > 3 Pcs every Name Card :";
+mes " > "+getitemname(7399)+""; 
+mes " > "+getitemname(7400)+"";
+mes " > "+getitemname(7401)+"";
+mes " > "+getitemname(7402)+""; 
+mes " > "+getitemname(7403)+""; 
+mes " > "+getitemname(7404)+"";
+mes " > 1077x "+getitemname(949)+""; 
+mes " > 1077x "+getitemname(914)+"";
+mes "and";
+mes "Zeny 1.781.945";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+	if (countitem(7399) < 3 || countitem(7400) < 3 ||countitem(7401) < 3 ||countitem(7402) < 3 ||countitem(7403) < 3 ||countitem(7404) < 3 || Zeny < 1781945 ) goto REQ_MISS;
+	if (countitem(949) < 1077 ||countitem(914) < 1077  ) goto REQ_MISS;
+	for (.@i = 7399; .@i < 7405; .@i++){
+		delitem .@i,3;
+	}
+	delitem 949,1077;
+	delitem 914,1077;
+	Zeny=Zeny-1781945;
+	getitem 31097,1; 
+	end;
+	}
+	
+Q_8:	// costume bloodytbandage
+mes "Item Requirements:";
+mes " > 5 Pcs every Name Card :";
+mes " > "+getitemname(7399)+""; 
+mes " > "+getitemname(7400)+"";
+mes " > "+getitemname(7401)+"";
+mes " > "+getitemname(7402)+""; 
+mes " > "+getitemname(7403)+""; 
+mes " > "+getitemname(7404)+"";
+mes " > 817x "+getitemname(930)+"";
+mes " >	77x "+getitemname(990)+"";
+mes "and";
+mes "Zeny 1.781.945";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+	if (countitem(7399) < 5 || countitem(7400) < 5 ||countitem(7401) < 5 ||countitem(7402) < 5 ||countitem(7403) < 5 ||countitem(7404) < 5 || Zeny < 1781945 ) goto REQ_MISS;
+	if (countitem(930) < 817 ||countitem(990) < 77  ) goto REQ_MISS;
+	for (.@i = 7399; .@i < 7405; .@i++){
+		delitem .@i,5;
+	}
+	delitem 990,77;
+	delitem 930,817;
+	Zeny=Zeny-1781945;
+	getitem 31122,1; 
+	end;
+	}
+	
+Q_9:	// costume artist hat
+mes "Item Requirements:";
+mes " > 5 Pcs every Name Card :";
+mes " > "+getitemname(7399)+""; 
+mes " > "+getitemname(7400)+"";
+mes " > "+getitemname(7401)+"";
+mes " > "+getitemname(7402)+""; 
+mes " > "+getitemname(7403)+""; 
+mes " > "+getitemname(7404)+"";
+mes " > 777x "+getitemname(916)+"";
+mes " > 817x "+getitemname(931)+"";
+mes "and";
+mes "Zeny 1.781.945";
+next;
+switch(select("Yes, please !","Cancel")){
+case 1:
+	if (countitem(7399) < 5 || countitem(7400) < 5 ||countitem(7401) < 5 ||countitem(7402) < 5 ||countitem(7403) < 5 ||countitem(7404) < 5|| Zeny < 1781945 ) goto REQ_MISS;
+	if (countitem(916) < 777 ||countitem(931) < 817  ) goto REQ_MISS;
+	for (.@i = 7399; .@i < 7405; .@i++){
+		delitem .@i,5;
+	}
+	delitem 916,777;
+	delitem 931,817;
+	Zeny=Zeny-1781945;
+	getitem 20306,1; 
+	end;
+	}
+	
+	
+REQ_MISS: 
+mes "Thank you for your participation";
+mes	"MERDEKA! MERDEKA! MERDEKA!!";
+end;
+
+}

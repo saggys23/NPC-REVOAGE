@@ -1,0 +1,108 @@
+
+
+-	script	rewardsevent#1000	-1,{
+
+	set .@n$, "^FF0000[NPC Claim Event]^000000";
+	set .gmlvl, 15;
+	setarray .@namaevent$,"Tester","Juna","kopisusu","Younghoon","Fatimah","Velove","ZeroTwo","Voyage","DimSum","Royeta","Debil","ChaiSenTao","Kadoya Tsukasa","Vodafone","Yuffie","anok","POSITRON","ZreX","Swtch","Wadidiw","PapaJack","Legolas","Tester15";     
+	
+	if( getgroupid() >= .gmlvl)
+	{
+	admin_only:
+		mes .@n$;	
+		mes "Hello, GM "+strcharinfo(0)+"!";
+		mes "What do you want to do?";
+		next;
+		switch(select("Assign Reward"))
+		{
+		case 1:
+				set @rewarditem, 8041;
+				mes .@n$;
+				mes "To whom do you wanna give the reward?";
+				input @playername$;
+				query_sql "SELECT `char_id` FROM `char` WHERE `name` = '"+escape_sql(@playername$)+"'",.@charid;
+						if (!.@charid) {next; mes .@n$; mes "The name is invalid."; next; goto admin_only; }
+							else set .@charid,0;
+				next;
+				set @rewardamount, 1;
+				mes .@n$;
+				mes "So, player "+@playername$+" will have";
+				//mes ""+@rewardamount+" "+getitemname(@rewarditem)+"s. Great~!";
+				next;
+				//message @playername$,"Please claim your rewards from the Rewards NPC! "+@rewardamount+" "+getitemname(@rewarditem)+"s";
+				query_sql "INSERT INTO `rewardevent` (`playername`, `reward_id`, `reward_amount`) VALUES ('"+@playername$+"', "+@rewarditem+", "+@rewardamount+")";
+				setarray $giverlog1$[getarraysize($giverlog1$)],strcharinfo(0);
+				setarray $receiverlog1$[getarraysize($receiverlog1$)],@playername$;
+				//setarray $itemlog1[getarraysize($itemlog1)],@rewarditem;
+				setarray $amountlog1[getarraysize($amountlog1)],@rewardamount;
+				set @playername$, "";
+				close2;
+				end;
+			}
+		}
+		
+	mes .@n$;
+	mes "Hello, "+strcharinfo(0)+"!";
+	next;
+	switch(select("Claim"))
+	{
+			
+			
+			
+			
+			
+	case 1:
+	
+	// EVENT SHARE VIDEO
+			if(!#sharevideo && inarray(.@namaevent$,strcharinfo(0)) != -1){
+				getitembound 14545,1,Bound_Account;
+				getitembound 35001,1,Bound_Account;
+				#sharevideo = true;
+				//message strcharinfo(0),"[Claim Event Manager]: You just got 20.000 Cash Points.";
+			}
+	// EVENT SHARE BOARD		
+			if (#eventboard) goto R_AccBound;
+			query_sql "SELECT `playername`, `reward_id`, `reward_amount` FROM `rewardevent`", .@available_name$, .@available_item, .@available_amount;
+			for (set @i, 0; @i < getarraysize(.@available_name$); set @i, @i+1)
+			{
+			if(strcharinfo(0) == .@available_name$[@i])
+				{
+				mes .@n$;
+				mes "Join next event ~ Thx u";
+				query_sql "DELETE FROM `rewardevent` WHERE `playername`='"+@winnername$+"'";
+				getitembound 12411,5,Bound_Account;
+				getitembound 3002,1,Bound_Account;
+				getitembound 17314,1,Bound_Account;
+				set #eventboard,1;
+				//announce "Player "+.@available_name$[@i]+" has claimed "+.@available_amount[@i]+" "+getitemname(.@available_item[@i])+"s from the Rewards NPC!",0,0xDBA901;
+				close;
+				}
+			}
+			goto R_Noreward;
+		
+	}
+	
+R_Invalid:
+	mes "^FF0000[Rewards NPC]^000000";
+	mes "Invalid. Does not exists in the logs!";
+	close;
+R_AccBound:
+	mes "^FF0000[Rewards NPC]^000000";
+	mes "No rewards at the meantime";
+	mes "Get out!";
+	end;	
+R_Noreward:
+	mes "^FF0000[Rewards NPC]^000000";
+	mes "No rewards at the meantime";
+	mes "Get out!";
+	close;
+
+OnInit:
+	query_sql "CREATE TABLE IF NOT EXISTS `rewardevent` (`playername` TINYTEXT NOT NULL, `reward_id` INT NOT NULL, `reward_amount` INT NOT NULL, INDEX `playername` (`playername`(32)) ) ENGINE=MyISAM";
+}
+
+/* Add npc's here (duplicate) ciao */
+
+payo2,98,104,3	duplicate(rewardsevent#1000)	Claim Event Rewards	109
+
+		

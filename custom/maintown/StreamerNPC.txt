@@ -1,0 +1,109 @@
+// ===== Donation Npc 1.0 ===================== //
+// ===== Credits : Jhosef and trOn ============ //
+// ===== Change Logs ========================== //
+// ============================================ //
+
+
+
+// ==== NPC Location ========================== // 
+payon,134,232,6	script	Stream Helper	10299,{
+
+// === Configuration ========================== //
+	set .gms_level, 30;
+	setarray .@StreamerID, 2000703,2002676,2000007,2002164,2000005,2000050,2000026,2000197,2000460,2001726,2002186;
+	set .@npc_name$, "[Stream Helper]";
+	
+// ==== NPC Talk ============================== //
+
+	
+	.@talkerid = getcharid(3);
+	if( getgroupid() >= .gms_level) goto AdminPanel;
+	if( inarray(.@StreamerID,.@talkerid) != -1) goto StreamerPanel;
+	if( getgroupid() < .gms_level) goto NonStreamer;
+// ==== Admin Panel =========================== //
+	AdminPanel:
+	mes .@npc_name$;
+	next;
+	switch(select("Add Streamer Box:Exit"))
+		{
+			case 1:
+				mes .@npc_name$;
+				mes "Input Streamer Nickname:";
+				input .@name$;	
+				query_sql "SELECT `account_id` FROM `char` WHERE `name` = '"+.@name$+"' ", .@streamid;
+				next;
+				if(inarray(.@StreamerID,.@streamid) != -1){
+				.@stats = query_sql("SELECT `status` FROM `streamerbox` WHERE `account_id` = "+.@streamid+" AND `status` = 0", .@status);
+				if (.@stats) {
+					mes "Streamer masih punya Box yg blm di claim";
+					end;
+					}
+				query_sql "INSERT INTO `streamerbox` (`account_id`,`streamername`,`inputby`) VALUES ("+.@streamid+", '"+escape_sql(.@name$)+"', '"+strcharinfo(0)+"')";
+				mes "Done ~ ! ";
+				close;
+				}
+				mes "Nickname yg kamu input salah atau tidak terdaftar.";
+				end;
+				
+			case 2:
+				end;
+				}
+				
+	StreamerPanel:
+	mes .@npc_name$;
+	mes "Selamat datang !";
+	mes "Apa yg bisa saya bantu?";
+	next;
+		switch(select("Claim Weekly Supply:Claim Streamer Headger:Exit")) {
+		//case 1:
+				//.@stats = query_sql("SELECT `status` FROM `streamerbox` WHERE `account_id` = "+.@talkerid+" AND `status` = 0", .@status);
+				//if (!.@stats) {
+					//mes .@npc_name$;
+					//mes "Kamu tidak punya kotak yg belum di Claim.";
+					//mes "Kamu bisa request ke Aktif GM / Chat Discord GM.";
+					//end;
+				//}
+				//mes .@npc_name$;
+				//mes "Here's Your Giveaway Box.";
+				//mes "Thanks for your creativity to make this Ragnarok more attractive.";
+				//query_sql "UPDATE `streamerbox` SET `status` = 1 WHERE `account_id` = "+.@talkerid+"";
+				//getitem 35005,3;
+				//close;				
+		case 1:
+			.@weekly = query_logsql("SELECT `account_id` FROM `weeklystreamer` WHERE `account_id` = "+.@talkerid+" ", .@weeklyacc);
+			if (!.@weekly) { 
+				mes .@npc_name$;
+				mes "Here's your Package ! Have fun !";
+				query_logsql "INSERT INTO `weeklystreamer` (`account_id`,`name`) VALUES ("+.@talkerid+",'"+strcharinfo(0)+"')";
+				getitembound 3000,10,Bound_Account;
+				getitembound 12208,10,Bound_Account;
+				getitembound 12210,10,Bound_Account;
+				getitembound 14003,5,Bound_Account;
+				getitem 35005,9;
+				}
+			mes .@npc_name$;
+			mes "You Already claim weekly package";
+			mes "Wait until reset at Saturday 5PM";
+			close;
+			
+		case 2:
+			mes .@npc_name$;
+			if(!#streamerhead){ getitembound 31569,1,Bound_Account;
+			#streamerhead = true;
+			end;}
+			mes "ID Stream kamu sudah claim Headger.";
+			end;
+			
+		case 3:
+			end;
+		}			
+		
+	NonStreamer:
+			mes "Sorry, you are not registered streamer";
+			end;
+	
+	OnSat1700:
+		query_logsql "truncate table `weeklystreamer`";
+		end;
+		}
+			

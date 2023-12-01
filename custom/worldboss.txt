@@ -1,0 +1,418 @@
+/*
+CREATE TABLE IF NOT EXISTS worldboss (
+  account_id int(11) NOT NULL,
+  char_id int(11) NOT NULL,
+  name varchar(23) NOT NULL,
+  kills int(11) NOT NULL DEFAULT '0',
+  damage int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (account_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+*/
+
+payon,155,205,6	script	world_warper	45,2,2,{
+    end;
+
+OnTouch:
+    warp "mvp_room",50,50;
+end;
+}
+
+-	script	worldboss#yumi	-1,{
+
+OnEventReady:
+	hideoffnpc "world_warper";
+	enablenpc "world_warper";
+	$WBID=143;
+	for ( .@i = 0; .@i < getarraysize( .worldflag ); .@i++ ) setmapflag .EventMap$, .worldflag[.@i];
+	query_sql("TRUNCATE worldboss");
+	.wave = 1;
+	.MapID = rand(getarraysize(.EventMap$));
+	announce "Valfreyja : Citizens of midgard! An abnormality has been detected.",bc_all;
+	sleep 10000;
+	announce "Valfreyja : This is a crisis that will lead to destruction and sorrow to the townspeople nearby!.",bc_all;
+	sleep 10000;
+	announce "Valfreyja : As the goddess of this world, I am asking for you cooperation to solve this crisis!.",bc_all;
+	sleep 10000;
+	announce "Valfreyja : The estimated time before the said abnormality, the \"flood\" will emerge in 5 Minutes time!.",bc_all;
+	sleep 30000;	//1 Minute passed
+	announce "Valfreyja : I won't leave things unrewarded for helping to solve the crisis! Join the fight!.",bc_all;
+	sleep 20000;
+	announce "Valfreyja : Rewards will be based on your participation!.",bc_all;
+	sleep 20000;
+	announce "Valfreyja : The more damage you dealt to the boss will give you plenty rewards! same as killing more enemies!.",bc_all;
+	sleep 20000;	//2 Minutes passed
+	announce "Valfreyja : There's 3 more minutes left before it begins! Prepare as fast as you can!.",bc_all;
+	sleep 30000;	
+	announce "Valfreyja : Join the others and help solve the crisis, portal open at Payon 155 210!",bc_all;
+	sleep 30000;	//3 Minutes passed
+	announce "Valfreyja : 2 Minutes left until the flood waves start!.",bc_all;
+	sleep 30000;
+	announce "Valfreyja : There are currently "+getmapusers(.EventMap$[.MapID])+" prepared adventurers!.",bc_all;
+	announce "Valfreyja : Portal opened at Payon 155 205!",bc_all;
+	sleep 30000;	//4 Minutes passed
+	announce "Valfreyja : 1 Minute! Please help defend area from the \"flood\".",bc_all;
+	sleep 40000;
+	announce "Valfreyja : 20 Seconds left.",bc_all;
+	sleep 15000;
+	announce "Valfreyja : 5 Seconds left.",bc_all;
+	sleep 2000;
+	announce "Valfreyja : \"Flood\" will emerge in 3.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : 2.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : 1.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : Portal still opened at Payon 155 205 until the World Boss Dead!",bc_all;
+	sleep 1000;
+	announce "Valfreyja : There are currently "+getmapusers(.EventMap$[.MapID])+" prepared adventurers!.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : Good Luck and Bless all participants! wave "+.wave+" is coming!.",bc_all;
+	callsub OnSlavesSpawn,.wave;
+end;
+
+OnPreludeSlave:
+	announce "Valfreyja : Good job on repelling wave "+(.wave-1)+"!.",bc_all;
+	sleep 5000;
+	announce "Valfreyja : The next wave will arrive in roughly 10 seconds.",bc_all;
+	sleep 7000;
+	announce "Valfreyja : Next wave in 3.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : 2.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : 1.",bc_all;
+	sleep 1000;	
+	announce "Valfreyja : Portal still opened at Payon 155 210 until the World Boss Dead!",bc_all;
+	sleep 1000;
+	announce "Valfreyja : Good Luck and Bless all participants! wave "+.wave+" is coming!.",bc_all;
+return;
+
+OnSlavesSpawn:
+	if(.WaveSlaves$[.wave]=="")
+		callsub OnWorldBossSpawn;
+	.Slaves = 0;
+	explode(.@mobs$,.WaveSlaves$[.wave],",");
+	for(.@i=0;.@i<getarraysize(.@mobs$);.@i+=2){
+		monster .EventMap$[.MapID],0,0,"[Slave]"+strmobinfo(1,atoi(.@mobs$[.@i])),atoi(.@mobs$[.@i]),atoi(.@mobs$[.@i+1]),strnpcinfo(0)+"::OnSlaveDead";
+		.Slaves += atoi(.@mobs$[.@i+1]);
+	}
+end;
+
+OnSlaveDead:
+	.Slaves--;
+	if(isloggedin(killerrid))
+		query_sql("INSERT INTO `worldboss` (account_id,char_id,name,kills) VALUES ("+getcharid(3)+","+getcharid(0)+",'"+strcharinfo(0)+"',1) ON DUPLICATE KEY UPDATE kills=kills+1,name='"+strcharinfo(0)+"';");
+	if(.Slaves%5 == 0 && .Slaves >=5)
+		announce "Valfreyja : "+.Slaves+" Monsters Left.",bc_all;
+	if(.Slaves < 5 && .Slaves > 0)
+		announce "Valfreyja : "+.Slaves+" Monster"+((.Slaves==1)?"":"s")+" Left.",bc_all;
+	if(.Slaves==0)
+		if(.WaveSlaves$[++.wave]!=""){
+			callsub OnPreludeSlave;
+			callsub OnSlavesSpawn,.wave;
+		}else{
+			callsub OnPreludeBoss;
+			callsub OnWorldBossSpawn;
+		}
+end;
+
+OnPreludeBoss:
+	announce "Valfreyja : Wow! That was the last wave of small time monsters!.",bc_all;
+	sleep 5000;
+	announce "Valfreyja : The next one will be the boss now, Prepare for battle!.",bc_all;
+	sleep 5000;
+	announce "Valfreyja : You will be rewarded base on how much damage you dealt.",bc_all;
+	sleep 5000;
+	announce "Valfreyja : This is no ordinary boss as it has a very immense power than other bosses.",bc_all;
+	sleep 5000;
+	announce "Valfreyja : Anyway, The Boss is coming now! On your positions!.",bc_all;
+	sleep 5000;	
+	announce "Valfreyja : 3.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : 2.",bc_all;
+	sleep 1000;
+	announce "Valfreyja : 1.",bc_all;
+	sleep 1000;	
+	announce "Valfreyja : Good Luck and Bless all of you!.",bc_all;
+return;
+
+OnWorldBossSpawn:
+	deletearray $@damage_cid;
+	.@BossID = rand(getarraysize(.WorldBossID));
+	monster .EventMap$[.MapID],.BossSpawnX[.MapID],.BossSpawnY[.MapID],"[BOSS]"+strmobinfo(1,.WorldBossID[.@BossID]),.WorldBossID[.@BossID],1,strnpcinfo(0)+"::OnWorldBossDead",2;
+end;
+
+OnWorldBossDead:
+	set $WBID,gettimetick(2);
+	.@name$ = strcharinfo(0);
+	freeloop(1);
+	for(.@i=0;.@i<getarraysize(.LastHitReward);.@i+=2)
+		getitem .LastHitReward[.@i],.LastHitReward[.@i+1];
+	for(.@i=0; .@i<getarraysize(.ScatteredItems); .@i+=2){
+		for(.@j=0;.@j<.ScatteredItems[.@i+1];.@j++){
+			do {
+				.@x = rand(0,.MapMaxX[.MapID]);
+				.@y = rand(0,.MapMaxY[.MapID]);
+			} while (!checkcell(.EventMap$[.MapID],.@x,.@y,cell_chkpass));
+			makeitem .ScatteredItems[.@i],1,"this",.@x,.@y;
+		}
+	}
+	if(killedrid)
+		for(.@i=0;.@i<getarraysize($@damage_done);.@i++)
+			query_sql("INSERT INTO `worldboss` (account_id,char_id,name,damage) SELECT account_id,'"+$@damage_cid[.@i]+"',name,'"+$@damage_done[.@i]+"' FROM `char` WHERE `char`.`char_id`="+$@damage_cid[.@i]+" ON DUPLICATE KEY UPDATE damage = damage + "+$@damage_done[.@i]+"");
+	freeloop(0);
+	announce "Valfreyja : The Boss has been slain! Congratulations.",bc_all;
+	sleep 5000;
+	announce "Valfreyja : Brave "+.@name$+" has dealt the last damage!",bc_all;
+	sleep 5000;
+	.@top = query_sql("SELECT char_id,name,damage FROM worldboss ORDER BY damage DESC LIMIT 3",.@cid,.@name,.@dmg);
+	if(.@dmg[2]){
+		announce "Valfreyja : Ranking 3rd! Brave "+.@name[2]+" for dealing "+callfunc("F_InsertComma",.@dmg[2])+" damage to the boss !",bc_all; sleep 5000;}
+	if(.@dmg[1]){
+		announce "Valfreyja : Ranking 2nd! Brave "+.@name[1]+" for dealing "+callfunc("F_InsertComma",.@dmg[1])+" damage to the boss!",bc_all; sleep 5000;}
+	if(.@dmg[0]){
+		announce "Valfreyja : Lastly! Ranking 1st! Hero "+.@name[0]+" dealing a total damage of "+callfunc("F_InsertComma",.@dmg[0])+" to the boss !",bc_all; sleep 5000;}
+	callsub OnEventEnd;
+end;
+
+OnEventEnd:
+	announce "Valfreyja : The crisis has been solved.",bc_all;
+	sleep 10000;
+	announce "Valfreyja : I thank you all for helping to subjugate the flood at "+.EventMap$[.MapID]+".",bc_all;
+	sleep 10000;	
+	announce "Valfreyja : As my thanks, All participants subjugating the boss will be rewarded!.",bc_all;
+	sleep 10000;
+	getmapxy(.@map$,.@x,.@y,BL_NPC,$@WBREWARDGID$);
+	announce "Valfreyja : Please Proceed to my guardian at "+.@map$+" "+.@x+","+.@y+"!.",bc_all;
+	sleep 10000;
+	announce "Valfreyja : Once Again, Thank you for helping, I hope to see you adventurers at the next crisis!.",bc_all;
+	hideonnpc "world_warper";
+	disablenpc "world_warper";
+	mapwarp .EventMap$[0],"payon",188,220;
+end;
+
+OnInit:
+	setarray .worldflag,mf_nosave,mf_nowarp,mf_nowarpto,mf_nomemo,mf_noteleport,mf_noreturn,mf_notrade,mf_nopenalty,mf_nobranch,mf_nodrop,mf_nomobloot,mf_nomvploot,mf_noicewall;
+	//========Map Configuration=========//
+	setarray .EventMap$[0],"mvp_room";		//Maps
+	setarray .MapMaxX[0],89;				//Map Max X coordinate(For scattering items)
+	setarray .MapMaxY[0],89;				//Map Max Y coordinate
+	setarray .BossSpawnX[0],50;				//World Boss Spawn Location X, 0 = Random
+	setarray .BossSpawnY[0],50;				//World Boss Spawn Location Y, 0 = Random
+	//==================================//
+	
+	//======Monster Configuration=======//
+	setarray .WaveSlaves$[1],		//(MobID,Amount)
+							"2311,2,1302,10,1200,5,1202,10,1191,20,1193,15",	//Wave 1 Slaves [Dark Lord, Dark Illusion, Zherlthish, Phendark, Mimic, Alarm]
+							"2310,2,1507,10,1370,10,1374,10,1379,20,1371,25",	//Wave 2 Slaves [Lord of Death, Bloody Murderer, Succubus, Incubus, Nightmare Terror, Fallen Angel]
+							"2309,2,1831,15,1833,15,1837,25,1383,30,1366,20";	//Wave 3 Slaves [Ifrit, Salamander, Kasa, Imp, Explosion, Lava Golem]
+	
+	setarray .WorldBossID[0],3029;		//Randomly Pick 1
+	setarray .ScatteredItems[0],12103,5,6241,3,6240,3,12246,1,35003,1,7825,5,7619,7,7620,7,35002,10,13890,50,13889,50,14234,50,969,50,14545,5,36000,3,36001,3,6293,15,12029,30,12033,30,12030,30;
+	setarray .LastHitReward[0],38027,1;	//Item ID, Amount{, Item ID, Amount}
+	//For Test Purpose
+	hideonnpc "world_warper";
+	disablenpc "world_warper";
+	
+	bindatcmd "worldboss",strnpcinfo(0)+"::OnEventReady",99,99;
+end;
+
+}
+
+payon,192,223,3	script	Valfreyja Guardian#WBREWARD	685,{
+
+	mes .name$;
+	mes "Good Day Fellow~";
+	mes "Goddess Freyja has sent me here to give rewards for the braves that help in solving flood crisis that happened a while ago.";
+	next;
+	switch(select("^00D323~Boss Damage Ranking^000000:^FF0000~Wave Kill Ranking^000000:^0000FF~Check Rewards^000000:~Goodbye!")){
+		case 1:
+			mes .name$;
+			mes "Here are the rankings";
+			mes "for dealing damage on";
+			mes "world boss.";
+			next;
+			callsub OnCheckRanking,1;
+			
+			break;
+		case 2:
+			mes .name$;
+			mes "Here are the rankings";
+			mes "for the amount of kills";
+			mes "during the flood.";
+			next;
+			callsub OnCheckRanking,0;
+			break;
+		case 3:
+			mes .name$;
+			mes "^00D323Boss Damage Ranking Rewards~^000000";
+			for(.@i=0;.@i<getarraysize(.BossRankRewards$);.@i++){
+				deletearray .@brwd$;
+				explode(.@brwd$,.BossRankRewards$[.@i],",");
+				mes "^FF0000Top "+(.@i+1)+" Rewards: ^000000";
+				for(.@j=0;.@j<getarraysize(.@brwd$);.@j+=2)
+					mes "->^0000FF"+atoi(.@brwd$[.@j+1])+"x "+getitemname(atoi(.@brwd$[.@j]))+"^000000";
+			}
+			mes "^FF0000Other Participants Rewards: ^000000";
+			for(.@i=0;.@i<getarraysize(.BossConsolation);.@i+=2)	
+				mes "->^0000FF"+.BossConsolation[.@i+1]+"x "+getitemname(.BossConsolation[.@i])+"^000000";
+			next;
+			mes .name$;
+			mes "^00D323Wave Kills Ranking Rewards~^000000";
+			for(.@i=0;.@i<getarraysize(.WaveRankRewards$);.@i++){
+				deletearray .@wrwd$;
+				explode(.@wrwd$,.WaveRankRewards$[.@i],",");
+				mes "^FF0000Top "+(.@i+1)+" Rewards: ^000000";
+				for(.@j=0;.@j<getarraysize(.@wrwd$);.@j+=2)
+					mes "->^0000FF"+atoi(.@wrwd$[.@j+1])+"x "+getitemname(atoi(.@wrwd$[.@j]))+"^000000";
+			}
+			mes "^FF0000Other Participants Rewards: ^000000";
+			for(.@i=0;.@i<getarraysize(.WaveConsolation);.@i+=2)
+				mes "->^0000FF"+.WaveConsolation[.@i+1]+"x "+getitemname(.WaveConsolation[.@i])+"^000000";
+			next;
+			mes .name$;
+			mes "Are you here to receive some rewards?";
+			next;
+			switch(select("~Get Boss Damage Rewards:~Get Wave Kills Rewards:~Cancel")){
+				case 1:
+					if($WBID == 143){ mes .name$; mes "World Boss is currently ongoing.";  end; }
+					callsub OnGetBossRewards;
+					break;
+				case 2:
+					if($WBID == 143){ mes .name$; mes "World Boss is currently ongoing.";  end; }
+					callsub OnGetWaveRewards;
+					break;
+				case 3:
+					end;
+			}
+			break;
+		case 4:
+			mes .name$;
+			mes "Alright~";
+			mes "I'm hoping to see you once again soon.";
+			mes "good luck on your adventures.";
+			break;
+
+	}
+end;
+
+OnCheckRanking:	//Checking the Ranking (DONE)
+	if(getarg(0))
+		.@ranking = query_sql("SELECT char_id,name,damage FROM worldboss WHERE damage !=0 ORDER BY damage DESC Limit 30",.@cid,.@name$,.@damage);
+	else
+		.@ranking = query_sql("SELECT char_id,name,kills FROM worldboss WHERE kills !=0 ORDER BY kills DESC Limit 30",.@cid,.@name$,.@kills);
+	mes .name$;
+	if(!.@cid[0]){mes "I'm sorry but there's no one in the ranking right now"; end;}
+	mes "^0000FFRank^000000 - "+(getarg(0)?"^00D323Damage Done^000000":"^FF0000Monster Kills^000000");
+	for(.@i=0;.@i<getarraysize(.@cid);.@i++){
+		if(.@i%10==0 && .@i!=0){ next; mes .name$; mes "^0000FFRank^000000 - "+(getarg(0)?"^00D323Damage Done^000000":"^FF0000Monster Kills^000000");}
+		mes (.@i+1)+". ^0000FF"+.@name$[.@i]+"^000000 - "+(getarg(0)? "^00D323"+callfunc("F_InsertComma",.@damage[.@i])+"^000000":"^FF0000"+.@kills[.@i])+"^000000";
+	}
+return;
+
+OnGetBossRewards:
+	if($WBID==#BossReward){
+		mes .name$;
+		mes "You already receive your boss reward, Please don't be greedy~";
+		end;
+	}
+	.@idx = callsub(OnCheckReward,1);	//Check if Player on rank
+	//IF TRUE = DO BELOW
+	if(.BossRankRewards$[.@idx]!=""){	//Item Reward
+		explode(.@rwd$,.BossRankRewards$[.@idx],",");
+		for(.@i=0;.@i<getarraysize(.@rwd$);.@i+=2)
+			getitem atoi(.@rwd$[.@i]),atoi(.@rwd$[.@i+1]);
+	}
+	else
+		for(.@i=0;.@i<getarraysize(.BossConsolation);.@i+=2)
+			getitem .BossConsolation[.@i],.BossConsolation[.@i+1];
+	callsub OnPercentageReward;	//Point Reward
+	callsub OnRewardSuccess,1;
+return;
+
+OnPercentageReward:
+	query_sql("SELECT ROUND(((SELECT damage FROM worldboss WHERE account_id="+getcharid(3)+") * 100.0 / (SELECT SUM(damage) FROM worldboss)*"+.pointReward+"/100),3) As Points, ROUND(((SELECT damage FROM worldboss WHERE account_id="+getcharid(3)+") * 100.0 / (SELECT SUM(damage) FROM worldboss)*"+.BaseExpReward+"/100),3) As BaseExp, ROUND(((SELECT damage FROM worldboss WHERE account_id="+getcharid(3)+") * 100.0 / (SELECT SUM(damage) FROM worldboss)*"+.JobExpReward+"/100),3) As JobExp",.@points,.@baseExp,.@jobExp);
+	if(.@points > .pointMax)
+		set .@pointReward,.pointMax;
+	else
+		set .@pointReward,.@points;
+	setd .pointVariable$,getd(.pointVariable$)+.@pointReward;
+	dispbottom "You receive "+.@pointReward+" "+.pointName$+".";
+	getexp .@baseExp,.@jobExp;	//Exp Reward
+	dispbottom "You received "+.@baseExp+" base experience and "+.@jobExp+" job experience.";
+return;
+
+OnGetWaveRewards:	//Wave Ranking Rewards (DONE)
+	if($WBID==#WaveReward){
+		mes .name$;
+		mes "You already receive your wave reward, Please don't be greedy~";
+		end;
+	}
+	.@idx = callsub(OnCheckReward,0);	//Check if Player on rank
+	if(.WaveRankRewards$[.@idx]!=""){	//Item Reward
+		explode(.@rwd$,.WaveRankRewards$[.@idx],",");
+		for(.@i=0;.@i<getarraysize(.@rwd$);.@i+=2)
+			getitem atoi(.@rwd$[.@i]),atoi(.@rwd$[.@i+1]);
+	}
+	else
+		for(.@i=0;.@i<getarraysize(.WaveConsolation);.@i+=2)
+			getitem .WaveConsolation[.@i],.WaveConsolation[.@i+1];
+	callsub OnRewardSuccess,0;
+return;
+
+OnCheckReward:
+	freeloop(1);
+	if(getarg(0))
+		.@rank = query_sql("SELECT char_id FROM worldboss WHERE damage !=0 ORDER BY damage DESC",.@cid);
+	else
+		.@rank = query_sql("SELECT char_id FROM worldboss WHERE kills !=0 ORDER BY kills DESC",.@cid);
+	freeloop(0);
+	.@idx = inarray(.@cid,getcharid(0));
+	if(.@idx>=0)
+		return .@idx;
+	mes .name$;
+	mes "Sorry, but it seems like you are not qualified to receive a reward.";
+end;
+
+OnRewardSuccess:
+	if(getarg(0)) set #BossReward,$WBID;
+	else set #WaveReward,$WBID;
+	mes .name$;
+	mes "Here's your rewards!";
+	mes "Thank you for helping the flood crisis";
+end;
+
+OnInit:
+	//========START OF WAVE REWARDS CONFIGURATION=========//
+	setarray .WaveRankRewards$[0],		//Individual Rewards for Top 3 Player
+							"38027,1,12103,5",	//TOP 1
+							"38027,1,12103,3",	//TOP 2
+							"14003,5,12103,3";	//TOP 3
+							//""			//FOR TOP 4, ADD MORE TO YOUR LIKING
+	setarray .WaveConsolation[0],14003,3;//FOR PLAYERS NOT IN TOP
+	//=========END OF WAVE REWARDS CONFIGURATION==========//
+	
+	//========START OF BOSS REWARDS CONFIGURATION=========//
+	setarray .BossRankRewards$[0],		//Individual Rewards for Top 3 Player
+							"38026,1,35003,1",	//TOP 1
+							"38026,1,12103,3",	//TOP 2
+							"14003,5,12103,3";	//TOP 3
+							//""			//FOR TOP 4, ADD MORE TO YOUR LIKING
+							
+	setarray .BossConsolation[0],14003,3;//FOR PLAYERS NOT IN TOP
+	//==========POINTS REWARD
+	set .pointVariable$,"#CASHPOINTS";
+	set .pointName$,"Cash Points";
+	set .pointReward,1000000;	// Whole Reward that will be distributed based on boss damage by percentage %	(Must be 100 Above)
+	set .pointMax,50000;	//Max Reward for players(To prevent taking all the Point Reward)
+	
+	//==========ETC Rewards
+	set .BaseExpReward,2000000;	// For Experience Reward based on Damage by percentage(Max of 2.1B Experience)
+	set .JobExpReward,1000000;
+	
+	//=========END OF BOSS REWARDS CONFIGURATION=========//
+	
+	//DO NOT TOUCH
+	set .name$,"[ Lenneth ]";
+	set $@WBREWARDGID$,strnpcinfo(0);
+end;
+}

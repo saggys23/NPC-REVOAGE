@@ -1,0 +1,66 @@
+//===== rAthena Script =======================================
+//= Mapflag: Disable Ice Wall.
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Current Version: =====================================
+//= 1.9
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: ========================================= 
+//= Blocks usage of WZ_ICEWALL.
+//===== Additional Comments: ================================= 
+//= 1.6a Re-enabled icewalls for cities [Lupus]
+//= 1.7 Officially icewall is allowed on interiors. [L0ne_w0lf]
+//= 1.8 Fixed arug_cas map names.
+//= 1.9 Renewal split. [Euphy]
+//============================================================
+
+//ayo_in01	mapflag	noicewall
+moc_pryd06	mapflag	levelcap
+lhz_dun03	mapflag	levelcap
+ra_fild02	mapflag	levelcap
+ra_fild03   mapflag	levelcap
+ra_fild04   mapflag	levelcap
+ve_fild01   mapflag	levelcap 
+ve_fild02   mapflag	levelcap
+lou_dun03   mapflag	levelcap
+prt_maze03	mapflag	levelcap
+gl_chyard   mapflag	levelcap
+abyss_03	mapflag	levelcap
+gef_dun02   mapflag	levelcap
+gef_dun01   mapflag	levelcap
+treasure02	mapflag	levelcap
+pay_fild11	mapflag	levelcap
+gon_dun03	mapflag	levelcap
+abbey02	mapflag	levelcap
+xmas_fild01	mapflag	levelcap
+ra_san05	mapflag	levelcap
+prt_sewb4	mapflag	levelcap
+lhz_dun03	mapflag	levelcap
+lhz_dun03	mapflag	levelcap
+thor_v03	mapflag	levelcap
+ama_dun03	mapflag	levelcap
+kh_dun02	mapflag	levelcap
+xmas_dun02	mapflag	levelcap
+iz_dun05	mapflag	levelcap
+ice_dun03	mapflag	levelcap
+ayo_dun02	mapflag	levelcap
+lhz_dun03	mapflag	levelcap
+niflheim	mapflag	levelcap
+anthell02	mapflag	levelcap
+mjolnir_04	mapflag	levelcap
+pay_dun04	mapflag	levelcap
+gef_fild14	mapflag	levelcap
+gef_fild10	mapflag	levelcap
+moc_pryd04	mapflag	levelcap
+in_sphinx5	mapflag	levelcap
+moc_fild17	mapflag	levelcap
+ein_dun02	mapflag	levelcap
+lhz_dun03	mapflag	levelcap
+beach_dun	mapflag	levelcap
+thana_boss	mapflag	levelcap
+tur_dun04	mapflag	levelcap
+odin_tem03	mapflag	levelcap
+jupe_core	mapflag	levelcap
+moc_fild22	mapflag	levelcap
+lhz_dun02	mapflag	levelcap

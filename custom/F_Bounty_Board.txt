@@ -1,0 +1,268 @@
+//===== Atlantis Script ======================================
+//= iRO Bounty Boards
+//===== By: ==================================================
+//= Ragno / AtlantisRO
+//===== Actual Version: ======================================
+//= 1.1 Added vip function to collect all bounties,
+//=     Fixed a minnor bug with one use of a close command.
+//= 1.0.2 Removed += operations with strings.
+//= 1.0.1 Changed npc and monsters constants to numerical ids
+//= 1.0 Starting Release
+//===== General Description: =================================
+//= Hunting Quest designed by iRO:
+//=    http://irowiki.org/wiki/Bounty_Board_Quests
+//===== How to Use: ==========================================
+//= Uses function "F_Bounty_Board" to manage the Bounty Boards
+//= npc on cities.
+//= The function arguments are this:
+//= 	callfunc "F_Bounty_Board", MinLevel, MaxLevel, MsgHuntPlace, MsgOutLevel,
+//=			MonsterID, 		QuestID, 	BaseExp, 	JobExp,		WarpMap{, 
+//=			MonsterID, 		QuestID, 	BaseExp, 	JobExp,		WarpMap};
+//============================================================
+
+function	script	F_Bounty_Board	{
+	if (BaseLevel < getarg(0) || (BaseLevel > getarg(1) && getarg(1))){
+		for (.@i = 5; .@i < getargcount(); .@i += 5){
+			if (checkquest(getarg(.@i)) != -1){
+				mes "[Bounty Board]";
+				mes "Quest mana yang selesai?";
+				next;
+				switch(select("Lapor Quest", "Hapus Quest")){
+					case 1: goto L_BountyOne;
+					case 2: goto L_BountyDel;
+				}
+			}
+		}
+		switch(getarg(3)){
+			case 1: mes "Lihat syarat level "+getarg(0)+"-"+getarg(1)+"."; break;
+			case 2: mes "Lihat syarat level "+getarg(0)+" and "+getarg(1)+"."; break;
+			case 3: mes "Lihat syarat level "+getarg(0)+"."; break;
+			case 4: mes "Lihat syarat level  "+getarg(0)+"."; break;
+			case 5: mes "Tidak ada yg menarik disini."; break;
+		}
+		close;
+	}
+ambil:
+	mes "[Bounty Board]";
+	mes "Halo " + strcharinfo(0) + " ";
+	mes "Pilih menu yg kamu inginkan.";
+	next;
+	switch(select("Ambil Quest", "Lapor Quest")){
+	case 1:	// Check bounty missions
+		mes "[Bounty Board]";
+		mes "Silahkan Pilih Quest yg kamu inginkan.";
+		next;
+		for (.@i = 4; .@i < getargcount(); .@i += 5)
+			.@menu$ = .@menu$ + getmonsterinfo(getarg(.@i),MOB_NAME) + ":";
+		.@menu$ = .@menu$ + "Cancel";
+		.@bounty = (select(.@menu$) * 5);
+		if (.@bounty == getargcount()+1){
+			mes "[Bounty Board]";
+			mes "Kamu memilih untuk tidak mengambil Quest.";
+			close;
+		}
+
+		.@monster$ = getmonsterinfo(getarg(.@bounty-1),MOB_NAME);
+		
+
+			if (checkquest(getarg(.@bounty),HUNTING) == -1) {
+				setquest getarg(.@bounty);
+				
+			mes "[Bounty Board]";
+			mes "Kalahkan " + .@HuntAllList$ + " kembalilah bila selesai.";
+			close2;
+
+
+		if (vip_status(1)){
+			mes "Account kamu aktif ^FF0000Premium Service^000000";
+			mes "Anda ingin Warp ke lokasi Hunt Board?";
+		switch (select("Warp", "Nanti dulu.")){
+		case 1:
+				.@map$ = getarg(.@bounty+3); 		//MapWarp
+				warp .@map$,0,0;
+				end;
+		case 2:
+			break;
+		}
+		end;
+		}
+}
+		mes "Kamu Sudah Memiliki Quest "+.@monster$+".";
+		mes "Silahkan cek Quest Window kamu^FF0000 ALT+U ^000000untuk info quest nya.";
+		if (vip_status(1)){
+		next;
+			mes "Account kamu aktif ^FF0000Premium Service^000000";
+			mes "Anda ingin Warp ke lokasi Hunt Board?";
+		switch (select("Warp", "Nanti dulu.")){
+		case 1:
+
+				.@map$ = getarg(.@bounty+3); 		//MapWarp
+				warp .@map$,0,0;
+				end;
+				
+		case 2:
+			end;
+			}
+		}
+		close;		
+	case 2:	// Collect bounty rewards
+			goto L_BountyOne;
+		
+	}
+
+L_BountyOne:
+	mes "[Bounty Board]";
+	mes "Pilih Quest yg sudah kamu selesaikan.";
+	next;
+	for (.@i = 4; .@i < getargcount(); .@i += 5)
+		.@menu$ = .@menu$ + getmonsterinfo(getarg(.@i),MOB_NAME) + ":";
+	.@menu$ = .@menu$ + "Cancel";
+	.@bounty = (select(.@menu$) * 5);
+	if (.@bounty > getargcount()){
+		mes "^000000[Bounty Board]^000000";
+		mes "Baiklah, kamu bisa kembali bila kamu perlu.";
+		close;
+	}
+	
+	if (checkquest(getarg(.@bounty),HUNTING) == 2){
+		mes "^000000[Bounty Board]^000000";
+		mes "Bagaimana kamu mau menerima Hadiahnya?";
+		mes "Hanya ^FF0000Premium Account^000000 Bisa pilih exp yg di inginkan.";
+			next;
+		if (vip_status(1)){
+
+			.@vip_reward = select("^FF0000Terima Base & Job EXP^000000", "^0000FFTerima Base EXP saja.^000000", "^FFA400Terima Job EXP saja.^000000");
+		}
+		erasequest getarg(.@bounty);
+		if (Zeny + 3500 <= MAX_ZENY)
+			Zeny += 3500;
+		.@BaseExp = getarg(.@bounty+1);
+		.@JobExp = getarg(.@bounty+2);
+		switch(.@vip_reward){
+			case 2:
+				getexp .@BaseExp,0;
+				getexp .@JobExp,0;
+				getexp .@BaseExp,0;
+				getexp .@JobExp,0;
+				mes " Selamat misi mu telah selesai . ";
+				break;
+			case 3:
+				getexp 0,.@BaseExp;
+				getexp 0,.@JobExp;
+				getexp 0,.@BaseExp;
+				getexp 0,.@JobExp;
+				mes " Selamat misi mu telah selesai . ";
+				break;
+			default:
+				getexp .@BaseExp,.@JobExp;
+				getexp .@BaseExp,.@JobExp;
+				mes " Selamat misi mu telah selesai . ";
+				break;
+		}
+	} else {
+		mes "^000000[Bounty Board]^000000";
+		mes "Kamu tidak memiliki Quest tsbt atau Quest mu belum selesai . ";
+	}
+	end;
+
+L_BountyDel:
+	mes "[Bounty Board]";
+	mes "Quest mana yg kamu ingin hapus?";
+	next;
+	for (.@i = 5; .@i < getargcount(); .@i += 5){
+		if (checkquest(getarg(.@i),HUNTING) == 1){
+			.@monster$ = getmonsterinfo(getarg(.@i-1),MOB_NAME);
+			mes "[Bounty Board]";
+			mes "Quest ini belum selesai " + .@monster$ + " hunt mission.";
+			mes "Apa kamu yakin?";
+			next;
+			if (select("Tetap Hunt "+.@monster$, "^FF0000Hapus Quest nya^000000") == 2){
+				erasequest getarg(.@i);
+				mes "[Bounty Board]";
+				mes "Semua Quest board anda telah terhapus.";
+				close2;
+				.@questerased = 1;
+			}
+		}
+	}
+	if (!.@questerased)
+		end;
+	else
+		end;
+
+}
+
+//simposmora
+mora,43,127,3	script	Innkeeper#mora_inn	522,{
+	mes "[Innkeeper]";
+	mes "Oh~ looks like we have another adventurer.";
+	mes "Where are you from?";
+	next;
+	switch(select("Just save the game.:I'd like to get some rest.:The place I used to live is called...:How can I use the warehouse?")) {
+	case 1:
+		mes "[Innkeeper]";
+		mes "Wow, what's the rush?";
+		mes "You've just come here, and you're already going someplace else?";
+		next;
+		mes "[Innkeeper]";
+		mes "You know, haste makes waste. Tsk tsk.";
+		mes "Well, the game's been saved.";
+		savepoint "mora",56,143,1,1;
+		close;
+	case 2:
+		mes "[Innkeeper]";
+		mes "My my, I need some rest also.";
+		mes "The rate is 5000 zeny. Do you want a room?";
+		next;
+		switch(select("Yes:No")) {
+		case 1:
+			if (Zeny < 5000) {
+				mes "[Innkeeper]";
+				mes "The rate is 5000z.";
+				close;
+			}
+			mes "[Innkeeper]";
+			mes "Make yourself at home.";
+			close2;
+			set Zeny, Zeny-5000;
+			percentheal 100,100;
+			warp "mora",32,123;
+			end;
+		case 2:
+			mes "[Innkeeper]";
+			mes "If you don't have the money, go soak yourself in the puddle in the center of the village.";
+			mes "It will warm you up.";
+			close;
+		}
+	case 3:
+		input .@inputstr$;
+		mes "["+strcharinfo(0)+"]";
+		mes "I come from a place called "+.@inputstr$+".";
+		next;
+		mes "[Innkeeper]";
+		mes "Oh, I think I've heard about the place before!";
+		next;
+		if (.@inputstr$ == "Shinlim") {
+			mes "[Innkeeper]";
+			mes "I heard there's an old tower where horrible witches put Savages in a giant cauldron and cast evil spells on them, right?";
+			next;
+			mes "[Innkeeper]";
+			mes "What's worse is that whoever takes medicine made out of Savages will come back for more!";
+			mes "And he will wander around looking for the tower, and eventually turn into an enormous Savage!";
+			emotion ET_STARE_ABOUT, playerattached();
+			next;
+		} else {
+			mes "[Innkeeper]";
+			mes "I heard that there are creeps there who won't get up at all even if it rains or snows, or their sweethearts or parents call them!";
+			mes "And that black clouds hover over them all the time, causing a storm!";
+			next;
+		}
+		mes "[Innkeeper]";
+		mes "How terrible!";
+		close;
+	case 4:
+		mes "[Innkeeper]";
+		mes "Search through the vegetable-shaped drawer to my right.";
+		close;
+	}
+}

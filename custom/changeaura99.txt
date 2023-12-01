@@ -1,0 +1,37 @@
+mora,40,147,4	script	Aura Changer	485,{
+
+	setarray .@auras_max[1], 152, 117, 35;
+
+	set .@s, select("Aura 1 part:Aura 2 part:Aura 3 part");
+	set .@revert, get_aura_part(.@s);
+
+	set .@current, 0;
+
+	while(1)
+	{
+		set_aura_part(.@s, .@current);
+		message strcharinfo(0),"Aura "+ .@s +" part == " + .@current;
+		set .@menu$, "Next (^0055FF"+((.@current!=.@auras_max[.@s])?.@current+1:1)+"^000000):Previous (^0055FF"+((.@current!=1 && .@current!=0)?.@current-1:.@auras_max[.@s])+"^000000):Jump to...:Revert to original (^0055FF"+.@revert+"^000000)";
+
+		switch (select(.@menu$)) 
+		{
+			case 1: 
+				set .@current, ((.@current!=.@auras_max[.@s])?.@current+1:1);
+			break;
+
+
+			case 2:
+				set .@current, ((.@current!=1 && .@current!=0)?.@current-1:.@auras_max[.@s]); 
+			break;
+
+			case 3: 
+				message strcharinfo(0),"Choose a type between 1 - "+.@auras_max[.@s]+".";
+				input .@current, 0, .@auras_max[.@s];
+			break;
+
+			case 4: 
+				set .@current, .@revert; set_aura_part(.@s, .@revert); 
+			break;
+		}
+	}
+}

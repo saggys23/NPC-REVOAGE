@@ -1,0 +1,43 @@
+mora,51,153,3	script	DoubleEXPController	25,{
+	// GM level required to change the reward
+	set .@gm_level, 99;
+	mes "Hello, " + ((getgmlevel() >= .@gm_level) ? "master! Want event EXP ?" : "are you here for your reward?");
+		if (getgmlevel() >= .@gm_level) {
+			switch(select("Bonus EXP:End Bonus EXP")) {
+	case 1:	
+	announce "Double Experience Begin!",bc_blue|bc_all;
+	set .br,getbattleflag("base_exp_rate")*3/2;
+	set .jr,getbattleflag("job_exp_rate")*3/2;
+   	setbattleflag("base_exp_rate",.br);
+	setbattleflag("job_exp_rate",.jr);
+	atcommand "@reloadmobdb";
+	end;
+	case 2:
+	announce "Double Experience already finish!",bc_blue|bc_all;
+	atcommand "@reloadbattleconf";
+	atcommand "@reloadmobdb";  
+	end;
+}
+}
+end;
+		}
+
+
+-	script	DoubleEXP	-1,{
+
+OnSat:
+OnFri2359:
+	announce "Double Experience Begin!",bc_blue|bc_all;
+	set .br,getbattleflag("base_exp_rate")*3/2;
+	set .jr,getbattleflag("job_exp_rate")*3/2;
+   	setbattleflag("base_exp_rate",.br);
+	setbattleflag("job_exp_rate",.jr);
+	atcommand "@reloadmobdb";
+	end;
+
+OnSun2359:
+	announce "Double Experience already finish!",bc_blue|bc_all;
+	atcommand "@reloadbattleconf";
+	atcommand "@reloadmobdb";  
+	end;
+}

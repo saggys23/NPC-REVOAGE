@@ -1,0 +1,221 @@
+izlude,124,115,6	script	Premium Service	528,{
+if (getgroupid()<4) {
+goto Prem;
+}
+
+set .@Timer, vip_status(VIP_STATUS_EXPIRE);
+
+mes "[ Premium Service ]";
+mes "Welcome "+strcharinfo(0)+",";
+mes "Please choose the menu.";
+mes "^FF0000Your VIP Status will Expire at:^000000";
+mes gettimestr("%Y-%m/%d %H:%M:%S",21,vip_status(VIP_STATUS_EXPIRE));
+mes "^FF0000Time Left: ^000000" + callfunc("Time2Str",.@Timer);
+next;
+switch(select("Heal & Buffs:Buy items:No, thanks.")) {
+
+	case 1:
+		mes "Choose which one do you wants.";
+		mes "First Buff ^FF0000STR +8, AGI +6, DEX +4, ATK +16^000000";
+		mes "Second Buffs ^FF0000INT +8, DEX +6, VIT +4, MATK +20^000000";
+		mes "Third Buffs ^FF0000Dex +8, AGI +6, LUK +4, ATK +12, MATK +15^000000";
+		mes "Fourth Buffs ^FF0000All stat +6, ATK +12, MATK +15^000000";
+		goto buff;
+
+		buff:
+		menu "First Buffs",First,"Second Buffs",Second,"Third Buffs",Third,"Fourth Buffs",Fourth;
+
+First:
+sc_start SC_STRFOOD,3600000,8;
+sc_start SC_AGIFOOD,3600000,6;
+sc_start SC_DEXFOOD,3600000,4;
+sc_start SC_ATKPOTION,600000,16;
+percentheal 100,100;
+close;
+
+Second:
+sc_start SC_INTFOOD,3600000,8;
+sc_start SC_DEXFOOD,3600000,6;
+sc_start SC_VITFOOD,3600000,4;
+sc_start SC_MATKPOTION,600000,20;
+percentheal 100,100;
+close;
+
+Third:
+sc_start SC_DEXFOOD,3600000,8;
+sc_start SC_AGIFOOD,3600000,6;
+sc_start SC_LUKFOOD,3600000,4;
+sc_start SC_ATKPOTION,600000,12;
+sc_start SC_MATKPOTION,600000,15;
+percentheal 100,100;
+close;
+
+Fourth:
+sc_start SC_STRFOOD,3600000,6;
+sc_start SC_AGIFOOD,3600000,6;
+sc_start SC_VITFOOD,3600000,6;
+sc_start SC_INTFOOD,3600000,6;
+sc_start SC_DEXFOOD,3600000,6;
+sc_start SC_LUKFOOD,3600000,6;
+sc_start SC_ATKPOTION,600000,12;
+sc_start SC_MATKPOTION,600000,15;
+percentheal 100,100;
+close;
+
+
+	case 2:
+		mes "Choose items do you wants.";
+		goto item_list;
+
+		item_list:
+		menu "Unlimited Flywing 2H Box 75000",unli,"HP Pil 10pcs 50000 Zeny",HP_PILL,"SP Pil 10pcs 50000 Zeny",SP_PILL,"Authoritative Badge 10pcs 30000 Zeny",Authoritative;
+
+		unli:
+		set .@amount, countitem(3012);
+		if (zeny < 75000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitembound 3012,1,Bound_Account;
+		set zeny,zeny-75000;
+		}
+		close;
+
+		HP_PILL:
+		set .@amount, countitem(12274);
+		if (zeny < 50000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitembound 12274,10,Bound_Account;
+		set zeny,zeny-50000;
+		
+		close;
+
+		SP_PILL:
+		set .@amount, countitem(12275);
+		if (zeny < 50000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitembound 12275,10,Bound_Account;
+		set zeny,zeny-50000;
+		}
+		close;
+
+		Authoritative:
+		set .@amount, countitem(662);
+		if (zeny < 30000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitembound 662,10,Bound_Account;
+		set zeny,zeny-30000;
+		}
+		close;
+	}
+
+	case 3:
+	mes "See you next time.";
+	close;
+	}
+
+
+Prem:
+set .@week,20000;
+set .@month,50000;
+if (getgroupid()>60) {
+mes "[ Premium Service ]";
+mes "Sorry,GM staff not allowed to use this feature.";
+close;
+}
+mes "[ Premium Service ]";
+mes "Maaf kamu tidak terdaftar sebagai premium member";
+mes " ";
+mes "Apa kamu ingin bergabung?";
+mes "Premium Service benefit : 100% Bonus EXP, 25% Bonus Drop, and access heal & buff.";
+next;
+mes "[ Premium Service ]";
+mes "Kamu bisa daftar disini atau membeli Ticket di cash shop.";
+mes "Berikut Biaya Member Premium Service.";
+mes "1 Week service "+.@week+" cash point";
+mes "1 Month service "+.@month+" cash point";
+mes " ";
+mes "^FF0000Your Cureent Cashpoint^000000 = "+#CASHPOINTS+".";
+next;
+switch(select("Register 1 Minggu:Register 1 Bulan:No, Thanks.")) {
+
+case 1:
+if (#CASHPOINTS < .@week) {
+mes "[ Premium Service ]";
+mes "Your cash points not enough,";
+mes ""+.@week+" cash point to use this feature.";
+close;
+}
+//set #CASHPOINTS, #CASHPOINTS - .@week;
+atcommand "@vip +7d "+strcharinfo(0)+"";
+mes "[ Premium Service ]";
+mes "Enjoy your service.";
+dispbottom "your cureent cashpoint "+#CASHPOINTS+".";
+close;
+
+case 2:
+if (#CASHPOINTS < .@month) {
+mes "[ Premium Service ]";
+mes "Your cash points not enough,";
+mes ""+.@month+" cash point to use this feature.";
+close;
+}
+//set #CASHPOINTS, #CASHPOINTS - .@month;
+atcommand "@vip +1m "+strcharinfo(0)+"";
+mes "[ Premium Service ]";
+mes "Enjoy your service.";
+dispbottom "your cureent cashpoint "+#CASHPOINTS+".";
+close;
+
+case 3:
+mes "[ Premium Service ]";
+mes "See You next time.";
+close;
+}
+
+}
+
+
+
+
+// --------------------------------------------------
+//	Duplicates:
+// --------------------------------------------------
+payo2,96,120,4	duplicate(Premium Service)	Premium Service#alb11	528
+alberta,33,240,4	duplicate(Premium Service)	Premium Service#alb	528
+aldebaran,146,116,4	duplicate(Premium Service)	Premium Service#alde	528
+amatsu,205,87,4	duplicate(Premium Service)	Premium Service#ama	528
+ayothaya,212,172,6	duplicate(Premium Service)	Premium Service#ayo	528
+comodo,191,161,4	duplicate(Premium Service)	Premium Service#com	528
+einbech,55,36,6	duplicate(Premium Service)	Premium Service#einbe	528
+einbroch,72,206,4	duplicate(Premium Service)	Premium Service#einbr	528
+geffen,127,66,4	duplicate(Premium Service)	Premium Service#gef	528
+gonryun,162,126,4	duplicate(Premium Service)	Premium Service#gon	528
+hugel,102,148,4	duplicate(Premium Service)	Premium Service#hug	528
+prontera,146,98,4	duplicate(Premium Service)	Premium Service#izl	528	//Pre-RE: (132,120)
+jawaii,248,134,4	duplicate(Premium Service)	Premium Service#jaw	528
+lighthalzen,154,104,4	duplicate(Premium Service)	Premium Service#lhz	528
+louyang,205,105,6	duplicate(Premium Service)	Premium Service#lou	528
+manuk,272,150,6	duplicate(Premium Service)	Premium Service#man	528
+mid_camp,216,286,4	duplicate(Premium Service)	Premium Service#mid	528
+morocc,146,89,4	duplicate(Premium Service)	Premium Service#mor	528
+moscovia,226,195,4	duplicate(Premium Service)	Premium Service#mos	528
+niflheim,199,180,4	duplicate(Premium Service)	Premium Service#nif	528
+payon,178,110,4	duplicate(Premium Service)	Premium Service#pay	528
+rachel,138,122,4	duplicate(Premium Service)	Premium Service#rac	528
+splendide,198,153,4	duplicate(Premium Service)	Premium Service#spl	528
+umbala,97,148,3	duplicate(Premium Service)	Premium Service#umb	528
+veins,211,120,4	duplicate(Premium Service)	Premium Service#ve	528
+xmas,142,139,6	duplicate(Premium Service)	Premium Service#xmas	528
+yuno,164,50,4	duplicate(Premium Service)	Premium Service#yuno	528
+pvp_y_room,88,83,4	duplicate(Premium Service)	Premium Service#pvp	528
+// --------------------------------------------------
+//	Duplicates (Renewal):
+// --------------------------------------------------
+brasilis,199,225,4	duplicate(Premium Service)	Premium Service#bra	528
+dewata,202,190,6	duplicate(Premium Service)	Premium Service#dew	528
+dicastes01,196,197,6	duplicate(Premium Service)	Premium Service#dic	528
+malangdo,137,116,6	duplicate(Premium Service)	Premium Service#mal	528
+malaya,228,195,4	duplicate(Premium Service)	Premium Service#ma	528

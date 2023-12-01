@@ -1,0 +1,154 @@
+// Archangel Quest HS/AAW
+//============================================================
+//20 : Light Red Pot 200 , Light Blue Pot 25, 10 concen, 100 flywing, 20 butwing, 3 Job BM
+//40 : Light Orange & Yellow 100 pcs, Light BP 75, 10 Awakening, 2H Flywing, 20 butwing, 3 BM
+//70 : Light White & Yellow 150 pcs, Light BP 125, 10 awak & conce, 1D Flywing, 20 butwing, 5 BM
+//90 : Costume Red And White Mochiring ID :20442, 1D Premi 3001, 200 PCS Light white pot 11501 250pcs, 11502 BP 200pcs
+
+payo2,100,118,3	script	Archangel	811,{
+    setarray .Items20[0], 598,200,0,11502,25,0,14509,10,0,601,100,0,602,20,0,14592,3,0; // <item id>,<amount>,<refine>
+	setarray .Items40[0], 599,100,0,11500,100,0,11502,75,0,14510,10,0,14509,10,0,3012,1,0,602,20,0,12263,3,0; // <item id>,<amount>,<refine>
+	setarray .Items70[0], 11500,150,0,11501,100,0,11502,125,0,14510,10,0,14509,10,0,3011,1,0,602,20,0,12263,5,0; // <item id>,<amount>,<refine>
+    setarray .Items90[0], 20442,1,0,3001,1,0,11501,250,0,11502,200,0,14510,10,0,14509,10,0,602,20,0,12263,5,0; // <item id>,<amount>,<refine>
+    set .size, getarraysize(.Items20);
+	set .size8, getarraysize(.Items40);
+	setarray .Lvl[0], 20,40,70,90;
+    @Level = 20;
+    @npc$ = "[^FF0000 Archangel^000000 ]";
+mes @npc$;
+mes "Hi , im here to help you !.";
+mes "i will give you starter pack depending on your Base Level : ";
+mes "Base Level 20.";
+mes "Base Level 40.";
+mes "Base Level 70.";
+mes "And Base Level 90.";
+next;
+	switch(select("- Claim Base Level 20:- Claim Base Level 40:- Claim Base Level 70:- Claim Base Level 90:Cancel")) {
+	case 1:
+	if (BaseLevel >= .Lvl[0]) {
+    if ( Freebies20 ) {
+    mes @npc$;
+    mes "You already have your freebies";
+    close;
+    }
+    mes @npc$;
+    mes "Here is your freebies!";
+    next;
+    if ( (MaxWeight/2) <= Weight ) { mes " please check ur weight limit.";end;}
+    for ( set .@i, 0; .@i < .size; set .@i, .@i + 3 ) 
+        getitembound2 .Items20[.@i],.Items20[.@i+1],1,.Items20[.@i+2],0,0,0,0,0,1;
+    set Freebies20, 1;
+    mes @npc$;
+    mes "Done!";
+    close;
+    }
+    else {
+    mes @npc$;
+    mes "Hi, I can give you free items once you meet my requirement. ";
+    next;
+    mes @npc$;
+    mes "You need to get a base level of 20.";
+    next;
+    mes @npc$;
+    mes "Come back if you're already stronger.";
+    close;
+    }
+
+case 2:
+	if (BaseLevel >= .Lvl[1]) {
+    if ( Freebies40 ) {
+    mes @npc$;
+    mes "You already have your freebies";
+    close;
+    }
+    mes @npc$;
+    mes "Here is your freebies!";
+    next;
+    if ( (MaxWeight/2) <= Weight ) { mes " please check ur weight limit.";end;}
+    for ( set .@i, 0; .@i < .size8; set .@i, .@i + 3 ) 
+        getitembound2 .Items40[.@i],.Items40[.@i+1],1,.Items40[.@i+2],0,0,0,0,0,1;
+    set Freebies40, 1;
+    mes @npc$;
+    mes "Done!";
+    close;
+    }
+    else {
+    mes @npc$;
+    mes "Hi, I can give you free items once you meet my requirement. ";
+    next;
+    mes @npc$;
+    mes "You need to get a base level of 40.";
+    next;
+    mes @npc$;
+    mes "Come back if you're already stronger.";
+    close;
+    }
+case 3:
+
+	if (BaseLevel >= .Lvl[2]) {
+    if ( Freebies70 ) {
+    mes @npc$;
+    mes "You already have your freebies";
+    close;
+    }
+    mes @npc$;
+    mes "Here is your freebies!";
+    next;
+    if ( (MaxWeight/2) <= Weight ) { mes " please check ur weight limit.";end;}
+    for ( set .@i, 0; .@i < .size8; set .@i, .@i + 3 ) 
+        getitembound2 .Items70[.@i],.Items70[.@i+1],1,.Items70[.@i+2],0,0,0,0,0,1;
+    set Freebies70, 1;
+    mes @npc$;
+    mes "Done!";
+    close;
+    }
+    else {
+    mes @npc$;
+    mes "Hi, I can give you free items once you meet my requirement. ";
+    next;
+    mes @npc$;
+    mes "You need to get a base level of 70.";
+    next;
+    mes @npc$;
+    mes "Come back if you're already stronger.";
+    close;
+    }
+case 4:
+	
+	if (BaseLevel >= .Lvl[3]) {
+    if ( Freebies90 ) {
+    mes @npc$;
+    mes "You already have your freebies";
+    close;
+    }
+    mes @npc$;
+    mes "Here is your freebies!";
+    next;
+    if ( (MaxWeight/2) <= Weight ) { mes " please check ur weight limit.";end;}
+    for ( set .@i, 0; .@i < .size8; set .@i, .@i + 3 ) 
+        getitembound2 .Items90[.@i],.Items90[.@i+1],1,.Items90[.@i+2],0,0,0,0,0,1;
+    set Freebies90, 1;
+    mes @npc$;
+    mes "Done!";
+    close;
+    }
+    else {
+    mes @npc$;
+    mes "Hi, I can give you free items once you meet my requirement. ";
+    next;
+    mes @npc$;
+    mes "You need to get a base level of 90.";
+    next;
+    mes @npc$;
+    mes "Come back if you're already stronger.";
+    close;
+    }
+	
+case 5:
+end;
+}
+
+OnInit:
+waitingroom "Claim Level 20/40/70/90",0;
+end;
+}

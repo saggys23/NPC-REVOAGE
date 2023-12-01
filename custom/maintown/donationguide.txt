@@ -1,0 +1,13 @@
+payon,169,239,3	script	Donation Guide	807,{
+	mes "[ Donation Guide ]";
+	mes "Hello ! ^884EA0"+strcharinfo(0)+"^000000";
+	mes "Just Click the Link below.";
+	mes "<URL>Donation Page<INFO>https://ageofragnarok.com/donate/</INFO></URL> ";
+	mes "You dont need to confirmation, Our donation system is automatic.";
+	mes "Just Re-select character After Status Payment is already [^08FF00PAID^000000]";
+	close;
+
+	OnInit:
+	waitingroom "Donation Guide",0; 
+	
+}

@@ -1,0 +1,344 @@
+/* ______________________________________________________________
+  |                                                              |
+  | rAthena Script                                               |
+  |                                                              |
+  | Rewards NPC                                                  |
+  | By:                                                          |
+  | Viole                                                        |
+  |                                                              |
+  | Current Version                                              |
+  | 1.6                                                          |
+  |                                                              |
+  | Description:                                                 |
+  | NPC which you can assign a reward                            |
+  | to a 'specific' player and set                               |
+  | the quantity of the reward to be                             |
+  | given.                                                       |
+  |                                                              |  
+  | Changelog:                                                   |
+  | Rewards NPC 1.0  Items recognized are only from item_db      |
+  | Rewards NPC 1.1  Items recognized from item_db to item_db2   |
+  | Rewards NPC 1.1  Prevent null from typing 0 in item & amount |
+  | Rewards NPC 1.1  Main: Can put many players now to give item |
+  | Rewards NPC 1.2  Fixed Cancel the process option             |
+  | Rewards NPC 1.2  Added Delete a process or all process option|
+  | Rewards NPC 1.3  Added Show Current Processes option         |
+  | Rewards NPC 1.4  Added Party Option in Assign Rewards        |
+  | Rewards NPC 1.4  Show Current Process (Player or Party)      |
+  | Rewards NPC 1.4  Added Delete Option for Party               |
+  | Rewards NPC 1.5  Added Guild Option in Assign Rewards        |
+  | Rewards NPC 1.5  Show Current Process (Player/Party/Guild)   |
+  | Rewards NPC 1.5  Added Delete Option for Guild               |
+  | Rewards NPC 1.5  Announce. GM adds a process for Party/Guild |
+  | Rewards NPC 1.6  Added View Logs (Credits: Euphy)            |
+  |                                  (Requested: bVersatile)     |
+  |                                                              |
+  | Note:                                                        |
+  | Players can view the logs too, or it's your choice to        |
+  | remove it, or not. Feel free to edit things inside.          |
+  |                                                              |
+  | If you added 2 items to a 'same' player/guild/party          |
+  | Only the first one is recognized.                            |
+  |                                                              |
+  | If you delete 1 player/party/guild process, all its          |
+  | player/party/guild's process will be deleted.                |
+  |                                                              |
+  | If some processes were deleted, and if you add a new process,|
+  | all those previous slots will be filled up.                  |
+  |                                                              |
+  | About the query sql's, I sucked at query sql, and got a prob |
+  | when adding only 1 sql, becuz of nulls..(I'll learn more)    |
+  |______________________________________________________________|*/
+  
+
+-	script	Rewards#101	-1,{
+
+	set .@n$, "^FF0000[Rewards NPC]^000000";
+	set .gmlvl, 15;
+	if( getgroupid() >= .gmlvl)
+
+	{
+	admin_only:
+		mes .@n$;	
+		mes "Hello, GM "+strcharinfo(0)+"!";
+		mes "What do you want to do?";
+		next;
+		switch(select("Assign Reward:Show Current Processes:Delete Process:View Logs"))
+		{
+		case 1:
+			next;
+			mes .@n$;
+			mes"Choose what category you want to give the reward.";
+			next;
+			switch(select("Kaskus:Facebook"))
+			{
+			case 1:
+				set @rewarditem, 8041;
+				mes .@n$;
+				mes "To whom do you wanna give the reward?";
+				input @playername$;
+				query_sql "SELECT `char_id` FROM `char` WHERE `name` = '"+escape_sql(@playername$)+"'",.@charid;
+						if (!.@charid) {next; mes .@n$; mes "The name is invalid."; next; goto admin_only; }
+							else set .@charid,0;
+				next;
+				set @rewardamount, 1;
+				mes .@n$;
+				mes "So, player "+@playername$+" will have";
+				mes ""+@rewardamount+" "+getitemname(@rewarditem)+"s. Great~!";
+				next;
+				message @playername$,"Please claim your rewards from the Rewards NPC! "+@rewardamount+" "+getitemname(@rewarditem)+"s";
+				query_sql "INSERT INTO `rewardplayerkaskus` (`playername`, `reward_id`, `reward_amount`) VALUES ('"+@playername$+"', "+@rewarditem+", "+@rewardamount+")";
+				setarray $giverlog1$[getarraysize($giverlog1$)],strcharinfo(0);
+				setarray $receiverlog1$[getarraysize($receiverlog1$)],@playername$;
+				setarray $itemlog1[getarraysize($itemlog1)],@rewarditem;
+				setarray $amountlog1[getarraysize($amountlog1)],@rewardamount;
+				set @playername$, "";
+				close2;
+				end;
+			
+			case 2:
+				set @rewarditem, 8040;
+				mes .@n$;
+				mes "To whom do you wanna give the reward?";
+				input @playername$;
+				query_sql "SELECT `char_id` FROM `char` WHERE `name` = '"+escape_sql(@playername$)+"'",.@charid;
+						if (!.@charid) {next; mes .@n$; mes "The name is invalid."; next; goto admin_only; }
+							else set .@charid,0;
+				next;
+				set @rewardamount, 1;
+				mes .@n$;
+				mes "So, player "+@playername$+" will have";
+				mes ""+@rewardamount+" "+getitemname(@rewarditem)+"s. Great~!";
+				next;
+				message @playername$,"Please claim your rewards from the Rewards NPC! "+@rewardamount+" "+getitemname(@rewarditem)+"s";
+				query_sql "INSERT INTO `rewardplayernpc` (`playername`, `reward_id`, `reward_amount`) VALUES ('"+@playername$+"', "+@rewarditem+", "+@rewardamount+")";
+				setarray $giverlog1$[getarraysize($giverlog1$)],strcharinfo(0);
+				setarray $receiverlog1$[getarraysize($receiverlog1$)],@playername$;
+				setarray $itemlog1[getarraysize($itemlog1)],@rewarditem;
+				setarray $amountlog1[getarraysize($amountlog1)],@rewardamount;
+				set @playername$, "";
+				close2;
+				end;
+			}
+			
+			
+		case 2:
+			show_process:
+			next;
+			mes .@n$;
+			mes "Choose from what category you would like to view current processes.";
+			next;
+			switch(select("Player:Cancel"))
+			{
+			case 1:
+				next;
+				mes "^FF0000[Current Processes]^000000";
+				mes "••••••••••••••••••••••••••••••••";
+				query_sql "SELECT `playername`, `reward_id`, `reward_amount` FROM `rewardplayernpc`", .@show_name$, .@show_item, .@show_amount;
+				for(set @i, 0; @i < getarraysize(.@show_name$); set @i, @i+1)
+				{
+					mes "To: ^FF0000Player^000000 ^0000FF"+.@show_name$[@i]+"^000000";
+					mes "Reward: "+.@show_amount[@i]+" "+getitemname(.@show_item[@i])+"s";
+					mes "••••••••••••••••••••••••••••••••";
+				}
+				goto show_process;				
+			case 2:
+				end;
+	
+			}
+		case 3:
+			next;
+			mes .@n$;
+			mes "Do you want to delete one process only or all processes?";
+			switch(select("Delete one process only:Delete all processes:Leave it as it is"))
+			{
+			case 1:
+				next;
+				mes .@n$;
+				mes "Please choose from what category you would like to delete a process.";
+				next;
+				switch(select("Player:Cancel"))
+				{
+				case 1:
+					next;
+					mes .@n$;
+					mes "Please input the player name you want to delete the process.";
+					input @deletename$;
+					next;
+					query_sql "SELECT `playername`, `reward_id`, `reward_amount` FROM `rewardplayernpc`", .@delete_name$, .@delete_item, .@delete_amount;
+					for (set @i, 0; @i < getarraysize(.@delete_name$); set @i, @i+1)
+					{
+					if(@deletename$ == .@delete_name$[@i])
+						{
+						mes .@n$;
+						mes "Deleting....";
+						query_sql "DELETE FROM `rewardplayernpc` WHERE `playername`='"+@deletename$+"'";
+						next;
+						mes .@n$;
+						mes "Deleted unclaimed process!";
+						close;
+						}
+					}
+					goto R_Invalid;
+				case 2:
+					end;
+				}
+				
+			case 2:
+				next;
+				mes .@n$;
+				mes "Please input DELETE to delete all the unclaimed processes.";
+				input @deleteall$;
+					if(@deleteall$ == "DELETE")
+					{
+						next;
+						mes .@n$;
+						mes "Deleting....";
+						query_sql "DELETE FROM `rewardplayernpc`";
+						query_sql "DELETE FROM `rewardpartynpc`";
+						query_sql "DELETE FROM `rewardguildnpc`";
+						next;
+						mes .@n$;
+						mes "Deleted all unclaimed processes!";
+						close;
+					}
+					next;
+					mes .@n$;
+					mes "Next time, please input DELETE correctly!";
+					close;
+			case 3:
+				next;
+				mes .@n$;
+				mes "Nothing Changed!";
+				close2;
+				end;
+			}
+		case 4:
+		viewlogs:
+			next;
+			mes .@n$;
+			mes "Choose what category you want to view the logs!";
+			next;
+			switch(select("Player Logs",
+				( getgmlevel() < .gmlvl )?"":"Delete Logs"))
+			{
+			case 1:
+				next;
+				mes .@n$;
+				mes "Current logs: ^008000" + (getarraysize($giverlog1$)) + "^000000";
+				mes "--------------------------------";
+				set .@i,0;
+				while (.@i < getarraysize($giverlog1$)) {
+						mes ""+.@i+". ^B041FFGM " + $giverlog1$[.@i] + "^000000 gave "+$amountlog1[.@i]+"x "+getitemname($itemlog1[.@i])+" to Player^55AAFF " + $receiverlog1$[.@i] + "^000000";
+						mes "--------------------------------";
+						set .@i, .@i+1; }
+				next;
+				goto viewlogs;
+		
+			case 2:
+				next;
+				mes .@n$;
+				mes "^FF0000This action cannot be undone.^000000";
+				mes "Are you sure?";
+				mes " ";
+				if (select("Yes:No") == 2) { mes "Request cancelled."; next; goto Log_Menu; }
+				deletearray $giverlog1$[0],getarraysize($giverlog1$); deletearray $receiverlog1$[0],getarraysize($receiverlog1$);
+				deletearray $itemlog1[0],getarraysize($itemlog1); deletearray $amountlog1[0],getarraysize($amountlog1);
+				deletearray $giverlog2$[0],getarraysize($giverlog2$); deletearray $receiverlog2$[0],getarraysize($receiverlog2$);
+				deletearray $itemlog2[0],getarraysize($itemlog2); deletearray $amountlog2[0],getarraysize($amountlog2);
+				deletearray $giverlog3$[0],getarraysize($giverlog3$); deletearray $receiverlog3$[0],getarraysize($receiverlog3$);
+				deletearray $itemlog3[0],getarraysize($itemlog3); deletearray $amountlog3[0],getarraysize($amountlog3);
+				next;
+				mes .@n$;
+				mes "Logs cleared.";
+				next;
+				goto admin_only;
+			}
+		}
+	}
+	mes .@n$;
+	mes "Hello, "+strcharinfo(0)+"!";
+	mes "For Claim please Read @Facebook Post '^ae2029Share For Freebies^000000'";
+	mes "and Absent @Kaskus Link '^ae2029kask.us/iGN07^000000'";
+	next;
+	switch(Select("Claim Facebook:Claim Kaskus:Leave"))
+	{
+	case 1:
+		if (#sharefreebies) goto R_AccBound;
+			mes .@n$;
+			mes "Please enter your Name:";
+			input @winnername$;
+			if (@winnername$!=strcharinfo(0)){next; mes .@n$; mes "You are a fake!"; close; end; }
+			next;
+			query_sql "SELECT `playername`, `reward_id`, `reward_amount` FROM `rewardplayernpc`", .@available_name$, .@available_item, .@available_amount;
+			for (set @i, 0; @i < getarraysize(.@available_name$); set @i, @i+1)
+			{
+			if(@winnername$ == .@available_name$[@i])
+				{
+				mes .@n$;
+				mes "You get ^0000FF" + getitemname(.@available_item[@i]) + " - " + .@available_amount[@i] + " ea.^000000";
+				query_sql "DELETE FROM `rewardplayernpc` WHERE `playername`='"+@winnername$+"'";
+				getitem .@available_item[@i],.@available_amount[@i];
+				set #sharefreebies,1;
+				//announce "Player "+.@available_name$[@i]+" has claimed "+.@available_amount[@i]+" "+getitemname(.@available_item[@i])+"s from the Rewards NPC!",0,0xDBA901;
+				close;
+				}
+			}
+			goto R_Noreward;
+			
+	case 2:
+			if (#kaskus) goto R_AccBound;
+			mes .@n$;
+			mes "Please enter your Name:";
+			input @winnername$;
+			if (@winnername$!=strcharinfo(0)){next; mes .@n$; mes "You are a fake!"; close; end; }
+			next;
+			query_sql "SELECT `playername`, `reward_id`, `reward_amount` FROM `rewardplayerkaskus`", .@available_name$, .@available_item, .@available_amount;
+			for (set @i, 0; @i < getarraysize(.@available_name$); set @i, @i+1)
+			{
+			if(@winnername$ == .@available_name$[@i])
+				{
+				mes .@n$;
+				mes "You get ^0000FF" + getitemname(.@available_item[@i]) + " - " + .@available_amount[@i] + " ea.^000000";
+				query_sql "DELETE FROM `rewardplayerkaskus` WHERE `playername`='"+@winnername$+"'";
+				getitem .@available_item[@i],.@available_amount[@i];
+				set #kaskus,1;
+				//announce "Player "+.@available_name$[@i]+" has claimed "+.@available_amount[@i]+" "+getitemname(.@available_item[@i])+"s from the Rewards NPC!",0,0xDBA901;
+				close;
+				}
+			}
+			goto R_Noreward;
+		
+
+	case 3:
+		mes .@n$;
+		mes "See yah.";
+		close;
+	}
+	
+R_Invalid:
+	mes "^FF0000[Rewards NPC]^000000";
+	mes "Invalid. Does not exists in the logs!";
+	close;
+R_AccBound:
+	mes "^FF0000[Rewards NPC]^000000";
+	mes "1 Account only 1 time claim.";
+	mes "Get out!";
+	end;	
+R_Noreward:
+	mes "^FF0000[Rewards NPC]^000000";
+	mes "No rewards at the meantime";
+	mes "Get out!";
+	close;
+
+OnInit:
+	query_sql "CREATE TABLE IF NOT EXISTS `rewardplayernpc` (`playername` TINYTEXT NOT NULL, `reward_id` INT NOT NULL, `reward_amount` INT NOT NULL, INDEX `playername` (`playername`(32)) ) ENGINE=MyISAM";
+	query_sql "CREATE TABLE IF NOT EXISTS `rewardplayerkaskus` (`playername` TINYTEXT NOT NULL, `reward_id` INT NOT NULL, `reward_amount` INT NOT NULL, INDEX `playername` (`playername`(32)) ) ENGINE=MyISAM";
+	query_sql "CREATE TABLE IF NOT EXISTS `rewardguildnpc` (`guildname` TINYTEXT NOT NULL, `reward_id` INT NOT NULL, `reward_amount` INT NOT NULL, INDEX `guildname` (`guildname`(32)) ) ENGINE=MyISAM";
+}
+
+/* Add npc's here (duplicate) ciao */
+
+payo2,96,106,3	duplicate(Rewards#101)	Share Kaskus & Facebook	100
+			
+		

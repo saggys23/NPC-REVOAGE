@@ -1,0 +1,193 @@
+//===== rAthena Script =======================================
+//= Woe Timer
+//===== By: ==================================================
+//= BeWan
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= A simple Woe Timer
+//= 1 Hour Countdown
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+-	script	woe_countdown1	-1,{ //For 1 hour WoE count down only
+	
+OnAgitStart:
+	//announce "The War of Emperium has begun!", bc_all;
+	
+sleep 300000; //delay for 5 minutes
+	announce "[WoE]: Last 55 Minutes", bc_all;
+sleep 300000; 
+	announce "[WoE]: Last 50 Minutes", bc_all;
+sleep 300000;
+	announce "[WoE]: Last 45 Minutes", bc_all;
+sleep 300000;
+	announce "[WoE]: Last 40 Minutes", bc_all;
+sleep 300000;
+	announce "[WoE]: Last 35 Minutes", bc_all;
+sleep 300000;
+	announce "[WoE]: Last 30 Minutes", bc_all;
+sleep 300000;
+	announce "[WoE]: Last 25 Minutes", bc_all;
+sleep 300000;
+	announce "[WoE]: Last 20 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 19 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 18 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 17 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 16 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 15 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 14 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 13 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 12 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 11 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 10 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 9 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 8 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 7 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 6 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 5 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 4 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 3 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 2 Minutes", bc_all;
+sleep 60000;
+	announce "[WoE]: Last 1 Minute", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 59 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 58 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 57 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 56 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 55 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 54 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 53 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 52 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 51 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 50 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 49 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 48 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 47 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 46 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 45 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 44 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 43 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 42 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 41 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 40 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 39 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 38 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 37 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 36 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 35 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 34 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 33 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 32 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 31 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 30 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 29 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 28 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 27 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 26 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 25 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 24 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 23 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 22 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 21 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 20 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 19 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 18 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 17 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 16 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 15 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 14 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 13 Seconds", bc_all;
+sleep 1000;
+	announce "[WoE]: Last 12 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 11 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 10 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 9 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 8 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 7 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 6 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 5 Seconds", bc_all;	
+sleep 1000;
+	announce "[WoE]: Last 4 Seconds", bc_all;	
+sleep 900;
+	announce "[WoE]: Last 3 Seconds", bc_all;	
+sleep 900;
+	announce "[WoE]: Last 2 Seconds", bc_all;	
+sleep 700;
+	announce "[WoE]: Last 1 Second", bc_all;		
+}

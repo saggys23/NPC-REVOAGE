@@ -1,0 +1,49 @@
+
+
+// Disclaimer :
+// Yes this code is from example 2 of script_commands.txt
+
+izlude,122,132,6	script	PVP Warper & Shop	418,{
+	.@pvpmap$ = "guild_vs1"; // Pvp map
+	.@register_num = 2; // How many party members are required?
+	
+	getpartymember getcharid(1), 1;
+	getpartymember getcharid(1), 2;
+
+	if ( !getcharid(1) || $@partymembercount != .@register_num ) {
+		mes "Please form a party of " + .@register_num + " to continue";
+		close;
+	}
+	for ( .@i = 0; .@i < $@partymembercount; .@i++ )
+		if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) )
+			.@count_online++;
+	if ( .@count_online != .@register_num ) {
+		mes "All your party members must be online to continue";
+		close;
+	}
+	copyarray .@partymembercid, $@partymembercid, .@register_num;
+	mes "Are you ready ?";
+	next; 
+select("Yes");
+	getpartymember getcharid(1), 1;
+	if ( $@partymembercount != .@register_num ) {
+		mes "You've made changes to your party !";
+		close;
+	}
+	for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+		if ( .@partymembercid[.@i] != $@partymembercid[.@i] ) {
+			mes "You've made changes to your party !";
+			close;
+		}
+	}
+	warpparty .@pvpmap$, 0,0, getcharid(1);
+	if(getpartyleader(getcharid(1),2) == getcharid(0)) {
+		getmapxy .@mapl$, .@xl, .@yl, 0;
+		warpparty .@mapl$, .@xl, .@yl, getcharid(1), .@mapl$;
+	return;
+}
+	end;
+}
+
+
+

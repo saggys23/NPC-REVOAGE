@@ -1,0 +1,118 @@
+
+// Author: _Okuz_
+// Version: 1.0.2 - 20:40 14/10/2016
+-	script	Weekend Floating Exp	-1,{
+OnInit:
+	// Setup the rates you want to double here...
+	setarray .server_conf$[0], "base_exp_rate", getbattleflag("base_exp_rate"), 
+				   "job_exp_rate", getbattleflag("job_exp_rate");
+				  
+	setarray .server_confdrop$[0], "item_rate_common", getbattleflag("item_rate_common"),
+				   "item_rate_common_boss", getbattleflag("item_rate_common_boss"),
+				   "item_rate_common_mvp", getbattleflag("item_rate_common_mvp"),
+				   "item_rate_heal", getbattleflag("item_rate_heal"), 
+				    "item_rate_heal_boss", getbattleflag("item_rate_heal_boss"), 
+					 "item_rate_heal_mvp", getbattleflag("item_rate_heal_mvp"), 
+				   "item_rate_use", getbattleflag("item_rate_use"), 
+				   "item_rate_use_boss", getbattleflag("item_rate_use_boss"), 
+				   "item_rate_use_mvp", getbattleflag("item_rate_use_mvp"), 
+				   "item_rate_equip", getbattleflag("item_rate_equip"), 
+				   "item_rate_equip_boss", getbattleflag("item_rate_equip_boss"), 
+				   "item_rate_equip_mvp", getbattleflag("item_rate_equip_mvp"), 
+				    "item_rate_card", getbattleflag("item_rate_card"),
+					 "item_rate_card_boss", getbattleflag("item_rate_card_boss"),
+				   "item_rate_card_mvp", getbattleflag("item_rate_card_mvp");
+
+	
+	// To force the event to run even if you have to shutdown your server for some reason...
+
+	if (gettime(4) != 5 && gettime(4) != 6 && gettime(4) != 0) end;
+
+//EXP RATE 
+
+OnThu1700:
+	// start double rates on Friday 00:00
+	if (!.active)
+		callsub(S_changeRates, 15);
+	end;
+	
+OnThu2300:
+	// stop double rates on Monday 00:00
+	callsub(S_changeRates, 10);
+	end;	
+	
+	
+	
+/////drop rates	
+OnWed1700:
+	// start double rates on Friday 00:00
+	if (!.activedrop)
+		callsub(S_changeRatesDrop, 15);
+	end;
+OnWed2300:
+	// stop double rates on Monday 00:00
+	callsub(S_changeRatesDrop, 10);
+	end;	
+/////drop rates	
+OnFri1700:
+	// start double rates on Friday 00:00
+	if (!.activedrop)
+		callsub(S_changeRatesDrop, 15);
+	end;
+OnFri2300:
+	// stop double rates on Monday 00:00
+	callsub(S_changeRatesDrop, 10);
+	end;		
+	
+
+
+//// BOTH
+OnSat1700:
+	// start double rates on Friday 00:00
+	if (!.active)
+		callsub(S_changeRates, 15);
+		callsub(S_changeRatesDrop, 15);
+	end;
+	
+OnSat2300:
+	// stop double rates on Monday 00:00
+	callsub(S_changeRates, 10);
+	callsub(S_changeRatesDrop, 10);
+	end;	
+	
+OnSun1700:
+	// start double rates on Friday 00:00
+	if (!.active)
+		callsub(S_changeRates, 15);
+		callsub(S_changeRatesDrop, 15);
+	end;
+	
+OnSun2300:
+	// stop double rates on Monday 00:00
+	callsub(S_changeRates, 10);
+	callsub(S_changeRatesDrop, 10);
+	end;	
+	
+
+// Arg(0): mult
+S_changeRates:
+	set .@size, getarraysize(.server_conf$);
+	for (set .@i, 0; .@i < .@size; set .@i, .@i + 2) {
+		setbattleflag .server_conf$[.@i], atoi(.server_conf$[.@i + 1])/10*getarg(0);
+	}
+	set .active, !.active;
+	atcommand "@reloadmobdb";
+	announce "[Event] : Exp Rates " + (.active ? "increased" : "restored") + "!",bc_all,0xFF6060;
+	return;
+
+
+S_changeRatesDrop:
+	set .@size, getarraysize(.server_confdrop$);
+	for (set .@j, 0; .@j < .@size; set .@j, .@j + 2) {
+		setbattleflag .server_confdrop$[.@j], atoi(.server_confdrop$[.@j + 1])/10*getarg(0);
+	}
+	set .activedrop, !.activedrop;
+	atcommand "@reloadmobdb";
+	announce "[Event] : Drop Rates " + (.activedrop ? "increased" : "restored") + "!",bc_all,0xFF6060;
+	return;
+}

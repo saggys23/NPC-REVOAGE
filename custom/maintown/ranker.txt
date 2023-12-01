@@ -1,0 +1,36 @@
+
+
+payo2,107,117,3	script	Live Rank	642,{
+	mes "[Rank Level]";
+	mes "Hello.";
+	mes "This is Live Level Ranking System anyone can see who leads the rank";
+	mes " ";
+	mes " ";
+	mes "NOTE : Rank update every 5 Minutes And Not record the Current EXP";
+	next;
+	switch(select("Check Level Ranking.", "Cancel")) {
+
+		case 1:
+
+	query_sql("SELECT name, base_level FROM `char` ORDER BY base_level DESC LIMIT 10", .@name$, .@fame);
+	mes "Hall Of Fame: TOP10";
+	mes "1." + .@name$[0] + "(" + .@fame[0] + ")";
+	mes "2." + .@name$[1] + "(" + .@fame[1] + ")";
+	mes "3." + .@name$[2] + "(" + .@fame[2] + ")";
+	mes "4." + .@name$[3] + "(" + .@fame[3] + ")";
+	mes "5." + .@name$[4] + "(" + .@fame[4] + ")";
+	mes "6." + .@name$[5] + "(" + .@fame[5] + ")";
+	mes "7." + .@name$[6] + "(" + .@fame[6] + ")";
+	mes "8." + .@name$[7] + "(" + .@fame[7] + ")";
+	mes "9." + .@name$[8] + "(" + .@fame[8] + ")";
+	mes "10." + .@name$[9] + "(" + .@fame[9] + ")";
+				close;
+			
+		case 2:
+			end;
+}
+OnInit:
+		waitingroom "Live Rank Level!",0;
+		end;
+}
+	

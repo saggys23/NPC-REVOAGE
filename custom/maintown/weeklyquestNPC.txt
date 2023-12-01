@@ -1,0 +1,144 @@
+payon,148,208,6	script	Weekly Quest	635,{
+	.@name$ = strcharinfo(0);
+	query_sql( "SELECT `task1`, `task2`, `task3`, `task4`,`task5`, `task6`, `task7`, `task8`, `task9`,`task10`,`weekly` FROM `weeklyquest` WHERE `account_id` = '"+getcharid(3)+"'", .@task1,.@task2,.@task3,.@task4,.@task5,.@task6,.@task7,.@task8,.@task9,.@task10,.@weeklyclaim );
+	mes "[ Weekly Quest ]";
+	mes " > Daily Mission Trainer : "+((.@task1 >= 4)?"^00FF00":"^FF0000")+" ("+.@task1+"/4)^000000";
+	mes " > Kill MVP Field Solo/Party : "+((.@task2 >= 5)?"^00FF00":"^FF0000")+" ("+.@task2+"/5)^000000";
+	mes " > AFK at Maintown : "+((.@task3 >= 24)?"^00FF00":"^FF0000")+" ("+.@task3+"/24)^000000 Hours";
+	mes " > Gachapon Zeny : "+((.@task4 >= 15)?"^00FF00":"^FF0000")+" ("+.@task4+"/15)^000000";
+	mes " > Claim WoE Participant : "+((.@task5 >= 1)?"^00FF00":"^FF0000")+" ("+.@task5+"/1)^000000";
+	mes " > Refine Using Normal/Enriched Ore : "+((.@task6 >= 10)?"^00FF00":"^FF0000")+" ("+.@task6+"/10)^000000";
+	mes " > Refine Using HD Ore : "+((.@task7 >= 3)?"^00FF00":"^FF0000")+" ("+.@task7+"/3)^000000";
+	mes " > Complete Instance to Certain Level : "+((.@task8 >= 1)?"^00FF00":"^FF0000")+" ("+.@task8+"/1)^000000";
+	mes " > Win Mini Event : "+((.@task9 >= 3)?"^00FF00":"^FF0000")+" ("+.@task9+"/3)^000000";
+	mes " > Daily Collect Item : "+((.@task10 >= 4)?"^00FF00":"^FF0000")+" ("+.@task10+"/4)^000000";
+	next;
+		if (.@task1 >= 4) ++.@weekly;
+		if (.@task2 >= 5) ++.@weekly;
+		if (.@task3 >= 24) ++.@weekly;
+		if (.@task4 >= 15) ++.@weekly;
+		if (.@task5 >= 1) ++.@weekly;
+		if (.@task6 >= 10) ++.@weekly;
+		if (.@task7 >= 3) ++.@weekly;
+		if (.@task8 >= 1) ++.@weekly;
+		if (.@task9 >= 3) ++.@weekly;
+		if (.@task10 >= 4) ++.@weekly;
+	switch(select("Check Rewards"+((.@weekly >= 4)?"^0000FF":"^FF0000")+"["+.@weekly+"/9]^000000:^FF0000Goodbye!")){
+		case 1:
+		if (checkweight(1201,8) == 0) {
+		mes "- Please check your weight limit!! -";
+		close;
+		}
+		mes "[ Weekly Quest ]";
+		if (.@weeklyclaim == 3) {
+			mes "You already claim all weekly Quest";
+			break;
+		}
+		if (.@weekly < 4 ) {
+			mes "Reward Available for completed 4,7 and 9 Task";
+			mes "Your current Completed Quest :";
+			mes "> ^FF0000["+.@weekly+"/9]^000000";
+						next;
+			mes "^0000FF4 Task Reward List : ^000000";
+			mes "> ^FF0000Elite Supply Box x3^000000";
+			mes "> ^FF0000Token Siefgard x2^000000";
+			mes "> ^FF0000Convex Mirror x1^000000";
+			mes "> ^FF0000Blacksmith's Blessing x1^000000";
+			mes "^0000FF7 Task Reward List : ^000000";
+			mes "> ^FF0000+5 Certificate Armor & Weapon^000000";
+			mes "> ^FF0000Blacksmith's Blessing x1^000000";
+			mes "^0000FF9 Task Reward List : ^000000";
+			mes "> ^FF0000Weekly Doll Costume Box x1^000000";
+			mes "> ^FF0000HD Oridecon & Elunium x1^000000";
+			mes "> ^FF0000Blacksmith's Blessing x2^000000";
+				break;
+		}
+		mes "^0000FF4 Task Reward List : ^000000";
+		mes "> ^FF0000Elite Supply Box x3^000000";
+		mes "> ^FF0000Token Siefgard x2^000000";
+		mes "> ^FF0000Convex Mirror x1^000000";
+		mes "> ^FF0000Blacksmith's Blessing x1^000000";
+		mes "^0000FF7 Task Reward List : ^000000";
+		mes "> ^FF0000+5 Certificate Armor & Weapon^000000";
+		mes "> ^FF0000Blacksmith's Blessing x1^000000";
+		mes "^0000FF9 Task Reward List : ^000000";
+		mes "> ^FF0000Weekly Doll Costume Box x1^000000";
+		mes "> ^FF0000HD Oridecon & Elunium x1^000000";
+		mes "> ^FF0000Blacksmith's Blessing x2^000000";
+		next;
+			switch(select(""+((.@weeklyclaim >= 1)?"^0000FF[CLAIMED] ^000000":"^000000")+"4 Task Rewards:"+((.@weeklyclaim >= 2)?"^0000FF[CLAIMED] ^000000":"^000000")+"7 Task Rewards:"+((.@weeklyclaim >= 3)?"^0000FF[CLAIMED] ^000000":"^000000")+"9 Task Rewards")){
+				case 1:
+				if ( .@weekly >= 4 && .@weeklyclaim < 1 ) {
+					mes "[ Weekly Quest ]";
+					mes "Here's your rewards ! Enjoy ! Happy AoR !";
+					query_sql("UPDATE `weeklyquest` SET `weekly` = 1 WHERE `account_id` = '"+getcharid(3)+"'");
+					getitembound 14003,3,Bound_Account;
+					getitem 6316,2;
+					getitem 6635,1;
+					getitembound 12214,1,Bound_Account;
+					end;
+				}
+				mes "[ Weekly Quest ]";
+				mes "You need to do more task to claim this reward or already CLAIMED.";
+				end;				
+				case 2:
+				if (.@weekly >= 7 && .@weeklyclaim < 2 ) {
+					mes "[ Weekly Quest ]";
+					mes "Here's your rewards ! Enjoy ! Happy AoR !";
+					if (.@weeklyclaim == 0) {
+					getitembound 14003,3,Bound_Account;
+					getitem 6316,2;
+					getitem 6635,1;
+					getitembound 12214,1,Bound_Account;
+					}
+					query_sql("UPDATE `weeklyquest` SET `weekly` = 2 WHERE `account_id` = '"+getcharid(3)+"'");
+					getitem 6457,1;
+					getitem 6456,1;
+					getitem 6635,1;
+					end;
+				}
+				mes "[ Weekly Quest ]";
+				mes "You need to do more task to claim this reward or already CLAIMED.";
+				end;
+				case 3:
+				if (.@weekly >= 9 && .@weeklyclaim < 3 ) {
+					mes "[ Weekly Quest ]";
+					mes "Here's your rewards ! Enjoy ! Happy AoR !";
+					if (.@weeklyclaim == 0) {
+					//5
+					getitembound 14003,3,Bound_Account;
+					getitem 6316,2;
+					getitem 6635,1;
+					getitembound 12214,1,Bound_Account;
+					//8
+					getitem 6457,1;
+					getitem 6456,1;
+					getitem 6635,1;
+					} else if (.@weeklyclaim == 1) {
+					getitem 6457,1;
+					getitem 6456,1;
+					getitem 6635,1;
+					}
+					query_sql("UPDATE `weeklyquest` SET `weekly` = 3 WHERE `account_id` = '"+getcharid(3)+"'");
+					getitem 6241,1;
+					getitem 6240,1;
+					getitem 35002,1;
+					getitem 6635,2;
+					end;
+				}
+				mes "[ Weekly Quest ]";
+				mes "You need to do more task to claim this reward or already CLAIMED.";
+				end;
+			}
+		case 2:
+		mes "[ Weekly Quest ]";
+		mes "Bye ! See you later !";
+		break;
+
+	}
+	end;
+OnThu0001:
+query_sql("TRUNCATE TABLE `weeklyquest`;");
+end;
+}
+

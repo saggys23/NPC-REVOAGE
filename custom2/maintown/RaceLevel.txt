@@ -1,0 +1,316 @@
+///////////////////////////////////////////////////////
+//  ___________               _____.__
+//  \__    ___/__.__.________/ ____\__| ____    ____
+//    |    | <   |  |\_  __ \   __\|  |/    \  / ___\
+//    |    |  \___  | |  | \/|  |  |  |   |  \/ /_/  >
+//    |____|  / ____| |__|   |__|  |__|___|  /\___  /
+//            \/       Scripts             \//_____/
+//
+//=====================================================
+// Name: Race to Max Level (v2)
+//
+// Description:
+// This NPC allows for Game Masters to set rewards to
+// be given to the first player of each 2nd class that
+// reaches the maximum level (base and class).
+//
+// Changes relative to v1:
+// - Support for multiple rewards in two categories
+// (rare and common).
+// - Support for setting rewards by name in-game
+// (requires SQL item_db). Otherwise, specify item ID.
+// - Support for setting the rare rates in-game.
+//
+// Additional info:
+// - Remember to change .@sql_item_db to 1 if you use
+// a SQL item_db.
+//=====================================================
+///////////////////////////////////////////////////////
+payo2,107,117,3	script	Claim Level 99	10255,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Sepertinya inventory anda penuh!! -";
+		close;
+	}
+	// GM level required to change the reward
+	set .@gm_level, 99;
+
+	// Set this to 1 if you are using SQL item_db.
+	set .@sql_item_db, 0;
+
+	// The item_db SQL table name.
+	set .@item_db_table$, "item_db_re";
+
+	// Base and job levels required
+	set .@maxbase, 99;
+	set .@maxjob, 50;
+
+	// The default/initial percentage for rare items.
+  set .@rare_chance, 30;
+
+  // Rewards. Remember, you can change these in-game too!
+  setarray .@default_rare_rewards[0], 20407;
+  setarray .@default_common_rewards[0], 20132;
+
+	if ($r99_rare_chance == 0)
+		$r99_rare_chance = .@rare_chance;
+	if (getarraysize($rare_rewards) == 0)
+		copyarray $rare_rewards[0], .@default_rare_rewards[0], getarraysize(.@default_rare_rewards);
+
+	if (getarraysize($common_rewards) == 0)
+		copyarray $common_rewards[0], .@default_common_rewards[0], getarraysize(.@default_common_rewards);
+
+	setarray .@rewardablejobs[0], Job_Knight, Job_Priest, Job_Wizard, Job_Blacksmith, Job_Hunter, Job_Assassin, Job_Crusader , Job_Monk , Job_Sage, Job_Rogue, Job_Alchemist, Job_Bard, Job_Dancer;
+
+	function SelectFromArray;
+	function ListRewards;
+
+	Begin:
+
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "Hello, " + ((getgmlevel() >= .@gm_level) ? "master! What do you want to do today?" : "are you here for your reward?");
+		if (getgmlevel() >= .@gm_level) {
+			.@select$ = "Change rare item chance:Update rewards:Restart race:Test reward:View explanation:Show rewarded players:Cancel";
+			switch(select(.@select$)) {
+				case 1:
+					goto ChangeRate;
+				case 2:
+					goto UpdateRewards;
+				case 3:
+					goto RestartRace;
+				case 4:
+					goto GetReward;
+				case 5:
+					goto ExplainRace;
+				case 6:
+					goto ShowRewarded;
+				default:
+					end;
+			}
+		} else {
+			.@select$ = "YES!:...What reward?:Who was rewarded?:Cancel";
+			switch(select(.@select$)) {
+				case 1:
+					goto GetReward;
+				case 2:
+					goto ExplainRace;
+				case 3:
+					goto ShowRewarded;
+				default:
+					end;
+			}
+		}
+
+	ChangeRate:
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "The rare item rate is currently set to ^0099cc" + $r99_rare_chance + "%^000000.";
+		mes "What do you want to change it to?";
+		input .@new_rate;
+		set $r99_rare_chance, .@new_rate;
+		mes "Done!";
+		next;
+		goto Begin;
+
+  // TODO: Provide a means to update the rewards arrays
+	UpdateRewards:
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "Choose which rewards you want to review or update.";
+		switch (select("Rare rewards:Common rewards:Cancel")) {
+			case 1:
+				goto UpdateRareRewards;
+			case 2:
+				goto UpdateCommonRewards;
+			default:
+				end;
+		}
+		// mes "The reward is " + getitemname($reward) + " (ID: " + $reward + ").";
+		// mes "Do you want to change it?";
+		// if (select("Yes:No") == 1) {
+		// 	clear;
+		// 	mes "[ ^0099ccRace to Max Level^000000 ]";
+		// 	mes "Please enter the new reward item ID.";
+		// 	input .@rewardid;
+		// 	clear;
+		// 	mes "[ ^0099ccRace to Max Level^000000 ]";
+		// 	mes "Set " + getitemname(.@rewardid) + " as the reward?";
+		// 	if(select("Yes:No") == 1) {
+		// 		set $reward, .@rewardid;
+		// 	}
+		// }
+		goto Begin;
+
+	UpdateRareRewards:
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "These are the rare rewards:";
+		ListRewards($rare_rewards);
+		if (select("Change reward:Cancel") == 1) {
+			clear;
+			mes "[ ^0099ccRace to Max Level^000000 ]";
+			mes "Which reward do you want to change?";
+			.@selected_reward = SelectFromArray($rare_rewards);
+			clear;
+			mes "[ ^0099ccRace to Max Level^000000 ]";
+			mes "Ah, the ^0099cc" + getitemname($rare_rewards[.@selected_reward - 1]) + "^000000.";
+			if (.@sql_item_db == 1) {
+				mes "What do you want to change it to? (Item name)";
+				input .@new_reward$;
+				.@sql$ = "SELECT id from `"+ .@item_db_table$ +"` WHERE name_japanese LIKE '%"+ escape_sql(.@new_reward$) +"%'";
+				query_sql(.@sql$, .@sql_results);
+				.@selected = SelectFromArray(.@sql_results);
+				.@selected = .@sql_results[.@selected - 1];
+			} else {
+				mes "What do you want to change it to? (Item ID)";
+				input .@selected;
+			}
+			clear;
+			mes "[ ^0099ccRace to Max Level^000000 ]";
+			mes "Update to ^0099cc" + getitemname(.@selected) + "^000000?";
+			if (select("Yes:No") == 1) {
+				clear;
+				mes "[ ^0099ccRace to Max Level^000000 ]";
+				mes "Item updated.";
+				$rare_rewards[.@selected_reward - 1] = .@selected;
+				next;
+			}
+		}
+		goto Begin;
+
+	UpdateCommonRewards:
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "These are the common rewards:";
+		ListRewards($common_rewards);
+		if (select("Change reward:Cancel") == 1) {
+			clear;
+			mes "[ ^0099ccRace to Max Level^000000 ]";
+			mes "Which reward do you want to change?";
+			.@selected_reward = SelectFromArray($common_rewards);
+			clear;
+			mes "[ ^0099ccRace to Max Level^000000 ]";
+			mes "Ah, the ^0099cc" + getitemname($common_rewards[.@selected_reward - 1]) + "^000000.";
+			if (.@sql_item_db == 1) {
+				mes "What do you want to change it to? (Item name)";
+				input .@new_reward$;
+				.@sql$ = "SELECT id from `"+ .@item_db_table$ +"` WHERE name_japanese LIKE '%"+ escape_sql(.@new_reward$) +"%'";
+				query_sql(.@sql$, .@sql_results);
+				.@selected = SelectFromArray(.@sql_results);
+				.@selected = .@sql_results[.@selected - 1];
+			} else {
+				mes "What do you want to change it to? (Item ID)";
+				input .@selected;
+			}
+			clear;
+			mes "[ ^0099ccRace to Max Level^000000 ]";
+			mes "Update to ^0099cc" + getitemname(.@selected) + "^000000?";
+			if (select("Yes:No") == 1) {
+				clear;
+				mes "[ ^0099ccRace to Max Level^000000 ]";
+				mes "Item updated.";
+				$common_rewards[.@selected_reward - 1] = .@selected;
+				next;
+			}
+		}
+		goto Begin;
+
+	RestartRace:
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "Are you sure you want to restart the race?";
+		if (select("Yes:No") == 1) {
+			for (.@i = 0; .@i < getarraysize(.@rewardablejobs); .@i++) {
+				set $rewarded$[.@rewardablejobs[.@i]], "";
+			}
+			announce "The Race to Max Level has begun! Claim a reward once you reach " + .@maxbase + " base and " + .@maxjob + " class!", bc_all;
+		}
+		goto Begin;
+
+	GetReward:
+		mes "Let's see... " + strcharinfo(0) + ", huh?";
+
+		set .@competitioner, 0;
+		for (.@i = 0; .@i < getarraysize(.@rewardablejobs); .@i++) {
+			if (Class == .@rewardablejobs[.@i]) {
+				set .@competitioner, 1;
+				if (BaseLevel < .@maxbase || JobLevel < .@maxjob) {
+					mes "I'm sorry, but you still need to level a bit more.";
+				} else if ($rewarded$[Class] == strcharinfo(0)) {
+					mes "You have already claimed your reward.";
+				} else if ($rewarded$[Class] != "") {
+					mes "Too late!";
+					mes "The reward for " + jobname(Class) + " was already claimed by " + $rewarded$[Class] + ".";
+				} else goto GiveReward;
+			}
+		}
+		if (.@competitioner == 0)
+			mes "You need to change your job.";
+		close;
+
+	GiveReward:
+		set $rewarded$[Class], strcharinfo(0);
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "Congratulations! You were the first " + jobname(Class) + " to reach " + .@maxbase + " base and " + .@maxjob + " class!";
+
+		// Choose item category based on probability
+    set .@itemCategory, 0;
+    set .@chance, rand(100);
+    if (.@chance < $r99_rare_chance) {
+      set .@itemCategory, 1;
+    }
+
+    if (.@itemCategory == 0) {
+      set .@reward, $common_rewards[rand(getarraysize($common_rewards))];
+			.@type$ = "Common";
+    } else {
+      set .@reward, $rare_rewards[rand(getarraysize($rare_rewards))];
+			.@type$ = "Rare";
+    }
+
+		getitem .@reward, 1;
+		announce strcharinfo(0) + " (" + jobname(Class) + ") reached Max. Level and received " + getitemname(.@reward) + " ("+ .@type$ +") !", bc_all;
+		close;
+
+	ExplainRace:
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		mes "Yes! When you reach the maximum level for your class, talk to me and you'll be rewarded with a special item.";
+    if ($r99_rare_chance > 0) {
+      mes "There is ^0099cc" + $r99_rare_chance + "%^000000 of chance that you'll get a rare item!";
+      mes "Possible rare items:";
+		set .@length, getarraysize($rare_rewards);
+		mes "^0099ccCostume Vicious Mind Aura Crimson (Red)^000000";
+		}
+		mes "Possible common items:";
+		set .@length, getarraysize($common_rewards);
+		mes "^0099ccCostume Vicious Mind Aura Crimson (White)^000000";
+		next;
+		goto Begin;
+
+	ShowRewarded:
+		clear;
+		mes "[ ^0099ccRace to Max Level^000000 ]";
+		for (.@i = 0; .@i < getarraysize(.@rewardablejobs); .@i++) {
+			mes jobname(.@rewardablejobs[.@i]) + ": " + (($rewarded$[.@rewardablejobs[.@i]] != "") ? "^0055ff" + $rewarded$[.@rewardablejobs[.@i]] + "^000000" : "^999999Nobody^000000");
+		}
+		next;
+		goto Begin;
+
+	function SelectFromArray {
+		.@size = getarraysize(getarg(0));
+		.@rewards_s$ = "";
+		for (.@i = 0; .@i < .@size; .@i++) {
+			.@rewards_s$ = .@rewards_s$ + getitemname(getelementofarray(getarg(0), .@i )) + ":";
+		}
+		return select(.@rewards_s$);
+	}
+
+	function ListRewards {
+		.@rewards = getarg(0);
+		.@size = getarraysize(getarg(0));
+		for (.@i = 0; .@i < .@size; .@i++) {
+			mes .@i + 1 + ". " + getitemname(getelementofarray(getarg(0), .@i));
+		}
+	}
+}

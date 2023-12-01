@@ -1,0 +1,3108 @@
+//===== rAthena Script ======================================= 
+//= Quest NPCs related to Morocc
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 3.2
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= - Stop Post
+//= - Binoculars Quest
+//= - Assassin Pub NPCs/supporting quest NPCS. [Disabled]
+//= - Resurrection of Satan Morocc
+//= - The Crow of the Fate
+//= - Succession of the Prince
+//===== Additional Comments: ================================= 
+//= 1.1 Fixed exploits [Lupus]
+//= 1.2 Added Dandelion's Request / Morocc Invasion quest. [SinSloth]
+//= 1.3 Updated dialogs from Binoculars Quest. [Samuray22]
+//= 1.3a added GM lvl check as in other invansion quests [Lupus]
+//= 1.4 Fixed a small bug in Dandelion's Request. [SinSloth]
+//= 1.5 Fixed a little bug with "Job_Alchemist" changed to "Job_Alchem". [Samuray22]
+//= 1.6 Fixed a nasty bug in last part of the quest. [SinSloth]
+//= 1.6a replaced item "names" with item id. [Lupus]
+//= 1.7 Fixed a bug with XP rewards. [SinSloth]
+//= 1.8 Fixed a bug which prevented reset of events. [SinSloth]
+//= 1.9 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 2.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 2.0a Corrected a Typo error ";;". [Samuray22]
+//= 2.1 Assassins will now get their request item. (bugreport:1220) [L0ne_W0lf]
+//= 2.2 Updated Binocular and Stop Post quests. [L0ne_W0lf]
+//= 2.3 Replaced effect numerics with constants. [Samuray22]
+//= 2.4 Implemented Ep. 12.1 Continental Guard Quest. [L0ne_W0lf]
+//=     Moved Dandelion's Request to a it's own file.
+//=     Added support NPCs required to finish Gaebolg quest.
+//= 2.5 Fixed Group of Evil never re-enabling. [L0ne_W0lf]
+//= 2.6 Added quest log commands for Resurrection of Satan Morocc. [L0ne_W0lf]
+//=     Added the two remaining episode 12.1 quests. 
+//=     Updated Satan Morocc Quest to allow peopel who have
+//=     finished it to return to the previous map.
+//= 2.7 Corrected weight checks, they only check for inventory slots. [L0ne_W0lf]
+//= 2.8 Disabled Assassin bar pub NPCs, as they are included in the 13.1 quests file. [L0ne_W0lf]
+//= 2.9 Fixed player dying/logging out during conversation could prevent
+//=     summoning of Satan Morocc until server reboot. [Gepard]
+//= 3.0 Updated RE/Pre-RE EXP. [Euphy]
+//= 3.1 Updated to match the latest official scripts. [Euphy]
+//= 3.2 Added GM management NPC and variable $@re_moc_time$. [Euphy]
+//= 3.3 Renewal script update for ep16.1 [Capuche]
+//============================================================ 
+
+// Stop Post Quest
+// ============================================================
+-	script	William	89,{
+	mes "[William]";
+	mes "Welcome to";
+	mes "MacMillan's ^3355FFPost^000000 Workshop.";
+	next;
+	mes "[William]";
+	mes "My family, the MacMillan Clan, has been producing Professional Traffic Signal Posts for more than 250 years. Nowadays, we are booking Special Orders for our unique ornament, ^3355FFStop Post^000000.";
+	next;
+	switch(select("Could I order one ^3355FFStop Post^000000?:Nah...")) {
+	case 1:
+		mes "[William]";
+		mes "This unique ornament, ^3355FFStop Post^000000, is a traffic signal on the road, and doubles as a hair ornament! This, we solemnly promise on the strength of a 100-year guarantee.";
+		next;
+		mes "[William]";
+		mes "To produce a ^3355FFStop Post^000000, we need ^3355FF91100 Zeny^000000, ^3355FF50 Trunk^000000 and ^3355FF1 Black Dyestuffs^000000.";
+		next;
+		if ((countitem(1019) > 49) && (countitem(983) > 0) && (Zeny > 91099)) {
+			delitem 1019,50;  //Wooden_Block
+			delitem 983,1;  //Black_Dyestuffs
+			set Zeny, Zeny-91100;
+			mes "[William]";
+			mes "Here you are~!";
+			mes "This ^3355FFStop Post^000000 has";
+			mes "been especially made";
+			mes "just for you!";
+			mes "Thank you for stopping by!";
+			mes "...Get the joke?";
+			getitem 2272,1; // Stop_Post
+			close;
+		}
+		else {
+			mes "[William]";
+			mes "So...";
+			mes "When you get those items, swing on by and we'll give you a Stop Post.";
+			close;
+		}
+	case 2:
+		mes "[William]";
+		mes "Anyway, thank you for coming by 'MacMillan's Workshop.' But think about buying something next time, will ya?";
+		close;
+	}
+}
+
+// Binoculars Quest
+// ============================================================
+-	script	Alchemist	64,{
+	mes "[Marius]";
+	mes "Howdy, new customer!!";
+	mes "I know what you're gonna talk about. You want the Magic Glasses from me, riiiiight?";
+	next;
+	switch(select("What is that?:Manufacture:Ignore him")) {
+	case 1:
+		mes "[Marius]";
+		mes "Hmm~!";
+		mes "Well, the official name for them is ^3355FFBinoculars^000000! An optical device that works like a pair of field glasses, they're designed for simultaneous use by both eyes!";
+		next;
+		mes "[Marius]";
+		mes "They're made up of two small telescopes joined with a single focusing device. You can arrange the lenses to produce stereoscopic vision.";
+		next;
+		mes "[Marius]";
+		mes "So?";
+		mes "Ain't that";
+		mes "something, huh?";
+		mes "Muhahahahahaha!";
+		mes ". . . . .";
+		next;
+		mes "[Marius]";
+		mes "Hm? You don't seem to";
+		mes "believe what I just said?";
+		mes "Oh c'mon, jerk. It's real!!";
+		next;
+		mes "[Marius]";
+		mes "I will let you";
+		mes "know the items I need...";
+		mes "1 ^3355FFGeek Glasses^000000! 100 ^3355FFSteel^000000!";
+		mes "And ^3355FF50000 Zeny^000000!";
+		close;
+	case 2:
+		if ((countitem(2243) > 0) && (countitem(999) > 99) && (Zeny > 49999)) {
+			mes "[Marius]";
+			mes "Perfect, perfect !";
+			mes "Now my masterpiece will be complete!";
+			mes "Muhahahaha !";
+			next;
+			delitem 2243,1;  //Spinning_Eyes
+			delitem 999,100;  //Steel
+			set Zeny, Zeny-50000;
+			mes "[Marius]";
+			mes "Here you are!";
+			mes "Binoculars !";
+			getitem 2296,1; // Binoculars
+			next;
+			mes "[Marius]";
+			mes "Just remember...";
+			mes "Don't peep at something you shouldn't look at. Well, at least try not to.";
+			close;
+		}
+		else {
+			mes "[Marius]";
+			mes "Argggghhhhhhh!!";
+			mes "You didn't bring";
+			mes "enough items!!!!";
+			mes "How dare you";
+			mes "disgrace me!!!";
+			mes "Baaaadddd !!";
+			close;
+		}
+	case 3:
+		mes "[Marius]";
+		mes "Hey you~!";
+		mes "Now you're in front of Marius, an Alchemist among Alchemists. Ignoring me, eh? Come on, I'll beat your ass!";
+		close;
+	}
+}
+
+// Morocc Assassin Guild Bar [Disabled]
+// ============================================================
+/*
+morocc,43,108,5	script	Sharp-Looking Kid#dan_07	82,{
+	if (BaseClass == Job_Assassin) {
+		mes "[Jack]";
+		mes "In spite of the chaotic mess in their town, ";
+		mes "there are still some of those who pay visits here.";
+		mes "Maybe the stronghold itself is a real one of a kind..";
+		close;
+	}
+	else {
+		if (countitem(7416) > 0) {
+			mes "[Jack]";
+			mes "A letter of recommendation?";
+			mes "Oh, boy. Looks like you've brought me a very, very old relic from the past.";
+			mes "Well, guess you should go in and see the master.";
+			close;
+		}
+		else {
+			mes "[Jack]";
+			mes "Hey, what are you peeking at?";
+			mes "Don't you have better things to do? You'd better go to the shelter and save your ass.";
+			close;
+		}
+	}
+}
+
+morocc,45,110,0	script	que_job01#01	45,2,2,{
+OnTouch_:
+	if (BaseClass == Job_Assassin) {
+		warp "que_job01",9,94;
+		end;
+	}
+	else {
+		mes "[Jack]";
+		mes "Wait, that's the restricted area....";
+		mes "......";
+		mes "Oh, well.";
+		next;
+		mes "[Jack]";
+		mes "Things have changed.";
+		mes "Just do whatever you want!";
+		close2;
+		warp "que_job01",9,94;
+		end;
+	}
+}
+
+que_job01,6,94,0	warp	morocc#01	2,2,morocc,45,103
+que_job01,17,48,0	warp	que_job01#02	2,2,que_job01,68,92
+que_job01,68,96,0	warp	que_job01#03	2,2,que_job01,17,53
+
+que_job01,80,77,0	script	que_job01#04	45,2,2,{
+OnTouch_:
+	if (BaseClass == Job_Assassin) {
+		warp "que_job01",61,50;
+		end;
+	}
+	else if (mao_request > 0) {
+		warp "que_job01",61,50;
+		end;
+	}
+	else {
+		mes "[Litheron]";
+		mes "Whoa, you're not";
+		mes "allowed to be in here.";
+		mes "Hey, master! Do you";
+		mes "know this guy?";
+		next;
+		if (prt_curse == 24) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "I don't care what you say, I'm coming in!!!";
+			next;
+			mes "[Litheron]";
+			mes "Hey, master-! What do we do with this guy?";
+			mes "He sure seems tough!";
+			next;
+			mes "[Master]";
+			mes "Hmm. Let him do what he wants to do.";
+			mes "Passing through one door doesn't make any difference.";
+			next;
+			mes "[Litheron]";
+			mes "Hah! Did you hear that?";
+			mes "Alright, how about this?";
+			mes "I'll let you in if you buy me a drink.";
+			mes "Besides, you can't risk making trouble here: this place";
+			mes "is full of deadly Assassins.";
+			next;
+			switch(select("Sure:Why should I?!")) {
+			case 1:
+				if (Zeny > 999) {
+					mes "[Litheron]";
+					mes "Heh, that's what";
+					mes "I'm talking about!";
+					mes "Hey, bartender! Gimme";
+					mes "the usual! I like your";
+					mes "style, adventurer...";
+					set Zeny, Zeny-1000;
+					next;
+					mes "[Litheron]";
+					mes "Alright, you can come";
+					mes "on in. But don't you dare";
+					mes "breathe a word about this";
+					mes "bar to another living soul.";
+					close2;
+					warp "que_job01",61,50;
+					end;
+				}
+				else {
+					mes "[Litheron]";
+					mes "Huh...";
+					mes "Oh, you don't even";
+					mes "have enough zeny to";
+					mes "buy water here. Oh boy...";
+					mes "If you really want to enter,";
+					mes "make sure you have the cash!";
+					close2;
+					warp "que_job01",85,77;
+					end;
+				}
+			case 2:
+				mes "[Litheron]";
+				mes "Not the saavy type,";
+				mes "are you...? Fine, fine.";
+				mes "If you're not gonna do";
+				mes "me any favors, then why";
+				mes "should I help you? Go away!";
+				close2;
+				warp "que_job01",85,77;
+				end;
+			}
+		}
+		else {
+			mes "[Master]";
+			mes "Not at all.";
+			mes "Make sure that this";
+			mes "one isn't allowed";
+			mes "to enter.";
+			next;
+			mes "[Litheron]";
+			mes "You heard the man.";
+			mes "You better retreat";
+			mes "from this place while";
+			mes "you still have legs...";
+			close2;
+			warp "que_job01",85,77;
+			end;
+		}
+	}
+}
+
+que_job01,65,50,0	warp	que_job01#05	2,2,que_job01,84,77
+
+que_job01,81,79,5	script	Idle Knight#dan_08	733,{
+	mes "[Litheron]";
+	mes "What's the matter?";
+	mes "Oh, I see... You're";
+	mes "probably wondering why";
+	mes "a Knight like me is in a";
+	mes "secret Assassin's pub.";
+	if (BaseClass == Job_Knight) {
+		mes "What about you, huh?";
+	}
+	next;
+	mes "[Litheron]";
+	mes "You know.. I just came to take a short breather. This whole restoration work is killing me.";
+	mes "It's almost impossible to spot a place for a little drink these days, if you know what I mean.";
+	close;
+}
+
+que_job01,82,95,3	script	Bar Master#moc_main01	46,{
+	if (checkweight(908,200) == 0) {
+		mes "^3355FFWait a second!";
+		mes "Right now, you're carrying";
+		mes "too many things with you.";
+		mes "Please come back after";
+		mes "using the Kafra Service";
+		mes "to store some of your items.^000000";
+		close;
+	}
+	if (BaseClass == Job_Assassin) {
+		mes "[Master]";
+		mes "Please, come in.";
+		mes "Care for a drink?";
+	}
+	else if ((BaseJob == Job_Thief) && (BaseClass != Job_Assassin)) {
+		mes "[Master]";
+		mes "......Huh. How did a ruffian like you get in here?";
+		mes "Well, I guess Jack's not doing his job.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Hey,master, don't be so harsh. We know each other, don't we?";
+		mes "You don't wanna hurt your old friend's feeling~";
+		next;
+		mes "[Master]";
+		mes "Whatever you say.";
+		mes "So,what do you wanna drink?";
+	}
+	else {
+		mes "[Master]";
+		mes "....Hmm...";
+		mes "What do you wanna drink?";
+	}
+	next;
+	switch(select("Order a Drink:Ask About Mission:Cancel")) {
+	case 1:
+		mes "[Master]";
+		mes "In this place, I only serve two drinks.";
+		mes "You want a Tropical Sograt or";
+		mes "a Vermilion on the Beach?";
+		next;
+		switch(select("Tropical Sograt:Vermilion on the Beach:Do you offer any free drinks?")) {
+		case 1:
+			if (checkweight(908,200) == 0) {
+				mes "[Master]";
+				mes "Hey, why did you bring";
+				mes "so much stuff with you?";
+				mes "I can't give you anything";
+				mes "to drink if you don't have";
+				mes "the room to carry it around.";
+				mes "Clear out your inventory!";
+				close;
+			}
+			else {
+				if (BaseClass == Job_Assassin) {
+					if (Zeny < 800) {
+						mes "[Master]";
+						mes "You know...";
+						mes "I was going to charge you";
+						mes "800 zeny for this drink, but";
+						mes "it looks like you can't afford";
+						mes "it right now. Come back when";
+						mes "you have the zeny, alright?";
+					}
+					else {
+						mes "[Master]";
+						mes "Most bartenders would";
+						mes "usually charge 1,000 zeny";
+						mes "for this stuff, but I'll only";
+						mes "ask you for 800. Enjoy it,";
+						mes "my friend, and drink it as";
+						mes "deeply as you would life.";
+						set Zeny, Zeny-800;
+						getitem 12112,1; //Tropical_Sograt
+					}
+					close;
+				}
+				else {
+					if (Zeny < 1000) {
+						mes "[Master]";
+						mes "Hey, you don't have";
+						mes "the zeny for this drink.";
+						mes "Make sure you come back";
+						mes "with 1,000 zeny if you want";
+						mes "me to fix you something, okay?";
+						close;
+					}
+					else {
+						mes "[Master]";
+						mes "For Assassins, I charge";
+						mes "800 zeny, but for you, I'm";
+						mes "gonna charge 1,000. No";
+						mes "hard feelings, but you're";
+						mes "already lucky to be here.";
+						mes "Hey, enjoy your drink~";
+						set Zeny, Zeny-1000;
+						getitem 12112,1; //Tropical_Sograt
+						close;
+					}
+				}
+			}
+		case 2:
+			if (checkweight(908,200) == 0) {
+				mes "[Master]";
+				mes "Hey, why did you bring";
+				mes "so much stuff with you?";
+				mes "I can't give you anything";
+				mes "to drink if you don't have";
+				mes "the room to carry it around.";
+				mes "Clear out your inventory!";
+				close;
+			}
+			else {
+				if (BaseClass == Job_Assassin) {
+					if (Zeny < 800) {
+						mes "[Master]";
+						mes "You know...";
+						mes "I was going to charge you";
+						mes "800 zeny for this drink, but";
+						mes "it looks like you can't afford";
+						mes "it right now. Come back when";
+						mes "you have the zeny, alright?";
+					}
+					else {
+						mes "[Master]";
+						mes "Most bartenders would";
+						mes "usually charge 1,000 zeny";
+						mes "for this stuff, but I'll only";
+						mes "ask you for 800. Enjoy it,";
+						mes "my friend, and drink it as";
+						mes "deeply as you would life.";
+						set Zeny, Zeny-800;
+						getitem 12113,1; //Vermilion_The_Beach
+					}
+					close;
+				}
+				else {
+					if (Zeny < 1000) {
+						mes "[Master]";
+						mes "Hey, you don't have";
+						mes "the zeny for this drink.";
+						mes "Make sure you come back";
+						mes "with 1,000 zeny if you want";
+						mes "me to fix you something, okay?";
+						close;
+					}
+					else {
+						mes "[Master]";
+						mes "For Assassins, I charge";
+						mes "800 zeny, but for you, I'm";
+						mes "gonna charge 1,000. No";
+						mes "hard feelings, but you're";
+						mes "already lucky to be here.";
+						mes "Hey, enjoy your drink~";
+						set Zeny, Zeny-1000;
+						getitem 12113,1; //Vermilion_The_Beach
+						close;
+					}
+				}
+			}
+		case 3:
+			mes "[Master]";
+			mes "What are you...?";
+			mes "I just told you";
+			mes "I only serve two";
+			mes "drinks. If you want";
+			mes "water, you oughtta";
+			mes "go someplace else.";
+			close;
+		}
+	case 2:
+		if (mao_request == 1) {
+			if (BaseClass == Job_Assassin) {
+				mes "[Master]";
+				mes "A mission...";
+				mes "Don't you think you're little too late?";
+				mes "All the requests were cancelled and there's nothing left for you to do.";
+				mes "Besides, first things first. The restoration work for the city is the most urgent.";
+				close;
+			}
+			else {
+				mes "[Master]";
+				mes "Huh?";
+				next;
+				select("Show him the Letter of Recommendation.");
+				if (countitem(7416) > 0) {
+					mes "[Master]";
+					mes "Ah.. I think you're little too late.";
+					mes "I've got nothing to say if this's about the request sent to each guild.";
+					mes "I'm sorry you've come this far for nothing.";
+					close;
+				}
+				else {
+					mes "[Master]";
+					mes "What are you talking about?";
+					next;
+					mes "[Master]";
+					mes "................You're looking way too suspicious now.";
+					mes " ";
+					mes "Boys, show this guy the door!!";
+					next;
+					mes "[Drinking Boys]";
+					mes "- Yes, Sir!";
+					next;
+					mes "- You've got kicked out of the place. -";
+					close2;
+					warp "morocc",45,106;
+					end;
+				}
+			}
+		}
+		else {
+			if (BaseClass == Job_Assassin) {
+				mes "[Master]";
+				mes "Let me take a guess. You haven't been assigned any missions from this joint, eh?";
+				mes "By the way, you like this place?";
+				next;
+				mes "[Master]";
+				mes "You know, I kinda...";
+				mes "happen to really love this little pub of mine..";
+				mes "where some secret businesses take place..";
+				next;
+				mes "[Master]";
+				mes "If you want, I'll recommend";
+				mes "you to the guildmaster for";
+				mes "a mission. Until then, you've";
+				mes "got to focus on your training.";
+				mes "And until you train... Why";
+				mes "don't you enjoy a drink?";
+				close;
+			}
+			else {
+				mes "[Master]";
+				mes "Mission...?";
+				mes "Come on, what are";
+				mes "you talking about?";
+				mes "Stop talking crazy and";
+				mes "order something to drink.";
+				close;
+			}
+		}
+	case 3:
+		mes "[Master]";
+		mes "Hmmm.";
+		close;
+	}
+}
+
+que_job01,49,49,5	script	Tao#dan_09	877,{
+	if (BaseClass == Job_Assassin) {
+		mes "[Tao]";
+		mes "Welcome, meow~";
+		mes "How's out, meow?";
+		next;
+		if (prt_curse == 24) {
+			switch(select("Is Marjana in?:I'm here to see you,Tao.")) {
+			case 1:
+				mes "[Tao]";
+				mes "She's in the room on your left, meow~";
+				mes "But then, how d'you know she's here, meow?";
+				close;
+			case 2:
+				mes "[Tao]";
+				mes "This is no place for playing, meow..";
+				mes "... Hey, it's awkward you looking at me like that, meow..";
+				close;
+			}
+		}
+		else {
+			mes "[Tao]";
+			mes "Is this all because of that dude called Raiyan Moore or More.. or.. blar?";
+			mes "... Meow..";
+			next;
+			mes "[Tao]";
+			mes "Ugh, you've got nothing to do, then get lost, meow?!";
+			mes "You know this place is prohibited, meow.";
+			mes "You won'e even be able to go into that room, anyway, meow~.";
+			next;
+			mes "[Tao]";
+			mes "Or, else.... You could?.. Oh, who knows, meow..";
+			mes "Tao hates to watch the gate anymore, meow~ meow~";
+			close;
+		}
+	}
+	else {
+		mes "[Tao]";
+		mes "What's up, meow!";
+		next;
+		switch(select("So, it's just you, little brat?:What has gotten into you?!:Hey, stop meowing?!")) {
+		case 1:
+			mes "[Tao]";
+			mes "What are you talking about, meow!";
+			mes "Tao's the greatest gate keeper!";
+			mes "Don't ever low estimate, meow!";
+			next;
+			mes "[Tao]";
+			mes "Looks like you came for some reasons, but don't even dream of getting my help, meow!!";
+			mes "Do you think I'm stupid enough to tell you that";
+			mes "the Master and Marjana are in that room on the right? Meow, meow, meow~~";
+			close;
+		case 2:
+			mes "[Tao]";
+			mes "Are you looking down on me because I'm a gate keeper?!";
+			mes "Grrrr...";
+			next;
+			mes "[Tao]";
+			mes "Get outta here while you have chances!!!!";
+			close;
+		case 3:
+			mes "[Tao]";
+			mes "Meow, meow.";
+			mes "It's a long story, meow.";
+			mes "That day, Tao really wanted a Big Ribbon, meow.";
+			next;
+			mes "[Tao]";
+			mes "So I went out looking for Wild Roses, meow...";
+			mes "...Meow? Wait a minute, why am I telling this story, meow?!";
+			next;
+			mes "[Tao]";
+			mes "Krrrr!";
+			mes "Who the hell are you!";
+			next;
+			mes "[Tao]";
+			mes "Get out of here, meow!!!";
+			close;
+		}
+	}
+}
+
+que_job01,51,55,0	script	que_job01#room_1	45,1,1,{
+
+OnReset:
+	set $@maobar_room,0;
+	end;
+
+OnTouch_:
+	if (prt_curse == 24) {
+		if ($@maobar_room == 0) {
+			set $@maobar_room,1;
+			donpcevent " #room1timer::OnEnable";
+			donpcevent "Marjana#poison::OnEnable";
+			mes "[Tao]";
+			mes "Ah, that place is protected";
+			mes "by security magic, so you'll";
+			mes "only have ^4D4DFF4 minutes^000000 to remain";
+			mes "there. Don't waste time, meow!";
+			close2;
+			warp "que_job01",11,7;
+			end;
+		}
+		else {
+			mes "[Tao]";
+			mes "Sooo sorry, meow~";
+			mes "Someone else is already";
+			mes "inside. Just come back";
+			mes "again later, meow?";
+			close2;
+			warp "que_job01",52,50;
+			end;
+		}
+	}
+	else if (mao_request > 0) {
+		if ($@maobar_room == 0) {
+			set $@maobar_room,1;
+			donpcevent " #room1timer::OnEnable";
+			donpcevent "Valdes#moc_master_1::OnEnable";
+			mes "[Tao]";
+			mes "Ah, that place is protected";
+			mes "by security magic, so you'll";
+			mes "only have ^4D4DFF4 minutes^000000 to remain";
+			mes "there. Don't waste time, meow!";
+			close2;
+			warp "que_job01",11,7;
+			end;
+		}
+		else {
+			mes "[Tao]";
+			mes "Sooo sorry, meow~";
+			mes "Someone else is already";
+			mes "inside. Just come back";
+			mes "again later, meow?";
+			close2;
+			warp "que_job01",52,50;
+			end;
+		}
+	}
+	else {
+		mes "[Tao]";
+		mes "Wh-who are you?";
+		mes "This is a restricted";
+		mes "area, meow! If you don't";
+		mes "have permission, then get";
+		mes "out of there right meow!";
+		close2;
+		warp "que_job01",52,50;
+		end;
+	}
+}
+
+que_job01,1,1,0	script	 #room1timer	844,{
+OnEnable:
+	initnpctimer;
+	mapannounce "que_job01","You will now enter the Master Zone, Area 1.",bc_map,"0x70DBDB";
+	end;
+
+OnStop:
+	mapannounce "que_job01","The security magic in the Master Zone, Area 1 is deactivated.",bc_map,"0x70DBDB";
+	donpcevent "#room1_warp::OnDisable";
+	donpcevent "Valdes#moc_master_1::OnDisable";
+	donpcevent "Marjana#poison::OnInit";
+	donpcevent "que_job01#room_1::OnReset";
+	stopnpctimer;
+	end;
+
+OnTimer240000:
+	donpcevent "#room1_warp::OnEnable";
+	end;
+
+OnTimer245000:
+	donpcevent "#room1_warp::OnDisable";
+	donpcevent "Valdes#moc_master_1::OnDisable";
+	donpcevent "Marjana#poison::OnInit";
+	end;
+
+OnTimer250000:
+	mapannounce "que_job01","The security magic Master Zone, Area 1 is now activated.",bc_map,"0x70DBDB";
+	donpcevent "que_job01#room_1::OnReset";
+	stopnpctimer;
+	end;
+}
+
+que_job01,12,13,0	script	#room1_warp	-1,15,15,{
+OnInit:
+	disablenpc "#room1_warp";
+	end;
+
+OnEnable:
+	enablenpc "#room1_warp";
+	end;
+
+OnDisable:
+	disablenpc "#room1_warp";
+	end;
+
+OnTouch_:
+	warp "que_job01",52,50;
+	end;
+}
+
+que_job01,51,44,0	warp	que_job01#room_2	1,1,que_job01,80,23
+
+que_job01,11,4,0	script	que_job01#room1_out	45,1,1,{
+OnTouch_:
+	warp "que_job01",52,50;
+	donpcevent " #room1timer::OnStop";
+	end;
+}
+
+que_job01,80,27,0	warp	que_job01#room2_1_out	1,1,que_job01,52,50
+
+que_job01,16,21,5	script	Valdes#moc_master_1	55,{
+	if (BaseClass == Job_Assassin) {
+		mes "[Valdes]";
+		mes "What is it? I have nothing to ask you to do.";
+		mes "Could you please leave me alone? I have a bad headache.";
+		next;
+		mes "[Valdes]";
+		mes "I'll ask you for a help some other time.";
+		mes "You look pretty passionate after all.";
+	}
+	else {
+		mes "[Valdez]";
+		mes "....Sorry, but could you please leave?";
+		mes "I'm really stressed out right now.";
+		mes "If you're here for the request that we made earlier, you can just forget about it.";
+	}
+	if (countitem(7417) > 0) {
+		delitem 7417,countitem(7417); //Mission_ScrollA
+	}
+	if (countitem(7418) > 0) {
+		delitem 7418,countitem(7418); //Mission_ScrollB
+	}
+	if (countitem(7416) > 0) {
+		delitem 7416,countitem(7416); //Letter_Of_Recommend
+	}
+	close;
+
+OnInit:
+	disablenpc "Valdes#moc_master_1";
+	end;
+
+OnEnable:
+	enablenpc "Valdes#moc_master_1";
+	end;
+
+OnDisable:
+	disablenpc "Valdes#moc_master_1";
+	end;
+}
+*/
+
+yuno_in04,180,106,3	script	Reading Girl#moc_girl1	73,{
+	mes "[" + strcharinfo(0) + "]";
+	mes "Excuse me, but may I ask";
+	mes "you a question?";
+	next;
+	mes "[Yunia]";
+	mes "Eh? Oh, I'm sorry, I was";
+	mes "so busy reading this book!";
+	mes "So, uh, what exactly did";
+	mes "you want to ask me?";
+	next;
+	select("What are you reading?");
+	mes "[Yunia]";
+	mes "Ah! This is one of the best sellers of Joshua Vansei's.";
+	mes "The main character is a writer, and it's so touching that this guy writes a story of his mistress...";
+	next;
+	mes "[Yunia]";
+	mes "Oh.. I can't wait to see Hoein Special..";
+	mes "And this, you could have a look if you want to.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "Oh, now, I shouldn't.";
+	mes "Looks like the cover's rounded with a red strap,";
+	mes "which..I really think is for adults only.";
+	mes "ex..cuse me~!";
+	close;
+}
+
+morocc_in,46,125,5	script	Assistant#moc_ex1	729,{
+	mes "[Sephit]";
+	mes "I've always believed in Satan..";
+	mes "Haah... Guess it's good to be living, after all.";
+	next;
+	mes "[Sephit]";
+	mes "Who would've thought to actually see the Satan while alive.....?";
+	close;
+}
+
+que_job01,70,84,1	script	Girl#moc_ex002	882,{
+	mes "[Girl]";
+	mes "Oh, the world.. the world is doomed..";
+	mes "-sobbing-";
+	mes "Nothing seems to be working now..";
+	emotion ET_CRY;
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	mes "....Tsk..tsk...";
+	mes "Good heavens.. I can't believe this young girl's drinking with sadness....";
+	close;
+}
+
+// The Crow of the Fate
+// ============================================================
+moc_ruins,137,70,3	script	Book-Touching Man#garas	48,{
+	if (BaseLevel > 59) {
+		if (checkweight(703,3) == 0) {
+			mes "- You have too many items in your inventory to proceed with this quest. -";
+			close;
+		}
+		if (barmunt_crow == 0) {
+			mes "^660000Morocc, the City of the Desert, has been completely devastated by Satan Morocc.^000000";
+			next;
+			mes "^660000The people of Morocc were resilient enough to endure the region's harsh weather, but their toughness to the weather could not prepare them enough as they witnessed the destruction brought down upon the city by Satan Morocc.^000000";
+			next;
+			mes "^660000This man, who looks as dry and thin as a fish dried up under the sun, still has a smile that reminds you of a benevolent god, and is touching a book in his hand.^000000";
+			next;
+			mes "^660000Watching him makes you giggle, he looks no better than the dried corpses in the pyramid, but he is obviously alive and doesn't appear to be a monster. Somehow, you find yourself compelled to approach this interesting looking man.^000000";
+			next;
+			emotion ET_THROB;
+			mes "[Book-Touching Man]";
+			mes "Ah... Mammi...";
+			next;
+			mes "[Book-Touching Man]";
+			mes "Your healthy golden skin is glowing under the blessed sunlight of Morocc.";
+			next;
+			emotion ET_CRY;
+			mes "[Book-Touching Man]";
+			mes "Your smile outshines the aura of the gods of Valhalla. You are a living gospel. Your smile even makes Goddess Freya hide in the shadows in shame! Ah.... Mammi, my Mammi!";
+			next;
+			mes "^660000You wave your hand close to his face to get his attention. He seems, however, to be in his own dreams, completely oblivious of your presense.^000000";
+			next;
+			switch(select("Speak:Pass Him By")) {
+			case 1:
+				mes "["+ strcharinfo(0) +"]";
+				mes "Are you talking to yourself?";
+				next;
+				emotion ET_HUK;
+				mes "[Book-Touching Man]";
+				mes "Wah! Oh, my god, you must be a messenger of the devil trying to interrupt me from feeling Mammi!";
+				mes "I'm not afraid of you, so bring it on!";
+				next;
+				mes "^660000Surprised by your voice, he yelled at you, which seemed bizarre.";
+				mes "You wonder what he meant by feeling her when he was just watching and touching a book.^000000";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Who's Mammi?";
+				next;
+				emotion ET_HUK;
+				mes "[Book-Touching Man]";
+				mes "What? Don't you know Mammi, one of the three greatest Rune-Midgarts' idols?";
+				next;
+				emotion ET_OHNO;
+				mes "[Book-Touching Man]";
+				mes "Man, you don't know anything, do you?! Well, judging by the stupid look on your face, I guess you're an adventurer running around on meaningless errands for others. Heh heh!";
+				next;
+				mes "^660000Umm... You now regret speaking to him in the first place.^000000";
+				next;
+				mes "[Book-Touching Man]";
+				mes "My Mammi is different from those other celebrities that only rely on their beauty and lack any real substance.";
+				mes "She always carries books with her despite her hectic schedule. That alone should tell you that she's more intelligent than all the others! Ah... Mammi...";
+				next;
+				mes "[Book-Touching Man]";
+				mes "She even mentioned in an interview in 'Morocc Times' that she wants to meet a man that loves books.";
+				next;
+				emotion ET_COOL;
+				mes "[Book-Touching Man]";
+				mes "That means... She's waiting for someone like me. Hehehe!";
+				mes "You see, every book in Rune-Midgarts' Library has the name Benjamin written on them... That's me!";
+				next;
+				mes "^660000This Benjamin seems to be a huge fan of a female celebrity called Mammi. He didn't shut his mouth and worshipped her beauty for a while, but then he suddenly stopped and looked depressed.^000000";
+				next;
+				mes "[Benjamin]";
+				mes "I have a problem....";
+				next;
+				mes "[Benjamin]";
+				mes "My Mammi said that she's fallen in love with a book written by ^FF0000'Oliver Hilpert'^000000 of Schwarzwald: ^FF0000'The Crow of the Fate,'^000000 but I didn't have a chance of even looking at it!";
+				next;
+				mes "^660000The Crow of the Fate^000000?";
+				next;
+				mes "[Benjamin]";
+				mes "Unless you're blind, you know how terrible Morocc is nowadays.";
+				next;
+				mes "[Benjamin]";
+				mes "I really need to read that book and tell her that I'm here for her, but I don't even have the time to regain my breath because of this situation in our hands!";
+				next;
+				emotion ET_CRY;
+				mes "[Benjamin]";
+				mes "My Mammi pillow cover is buried under debris... Gasp!";
+				mes "Mammi, I'm coming! Don't you die yet!";
+				next;
+				mes "^660000He seems to see an image of Mammi, and he shouted her name, gasping with anxiety. You feel so sorry for his agony.^000000";
+				next;
+				mes "^660000He inhaled deeply, and then suddenly turned his head toward you.^000000";
+				next;
+				emotion ET_AHA;
+				mes "[Benjamin]";
+				mes "....Ye... Yes, you!";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Huh?";
+				emotion ET_PROFUSELY_SWEAT, playerattached();
+				next;
+				mes "[Benjamin]";
+				mes "You look bored. You must be waiting for someone to give you something to do!";
+				mes "Help me connect with Mammi. Who knows? I may let you have a conversation with Mammi, whom everyone in Rune-Midgarts adores.";
+				next;
+				mes "^660000Didn't you just call me an adventurer that runs around on meaningless errands for others...?^000000";
+				next;
+				mes "[Benjamin]";
+				mes "All I'm asking is to check out a book from Prontera Library for me. It sounds easy, doesn't it?";
+				mes "Well, you don't look like someone who loves reading, but I hope you at least know how to check out a book from a library.";
+				next;
+				if (Sex == SEX_MALE) {
+					mes "[Benjamin]";
+					mes "If you help me, I'll show you a limited picture book edition of Mammi... Once. Hehehehe.";
+					mes "What do you say? You do want to help me, right?";
+					next;
+				}
+				else {
+					mes "[Benjamin]";
+					mes "If you help me, I'll show you a limited picture book edition of Mammi... Once. Hehehehe.";
+					mes "So, aren't you interested in looking at another girl's pictures? Umm, if you want, I can introduce you to a handsome guard in Morocc...";
+					mes "What do you say? You do want to help me, right?";
+					next;
+				}
+				mes "^660000What do you want to do?^000000";
+				next;
+				switch(select("Help him:Don't help him")) {
+				case 1:
+					mes "[Benjamin]";
+					mes "Wow, are you really going to help me?";
+					next;
+					mes "[Benjamin]";
+					mes "Thank you so much! Then remember this title: 'The Crow of the Fate' written by 'Oliver Hilpert.' I'm sure you can find it in Prontera Library.";
+					mes "Hehehe, Mammi! I'm almost there!";
+					set barmunt_crow,1;
+					setquest 2063;
+					close;
+				case 2:
+					mes "[Benjamin]";
+					mes "What, don't you know how to check out a book from a library? Oh, my...";
+					close;
+				}
+			case 2:
+				mes "[Benjamin]";
+				mes "Oh... Mammi... My Mammi...";
+				close;
+			}
+		}
+		else if (barmunt_crow == 1) {
+			mes "[Benjamin]";
+			mes "Don't you forget this title: 'The Crow of the Fate' written by 'Oliver Hilpert.' I'm sure you can find it in Prontera Library.";
+			close;
+		}
+		else if (barmunt_crow == 10) {
+			mes "[Benjamin]";
+			mes "Oh... Mammi... My Mammi...";
+			next;
+			mes "^660000Just like the last time that you saw him, Bejamin is living in his dreams, rubbing a book on his face.^000000";
+			next;
+			mes "^660000You carefully approached him, and then gave him a pat on the shoulder.^000000";
+			next;
+			emotion ET_HUK;
+			mes "[Benjamin]";
+			mes "Grrrr! Who dares touch me?!";
+			next;
+			mes "^660000...Umm... Obviously you weren't careful enough... ^000000";
+			next;
+			mes "[Benjamin]";
+			mes "Who dares interrupt me from feeling Mammi? Do you want a piece of me... Err?";
+			mes "Gosh, it's you. What took you so long? Wasn't Prontera Library, like, five minutes away?";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Ahchoo! Thanks to you, I couldn't find it from the library. So I travelled all the way up to Schwarzwald... Ahchoo!";
+			specialeffect2 EF_VENOMDUST;
+			next;
+			mes "^660000Feeling angry at him, you exaggerated a fit of sneezing which you have had for quite a while.^000000";
+			next;
+			mes "[Benjamin]";
+			mes "Oh... you did?";
+			mes "Hehehe, you're more reliable than I thought. Thanks for the book... Wait, does that mean I have to go up to Schwarzwald to return this? Man!";
+			next;
+			mes "[Benjamin]";
+			mes "...No, I can do anything as long as it's for Mammi. Heh heh, you're a kind adventurer. Thanks.";
+			mes "Was it cold up there? I guess it is since Schwarzwald is located up north from here.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "..................";
+			next;
+			mes "[Benjamin]";
+			mes "Let me think. If this book is not yet available in Prontera Library, it must mean that not many people of Rune-Midgarts have read this book.";
+			next;
+			mes "[Benjamin]";
+			mes "Grrrr... Mammi! Here I am, following your noble tastes to read such a rare book! Mammi...!";
+			emotion ET_BIGTHROB;
+			next;
+			mes "[Benjamin]";
+			mes "I feel so excited to think about having a deep conversation with Mammi about literature! Yay!";
+			mes "I should go read this book right away. Hehehe!";
+			emotion ET_DELIGHT;
+			next;
+			mes "[Benjamin]";
+			mes "Oops, I must not forget to repay you. You know, I'm a polite man.";
+			next;
+			mes "[Benjamin]";
+			mes "Look, it's the picture book of Mammi I told you about.";
+			next;
+			cutin "mami01",4;
+			mes "[Benjamin]";
+			mes "Ah... Look at this picture of her wearing the rolled-up puppy ears! Doesn't she look like a sad puppy wandering Comodo, the City of Lovers, all by herself?!";
+			mes "How could no one shed a tear after watching this sad picture of her?! Argh, Mammi! I'm coming to make you the happiest woman in the world!";
+			next;
+			cutin "mami02",4;
+			mes "["+ strcharinfo(0) +"]";
+			mes "'She looks different than I thought with these glasses and pony tails... She really looks like someone who loves literature.";
+			mes "Wait, when did people start calling Comodo the City of Lovers? Hmm... This guy really thinks weird things!'";
+			next;
+			mes "[Benjamin]";
+			mes "I've decided to give you this <Angel Mammi's Special picture book: In Comodo> which is full of her beautiful pictures in return of your favor. Ahem... What do you say?";
+			next;
+			mes "^660000He is staring at you arrogantly. Obviously, he doesn't care if you like the book or not.^000000";
+			next;
+			switch(select("I'll take it.:No, thanks.")) {
+			case 1:
+				mes "'^660000Well, if it's for free, and there's no harm keeping it.'^000000";
+				next;
+				break;
+			case 2:
+				mes "["+ strcharinfo(0) +"]";
+				mes "No, thanks. I'm not interested in her as much as you.";
+				next;
+				mes "...^660000Was what you were about to say, but you could not refuse his offer. Looking at his fanatical eyes, burning with love for her, even Odin could not refuse...^000000";
+				next;
+				break;
+			}
+			mes "^660000Quickly blinking his eyes, he made you take Mammi's picture book in your arms";
+			mes "demanding that you must encase the book so it would not be damaged.^000000";
+			set barmunt_crow,11;
+			getitem 7795,1; //Mami_Photo_Album
+			next;
+			mes "[Benjamin]";
+			mes "Oh, right. If you're interested in this author, Oliver Hilpert, I suggest you read the prequel of <The Crow of the Fate>, ^3131FF<The Trace of the Fate>^000000 as well as the sequel.";
+			next;
+			mes "[Benjamin]";
+			mes "That was also a bestseller.";
+			next;
+			mes "[Benjamin]";
+			mes "Now I need to start reading this book for the moment that I'll meet my Mammi, so please leave me alone.";
+			next;
+			mes "^660000As soon as he finished, he returned to escaping reality by indulging himself in his dreams of Mammi.^000000";
+			next;
+			mes "^660000The Trace of the Fate, huh?";
+			mes "Well, I don't have anything else to do. I might want to read the book...^000000";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Wait, does it mean that I have to go back to Juno Library?";
+			next;
+			mes "^660000Thinking of travelling back to Juno made you sigh in frustration.^000000";
+			changequest 2067,2068;
+			close2;
+			cutin "",255;
+			end;
+		}
+		else if (barmunt_crow == 11) {
+			mes "^660000You have embarked on a journey to Juno to read the prequel of <The Crow of the Fate>: <The Trace of the Fate>.^000000";
+			close;
+		}
+		else if (barmunt_crow == 15) {
+			if ((countitem(7797) == 1) && (countitem(7796) == 1)) {
+				mes "["+ strcharinfo(0) +"]";
+				mes "Hey, Benjamin!";
+				mes "I've got the perfect thing to help you appeal to Mammi. Do you want to see?";
+				next;
+				mes "[Benjamin]";
+				mes "WH... WHAT?!";
+				mes "What is they? Show me!?";
+				next;
+				mes "^660000You have shown him an autograph and a written note by Oliver Hilpert.^000000";
+				next;
+				mes "[Benjamin]";
+				mes "Oh, my god!";
+				mes "These will surely help me get closer to Mammi!";
+				mes "Give them to me!";
+				next;
+				switch(select("Give:Don't Give")) {
+				case 1:
+					mes "[Benjamin]";
+					mes "Oh, "+ strcharinfo(0) +"!";
+					mes "You are the best! Thanks!";
+					next;
+					mes "[Benjamin]";
+					mes "Maaaammmiii!";
+					mes "I'm going to see her tomorrow as soon as the morning comes! Mammi, I'm coming!";
+					delitem 7797,1; //Author_Memo
+					delitem 7796,1; //Author_Autograph
+					set barmunt_crow,16;
+					if (checkre(3))
+						getexp 90000,90000;
+					else
+						getexp 900000,900000;
+					close;
+				case 2:
+					mes "[Benjamin]";
+					mes "Huh? What, are you kidding me?";
+					close;
+				}
+			}
+			else {
+				mes "[Benjamin]";
+				mes "Oh... Mammi... Oh...";
+				close;
+			}
+		}
+		else {
+			mes "[Benjamin]";
+			mes "Oh... Mammi... Oh...";
+			close;
+		}
+	}
+	else {
+		mes "With dreamy eyes, the man is looking down at a book in his hand.";
+		close;
+	}
+}
+
+prt_in,179,92,3	script	Library Curator#garas	57,{
+	if (barmunt_crow == 0) {
+		mes "[Curator Guys]";
+		mes "Our library's Monster Encyclopedia has every monster in the Rune-Midgarts Kingdom categorized by dungeon, to help our readers find them easily.";
+		mes "We also have many essential books for adventurers. Why don't you take a look?";
+		next;
+		mes "[Curator Guys]";
+		mes "The other library across the street also has Monster Encyclopedias.";
+		mes "If you're interested, feel free to drop by that library as well.";
+		close;
+	}
+	else if (barmunt_crow == 1) {
+		mes "[Curator Guys]";
+		mes "Our library's Monster Encyclopedia has every monster in the Rune-Midgarts Kingdom categorized by dungeon, to help our readers find them easily.";
+		mes "We also have many essential books for adventurers. Why don't you take a look?";
+		next;
+		switch(select("Search books.:Look around the library.")) {
+		case 1:
+			mes "[Curator Guys]";
+			mes "Do you have a specific book in mind?";
+			mes "No problem, I'm here to assist you.";
+			mes "What kind of book are you looking for?";
+			next;
+			switch(select("Say the title.:Say the author.:Search by keyword.")) {
+			case 1:
+				mes "[Curator Guys]";
+				mes "Oh, do you know the title?";
+				mes "Sure, now what's the name?";
+				input .@input$;
+				next;
+				if (compare(.@input$,"The Crow of the Fate") == 1) {
+					mes "[Curator Guys]";
+					mes ""+.@input$+"...?";
+					mes "Alright, let me see...";
+					next;
+				}
+				else {
+					mes "[Curator Guys]";
+					mes "Hmm... I'm sorry. I've worked at this place for a few decades, but I don't think I've ever seen such a book.";
+					close;
+				}
+				break;
+			case 2:
+				mes "[Curator Guys]";
+				mes "Oh, do you know the author?";
+				mes "Sure, now what's the name?";
+				input .@input$;
+				next;
+				if (compare(.@input$,"Oliver Hilpert") == 1) {
+					mes "[Curator Guys]";
+					mes ""+.@input$+"...?";
+					mes "Alright, let me see...";
+					next;
+				}
+				else {
+					mes "[Curator Guys]";
+					mes "Hmm... I'm sorry. I've worked at this place for a few decades, but I don't think I've ever heard of such an author.";
+					close;
+				}
+				break;
+			case 3:
+				mes "[Curator Guys]";
+				mes "You must be having a hard time remembering the book's title or author.";
+				mes "No problem; why don't you tell me at least a little bit of what you remember?";
+				next;
+				input .@input$;
+				if ((compare(.@input$,"Fate") == 1) || (compare(.@input$,"Crow") == 1) || (compare(.@input$,"Oliver") == 1) || (compare(.@input$,"Hilpert") == 1)) {
+					mes "[Curator Guys]";
+					mes ""+.@input$+"...?";
+					mes "Alright, let me see...";
+					next;
+				}
+				else {
+					mes "[Curator Guys]";
+					mes "Hmm... I'm sorry. I've worked at this place for a few decades, but I don't think I've ever seen a book whose name is even close to the words you said.";
+					close;
+				}
+				break;
+			}
+			emotion ET_AHA;
+			mes "[Curator Guys]";
+			mes "Oh, right! I think I know the book:";
+			next;
+			mes "[Curator Guys]";
+			mes "^3131FFOliver Hilpert's";
+			mes "<The Crow of the Fate>^000000!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "That's right! That's what I'm looking for!";
+			next;
+			mes "[Curator Guys]";
+			mes "Haha... But I have bad news for you.";
+			mes "The book has become so popular that you can't even find it from Schwarzwald, the author's country.";
+			mes "We tried to get a hold of the book, but it was too late. It'll take a while for the next editon to be published, so why don't you read a different book for now?";
+			next;
+			mes "[Curator Guys]";
+			mes "If you are not busy and really want to read the book, I have a suggestion: try Juno Library.";
+			mes "You can find every book published in Schwarzwald from the library. Chances are, you'll find it there.";
+			next;
+			mes "[Curator Guys]";
+			mes "Well, Juno is quite far from here, but if you're really enthusiastic about reading such a popular book, it should be worthwile.";
+			next;
+			mes "^660000The book isn't for you, but you believe in 100% customer satisfaction. Let's go to Juno Library now.^000000";
+			set barmunt_crow,2;
+			changequest 2063,2064;
+			close;
+		case 2:
+			mes "[Curator Guys]";
+			mes "Each book tells you a story of life, wisdom, happiness, and sensation.";
+			mes "Look around! They are the witnesses of mankind. And everyday, we have new ones joining them.";
+			close;
+		}
+	}
+	else if (barmunt_crow == 2) {
+		mes "[Curator Guys]";
+		mes "^3131FFThe Crow of the Fate^000000 was sold out even before we got a hold of one copy. You won't be able to find the book anywhere in the Rune-Midgarts Kingdom.";
+		mes "If you really want to read the book, you should try Juno Library.";
+		close;
+	}
+	else {
+		mes "[Curator Guys]";
+		mes "Our library's Monster Encyclopedia has every monster in the Rune-Midgarts Kingdom, categorized by dungeon to help the readers find them easily.";
+		mes "We also have many essential books for adventurers. Why don't you take a look?";
+		next;
+		mes "[Curator Guys]";
+		mes "The other library across the street also has Monster Encyclopedias.";
+		mes "If you're interested, feel free to drop by that library as well.";
+		close;
+	}
+}
+
+yuno,333,210,5	script	Library Master#garas	57,{
+	if (barmunt_crow == 2) {
+		mes "[Dog]";
+		mes "Bowwow!";
+		mes "Grrr... Bowwow!";
+		next;
+		mes "^660000A dog is barking loudly at the front of the library.^000000";
+		next;
+		mes "[Library Master]";
+		mes "You damn bird! Fly away, leave!";
+		next;
+		mes "^660000A man is also yelling at the front of the library.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "What's happening here?";
+		next;
+		mes "[Library Master]";
+		mes "It's nothing, but there's a gigantic crow sitting on the roof of this library, crowing for at least a few hours now.";
+		mes "I was trying to drive it away because... It feels ominous somehow.";
+		next;
+		mes "[Library Master]";
+		mes "Go! Fly away, you damn bird! Leave!!";
+		next;
+		mes "^660000You looked up, and found a huge crow sitting on the roof of the library as if it owned the place.^000000";
+		next;
+		mes "[Library Master]";
+		mes "Leave! Gosh, it won't go away!";
+		mes "I'm afraid that creepy bird will scare away my patrons!";
+		next;
+		mes "[Library Master]";
+		mes "Umm... Oh, well.";
+		mes "(Grabbing a pebble)";
+		mes "I said go away, you stupid bird!";
+		next;
+		mes "(WHIZZ-)";
+		next;
+		mes "(THUD!)";
+		specialeffect EF_PIERCE;
+		next;
+		mes "(Gush)";
+		next;
+		mes "^660000Hit by the pebble which the man threw, the crow quickly flew up into the air.^000000";
+		mes "^660000But then it started flying above the roof in a circle, and looked even spookier.^000000";
+		specialeffect EF_BAT;
+		next;
+		mes "[Library Master]";
+		mes "Grrr... Can't you just go away?!";
+		next;
+		mes "^660000He started yelling at the crow, but it didn't seem to care. Instead, it flew up a little higher.";
+		mes "Eventually he turned his head away from the crow, and gave up on driving it away. Then the dog stopped barking as well.^000000";
+		next;
+		mes "^660000You looked down on the ground, and then found a couple of feathers dropped from the crow when it was hit by the pebble.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Wow, look at the size of these feathers. I guess such a huge crow needs big feathers to fly.";
+		next;
+		mes "[Library Master]";
+		mes "When I was young, I heard that bird feathers bring Odin's servants to bless their owner, and so many poets used them as bookmarks.";
+		next;
+		mes "[Library Master]";
+		mes "I used to have a small feather. I guess it's only natural that I've become a library master. Hahaha!";
+		next;
+		mes "[Library Master]";
+		mes "You know the old saying, 'you can memorize Edda after 3 years of working at a library.'";
+		mes "Why don't you keep one of the feathers? Who knows? It may bring you good luck.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "I guess so.";
+		next;
+		mes "^660000You picked up one of the big dark feathers from the ground.";
+		mes "Looking at the lustrous feather somehow made you feel so happy, as if you had obtained treasure.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "...Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Library Master]";
+		mes "God bless you. Oh, did you catch cold?";
+		mes "You should take good care of yourself, especially if you're an adventurer.";
+		next;
+		mes "^660000You started feeling cold and began to shiver.^000000";
+		next;
+		mes "[Library Master]";
+		mes "Try to drink hot Jellopy broth mixed with honey. My mother used to make that for me whenever I caught cold.";
+		mes "I gurantee you that you'll get better quickly.";
+		next;
+		mes "^660000He sounded sincere, but it doesn't sound like that kind of broth would even be effective...^000000";
+		emotion ET_THINK, playerattached();
+		set barmunt_crow,3;
+		close;
+	}
+	else {
+		mes "[Library Master]";
+		mes "Be careful to not catch cold!";
+		close;
+	}
+}
+
+yuno,336,203,0	script	#garas_catch	139,3,3,{
+OnTouch:
+	if (barmunt_crow == 2) {
+		mes "[Dog]";
+		mes "Bowwow!";
+		mes "Grrr... Bowwow!";
+		next;
+		mes "^660000A dog is barking loudly at the front of the library.^000000";
+		next;
+		mes "[Library Master]";
+		mes "You damn bird! Fly away, leave!";
+		next;
+		mes "^660000A man is also yelling at the front of the library.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "What's happening here?";
+		next;
+		mes "[Library Master]";
+		mes "It's nothing, but there's a gigantic crow sitting on the roof of this library, crowing for at least a few hours now.";
+		mes "I was trying to drive it away because... It feels ominous somehow.";
+		next;
+		mes "[Library Master]";
+		mes "Go! Fly away, you damn bird! Leave!!";
+		next;
+		mes "^660000You looked up, and found a huge crow sitting on the roof of the library as if it owned the place.^000000";
+		next;
+		mes "[Library Master]";
+		mes "Leave! Gosh, it won't go away!";
+		mes "I'm afraid that creepy bird will scare away my patrons!";
+		next;
+		mes "[Library Master]";
+		mes "Umm... Oh, well.";
+		mes "(Grabbing a pebble)";
+		mes "I said go away, you stupid bird!";
+		next;
+		mes "(WHIZZ-)";
+		next;
+		mes "(THUD!)";
+		specialeffect EF_PIERCE;
+		next;
+		mes "(Gush)";
+		next;
+		mes "^660000Hit by the pebble which the man threw, the crow quickly flew up into the air.^000000";
+		mes "^660000But then it started flying above the roof in a circle, and looked even spookier.^000000";
+		specialeffect EF_BAT;
+		next;
+		mes "[Library Master]";
+		mes "Grrr... Can't you just go away?!";
+		next;
+		mes "^660000He started yelling at the crow, but it didn't seem to care. Instead, it flew up a little higher.";
+		mes "Eventually he turned his head away from the crow, and gave up on driving it away. Then the dog stopped barking as well.^000000";
+		next;
+		mes "^660000You looked down on the ground, and then found a couple of feathers dropped from the crow when it was hit by the pebble.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Wow, look at the size of these feathers. I guess such a huge crow needs big feathers to fly.";
+		next;
+		mes "[Library Master]";
+		mes "When I was young, I heard that bird feathers bring Odin's servants to bless their owner, and so many poets used them as bookmarks.";
+		next;
+		mes "[Library Master]";
+		mes "I used to have a small feather. I guess it's only natural that I've become a library master. Hahaha!";
+		next;
+		mes "[Library Master]";
+		mes "You know the old saying, 'you can memorize Edda after 3 years of working at a library.'";
+		mes "Why don't you keep one of the feathers? Who knows? It may bring you good luck.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "I guess so.";
+		next;
+		mes "^660000You picked up one of the big dark feathers from the ground.";
+		mes "Looking at the lustrous feather somehow made you feel so happy, as if you had obtained treasure.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "...Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Library Master]";
+		mes "God bless you. Oh, did you catch cold?";
+		mes "You should take good care of yourself, especially if you're an adventurer.";
+		next;
+		mes "^660000You started feeling cold and began to shiver.^000000";
+		next;
+		mes "[Library Master]";
+		mes "Try to drink hot Jellopy broth mixed with honey. My mother used to make that for me whenever I caught cold.";
+		mes "I gurantee you that you'll get better quickly.";
+		next;
+		mes "^660000He sounded sincere, but it doesn't sound like that kind of broth would even be effective...^000000";
+		emotion ET_THINK, playerattached();
+		set barmunt_crow,3;
+		close;
+	}
+	end;
+}
+
+yuno,343,204,1	script	#garas_eff	111,{
+	end;
+}
+
+yuno,335,208,5	script	Dog#garas	81,{
+	mes "[Dog]";
+	mes "Bowwow!";
+	close;
+}
+
+yuno_in04,111,57,3	script	Library Part-Timer#garas	862,{
+	if (barmunt_crow == 3) {
+		mes "[Library Part-Timer]";
+		mes "People should learn to put away books after pulling them out.";
+		mes "All these books piled up in the cart make me feel so frustrated, you know? Sigh...";
+		next;
+		mes "[Library Part-Timer]";
+		mes "...Now how may I help you?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "I'm looking for a book called <The Crow of the Fate> written by Oliver Hilpert... Ahchoo!";
+		emotion ET_KEK, playerattached();
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Library Part-Timer]";
+		mes "Ah, I remember that one... It's the one most frequently left in the cart.";
+		mes "Please enter the room on the ^3131FFright side^000000. You can find it in the Bestseller corner.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Thanks.";
+		close;
+	}
+	else if (barmunt_crow == 7) {
+		mes "[Library Part-Timer]";
+		mes "How may I help you?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Yes, umm... ahchoo! Where can I find old news articles...? Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Library Part-Timer]";
+		mes "Oh, you can find them in a corner of the right room.";
+		mes "Please be careful when you handle them since most of them are pretty ancient.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Thanks... Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		close;
+	}
+	else if (barmunt_crow == 11) {
+		mes "[Library Part-Timer]";
+		mes "People should learn to put away books after pulling them out.";
+		mes "All these books piled up in the cart make me feel so frustrated, you know? Sigh...";
+		next;
+		mes "[Library Part-Timer]";
+		mes "...How may I help you?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Cough... I'm looking for a book called <The Crow of the Fate> written by Oliver Hilpert.";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Library Part-Timer]";
+		mes "Ah, I remember that one... It's the one most frequently left in the cart.";
+		mes "Go ^3131FFupstairs^000000, and check the left shelf.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Thanks.";
+		next;
+		mes "[Library Part-Timer]";
+		mes "Oliver Hilpert has attained huge fame despite his young age.";
+		mes "I've read his <The Trace of the Fate> at least several times. I mean, that book is so captivating that I can never get tired of reading it.";
+		next;
+		mes "[Library Part-Timer]";
+		mes "Umm... The most impressive scene was... Err...";
+		next;
+		mes "[Library Part-Timer]";
+		mes "Right! When the hero was meeting his end in the burning mansion... ^FF0000-- BEEP --^000000";
+		specialeffect2 EF_BASH3D2;
+		close2;
+		warp "que_ba",264,186;
+		end;
+	}
+	else if (barmunt_crow == 12) {
+		mes "[Library Part-Timer]";
+		mes "Excuse me, are you okay? I mean, you just kind of drifted off all of a sudden.";
+		mes "You look a little pale.";
+		next;
+		mes "[Library Part-Timer]";
+		mes "Why don't you go inside and take a rest? Read <The Trace of the Fate> or something.";
+		mes "You can find the book at the left bookshelf upstairs.";
+		close;
+	}
+	end;
+}
+
+yuno_in04,100,5,3	script	Hot Bestseller Corner	111,{
+	if (barmunt_crow == 3) {
+		mes "^660000The countless number of books filling this room tell you why this place is called the Greatest Library of Juno, the City of Scholars.^000000";
+		next;
+		mes "^660000Books tagged as 'Bestseller of The Month' are stored in the middle of the shelf that's at your eye level.^000000";
+		next;
+		mes "^660000It was not that difficult to find 'The Crow of the Fate'";
+		mes "because it was the only book leaning against the wall of an empty shelf.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ah, luckily there's one... Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Sniff... So now all I have to do is just check this out and deliver it to that Mammi fanatic.";
+		next;
+		mes "^FF0000-- BEEP --^000000";
+		next;
+		mes "^660000You were about to pull out the book, complaining and grumbling, when suddenly it felt as if your brain exploded. You black out...^000000";
+		set barmunt_crow,4;
+		close2;
+		specialeffect2 EF_BASH3D2;
+		warp "que_ba",247,33;
+		end;
+	}
+	else if (barmunt_crow == 4) {
+		mes "^660000The countless number of books filling this room tell you why this place is called the Greatest Library of Juno, the City of Scholars.^000000";
+		next;
+		mes "^660000Books tagged as 'Bestseller of The Month' are stored in the middle of the shelf that's at your eye level.^000000";
+		next;
+		mes "^660000It was not that difficult to find 'The Crow of the Fate'";
+		mes "because it was the only book leaning against the wall of an empty shelf.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ah, luckily there's one... Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Sniff... So now all I have to do is just check this out and deliver it to that Mammi fanatic.";
+		next;
+		mes "^FF0000-- BEEP --^000000";
+		next;
+		mes "^660000You were about to pull out the book, complaining and grumbling, when suddenly it felt as if your brain exploded. You black out...^000000";
+		close2;
+		specialeffect2 EF_BASH3D2;
+		warp "que_ba",247,33;
+		end;
+	}
+	else if (barmunt_crow == 5) {
+		mes "^660000The countless number of books filling this room tell you why this place is called the Greatest Library of Juno, the City of Scholars.^000000";
+		next;
+		mes "^660000Books tagged as 'Bestseller of The Month' are stored in the middle of the shelf that's at your eye level.^000000";
+		next;
+		mes "^660000It was not that difficult to find 'The Crow of the Fate'";
+		mes "because it was the only book leaning against the wall of an empty shelf.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ah, luckily there's one... Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Sniff... So now all I have to do is just check this out and deliver it to that Mammi fanatic.";
+		next;
+		mes "^FF0000-- BEEP --^000000";
+		next;
+		mes "^660000You were about to pull out the book, complaining and grumbling, when suddenly it felt as if your brain exploded. You black out...^000000";
+		close2;
+		specialeffect2 EF_BASH3D2;
+		warp "que_ba",247,33;
+		end;
+	}
+	end;
+}
+
+yuno_in04,100,3,0	script	#garas_path	139,1,1,{
+OnTouch:
+	if (barmunt_crow == 6) {
+		mes "...................................";
+		next;
+		mes "...................................";
+		mes "...................................";
+		next;
+		mes "...................................";
+		mes "...................................";
+		mes "...................................";
+		next;
+		mes "^660000You are still inside the library,";
+		mes "but you do not know if this is a dream or reality.^000000";
+		next;
+		mes "^660000You turned your head toward the bookshelf, and found the bookshelf with the empty shelf.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Phew... I guess I had a dream or something... Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "^660000It was an indescribable dream: a burning laboratory in an unknown place in Schwarzwald.";
+		mes "You tried to think hard, but could not figure out what the dream meant.^000000";
+		next;
+		mes "^660000You carefully opened the book again, but nothing happened.^000000";
+		next;
+		mes "<....at the end of the sooty fog and chaotic screams, there was a creature that looked too outrageous to be a human...>";
+		next;
+		mes "...................................";
+		next;
+		mes "<- Eva, what are you doing? Come over here! Hurry!-";
+		mes "-I can't leave him here!-";
+		mes "Ignoring the collapsing laboratory ceiling, Eva approached a test tube, carefully took out something, and then put it under her jacket. >";
+		next;
+		mes "^660000...................................^000000";
+		next;
+		mes "^660000The books was telling the exact scene that you have seen in your dream.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Deja Vu? Am I having Deja Vu?";
+		next;
+		mes "^660000Of course, it was just a dream, but still was a very mysterious experience.^000000";
+		next;
+		mes "...................................";
+		next;
+		mes "...................................";
+		next;
+		mes "'^660000Now I wonder if the scene is describing an accident that really happened in the past. If there was such big fire, I'm sure I can verify it in a newspaper.";
+		mes "...I just want to know it out of curiosity...^000000'";
+		set barmunt_crow,7;
+		changequest 2064,2065;
+		close;
+	}
+	else if (barmunt_crow == 7) {
+		mes "["+ strcharinfo(0) +"]";
+		mes "If I want to read news articles about fires, which section should I go to?";
+		close;
+	}
+	end;
+}
+
+yuno_in04,117,102,3	script	Old News Scrapbook	844,{
+	if (barmunt_crow == 7) {
+		mes "^660000It is a folder with an wooden frame holding a thick pile of old newspapers.^000000";
+		next;
+		mes "^660000You carefully looked through the newspapers to see if you could find any articles about fire accidents.^000000";
+		next;
+		while(1) {
+			mes "...................................";
+			next;
+			mes "...................................";
+			next;
+			set .@newspp,rand(1,10);
+			if ((.@newspp == 1) || (.@newspp == 2)) {
+				mes "- Page 1 -";
+				mes "Renowned Assassin Sieglinde: 'I serve you only.'";
+				mes " ";
+				mes " Sieglinde has attained the title of Greatest Assassin";
+				mes "for his professionalism";
+				mes "and fame among ladies,";
+				mes "for his bad-boy image characterized by his sharpened Katar:";
+				mes "a handsome man that lives a life of romantic loneliness.";
+				mes "Recently this Assassin-Turned-Into-Celebrity has made";
+				mes "a true confession with a smile on his face:";
+				mes "he has been secretly going out with a lady,";
+				mes "and they are planning to wed next year.";
+				mes " The lady in question is known as Priestess M,";
+				mes "and she works in Prontera Church, but he refused to give us more information";
+				mes "about his fiancee for the sake of her safety.";
+				mes "As soon as the news spread,";
+				mes "his female fans showed a negative reaction";
+				mes "saying, 'This is ridiculous.";
+				mes "Assassins must live alone under the shadows.'";
+				mes "Hopefully the fans' reaction won't cause too much worry";
+				mes "to Siglinde and his soon-to-be wife.";
+				mes " ";
+				next;
+			}
+			else if ((.@newspp == 3) || (.@newspp == 4)) {
+				mes "- Page 4 -";
+				mes "Fight Scene in Juno";
+				mes " ";
+				mes "Last night, two young men were witnessed";
+				mes "violently fighting each other in Juno Plaza.";
+				mes "According to the Juno soldier that arrested them,";
+				mes "Mr. B had not been so happy with Mr. A's";
+				mes "careless behavior, and it seems";
+				mes "that his patience finally ran out last night.";
+				mes "It seems the fight started when Mr. A put his bare sweaty feet on Mr. B's thigh,";
+				mes "saying that his feet are too sweaty.'";
+				mes "Blame the hot weather, people!";
+				mes " ";
+				next;
+			}
+			else if (.@newspp == 5) {
+				mes "God's Warning: A Secret Lab Reduced to Ashes";
+				mes " ";
+				mes " The smoke clouding the sky of Juno last night";
+				mes "turned out to be from";
+				mes "a secret laboratory set on fire.";
+				mes " More information about the laboratory";
+				mes "has not yet been released, but according to the witnesses,";
+				mes "the laboratory was found empty";
+				mes "without anybody or anything inside";
+				mes "except broken pieces of test tubes";
+				mes "which proved that the place was used as a laboratory.";
+				mes " Scientist Sion, the accident scene investigator,";
+				mes "suspects from the remnants of machines inside";
+				mes "that the laboratory must have been used";
+				mes "to test biotechnology projects,";
+				mes "and expressed his belief that the fire was the wrath of God,";
+				mes "righteous punishment for trifling with his creations.";
+				mes " ";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "...........................";
+				mes "...........................";
+				mes "This is the place I've seen in my dream!";
+				next;
+				mes "Wait, then what about the place where they escaped...?";
+				next;
+				mes "You quickly checked the date of the news. It was too long ago";
+				mes "for you to find any more information from searching news articles.";
+				next;
+				mes "What if they have any descendents or successors?";
+				next;
+				mes "You feel your heart beating faster with excitement.";
+				mes "You are now convinced this was not just your dream or illusion. You had a vision of what really happened in the past.";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "I can't believe this is happening!";
+				mes "Think hard... It was ^FF0000an area connected to a northern cave^000000.";
+				set barmunt_crow,8;
+				changequest 2065,2066;
+				close;
+			}
+			else if ((.@newspp == 6) || (.@newspp == 7)) {
+				mes "- Culture Page -";
+				mes "- Please Save My Water -";
+				mes " ";
+				mes "A recently acclaimed young author,";
+				mes "Jean Cadoc's new series";
+				mes "'Please Save My Water' has been ranked at the top";
+				mes "for the most checked-out book in libraries.";
+				mes "'Please Save My Water' is about a girl called Ujer";
+				mes "who was blessed by Mother Nature.";
+				mes "Her father left a will on his deathbed";
+				mes " to 'protect the water' against the evil,";
+				mes "and she is fighting against a group of evil villains";
+				mes "that are contaminating nature so that she can purify the water.";
+				mes "This book will be soon selected as an essential academic book of";
+				mes "the Schwarzwald Republic for";
+				mes "promoting morality and";
+				mes "promoting environmental protection throughout the nation.";
+				mes " ";
+				next;
+			}
+			else {
+				mes "Einbech Mine Collapsed (2)";
+				mes " ";
+				mes "According to an employee of Rekenber Corporation,";
+				mes "which has been leading Einbech's mining business,";
+				mes "three dead bodies have been discovered,";
+				mes "but one survivor was admitted into a hospital.";
+				mes "He is in a critical condition,";
+				mes "and also informed us that they are";
+				mes "still searching for survivors,";
+				mes "and have hired specialists to investigate";
+				mes "the cause of the accident.";
+				mes " ";
+				next;
+			}
+		}
+	}
+	else {
+		mes "^660000It is a folder with a wooden frame holding a thick pile of old newspapers.^000000";
+		close;
+	}
+}
+
+yuno_in04,169,123,3	script	Suspicious Man#oliver_h	407,{
+	if (checkweight(617,3) == 0) {
+		mes "- You have too many items in your inventory to proceed with this quest. -";
+		close;
+	}
+	if (barmunt_crow > 14) {
+		mes "^660000The writer was writing in the notebook at an extremely fast pace.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Let's not disturb him, especially when he is full of creative ideas. That doesn't happen very often.";
+		close;
+	}
+	else if (barmunt_crow == 13) {
+		cutin "oliver_pre",2;
+		if (countitem(7795) < 1) {
+			mes "[Oliver Hilpert]";
+			mes "Lady Mammi...";
+			close2;
+			cutin "",255;
+			end;
+		}
+		mes "[Oliver Hilpert]";
+		mes "Did you change your mind about selling Lady Mammi's picture book to me?";
+		next;
+		switch(select("Yes:No")) {
+		case 1:
+			cutin "oliver_smile",2;
+			mes "[Oliver Hilpert]";
+			mes "Wow, thanks!";
+			next;
+			mes "[Oliver Hilpert]";
+			mes "Umm... I haven't received my publishing advance yet, but do you mind taking this instead?";
+			next;
+			break;
+		case 2:
+			mes "[Oliver Hilpert]";
+			mes "Okay... I see...";
+			emotion ET_CRY;
+			close2;
+			cutin "",255;
+			end;
+		}
+		mes "[Oliver Hilpert]";
+		mes "I haven't had a chance to open it, but my publisher said it has something very rare inside. I hope that it's enough to pay you for your book.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Haha, thanks.";
+		mes "You know, in Morocc... Ahchoo! ...There's someone who's as big a fan of Mammi's as you... Ahchoo! So why don't you go meet him?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "I got that book from him as a gift. He may have more rare books of her... Ahchoo!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Oh, thank you so much for such valuable information!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Wah! I must write down the story that I saw in my dream last night before I forget!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "I hope you'll also like my next book. Then I must go... Thank you for the picture book!";
+		next;
+		cutin "oliver_smile",255;
+		mes "^660000He started running around like a chicken with its head cut off. He quickly opened his bag, took out his notebook, ran to a table, and then started writing down something at a fast speed.";
+		mes "At first, he looked pretty silly, but now he strikes you as a man that's very serious about his writing.^000000";
+		next;
+		mes "^660000You were about to leave when you found a piece of paper on the ground.^000000";
+		next;
+		mes "^660000The piece of paper is covered with scribbles, and is labeled <The Crow of the Fate> at the top. Oliver must have dropped this note containing information about his novel, <The Crow of the Fate>.^000000";
+		next;
+		mes "^3131FFAncient weapon = Some kind of power source^000000";
+		mes "^3131FFSeclusion - A female disciple's letter^000000";
+		mes "^3131FFThe stepmother = Lover from a past life?!^000000";
+		close2;
+		specialeffect2 EF_ENHANCE;
+		delitem 7795,1; //Mami_Photo_Album
+		set barmunt_crow,14;
+		getitem 7796,1; //Author_Autograph
+		getitem 7797,1; //Author_Memo
+		getitem 617,1; //Old_Violet_Box
+		warp "que_ba",270,270;
+		end;
+	}
+	else if (barmunt_crow == 14) {
+		mes "["+ strcharinfo(0) +"]";
+		mes "This dream seems pretty meaningful somehow.";
+		mes "I'd better give him this note back.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Excuse me, Mr. Hilpert.";
+		next;
+		cutin "oliver_think",2;
+		mes "[Oliver Hilpert]";
+		mes ".................";
+		mes ".................";
+		mes "...........Huh?";
+		next;
+		cutin "oliver_think",255;
+		mes "You felt sorry for interrupting him from writing.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "I think you've dropped this.";
+		next;
+		mes "^660000You rummaged your pocket to find the memo, and then happened to drop the crow feather which you picked up outside the library. Then suddenly...^000000";
+		next;
+		mes "(WHACK)";
+		specialeffect EF_VENOMDUST;
+		specialeffect2 EF_DETOXICATION;
+		next;
+		mes "^660000Oliver picked up the feather more quickly than you could, and then tore it into pieces before you could even say anything.^000000";
+		next;
+		mes "^660000You looked angrily at him, and found out that he turned into a completely different person; he no longer looked stupid or serious but extremely coldhearted.^000000";
+		next;
+		cutin "oliver_hum",2;
+		mes "[Oliver Hilpert]";
+		mes "Errr?!";
+		mes "What's happened to this feather?";
+		next;
+		mes "[Oliver Hilpert]";
+		emotion ET_KEK;
+		mes "Wah! Did I do this?";
+		mes "Oh my god, I'm sorry! I'm so sorry!";
+		next;
+		mes "^660000He changed back to himself, and started apologizing to you for his sudden rage.^000000";
+		next;
+		emotion ET_CRY;
+		mes "[Oliver Hilpert]";
+		mes "I... I don't know how to apologize...";
+		mes "It's just that... I became so angry that I--! Argh, I'm sorry!";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Well, it's okay. I happened to pick it up from the street. You don't have to apologize.";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "If you say so, thank you for your understanding.";
+		mes "Phew, I felt so guilty...";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Here, take your memo back.";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Oh, you can just throw it away. It's no longer useful.";
+		mes "Phew...";
+		next;
+		cutin "oliver_pre",2;
+		mes "[Oliver Hilpert]";
+		mes "I'm having great ideas right now. I'm sorry, but I should go.";
+		next;
+		cutin "oliver_pre",255;
+		mes "^660000As soon as he talked to you, he went back to his writing and became completely absorbed in his work.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "He has such amazing concentration.";
+		mes "I guess not everyone can make bestselling books, huh?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "...Wait, I'm not sneezing anymore...";
+		mes "The headache and the heavy feeling in my chest is gone too!";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "What if it was all caused by that crow feather? What if...?";
+		next;
+		switch(select("It was cursed by the pebble.:The crow has something to do with Oliver.")) {
+		case 1:
+			mes "["+ strcharinfo(0) +"]";
+			mes "Ah, I see.";
+			mes "I think when the crow was hit by the pebble, its wisdom must have turned into disaster.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Argh, that was all because of the library master!";
+			mes "Luckily the feather is gone, so hopefuly I won't suffer any more disaster.";
+			next;
+			break;
+		case 2:
+			mes "["+ strcharinfo(0) +"]";
+			mes "I remember Mr. Zid saying Eva had left a black feather behind her.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Also, the female assistant turned into a crow flying away, and then the crow feather made me sneeze and cough.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "..................";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Yes, Mr. Hilpert's soul is cursed by the Crow!";
+			mes "I wonder if he threw rocks at crows like the library master...";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "..................";
+			mes "I guess it's a stupid idea.";
+			next;
+			break;
+		}
+		mes "["+ strcharinfo(0) +"]";
+		mes "Oh well, whatever.";
+		mes "What matters is that I'm cured!";
+		mes "If I have another dream, I'll deal with it then~";
+		next;
+		mes "^660000As you left the library, you thought that thinking Mr. Oliver is your half would be a better idea.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "That was pretty fun, but also pretty tiring. Where should I head for my next adventure?";
+		set barmunt_crow,15;
+		completequest 2068;
+		close2;
+		cutin "",255;
+		end;
+	}
+	else {
+		mes "^660000A suspicious-looking young man is searching passing faces as if he is looking for someone.^000000";
+		close;
+	}
+}
+
+yuno_in04,167,120,3	script	Worn-out Book#garas	111,{
+	if (checkweight(617,3) == 0) {
+		mes "- You have too many items in your inventory to proceed with this quest. -";
+		close;
+	}
+	if (barmunt_crow == 12) {
+		if (countitem(7795) < 1) {
+			mes "- You felt as if you have left something important behind. -";
+			close;
+		}
+		mes "^660000The book's cover was seriously damaged, considering its recent publishing date. Many people must have turned its pages.^000000";
+		next;
+		mes "^660000You carefully turned the first page, worrying that you might have another crazy dream.^000000";
+		next;
+		mes ".........................";
+		mes ".........................";
+		mes ".........................";
+		next;
+		mes "< Since he was young - it was before he could even remember exactly how young he was - his dreams have filled his brain with immense knowledge that he had never seen or learned from anywhere else.";
+		mes "He was a little boy outside, but wiser than any grown sage. He spoke many languages so fluently that they sounded like Edda chanted by Odin.";
+		mes "To him, his small and dark underground village was a prison blocking him from satisfying his curiosity and desire for freedom.";
+		mes "He expressed his desire to learn more knowledge of the outside world to stepmother Eva, but she always ignored his wish with a stern look.";
+		mes "Eventually, her unreasonable dissuasion could no longer stop him from escaping his reality.";
+		mes " ";
+		mes "- Gasp! Gasp! -";
+		mes "He ran through the darkness which seemed to have no end. He was running away from everything that tried to confine him.>";
+		next;
+		mes ".........................";
+		mes ".........................";
+		mes ".........................";
+		next;
+		mes "< - Umm...-";
+		mes "-...He's awake.-";
+		mes "- Hello, can you see me? How do you feel? -";
+		mes "An old man slowly walked into the room. With a smile on the face, he sat down on a chair. The little boy felt afraid for a little while after seeing people outside his village for the first time,";
+		mes "but then he forced himself up from the bed, and looked around.";
+		mes " ";
+		mes "- Where am I? Why am I here? - ";
+		mes "- I was riding a carriage last night, and found you lying in the street. My name is Haeji. You may call me Mr. Haeji, son.-";
+		mes "-.......-";
+		mes "- What's your name? -";
+		mes "-......Al.-";
+		mes "- Do you know why you're on the street? Where do you live? Your parents must be dying to see you.-";
+		mes "Haeji's comment instantly brought the monsterous image of Eva to Al's mind. Inwardly, he screamed in fear.";
+		mes "- I live nowhere, and I don't have parents. -";
+		mes "Al had to lie no matter how long, he thought. The old man seemed to understand him: his eyes showed sympathy for the little boy. Haeji insisted that Al could stay in his mansion as long as he wanted.";
+		mes "Later, after learning that Haeji was a professor of Juno City University, Al was convinced that the fates were on his side.>";
+		next;
+		mes ".........................";
+		mes ".........................";
+		mes ".........................";
+		next;
+		mes "^660000You felt somebody staring at you reading the book. You turned your head, and found a dandy and yet suspicious-looking young man.^000000";
+		next;
+		cutin "oliver_pre",2;
+		mes "^660000The young man approached and shook your hand with a grin on his face.^000000";
+		next;
+		mes "[Suspicious-Looking Man]";
+		mes "Hey, you're reading <The Trace of the Fate>!";
+		mes "Hahaha, nice to meet you. I'm the author of that book. I've come by to check how well my new book, <The Crow of the Fate>, is doing, and it's a great honor to meet a fan of mine! I feel embarrassed, but thanks! Hehe.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Cough, no, I'm not a fa...";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Oh, right! Do you want my autograph?";
+		next;
+		mes "(Scribble)";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "^660000He took out a big piece of paper from his bag, drew something really fast, and then handed it to you.^000000";
+		next;
+		mes "Haha, look. I've signed it as big as I could so that you can brag about this to your friends!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "You know, I just wrote what I saw in my dream; I didn't know people would love my stories so much! It's very surprising to me.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Dream?";
+		next;
+		cutin "oliver_think",2;
+		mes "[Oliver Hilpert]";
+		mes "Yes, I've been having dreams that are so vivid, they feel like reality.";
+		mes "I was told great writers usually find their inspiration from their dreams. I guess I was born to be one of them. Hahaha!";
+		next;
+		mes "You felt something uncomfortable about this so-called dream. You wanted to understand the meaning of what you've seen while reading the book.";
+		mes "If Oliver was dreaming exactly the same things as you, that might mean he and you are sharing dreams. Then again, you've discovered the cave village in the book actually exists.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "The hero Al was having dreams...";
+		next;
+		cutin "oliver_pre",2;
+		mes "[Oliver Hilpert]";
+		mes "Wah!";
+		mes "Isn't that over there?!";
+		emotion ET_HUK;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Huh?";
+		next;
+		mes "^660000You quickly turned your head following his eyes. There was nothing but your bag.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ah... Ahchoo! Mr. Hilpert, are you interested in my bag? It's just a simple bag I got from the Novice Training Grounds...";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Oliver Hilpert]";
+		mes "No, no!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "I was looking at the thing shining under the cover of the bag!";
+		next;
+		mes "^660000You checked what the thing in your bag was, and it was...^000000";
+		next;
+		cutin "oliver_smile",2;
+		mes "[Oliver Hilpert]";
+		mes "Lady Mammi!";
+		emotion ET_BIGTHROB;
+		next;
+		mes "^660000Yes, it was the picture book of Mammi, an idol whom Benjamin of Morocc insists to be one of the three greatest idols in the Rune-Midgarts Kingdom. That must be why Oliver is squealing in delight.^000000";
+		emotion ET_THINK, playerattached();
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ahchoo! Are you also a Mammi fan?";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Are you kidding?! Of course!";
+		mes "Tell me, where you can find another intelligent and beautiful woman like her?";
+		mes "I believe she's the reincarnation of the Wisdom Goddess who was expelled to the Midgard Continent by jealous goddesses.";
+		next;
+		mes "^660000Mammi seems to have a strange level of popularity that you can never understand.^000000";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "May I see?";
+		next;
+		mes "^660000You have given him Mammi's picture book.^000000";
+		next;
+		mes "[Oliver Hilpert]";
+		mes ".................";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "...Oh!";
+		cutin "mami01",4;
+		emotion ET_THROB;
+		next;
+		mes "[Oliver Hilpert]";
+		mes "...Ooooh!";
+		cutin "mami02",4;
+		emotion ET_THROB;
+		next;
+		cutin "oliver_smile",2;
+		mes "[Oliver Hilpert]";
+		mes "Ah... This is why I'm in love with Lady Mammi.";
+		mes "Adventurer, you must be an enthusiastic fan of her as well. Where did you find this rare picture book?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "No, I got it as a gift from someone... Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "[Oliver Hilpert]";
+		mes "What? Now I'm shocked!";
+		mes "It's shocking to see you unimpressed by the beauty of Lady Mammi,";
+		mes "but it is more shocking that God has given such a rare picture book of her";
+		mes "to someone like you who does not appreciate its value!";
+		mes "I flew over to the Rune-Midgarts Kingdom on the earliest airship";
+		mes "to get this book on the day it was released, but the books were sold out. The person right in front of me got the last one!";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "...............";
+		mes "I... I see...";
+		emotion ET_SWEAT, playerattached();
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Umm...";
+		mes "If you don't really like that book, why don't you sell it to me?";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "As I told you earlier, it's something I'm willing to cross continents to get. Please?";
+		mes "I really want to buy your book!";
+		next;
+		switch(select("Sell:Don't Sell")) {
+		case 1:
+			mes "[Oliver Hilpert]";
+			mes "Wow, thanks!";
+			next;
+			mes "[Oliver Hilpert]";
+			mes "Umm... I haven't received my publishing advance yet, but do you mind taking this instead?";
+			next;
+			break;
+		case 2:
+			mes "[Oliver Hilpert]";
+			mes "Okay... I see...";
+			emotion ET_CRY;
+			set barmunt_crow,13;
+			close2;
+			cutin "",255;
+			end;
+		}
+		mes "[Oliver Hilpert]";
+		mes "I haven't had a chance to open it, but my publisher said it has something very rare inside. I hope that it's enough to pay you for your book.";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Haha, thanks.";
+		mes "You know, in Morocc... Ahchoo! ...There's someone who's as big a fan of Mammi's as you... Ahchoo! So why don't you go meet him?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "I got that book from him as a gift. He may have more rare books of her... Ahchoo!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Oh, thank you so much for such valuable information!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Wah! I must write down the story that I saw in my dream last night before I forget!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "I hope you'll also like my next book. Then I must go... Thank you for the picture book!";
+		cutin "oliver_smile",255;
+		next;
+		mes "^660000He started running around like a chicken with its head cut off. He quickly opened his bag, took out his notebook, ran to a table, and then started writing down something at a fast speed.";
+		mes "At first, he looked pretty silly, but now he strikes you as a man that's very serious about his writing.^000000";
+		next;
+		mes "^660000You were about to leave when you found a piece of paper on the ground.^000000";
+		next;
+		mes "^660000The piece of paper is covered with scribbles, and is labeled <The Crow of the Fate> at the top. Oliver must have dropped this note containing information about his novel, <The Crow of the Fate>.^000000";
+		next;
+		mes "^3131FFAncient weapon = Some kind of power source^000000";
+		mes "^3131FFSeclusion - A female disciple's letter^000000";
+		mes "^3131FFThe stepmother = Lover from a past life?!^000000";
+		close2;
+		specialeffect2 EF_ENHANCE;
+		delitem 7795,1; //Mami_Photo_Album
+		set barmunt_crow,14;
+		getitem 7796,1; //Author_Autograph
+		getitem 7797,1; //Author_Memo
+		getitem 617,1; //Old_Violet_Box
+		warp "que_ba",270,270;
+		cutin "",255;
+		end;
+	}
+	else {
+		mes "^660000The book's cover was seriously damaged, considering its recent publishing date. Many people must have turned its pages.^000000";
+		close;
+	}
+}
+
+que_ba,247,33,0	script	#bpast_1_1	-1,1,1,{
+OnTouch:
+	if (barmunt_crow < 4) {
+		warp "ama_dun03",119,110;
+	}
+	else {
+		sc_end SC_Blind;
+		mes "[???]";
+		mes "Waaaaah!";
+		next;
+		mes "^660000Startled by a terrifying scream, you regained consciousness. It seems that you were lost in time for quite a while.^000000";
+		next;
+		mes "^660000You scrambled to stand on you feet, and then followed the sound of the scream to an old and abandoned building.^000000";
+		next;
+		mes "^660000The old, huge and somehow intimidating building was expelling dark red smoke out of broken and open windows.^000000";
+		close;
+	}
+}
+
+que_ba,257,39,3	script	Female Researcher#bpast	744,{
+	if (barmunt_crow < 4) {
+		warp "ama_dun03",119,110;
+	}
+	else if (barmunt_crow == 4) {
+		mes "^660000While trying to remember what happened, you encounter a woman who passes by you. You instinctively reach for her shoulder to get her attention.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ahchoo! Ahchoo! Gosh...";
+		mes "Hey, where am I...?";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "- Pzzzz -";
+		specialeffect EF_CLOAKING;
+		next;
+		mes "^660000Surprisingly, your arm passed through her body.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "...Where the hell am I?";
+		close;
+	}
+	else {
+		warp "yuno_in04",100,3;
+	}
+	end;
+}
+
+que_ba,265,34,0	warp	#bpast_1to2	1,1,que_ba,156,37
+
+que_ba,176,43,7	script	Researcher#bpast_2_1	402,{
+	specialeffect EF_CLOAKING;
+	mes "[Researcher]";
+	mes "Fire!";
+	mes "Everybody, move, move!";
+	close;
+}
+
+que_ba,181,14,7	script	Researcher#bpast_2_2	865,{
+	specialeffect EF_CLOAKING;
+	mes "[Researcher]";
+	mes "Cough, cough!";
+	mes "Argh... I can't breathe... I have to get out...";
+	close;
+}
+
+que_ba,183,25,0	warp	#bpast_2to3_1	1,1,que_ba,72,25
+que_ba,183,52,0	warp	#bpast_2to3_2	1,1,que_ba,72,51
+
+que_ba,102,56,0	script	#3room_barmunt	-1,3,3,{
+OnTouch:
+	if (barmunt_crow < 4) {
+		warp "yuno_in04",100,3;
+	}
+	else {
+		mes "^660000You walked through the flame engulfed hallway and ended at a room that was about to collapse, just like everywhere else in this place.^000000";
+		next;
+		mes "^660000You could not clearly see what was inside the room because of all the smoke, but you knew there was something there.^000000";
+		next;
+		mes "^660000You squinted your eyes, and listened. You could hear human voices, but their silhouettes of whomever was talking were not human shaped.^000000";
+		next;
+		mes "[Female]";
+		mes "Cough! Fire... Cough!";
+		mes "Goddamn humans... Cough, cough!";
+		next;
+		mes "^660000Her coughing grew worse as the roaring of the flames grew stronger.^000000";
+		next;
+		mes "[Male]";
+		mes "They ran away, and left us behind to die!";
+		next;
+		mes "[Female]";
+		mes "...Are we going to die?";
+		next;
+		mes "[Male]";
+		mes "Die? ...Haha.";
+		mes "^3131FF'Eva'^000000, we won't die... We were never exactly alive to begin with.";
+		next;
+		mes "- Crumbling -";
+		next;
+		mes "[Male]";
+		mes "Argh!";
+		next;
+		mes "^660000The only exit was blocked by steel bars; no one could get out of the room enveloped in flames. Then, a corner of a wall crumbled by the heat from the fire.^000000";
+		next;
+		mes "^660000The male silhouette quickly approached the wall, and started to dig at the crumbled corner.^000000";
+		next;
+		mes "[Male]";
+		mes "...It's done!";
+		next;
+		mes "[Male]";
+		mes "Let's go, Eva!";
+		next;
+		mes "[Eva]";
+		mes "Wait, we have to take the children with us.";
+		next;
+		mes "^660000The female silhouette called Eva approached the test tubes standing in a row against a wall.^000000";
+		next;
+		mes "[Male]";
+		mes "Eva!! We don't have time to save all of them! Come here!";
+		if (barmunt_crow == 4) {
+			set barmunt_crow,5;
+		}
+		sc_start SC_Blind,600000,0,10000;
+		close2;
+		warp "que_ba",53,232;
+		end;
+	}
+	end;
+}
+
+que_ba,104,55,3	script	Grotesque Woman#eva1	980,{
+	specialeffect EF_CLOAKING;
+	end;
+}
+
+que_ba,99,51,7	script	Grotesque Man#zid1	999,{
+	specialeffect EF_CLOAKING;
+	end;
+}
+
+que_ba,53,232,0	script	#garas_f_yume	139,1,1,{
+OnTouch:
+	if (barmunt_crow == 5) {
+		//GetHEALTHSTATE VAR_HEALTHSTATENORMAL 0
+		mes "^660000Suddenly a flash of light stung your eyes. A few seconds later, you opened your eyes and found that you were somewhere in Schwarzwald.^000000";
+		next;
+		mes "^660000And you aren't alone: you can now clearly see the man and woman that escaped the laboratory.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Umm...";
+		next;
+		mes "[Grotesque Man]";
+		mes "Where should we go?";
+		mes "No one will welcome us... We look like monsters!";
+		next;
+		mes "[Eva]";
+		mes "...";
+		mes "I know a cave that's hidden in the north.";
+		mes "We can stay there for a while.";
+		next;
+		mes "^660000They seemed completely oblivious of your presence, and headed north.^000000";
+		next;
+		mes "^660000You were looking at their backs as they left, and then noticed that you were holding the book you were reading in your hands. Then....^000000";
+		set barmunt_crow,6;
+		specialeffect2 EF_FLASHER;
+		close2;
+		warp "yuno_in04",100,3;
+	}
+	else {
+		warp "yuno_in04",100,3;
+	}
+	end;
+}
+
+que_ba,50,238,1	script	Grotesque Woman#eva2	980,{
+	specialeffect EF_CLOAKING;
+	end;
+}
+
+que_ba,48,227,7	script	Grotesque Man#zid2	999,{
+	specialeffect EF_CLOAKING;
+	end;
+}
+
+que_ba,264,186,0	script	#barmut_room1	139,2,2,{
+OnTouch:
+	if (barmunt_crow == 11) {
+		mes "^660000You wake up, and look around you. Somehow, you've now ended up in a huge mansion.^000000";
+		next;
+		mes "^660000You suddenly feel a sharp pain in your chest, as if someone were squeezing your heart.^000000";
+		next;
+		mes "^660000This mansion looks very elegant and expensive, but it is on fire, just like the laboratory in your first dream.^000000";
+		next;
+		mes "^660000You're having trouble thinking because of your chest pain and the fire, but you know that this mansion won't last long. You look around for an exit, and see a man standing downstairs in the center of flames.^000000";
+		next;
+		mes "^660000He didn't seem to care that he'd perish along with the mansion, and was talking slowly in a low, sad voice.^000000";
+		next;
+		mes "[Mysterious Man]";
+		mes ".....................";
+		mes "After all, God has trifled with me...";
+		mes "This was his plan all long...";
+		mes "Even my best friends were his puppets...";
+		next;
+		mes "[Mysterious Man]";
+		mes "I strongly resent my fate...";
+		mes "But I'm ready to accept the end... Of everything...";
+		next;
+		mes "^660000He could not finish his words before flames swallowed him up. At the same time, you were...^000000";
+		specialeffect EF_METEORSTORM;
+		set barmunt_crow,12;
+		close2;
+		warp "yuno_in04",108,57;
+	}
+	else {
+		warp "yuno_in04",108,57;
+	}
+	end;
+}
+
+que_ba,270,181,3	script	#barmunt_fire	755,{
+	end;
+}
+
+que_ba,270,270,0	script	#barmunt_living	139,1,1,{
+OnTouch:
+	mes "..................";
+	mes "..................";
+	mes "..................";
+	mes "..................";
+	next;
+	mes "[Mysterious Man]";
+	mes "..................";
+	mes "..................";
+	mes "..................";
+	mes "E...Eva, no!";
+	next;
+	mes "[Mysterious Man]";
+	mes "Was it a dream?";
+	mes "..................";
+	mes "...Gosh, that was strange.";
+	next;
+	mes "[Mysterious Man]";
+	mes "Mother was... She was a regular human.";
+	mes "Was I standing next to her?";
+	mes "..................";
+	next;
+	mes "^660000He mumbled to himself, and brushed back his sweaty hair with a trembling hand.^000000";
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	mes "A dream again.";
+	mes "I guess he won't be able to see or hear me, just like the others.";
+	next;
+	mes "^660000You put your guard down, and stare at him.";
+	mes "Suddenly his face distorted in anger as he looked right back at you.^000000";
+	next;
+	mes "[Mysterious Man]";
+	mes "How the hell did you find me?!";
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	mes "...Wah! He can see me! He can see me!";
+	next;
+	enablenpc "#barmut_onna";
+	mes "[Mysterious Woman]";
+	mes "You don't have to be so angry at me, sir.";
+	next;
+	mes "^660000As soon as you heard her voice,";
+	mes "you turned around and found a woman standing there.^000000";
+	next;
+	mes "[Mysterious Woman]";
+	mes "It was almost done, but then you broke all of them -- even ^FF00FFBEEP^000000 and ^FF00FFBEEP^000000 -- and were hiding in here.";
+	next;
+	mes "[Mysterious Man]";
+	mes "They weren't supposed to exist in this world!";
+	next;
+	mes "[Mysterious Woman]";
+	mes "It's his decision. Your fate is on his...";
+	next;
+	mes "[Mysterious Man]";
+	mes "Shut up!";
+	next;
+	mes "^660000The raging man drew a sword, and pointed it at her. She then suddenly transformed into a crow and flew away. The echos of her laughter could be heard outside the window.^000000";
+	disablenpc "#barmut_onna";
+	specialeffect EF_BAT;
+	next;
+	mes "[Echoing Voice]";
+	mes "You are bound to your fate, no matter how hard you try to escape...";
+	soundeffect "loli_ruri_stand.wav",0;
+	next;
+	mes "..................";
+	mes "..................";
+	mes "..................";
+	mes "..................";
+	next;
+	mes "..................";
+	mes "..................";
+	mes "..................";
+	mes "..................";
+	close2;
+	warp "yuno_in04",165,122;
+	end;
+}
+
+que_ba,263,276,3	script	#barmut_room2	755,{
+	end;
+}
+
+que_ba,266,268,3	script	#barmut_onna	982,{
+OnInit:
+	disablenpc "#barmut_onna";
+	end;
+}
+
+cave,82,97,3	script	Cave Settler#g1	996,3,3,{
+	if (barmunt_crow == 8) {
+		mes "[Cave Settler]";
+		mes "No outsiders are allowed beyond this point.";
+		next;
+		switch(select("Step back.:No, listen to me!")) {
+		case 1:
+			mes "[Cave Settler]";
+			mes "Hah, I knew you would be scared of me!";
+			close2;
+			warp "cave",81,92;
+			end;
+		case 2:
+			mes "["+ strcharinfo(0) +"]";
+			mes "Ah... Ahchoo!";
+			mes "'I'm not like other outsiders... Ahchoo!";
+			mes "I have a goal to achieve in here... Ahchoo!";
+			specialeffect2 EF_VENOMDUST;
+			next;
+			mes "^660000Although you a bit intimidated by this guard, and your sneezing definitely not helping, you continue.^000000";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "I'm here to find somebody!";
+			input .@input$;
+			mes "Her name is ^FF0000"+.@input$+"^000000!";
+			next;
+			if (compare(.@input$,"Eva") == 0) {
+				mes "[Cave Settler]";
+				mes "Are you kidding me? If you're looking for a missing child, go to the Juno police station!";
+				close2;
+				warp "cave",81,92;
+				end;
+			}
+			else {
+				mes "[Cave Settler]";
+				mes "............!!!!";
+				next;
+				mes "[Cave Settler]";
+				mes "Did you just say Eva?";
+				mes "Hmm...";
+				mes "Wait here.";
+				next;
+				emotion ET_COMEON;
+				mes "[Cave Settler]";
+				mes "Hey, Jaeda!";
+				enablenpc "Jaeda#garas1";
+				next;
+				mes "[Cave Settler]";
+				mes "Go upstairs, and tell Eva that she has a visitor.";
+				disablenpc "Jaeda#garas1";
+				next;
+				mes "^660000Surprisingly, he seemed to know who Eva is. You still could not believe that she actually exists! It's all so very strange.^000000";
+				next;
+				mes "^660000You can feel the excitement and anticipation well within you. Maybe you're coming closer to learning what your dreams really mean.^000000";
+				enablenpc "Jaeda#garas1";
+				next;
+				mes "[Cave Settler]";
+				mes "Hmm... Yeah? I see.";
+				next;
+				disablenpc "Jaeda#garas1";
+				mes "[Cave Settler]";
+				mes "Hey, you can pass. Go upstairs, but you'd better think twice before trying anything funny. Do you understand me?";
+				next;
+				mes "^660000The stern-looking man examined you, and then stepped to the side, allowing you to pass.";
+				mes "You clenched your fists in nervousness, and then started up the dark stairwell.^000000";
+				set barmunt_crow,9;
+				close2;
+				warp "cave",82,105;
+				end;
+			}
+		}
+	}
+	else if (barmunt_crow < 8) {
+		mes "[Cave Settler]";
+		mes "No outsiders are allowed beyond this point.";
+		next;
+		mes "^660000His voice is as stern and intimidating as his appearance.^000000";
+		close2;
+		warp "cave",81,92;
+		end;
+	}
+	else {
+		mes "[Cave Settler]";
+		mes "Do you still have business with Zid?";
+		mes "You'd better finish it quickly because we don't like outsiders running around our village.";
+		close;
+	}
+
+OnTouch:
+	if (barmunt_crow == 8) {
+		mes "[Cave Settler]";
+		mes "No outsiders are allowed beyond this point.";
+		next;
+		switch(select("Step back.:No, listen to me!")) {
+		case 1:
+			mes "[Cave Settler]";
+			mes "Hah, I knew you would be scared of me!";
+			close2;
+			warp "cave",81,92;
+			end;
+		case 2:
+			mes "["+ strcharinfo(0) +"]";
+			mes "Ah... Ahchoo!";
+			mes "'I'm not like other outsiders... Ahchoo!";
+			mes "I have a goal to achieve in here... Ahchoo!";
+			specialeffect2 EF_VENOMDUST;
+			next;
+			mes "^660000Although you're a bit intimidated by this guard, and your sneezing definitely not helping, you continue.^000000";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "I'm here to find somebody!";
+			input .@input$;
+			mes "Her name is ^FF0000"+.@input$+"^000000!";
+			next;
+			if (compare(.@input$,"Eva") == 0) {
+				mes "[Cave Settler]";
+				mes "Are you kidding me? If you're looking for a missing child, go to the Juno police station!";
+				close2;
+				warp "cave",81,92;
+				end;
+			}
+			else {
+				mes "[Cave Settler]";
+				mes "............!!!!";
+				next;
+				mes "[Cave Settler]";
+				mes "Did you just say Eva?";
+				mes "Hmm...";
+				mes "Wait here.";
+				next;
+				emotion ET_COMEON;
+				mes "[Cave Settler]";
+				mes "Hey, Jaeda!";
+				enablenpc "Jaeda#garas1";
+				next;
+				mes "[Cave Settler]";
+				mes "Go upstairs, and tell Eva that she has a visitor.";
+				disablenpc "Jaeda#garas1";
+				next;
+				mes "^660000Surprisingly, he seemed to know who Eva is. You still could not believe that she actually exists! It's all so very strange.^000000";
+				next;
+				mes "^660000You can feel the excitement and anticipation well within you. Maybe you're coming closer to learning what your dreams really mean.^000000";
+				enablenpc "Jaeda#garas1";
+				next;
+				mes "[Cave Settler]";
+				mes "Hmm... Yeah? I see.";
+				next;
+				disablenpc "Jaeda#garas1";
+				mes "[Cave Settler]";
+				mes "Hey, you can pass. Go upstairs, but you'd better think twice before trying anything funny. Do you understand me?";
+				next;
+				mes "^660000The stern-looking man examined you, and then stepped to the side, allowing you to pass.";
+				mes "You clenched your fists in nervousness, and then started up the dark stairwell.^000000";
+				set barmunt_crow,9;
+				close2;
+				warp "cave",82,105;
+				end;
+			}
+		}
+	}
+	else if (barmunt_crow < 8) {
+		mes "[Cave Settler]";
+		mes "No outsiders are allowed beyond this point.";
+		next;
+		mes "^660000His voice is as stern and intimidating as his appearance.^000000";
+		close2;
+		warp "cave",81,92;
+	}
+	end;
+}
+
+cave,85,101,3	script	Jaeda#garas1	401,{
+OnInit:
+	disablenpc "Jaeda#garas1";
+	end;
+}
+
+ein_fild01,28,261,0	warp	cave_in1	1,1,cave,97,24
+cave,97,21,0	warp	case_out1	1,1,ein_fild01,28,255
+
+cave,86,167,0	warp	zid_in	1,1,cave,77,185
+cave,79,180,0	warp	zid_out	3,3,cave,90,162
+
+cave,22,186,3	script	Monsterous Man#zid	999,{
+	if (barmunt_crow == 9) {
+		mes "^660000You are looking at a man who appears as hideous as a monster.";
+		mes "He was the man with Eva that you saw in your dream. Of course, he's older now, and his age is showing in his face and skin.^000000";
+		next;
+		mes "(WHIZZ)";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Argh...";
+		next;
+		mes "^660000The pain in your chest suddenly hits you...";
+		mes "And your lungs seem much weaker from all of the coughing and sneezing you've suffered lately.^000000";
+		next;
+		mes "^660000Rubbing your chest to ease the pain, you keep staring at him in surprise.^000000";
+		next;
+		mes "^660000Thankfully, he speaks to you first.^000000";
+		next;
+		mes "[Monsterous Man]";
+		mes "Does my appearance bother you?";
+		next;
+		mes "[Monsterous Man]";
+		mes "So, you know Eva... Huh?";
+		next;
+		mes "^660000He sounded weak, as if he did not have enough energy to talk.^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Umm... Ahchoo!";
+		specialeffect2 EF_VENOMDUST;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Do you know a man by the name of Oliver Hilpert?";
+		next;
+		mes "[Monsterous Man]";
+		mes "Oliver? Well, I don't think so.";
+		mes "What does he have to do with anything?";
+		next;
+		mes "^660000You have given him Oliver's novel, <The Crow of the Fate>, explaining strange events that have happened to you.^000000";
+		next;
+		mes "....................";
+		next;
+		mes "....................";
+		mes "....................";
+		next;
+		mes "....................";
+		mes "....................";
+		mes "....................";
+		next;
+		mes "^660000He squinted his eyes in curiosity and looked through a few pages of the book quietly. Then he opened his mouth as he handed the book back to you.^000000";
+		next;
+		mes "[Monsterous Man]";
+		mes "I'm surprised that the story in this book is... It's similar to my life story. Very similar.";
+		next;
+		while(1) {
+			mes "[Zid]";
+			mes "My name is Zid. Tell me what you want from me. I want to know more about this book.";
+			next;
+			switch(select("About the Cave Village:About Himself:About Eva:End Conversation")) {
+			case 1:
+				mes "[Zid]";
+				mes "Did you notice that our villagers look different?";
+				next;
+				mes "[Zid]";
+				mes "Human curiosity has led to great achievements and contributions, but there is a point where knowledge may be too much to handle.";
+				mes "Everyone in this village is a runaway... We are victims of what happens when people play God, seek out forbidden knowledge, and toy with life.";
+				next;
+				mes "[Zid]";
+				mes "We have no choice but hide here because they are too powerful for us to speak out against... And we know that isn't right.";
+				next;
+				break;
+			case 2:
+				mes "[Zid]";
+				mes "I was a normal man once, but poverty made me lose my pride, self-esteem, and identity.";
+				mes "I was sick and tired of worrying about food everyday, and I volunteered to be a test subject in some experiment.";
+				mes "I no longer had to worry about starving, but my life as a 'human' ended that day.";
+				next;
+				mes "[Zid]";
+				mes "At first, Eva and I were the only ones here, but others joined us, and we formed a small settlement.";
+				mes "Now I'm the oldest villager, and feel the heavy responsibility of protecting others.";
+				next;
+				break;
+			case 3:
+				mes "[Zid]";
+				mes "The laboratory in which Eva and I were being tested was not ordinary.";
+				mes "It was built to test and duplicate God's power of creation.";
+				next;
+				mes "[Zid]";
+				mes "They failed to achieve their objective, and caused a series of unfortunate events";
+				mes "by trying to manipulate materials that were difficult to even examine.";
+				mes "They believed their research would open a whole new world for mankind...";
+				next;
+				mes "[Zid]";
+				mes "Eva was one of them... Although she wasn't kind, she at least sympathized for me because I sold myself out of poverty.";
+				next;
+				mes "[Zid]";
+				mes "She had a man who loved her so much...";
+				mes "His name was Sefakiest, and he always supported her research.";
+				next;
+				mes "[Zid]";
+				mes "He... Killed himself in despair after Eva was turned into a mutant just like me... She wanted him to use her as his test subject.";
+				mes "No one expected him to end his life so easily when he was the most enthusiastic researcher of all.";
+				next;
+				mes "[Zid]";
+				mes "Then somebody set the laboratory on fire. I assume you've seen that in your dream. The fire completely burned down the building.";
+				next;
+				mes "[Zid]";
+				mes "Eva and I were able to escape before we could be found, and then settled down here. After all, we can't just mingle with ordinary humans.";
+				next;
+				mes "[Zid]";
+				mes "Eva managed to save one of the test subjects which actually grew up into a normal looking human, but he was actually perfect.";
+				next;
+				mes "[Zid]";
+				mes "That boy ran away when he was about 10. I guess he hit puberty... You know boys and girls at that age.";
+				next;
+				mes "[Zid]";
+				mes "Eva couldn't forget him. She was waiting for his return inside this dark cave. For a while, he was sending letters without his address, but then they stopped coming. That's when Eva disappeared.";
+				mes "I found ^3131FFa giant black feather^000000 in her room after she left.";
+				next;
+				mes "[Zid]";
+				mes "I don't know why, but... I believe Eva no longer exists...";
+				next;
+				break;
+			case 4:
+				set .@exitloop,1;
+				break;
+			}
+			if (.@exitloop) break;
+		}
+		mes "[Zid]";
+		mes "Hmm...";
+		mes "Maybe Oliver is Eva's boy...";
+		next;
+		mes "[Zid]";
+		mes "No, he's too young to be him because it happened a long time ago...";
+		next;
+		mes "[Zid]";
+		mes ".........................";
+		next;
+		mes "[Zid]";
+		mes "I guess it's just an old memory... Why should I care? Why should anyone?";
+		next;
+		mes "^660000Zid stopped talking, and then lowered his head. After the pause, he opened his mouth again.^000000";
+		next;
+		mes "[Zid]";
+		mes "Now I'm too old to remember even Eva or the boy.";
+		mes "My purpose in life is to protect the other villagers. They have lives ahead of them, living inside this dark cave.";
+		next;
+		mes "[Zid]";
+		mes "The book was interesting, but I'm sure that guy, Oliver, experienced the same thing that happened to you.";
+		next;
+		mes "[Zid]";
+		mes "Even if he has something to do with Eva, it's too late to do anything for her.";
+		next;
+		mes "[Zid]";
+		mes "Think about it: who can save us from this dark cave, even if Eva or that boy is still alive? The answer is nobody.";
+		next;
+		mes "[Zid]";
+		mes ".................................";
+		next;
+		mes "[Zid]";
+		mes "I'm so sorry for not being much help.";
+		mes "You'd better wake up from the dream, and move on with your life.";
+		mes "...Sadly everything is nothing but a dream...";
+		next;
+		mes "[Zid]";
+		mes "If you really feel sorry for us, please do not let others know where we are.";
+		next;
+		mes "^660000Zid turned his head away from you. You're still not sure if all of this is really happening. It's all so surreal...^000000";
+		next;
+		mes "^660000Frustrated by the conversation with Zid, you have decided to go back to Morocc and forget everything.^000000";
+		set barmunt_crow,10;
+		changequest 2066,2067;
+		close;
+	}
+	else if (barmunt_crow == 10) {
+		mes "Zid seemed to have lost his interest in the book.";
+		mes "You have decided to deliver the book to Benjamin of Morocc.";
+		close;
+	}
+	else {
+		mes "[Monsterous Man]";
+		mes "Don't look at my face...";
+		close;
+	}
+}
+
+cave,91,43,3	script	Cave Settler#f_cave1	870,{
+	mes "[Cave Settler]";
+	mes "(Startled)";
+	next;
+	mes "[Cave Settler]";
+	mes "Mumble... Mumble...";
+	close;
+}
+
+cave,72,71,5	script	Cave Settler#m_cave2	981,{
+	mes "[Cave Settler]";
+	mes "Heh...";
+	mes "You want... This?";
+	next;
+	mes "- She showed you Monster's Feed. -";
+	close;
+}
+
+cave,134,62,1	script	Cave Settler#m_cave3	981,{
+	mes "[Cave Settler]";
+	mes "Accessory!";
+	mes "My pretty accessory!";
+	mes "Waaah!";
+	mes "My accessory is gone!";
+	close;
+}
+
+cave,113,74,5	script	Cave Settler#f_cave4	401,{
+	mes "[Cave Settler]";
+	mes "No one in this village welcomes you. Go back.";
+	next;
+	mes "[Cave Settler]";
+	mes "Your eyes are so tempting... I wanna eat them! Heh heh!";
+	close;
+}
+
+cave,76,39,5	shop	Cave Girl#f_cave5	62,712:-1
+
+cave,108,34,3	script	Cave Settler#f_cave6	979,{
+	mes "[Cave Settler]";
+	mes "Hoho, did he really say that yesterday...?";
+	mes "Wah!";
+	next;
+	mes "[Cave Settler]";
+	mes "It's a human...";
+	next;
+	mes "(Whisper)";
+	mes "(Whisper)";
+	close;
+}
+
+cave,105,32,7	script	Cave Settler#f_cave7	979,{
+	mes "[Cave Settler]";
+	mes "Hoho, did he really say that yesterday...?";
+	mes "Wah!";
+	next;
+	mes "[Cave Settler]";
+	mes "It's a human...";
+	next;
+	mes "(Whisper)";
+	mes "(Whisper)";
+	close;
+}

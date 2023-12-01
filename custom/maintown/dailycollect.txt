@@ -1,0 +1,118 @@
+
+payon,148,219,6	script	Daily Collect Quest	553,{
+	mes "[ Daily Collect ]";
+	mes "Today Daily Collect Item List : ";
+	@collectdaily = 0;
+	for (.@i= .random ; .@i < .random + 6; .@i = .@i+2){
+		mes "Item : ^FF0000"+.questitem[.@i+2]+"^000000x ^0000FF"+getitemname(.questitem[.@i+1])+" ^000000[ID:"+.questitem[.@i+1]+"]";
+		if (countitem(.questitem[.@i+1]) >= .questitem[.@i+2]) @collectdaily = @collectdaily+1; 
+	}	
+	next;
+	switch(select("~ Complete Daily Quest:~ Mission Shop[^0055FF"+#Mission_Points+"^000000]:~ Wait, I still need some items!")){
+		case 1:
+		.@date = gettime(DT_DAYOFMONTH);
+		if (#dailycollect >= .@date) {
+		mes "[ Daily Collect ]";
+		mes "You have completed the daily mission today, or just relogin if you haven't."; 
+		break;
+		}
+		if (@collectdaily == 3) {
+		for (.@i= .random ; .@i < .random + 6; .@i = .@i+2){
+			delitem .questitem[.@i+1],.questitem[.@i+2];
+		}
+	// WEEKLY QUEST			
+		.@selectIfCharExistQuery$ = "SELECT account_id FROM weeklyquest WHERE account_id = '"+getcharid(3)+"';";
+			if (query_sql(.@selectIfCharExistQuery$, .@accid) > 0) {
+				.@updaterecapQuery$ = "UPDATE `weeklyquest` SET `task10` = `task10` + 1 WHERE `account_id` = '"+getcharid(3)+"';";
+			} else {
+				.@updaterecapQuery$ = "INSERT INTO weeklyquest (`account_id` , `task10`) VALUES ('"+getcharid(3)+"','1');";
+		}
+			query_sql(.@updaterecapQuery$);
+	// END
+		#Mission_Points = #Mission_Points + 8;
+		set #dailycollect, .@date;
+		mes "[ Daily Collect ]";
+		mes "Well, mission accomplished !";
+		mes "Now you have ^0055FF" + #Mission_Points + "^000000 Mission Points.";
+		break;
+		} else { 
+		mes "[ Daily Collect ]"; 
+		mes "Are you try to trick me?!"; 
+		break;
+	}
+		
+		case 2:
+		mes "[ Daily Collect ]";
+		mes "You can talk to my Wife to redeem your points, she's behind me.";
+		end;
+		case 3:
+			break;
+	}
+	end;
+
+
+OnHour00:
+.random = rand(1,51)*6;
+	if(gettime(DT_DAYOFMONTH) == 1){
+		query_sql("DELETE FROM `acc_reg_num` WHERE `key` = '#dailycollect'");
+		
+	}
+end;
+
+OnInit:
+	.random = rand(1,51)*6;
+	setarray .questitem[1],
+			7069,100,7054,100,7002,150,
+            7069,100,7054,100,7002,150,        //Q1    
+            7069,100,7004,150,931,150,        //Q2
+            7069,100,1020,150,954,150,        //Q3
+            748,5,7001,150,928,150,            //Q4
+            728,50,956,150,1031,150,           //Q5
+            539,50,962,150,7013,100,           //Q6
+            2618,5,7093,50,1098,150,           //Q7
+            2339,5,1034,150,1012,100,           //Q8
+            1041,150,944,150,1096,150,         //Q9
+            1099,150,901,150,953,100,          //Q10
+            1551,1,1042,150,1059,100,           //Q11
+            1041,150,7016,50,7221,100,         //Q12
+            1099,150,1012,100,1042,150,        //Q13
+            2339,5,1062,150,7315,50,            //Q14
+            7054,100,901,150,7277,20,          //Q15
+            539,50,7001,150,1098,150,          //Q16
+            956,150,7093,50,12127,15,          //Q17
+            7069,100,7068,100,962,150,        //Q18
+            748,5,1042,150,955,150,            //Q19
+            728,50,7001,150,7315,50,           //Q20
+            7004,150,1551,1,1059,100,           //Q21
+            1034,150,1031,150,748,5,           //Q22
+            2618,5,901,150,929,150,            //Q23
+            7093,50,7054,100,1517,5,           //Q24
+            7016,50,956,150,7069,100,          //Q25
+            7004,150,2339,5,955,150,            //Q26
+            1041,150,944,150,7156,50,          //Q27
+            1034,150,911,150,7013,100,         //Q28
+            7001,150,7016,50,7221,100,         //Q29
+            748,5,1020,150,7166,50,            //Q30
+            539,50,955,150,12127,15,           //Q31
+            962,150,1048,50,7069,100,          //Q32
+            728,50,1012,100,7093,50,           //Q33
+            923,150,748,5,911,150,             //Q34
+            7093,50,748,5,1517,5,              //Q35
+            7004,150,728,50,1098,150,          //Q36
+            954,150,2618,5,929,150,            //Q37
+            1062,150,944,150,7069,100,         //Q38
+            7002,150,931,150,7093,50,          //Q39
+            956,150,962,150,911,150,           //Q40
+            7016,50,955,150,956,150,           //Q41
+            7016,50,1551,1,7069,100,            //Q42
+            901,150,7156,50,7001,150,          //Q43
+            953,100,7004,150,2339,5,            //Q44
+            7004,150,7001,150,1048,50,         //Q45
+            1034,150,7221,100,728,50,          //Q46
+            901,150,539,50,928,150,            //Q47
+            1042,150,923,150,7001,150,         //Q48
+            962,150,7093,50,1048,50,           //Q49
+            7054,100,7166,50,7002,150;         //Q50
+			end;
+}
+

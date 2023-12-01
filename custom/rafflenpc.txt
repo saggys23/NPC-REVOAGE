@@ -1,0 +1,108 @@
+/*CREATE TABLE `raffle` (
+ `rafflenumber` int(11) unsigned NOT NULL auto_increment,
+ `charname` varchar(30) NOT NULL default 'Unknown',
+ `ownednumber` int(11) default '1',
+   PRIMARY KEY  (`rafflenumber`)
+ ) ENGINE=MyISAM;
+ 
+ is_guild_leader({<guild ID>})
+ */
+
+
+payon,163,213,3	script	Pak Uban Raffle Master	963,{
+	mes "[ Pak Uban OLD Man]";
+	mes "You see my hair? nice color isn't it?";
+	mes "You have my coupon ?";
+	mes "want exchange it ? ";
+	next;
+	switch(select("Top 10 Raffle Point:How to Get Raffle Point ?:Exchange Ubans Ticket to Raffle Point[^EE3333"+(250- $exchangelimit)+"^000000]:Pak Ubans Shop[^EE3333"+(countitem(25793)+"^000000]"))){
+		case 1:
+		//.@nb = query_sql("select name, kills, deaths from pvpladder order by kills desc limit "+ getvariableofnpc(.showtotal, "DOTAPVP"), .@name$, .@kills, .@deaths);
+		.@nb = query_sql( "SELECT `charname`,`ownednumber` from `raffle` ORDER BY `ownednumber` DESC LIMIT 10;",.@top10name$,.@ownedtotal);
+		mes "[ Pak Uban OLD Man]";
+		if (!.@nb) {
+				mes "The leaderboards currently is empty.";
+				end;
+			}
+			//^00AA00["+ .@owned[.@i] +"]
+		for (.@i = 0; .@i < .@nb; .@i++)
+			mes "^996600"+ (.@i+1) +": ^006699"+ .@top10name$[.@i] +" ^00AA00["+ .@ownedtotal[.@i] +"] ^000000";
+		next;
+		query_sql( "SELECT `ownednumber` from `raffle` where `charname` = '"+strcharinfo(0)+"';",.@owned);
+		mes "[ Pak Uban OLD Man]";
+		mes "Your Character Raffle Point : ^00AA00<"+.@owned+"> ^000000";
+		end;
+		
+		case 2:
+		mes "[ Pak Uban OLD Man]";
+		mes "There's Only ^EE3333250 Raffle Point^000000 you can get from Exchanging 5Pcs ^f00000Ubans Ticket^000000.";
+		mes "You can obatain Ubans Ticket from New mobs episode Rachel and Hugel.";
+		mes "Hurry up , there's "+(250- $exchangelimit)+" points remaining.";
+		mes "Otherwise you can exchange to usefull item if limit already reached.";
+		next;
+		mes "[ Pak Uban OLD Man]";
+		mes "You can get entry too from supporting our server with make a Donation.";
+		mes "Every ^f00000100K^000000 you will get 1 ^f00000Raffle Points^000000.";
+		next;
+		mes "[ Pak Uban OLD Man]";
+		mes "And there's leaderboard raffle points ^f00000TOP 5^000000 will get Bonus.";
+		mes " ";
+		mes "1. Choosen ^EE3333MVP Card^000000 [Only card who already dropped you can check at our website] + 10 Pandora Box. ";
+		mes "2. Costume: Sword Wings + 10 Pandora Box.";
+		mes "3. Costume Talos Set + 10 Pandora Box";
+		mes "4. Costume Visage Set + 5 Pandora Box";
+		mes "5. +6 Certificate Weapon and Armor + 5 Pandora Box";
+		end;
+		case 3:			
+//		.@charname$ = strcharinfo(0);
+//		if (countitem(25793)>4) {
+//		.@selectIfCharExistQuery$ = "SELECT `ownednumber` from `raffle` where `charname` = '"+.@charname$+"';";
+		//.@selectIfCharExistQuery$ = "SELECT guild_id, char_id, `"+.listsql$[.@j]+"` FROM woe_restock WHERE char_id = '"+.@charid+"' AND guild_id = '"+.@guildidrid+"';";
+		//	if (query_sql(.@selectIfCharExistQuery$, .@guildid, .@char_id, .@sqlamount) > 0) { 
+//			if (query_sql(.@selectIfCharExistQuery$, .@owned) > 0) {
+//				.@updaterecapQuery$ = "UPDATE raffle SET `ownednumber` = ('"+.@owned+"'+1) WHERE charname = '"+.@charname$+"' ;";
+//			} else {
+//				.@updaterecapQuery$ = "INSERT INTO `raffle` (`charname`) VALUES ('"+.@charname$+"');";
+//			}
+//		query_sql(.@updaterecapQuery$);	
+		/*
+		query_sql( "SELECT `ownednumber` from `raffle` where `charname` = '"+.@charname$+"' ORDER BY `ownednumber` DESC LIMIT 1;",.@owned);
+		//query_sql( "SELECT `limit` FROM `woe_restock` WHERE guild_id = '"+.@guildidrid+"' ORDER BY `limit` DESC LIMIT 1;", .@limit);
+		query_sql "INSERT INTO `raffle` (`charname` , `ownednumber`) VALUES ('"+.@charname$+"','"+(.@owned = .@owned +1) +"');";*/
+//		$exchangelimit+= 1;
+//		delitem 25793,5;
+//		mes "[ Pak Uban OLD Man]";
+//		mes "Congratulations, you just have new raffle points ["+(.@owned+1)+"]";
+//		mes "Good Luck ! ";
+//		end;
+//		}
+//		mes "[ Pak Uban OLD Man]";
+//		mes "Nah, you need 5 Ubans Ticket to get raffle points";
+//		end;
+		mes "[ Pak Uban OLD Man]";
+		mes "Event already close !";
+		end;
+		case 4:
+		callshop "raffleshop",1;
+		end;
+	}
+	end;
+
+		OnTimer355000:
+		//attachnpctimer;
+		npctalk "Hei, attention please ! I have a MOTORCYCLE to use as a giveaway prize !";
+		//npctalk "You see my hair? nice color isn't it?";
+		
+		end;
+		OnTimer360000:
+		npctalk "Come talk to me, If you want, you have to do some tasks.";
+		npctalk "REMINDER : The event is coming to an end soon ( 21 October 11.59 PM ), have you participated yet?";
+		initnpctimer;
+		
+		OnInit:
+		initnpctimer;
+		end;
+}
+
+-	itemshop	raffleshop	877,909,20510:180,38024:50,38025:75,38005:50,38006:75,6235:30,6231:20,6240:5,6241:5,6635:5,14545:2,12412:3,3001:10
+

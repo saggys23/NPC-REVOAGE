@@ -1,0 +1,168 @@
+// Original script by Unknown
+// Edit by Mabuhay
+// Removed my timer cool downs and stuff.
+// Adjust to your time you wish for it to start.
+
+-	script	Event_Bombring	-1,{
+OnInit:
+	// item reward
+	setarray .item,
+		501, 10,
+		502, 5;
+
+	// @bombstart - gm manual start
+	bindatcmd "bombstart", strnpcinfo(0)+"::OnStart",60,60;
+	
+	// @bomb - player join event
+	bindatcmd "bomb", strnpcinfo(0)+"::OnJoinEvent";
+	
+	// Mapflags
+	setarray .@mapflag,
+		mf_nowarp,
+		mf_nowarpto,
+		mf_noskill,
+		mf_noteleport,
+		mf_nomemo,
+		mf_nosave,
+		mf_noicewall,
+		mf_nobranch,
+		mf_noreturn,
+		mf_noequip,
+		mf_nocostume,
+		mf_notoken,
+		//mf_nocommand;
+		mf_noitemconsumption;
+		
+	for ( .@i = 0; .@i < getarraysize(.@mapflag); .@i++)
+		setmapflag "quiz_02", .@mapflag[.@i];
+	end;
+	
+OnJoinEvent:
+	mes " [ Event Status ] ";
+	switch ( .start ) {
+		case 1: .@status$ = "active"; break;
+		case 2: .@status$ = "on-going"; break;
+		default: .@status$ = "not active"; break;
+	}
+	mes "Event is currently ^ff0000"+ .@status$ +"^000000";
+	mes "NOTE : Becarefull all your buff's will be dispelled.";
+	next;
+	switch(select(
+		"Bombring Event - "+ ((.start == 1) ? "^0000ffJoin Event":((.start == 2) ? "^0000ffEvent On-Going":"^ff0000Not Available"))+"^000000" )) {
+	case 1:
+		if ( !.start ) {
+			mes "Event is not available.";
+			close;
+		} else if ( .start == 2 ) {
+			mes "Event is on-going";
+			close;
+		}
+	if (ismounting()) {
+		message strcharinfo(0),"You must first remove your mount.";
+		end;
+	} 
+	if( checkriding() ){
+				message strcharinfo(0),"You must first remove your mount.";
+				end;
+			}
+		callfunc("dispell");
+		nude;
+		sc_start SC_DECREASEAGI,600000,10;
+		percentheal 100,100;
+		warp "quiz_02",59,345;
+	}
+	end;
+
+OnStart:
+//OnClock0800:	// PORING
+//OnClock1000:	// DICE
+//OnClock1200:	// DISGUISE
+//OnClock1400:	// CLUCKERS
+OnClock1600:	// BOMBRING
+//OnClock1800:
+//OnClock2000:
+//OnClock2200:
+//OnClock0000:
+OnClock0200:
+	if ( .start ) end;
+	.start = 1;
+	.round = 0;
+	killmonsterall "quiz_02";
+	announce "Bombring: We are going to have a Bombring event.",0;
+	sleep 10000;
+	announce "Bombring: For those who wants to join, use @bomb",0;
+	sleep 10000;
+	announce "Bombring: After 3 Minute Event will close.",0;
+	sleep 10000;
+	announce "Bombring: So please if you want to join. use @bomb",0;
+	sleep 60000;
+	announce "Bombring: After 2 Minute Event will close.",0;
+	sleep 10000;
+	announce "Bombring: So please if you want to join. use @bomb",0;
+	sleep 60000;
+	announce "Bombring: After 1 Minute Event will close.",0;
+	sleep 10000;
+	announce "Bombring: So please if you want to join. use @bomb",0;
+	sleep 60000;
+	announce "Bombring: The entry to the event is now closed.",bc_all,0x0ceedb;
+	if ( getmapusers("quiz_02") < 2 ) {
+		announce "Bombring: Not enough participants.",bc_all,0x0ceedb;
+		.start = false;
+		mapwarp "quiz_02", "payon", 150, 163; // warp out.
+		end;
+	}
+	.start = 2;
+	sleep 3500;
+	mapannounce "quiz_02","We're about to begin the event.",bc_map,0x0ceedb;
+	sleep 2500;
+	mapannounce "quiz_02","The rules are simple.",bc_map,0x0ceedb;
+	sleep 2000;
+	mapannounce "quiz_02","Event will run for 30 seconds for 5 total rounds.",bc_map,0x0ceedb;
+	sleep 2500;
+	mapannounce "quiz_02","All you have to do is avoid Bombrings and stay alive for 30 seconds.",bc_map,0x0ceedb;
+	sleep 2000;
+	mapannounce "quiz_02","That's all. Let's begin.",bc_map,0x0ceedb;
+	sleep 3000;
+	while ( .round < 5 ) {
+		.@count = getmapusers("quiz_02");
+		.round++;
+		mapannounce "quiz_02","Round "+.round,bc_map,0x0ceedb;
+		areamonster "quiz_02",48,334,71,357,"Run for you life!",1904, 7 * .@count * .round;
+		sleep 10000 - ( 1000*.round );
+	}
+	.@count = getmapusers("quiz_02");
+	if ( !.@count )
+		announce "Bombring: No one survived the bombrings.",bc_all,0x0ceedb;
+	else if ( .@count ) {
+		.@size = getmapunits(BL_PC,"quiz_02",.@aid);
+		.@amt = getarraysize(.item);
+		if ( .@size > 1 ) announce "A lot players has won the Bombring Event.",bc_all,0x0ceedb;
+		for ( .@i = 0; .@i < getarraysize(.@aid); .@i++) {
+			attachrid .@aid[.@i];
+			if ( .@size == 1 ) announce strcharinfo(0)+" has won the Bombring Event.",bc_all,0x0ceedb;
+			//for ( .@j = 0; .@j < .@amt; .@j += 2 )
+				//getitem .item[.@j], .item[.@j+1];
+		//
+		getitem 3105,2;
+// WEEKLY QUEST			
+	.@selectIfCharExistQuery$ = "SELECT account_id FROM weeklyquest WHERE account_id = '"+getcharid(3)+"';";
+		if (query_sql(.@selectIfCharExistQuery$, .@accid) > 0) {
+			.@updaterecapQuery$ = "UPDATE `weeklyquest` SET `task9` = `task9` + 1 WHERE `account_id` = '"+getcharid(3)+"';";
+		} else {
+			.@updaterecapQuery$ = "INSERT INTO weeklyquest (`account_id` , `task9`) VALUES ('"+getcharid(3)+"','1');";
+	}
+		query_sql(.@updaterecapQuery$);
+// END
+		}
+		detachrid;
+	}
+	.start = false;
+	sleep 5000;
+	mapwarp "quiz_02","payon",rand(148,163),rand(195,205);
+	end;
+	
+OnPCDieEvent:
+	if ( .start && strcharinfo(3) == "quiz_02" )
+		warp "payon",rand(148,163),rand(195,205);
+	end;
+}

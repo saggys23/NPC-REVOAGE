@@ -1,0 +1,118 @@
+/* SQL Tables:
+CREATE TABLE `recapransum` (
+ `guild_id` int(11) unsigned NOT NULL,
+ `guildname` varchar(30) NOT NULL default 'NoGuild',
+ `char_id` int(11) unsigned NOT NULL,
+ `charname` varchar(30) NOT NULL default 'Unknown',
+ `class` smallint(6) unsigned NOT NULL,
+ `wsp` int(11) default '0',
+ `wp` int(11) default '0',
+ `bp` int(11) default '0',
+ `panacea` int(11) default '0',
+ `fire` int(11) default '0',
+ `acid` int(11) default '0',
+ `glisering` int(11) default '0',
+ `blue` int(11) default '0',
+ `yellow` int(11) default '0',
+ `edp` int(11) default '0',
+ `date` timestamp default CURRENT_TIMESTAMP
+ ) ENGINE=MyISAM;
+ */
+-	script	restock_woe	-1,{
+
+OnInit:
+setarray .itemlist[1],547,	11503,	11504,	525,	7135,	7136,	7139,	717,	715,	678;
+setarray .listsql$[1],"wsp","wp",	"bp",	"panacea",	"fire",	"acid",	"glisering",	"blue",	"yellow",	"edp";
+setarray .weight[1],	2,		6,		6,	10,	1,		1,		1,		3,		3,		10;
+setarray .restockamount[1],
+			400,0,150,15,150,150,30,0,0,0,		//Bio				
+			0,100,60,15,0,0,0,75,125,0,			//Prof
+			0,70,50,15,0,0,0,60,60,0,			//HW
+			0,150,70,15,0,0,0,0,0,8,			//SINX
+			0,300,60,15,0,0,0,0,0,0,			//Palad,WS,LK
+			0,100,200,15,0,0,0,0,0,0,			//Champ
+			0,65,100,15,0,0,0,0,0,0,			//SL,HP,SNIP,BARD,GIPSI
+			0,100,100,15,0,0,0,0,0,0,			//Stalk
+			0,100,50,15,0,0,0,0,0,0,			//Ninja
+			0,150,50,15,0,0,0,0,0;				//TKM
+			
+setarray .guild$[0],"GMTESTING","Eden","HumbleGod","KaumKiri","GarudaForces","BK","Syndicate","TESTERGM";
+
+	bindatcmd("restock",strnpcinfo(3)+"::OnRestock",0,99);
+
+	end;
+
+
+OnClock2048:			//start
+set .restockhour,1;
+end;
+OnClock2200:			//stop
+set .restockhour,0;
+end;
+
+
+OnRestock:
+.@gname$ = strcharinfo(2);
+if (inarray(.guild$,.@gname$) == -1 ) {mes "Only Registered Guild can use @restock."; end;}
+//if (gettime(DT_HOUR)>=19 && gettime(DT_HOUR)<22 && gettime(DT_DAYOFWEEK) == FRIDAY || agitcheck() || agitcheck2() ){
+if (.restockhour && ( gettime(DT_DAYOFWEEK) == SUNDAY ||gettime(DT_DAYOFWEEK) == WEDNESDAY)) {
+if (@delayrestock > gettimetick(2)) {
+	message strcharinfo(0),"Please wait, " + (@delayrestock - gettimetick(2))  + " seconds to restock again."; end;
+	}		
+if (Class == 4019) .@z = 0;					
+else if (Class == 4017) .@z = 10;	
+else if (Class == 4010) .@z = 20;	
+else if (Class == 4013) .@z = 30;
+else if (Class == 4015||Class == 4011||Class == 4008) .@z = 40;
+else if (Class == 4016) .@z = 50;
+else if (Class == 4049||Class == 4009||Class == 4012||Class == 4020||Class == 4021) .@z = 60;
+else if (Class == 4018) .@z = 70;
+else if (Class == 25) .@z = 80;
+else if (Class == 4047) .@z = 90;
+else end;
+	for(.@i = 1; .@i < getarraysize(.itemlist); .@i++) {
+	setarray .@amount[.@i] , .restockamount[.@i+.@z] - countitem(.itemlist[.@i]);
+	if (.@amount[.@i] > 0) {
+		.@weighty = .weight[.@i] * .@amount[.@i] ; 
+	} else .@weighty = 0;
+	.@weighttotal = .@weighty + .@weighttotal;			//total Weight
+	}
+		if ((MaxWeight/100*89 - Weight - .@weighttotal*10) > 0) {
+		.@ok = 1; 
+		} else if ((MaxWeight/100*89 - Weight - .@weighttotal*5) > 0 ){
+			.@ok = 2; 
+		} else {
+			dispbottom "You already overweight to carry more ransum."; 
+			dispbottom "Please clean up unused items!"; 
+			@delayrestock = gettimetick(2) + 5;
+			end;
+			}
+	for(.@j = 0; .@j < getarraysize(.itemlist); .@j++) {
+	if (.@amount[.@j]>0){
+	.@totalamount = .@amount[.@j]/.@ok;
+	getitembound .itemlist[.@j],.@totalamount,Bound_Char;
+	//if  (agitcheck() || agitcheck2()){
+	.@selectIfCharExistQuery$ = "SELECT guild_id, char_id, `"+.listsql$[.@j]+"` FROM recapransum WHERE char_id = '"+getcharid(0)+"' AND guild_id = '"+getcharid(2)+"';";
+		if (query_sql(.@selectIfCharExistQuery$, .@guildid, .@char_id, .@sqlamount) > 0) { 
+			.@updaterecapQuery$ = "UPDATE recapransum SET `"+.listsql$[.@j]+"` = "+.listsql$[.@j]+" + '"+.@totalamount+"' WHERE char_id = '"+getcharid(0)+"' AND guild_id = '"+getcharid(2)+"';";
+		} else {
+			.@updaterecapQuery$ = "INSERT INTO recapransum (`char_id` , `guild_id` ,`class`,`charname`,`"+.listsql$[.@j]+"`,`guildname`) VALUES ('"+getcharid(0)+"','"+getcharid(2)+"','"+Class+"','"+strcharinfo(0)+"','"+.@totalamount+"','"+strcharinfo(2)+"');";
+	}
+	query_sql(.@updaterecapQuery$);
+	//}
+	dispbottom " "+getitemname(.itemlist[.@j])+ " Amount :"+.@totalamount+" ";
+		}
+	}
+	dispbottom ""+((.@ok == 2)?"You get half of default ransum because Weight Limit.":"Fully restocked~^^")+"";
+	@delayrestock = gettimetick(2) + 15;  //change before implement
+} else{
+mes "Commands available 10mins before WoE Times.";
+end;
+}
+end;
+}
+
+
+
+
+

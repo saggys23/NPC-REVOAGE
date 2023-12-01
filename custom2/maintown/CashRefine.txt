@@ -1,0 +1,20 @@
+//izlude,154,118,5	duplicate(Suhnbi#cash)	Suhnbi#izl	85
+izlude_a,154,118,5	duplicate(Suhnbi#cash)	Suhnbi#izlA	85
+izlude_b,154,118,5	duplicate(Suhnbi#cash)	Suhnbi#izlB	85
+izlude_c,154,118,5	duplicate(Suhnbi#cash)	Suhnbi#izlC	85
+izlude_d,154,118,5	duplicate(Suhnbi#cash)	Suhnbi#izlD	85
+pa2_in01,76,22,6	duplicate(Suhnbi#cash)	Suhnbi#payo2	85
+
+//izlude,148,121,6	duplicate(BlacksmithDister)	Blacksmith Dister#izl	826
+izlude_a,148,121,6	duplicate(BlacksmithDister)	Blacksmith Dister#izlA	826
+izlude_b,148,121,6	duplicate(BlacksmithDister)	Blacksmith Dister#izlB	826
+izlude_c,148,121,6	duplicate(BlacksmithDister)	Blacksmith Dister#izlC	826
+izlude_d,148,121,6	duplicate(BlacksmithDister)	Blacksmith Dister#izlD	826
+pa2_in01,96,22,3	duplicate(BlacksmithDister)	Blacksmith Dister#payo2	826
+
+//izlude,151,121,3	duplicate(MightyHammer)	Mighty Hammer#izl	826
+izlude_a,151,121,3	duplicate(MightyHammer)	Mighty Hammer#izlA	826
+izlude_b,151,121,3	duplicate(MightyHammer)	Mighty Hammer#izlB	826
+izlude_c,151,121,3	duplicate(MightyHammer)	Mighty Hammer#izlC	826
+izlude_d,151,121,3	duplicate(MightyHammer)	Mighty Hammer#izlD	826
+pa2_in01,76,18,6	duplicate(MightyHammer)	Mighty Hammer#payo2	826

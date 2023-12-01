@@ -1,0 +1,232 @@
+// Golden Man
+//============================================================
+
+vip,62,261,6	script	Golden Man	653,{
+	if (checkweight(714,5) == 0) {
+		mes "- Please Check yours weight limit -";
+		close;
+	}
+	mes "[- ^FFDF00Golden Man^000000 -]";
+	mes "What do you see?.";
+	mes "Am i shiny?.";
+	next;
+	mes "[- ^FFDF00Golden Man^000000 -]";
+	mes "Yes, because of all equipments that I used is made of pure gold.";
+	mes " ";
+	mes " ";
+	mes "Do you want to have it?";
+	next;
+	switch(select("Ya, offc ! :No, it must be expensive")) {
+	case 1:	
+	mes "[- ^FFDF00Golden Man^000000 -]";
+	mes "First you need ^FE2E2EShining Gold Stone^000000 for main Requirement.";
+	mes "^FE2E2EEquipment^000000 with ^FE2E2ERefine Level +7^000000 .";
+	mes "And Zeny for Every Craft.";
+	next;
+	mes "[- ^FFDF00Golden Man^000000 -]";
+	mes "What would you like to have ?";
+	next;
+	switch(select("Make a Shining Gold Stone:Golden Shield:Golden Shoes:Golden Garment")){
+//STONE
+	case 1:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2EGold^000000 10 Pcs";
+		mes "^FE2E2EOridecon^000000 50 Pcs";
+		mes "^FE2E2EElunium^000000 50 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 7.500.000";
+		next;
+		switch(select("Yes, please !","Cancel")){	
+			case 1:
+			if (countitem(969) < 10 || countitem(985) < 50 || countitem(984) < 50 || Zeny < 7500000 ) goto REQ_MISS;
+			delitem 985,50;			//elu ori
+			delitem 984,50;			//elu ori
+			delitem 969,10;			//gold
+			Zeny=Zeny-7500000;		//Zeny
+			getitem 3005,1;    // Shining Gold Stone
+			mes "[- ^FFDF00Golden Man^000000 -]";
+			mes "Clack, clack ~ Here's your stone !";
+			end;
+			case 2:
+			end;
+			}
+//SHIELD
+	case 2:
+		switch(select("Golden Guard","Golden Buckler","Golden Shield")){
+			//golden guard
+		case 1:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2E+7 Guard [1]^000000 1 Pcs";
+		mes "^FE2E2EShining Gold Stone^000000 1 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 5.000.000";
+		next;
+		switch(select("Yes, please !","Cancel")){
+			case 1:
+				if (countitem2 (2102,1,7,0,0,0,0,0) <1 || countitem(3005) < 1 || Zeny < 5000000 ) goto REQ_MISS;
+				delitem2 2102,1,1,7,0,0,0,0,0;
+				delitem 3005,1;
+				getitem 8012,1;
+				Zeny=Zeny-5000000;	
+				mes "[- ^FFDF00Golden Man^000000 -]";
+				mes "Whooa, you are ^FFDF00glowing^000000 now ";
+				end;
+			case 2:
+				end;
+		}
+			//golden buckler
+		case 2:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2E+7 Buckler [1]^000000 1 Pcs";
+		mes "^FE2E2EShining Gold Stone^000000 1 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 5.000.000";
+		next;
+		switch(select("Yes, please !","Cancel")){
+			case 1:
+				if (countitem2 (2104,1,7,0,0,0,0,0) <1 || countitem(3005) < 1 || Zeny < 5000000 ) goto REQ_MISS;
+				delitem2 2104,1,1,7,0,0,0,0,0;
+				delitem 3005,1;
+				getitem 8013,1;
+				Zeny=Zeny-5000000;	
+				mes "[- ^FFDF00Golden Man^000000 -]";
+				mes "Whooa, you are ^FFDF00glowing^000000 now ";
+				end;
+			case 2:
+				end;
+		}
+			//golden shield
+		case 3:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2E+7 Shield [1]^000000 1 Pcs";
+		mes "^FE2E2EShining Gold Stone^000000 1 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 5.000.000";
+		next;
+		switch(select("Yes, please !","Cancel")){
+			case 1:
+				if (countitem2 (2106,1,7,0,0,0,0,0) <1 || countitem(3005) < 1 || Zeny < 5000000 ) goto REQ_MISS;
+				delitem2 2106,1,1,7,0,0,0,0,0;
+				delitem 3005,1;
+				getitem 8014,1;
+				Zeny=Zeny-5000000;	
+				mes "[- ^FFDF00Golden Man^000000 -]";
+				mes "Whooa, you are ^FFDF00glowing^000000 now ";
+				end;
+			case 2:
+				end;
+		}
+	}
+//SHOES
+	case 3:
+		switch(select("Golden Shoes","Golden Boots")){
+			//golden shoes
+		case 1:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2E+7 Shoes [1]^000000 1 Pcs";
+		mes "^FE2E2EShining Gold Stone^000000 1 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 5.000.000";
+		next;
+		switch(select("Yes, please !","Cancel")){
+			case 1:
+				if (countitem2 (2404,1,7,0,0,0,0,0) <1 || countitem(3005) < 1 || Zeny < 5000000 ) goto REQ_MISS;
+				delitem2 2404,1,1,7,0,0,0,0,0;
+				delitem 3005,1;
+				getitem 8001,1;
+				Zeny=Zeny-5000000;	
+				mes "[- ^FFDF00Golden Man^000000 -]";
+				mes "Whooa, you are ^FFDF00glowing^000000 now ";
+				end;
+			case 2:
+				end;
+		}
+			//golden boots
+		case 2:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2E+7 Boots [1]^000000 1 Pcs";
+		mes "^FE2E2EShining Gold Stone^000000 1 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 5.000.000";
+		next;
+		switch(select("Yes, please !","Cancel")){
+			case 1:
+				if (countitem2 (2406,1,7,0,0,0,0,0) <1 || countitem(3005) < 1 || Zeny < 5000000 ) goto REQ_MISS;
+				delitem2 2406,1,1,7,0,0,0,0,0;
+				delitem 3005,1;
+				getitem 8002,1;
+				Zeny=Zeny-5000000;	
+				mes "[- ^FFDF00Golden Man^000000 -]";
+				mes "Whooa, you are ^FFDF00glowing^000000 now ";
+				end;
+			
+			case 2:
+				end;
+		}
+	}
+//GARMENT
+	case 4:
+		switch(select("Golden Muffler","Golden Manteau")){
+			//golden muffler
+			case 1:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2E+7 Muffler [1]^000000 1 Pcs";
+		mes "^FE2E2EShining Gold Stone^000000 1 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 5.000.000";
+		next;
+		switch(select("Yes, please !","Cancel")){
+			case 1:
+				if (countitem2 (2504,1,7,0,0,0,0,0) <1 || countitem(3005) < 1 || Zeny < 5000000 ) goto REQ_MISS;
+				delitem2 2504,1,1,7,0,0,0,0,0;
+				delitem 3005,1;
+				getitem 8005,1;
+				Zeny=Zeny-5000000;	
+				mes "[- ^FFDF00Golden Man^000000 -]";
+				mes "Whooa, you are ^FFDF00glowing^000000 now ";
+				end;
+			case 2:
+			end;
+		}
+		//golden manteau
+			case 2:
+		mes "[- ^FFDF00Golden Man^000000 -]";
+		mes "Item Requirements:";
+		mes "^FE2E2E+7 Manteau [1]^000000 1 Pcs";
+		mes "^FE2E2EShining Gold Stone^000000 1 Pcs";
+		mes "and";
+		mes "^FE2E2EZeny^000000 5.000.000";
+		next;
+		switch(select("Yes, please !","Cancel")){
+			case 1:
+				if (countitem2 (2506,1,7,0,0,0,0,0) <1 || countitem(3005) < 1 || Zeny < 5000000 ) goto REQ_MISS;
+				delitem2 2506,1,1,7,0,0,0,0,0;
+				delitem 3005,1;
+				getitem 8006,1;
+				Zeny=Zeny-5000000;	
+				mes "[- ^FFDF00Golden Man^000000 -]";
+				mes "Whooa, you are ^FFDF00glowing^000000 now ";
+				end;
+			case 2:
+			end;
+		}
+	}
+}
+	case 2:
+	end;
+	}
+REQ_MISS: 
+	mes "[- ^FFDF00Golden Man^000000 -]";
+	mes "Oh, are you try to trick me ?";
+	end;
+}
+	
+
+

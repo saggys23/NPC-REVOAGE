@@ -1,0 +1,218 @@
+in_sphinx1,6,293,6	script	PejuangTua	494,{
+		if ( BaseLevel > 10 || Class != 0 ) {
+			mes "Novice maks lvl 10 to play this event.";
+			end;
+		}
+if (countitem(8066) > 0) { mes " Lanjut ke Point 2 utk membuat bambu runcing !!!"; end;}
+	mes "[PejuangTua]";
+	mes "Ah akhirnya ada pejuang yg datang.";
+	mes "Saya berikan potongan Bambu segera Runcingkan !";
+	mes "Mari kita basmi penjajah yg datang !";
+	mes "^5533FFMERDEKA !^000000";
+	getitem 8066,1;
+	viewpoint 2,10,290,1,0xFF0000;
+	viewpoint 1,291,293,2,0xFF0000;
+	message strcharinfo(0),"Lihat Minimap saya beri anda petunjuk !";
+	close;
+}
+
+in_sphinx1,293,293,6	script	Peruncing Bambu	494,{
+		if ( BaseLevel > 10 || Class != 0 ) {
+			mes "Novice maks lvl 10 to play this event.";
+			end;
+		}
+if (countitem(8066) < 1 && countitem(6500) < 1) { mes "Bawakan saya potongan bambu!!!"; end;}
+if (countitem(6500) > 0 ) { mes "Maju ketitik selanjutnya kamu akan bertemu Pemimpin nya!!!"; end;}
+	mes "[PeruncingBambu]";
+	mes "Ambil bambu mu !";
+	mes "Segera bunuh kepala Coloni Penjajah dititik selanjutnya.";
+	mes "^5533FFMERDEKA !^000000";
+	delitem 8066,1;
+	getitem 6500,1;
+	viewpoint 2,291,293,2,0xFF0000;
+	viewpoint 1,80,188,3,0xFF0000;
+	message strcharinfo(0),"Lihat Minimap saya beri anda petunjuk !";
+	close;
+	end;
+}
+
+
+
+in_sphinx1,80,188,6	script	Pimpinan Penjajah	494,{
+		if ( BaseLevel > 10 || Class != 0 ) {
+			mes "Novice maks lvl 10 to play this event.";
+			end;
+		}
+if (countitem(6500) < 1 ) { mes "Hahahahaha, tanah ini milikku !!! "; end;}
+	mes "[Pimpinan Penjajah]";
+	mes "*penjajah tertusuk bambu*";
+	mes "Arghhh.";
+	mes "argggrgggghhh!";
+	mes "^5533FFMERDEKA !^000000";
+	delitem 6500,1;
+if (giveitemrun < 3) {
+	giveitemrun = giveitemrun + 1;
+	getitem 8055,1;
+	mapannounce "in_sphinx1", strcharinfo(0)+" "+giveitemrun+" Pejuang berhasil membunuh Penjajah.",bc_all,0x0ceedb;
+	viewpoint 2,291,293,2,0xFF0000;
+	warp "payo2",89,116;
+	close;
+	end;
+}
+	next;
+	mes "Pimpinan Penjajah sudah tewas tertusuk 3 bambu.";
+	close;
+	end;
+
+}
+
+
+
+-	script	NoviceRun	-1,{
+OnInit:
+		
+disablenpc "PejuangTua";	
+disablenpc "Peruncing Bambu";
+disablenpc "Pimpinan Penjajah";	
+	
+	bindatcmd "runstart", strnpcinfo(0)+"::OnStart",99,99;
+	bindatcmd "runstop", strnpcinfo(0)+"::OnEnd",99,99;
+	bindatcmd "joinrun", strnpcinfo(0)+"::OnJoinEvent";
+	bindatcmd "hiderun", strnpcinfo(0)+"::OnHide",99,99;
+
+	end;
+
+
+OnStart:
+
+	if ( .start ) end;
+			setarray .@mapflag,
+		mf_pvp,
+		mf_nowarp,
+		mf_nowarpto,
+		mf_noskill,
+		mf_noteleport,
+		mf_nosave,
+		mf_noicewall,
+		mf_nobranch,
+		mf_noreturn,
+		mf_noitemconsumption,
+		mf_nodrop,
+		mf_nopenalty;
+		
+	setarray .@hidenpc$[0],
+		"sphx001",
+		"mocf019",
+		"sphx01",
+		"sphx01-1";
+	mapwarp "in_sphinx1","payo2",89,116;
+	.start = 1;
+	
+enablenpc "PejuangTua";	
+enablenpc "Peruncing Bambu";
+enablenpc "Pimpinan Penjajah";	
+	monster "in_sphinx1",0,0,"Monster Invaders",1041,50;
+	monster "in_sphinx1",0,0,"Monster Invaders",1111,50;
+	monster "in_sphinx1",0,0,"Monster Invaders",1178,50;
+
+	for ( .@i = 0; .@i < getarraysize(.@mapflag); .@i++) {
+		setmapflag "in_sphinx1",.@mapflag[.@i];
+		}
+		
+	for ( .@j = 0; .@j < getarraysize(.@hidenpc$); .@j++) {
+		disablenpc .@hidenpc$[.@j];
+		}
+	end;
+	
+	
+	
+OnEnd:
+	set giveitemrun,0;
+disablenpc "PejuangTua";	
+disablenpc "Peruncing Bambu";
+disablenpc "Pimpinan Penjajah";	
+
+		setarray .@mapflag,
+		mf_pvp,
+		mf_nowarp,
+		mf_nowarpto,
+		mf_noskill,
+		mf_noteleport,
+		mf_nosave,
+		mf_noicewall,
+		mf_nobranch,
+		mf_noreturn,
+		mf_noitemconsumption,
+		mf_nodrop,
+		mf_nopenalty;
+		
+	setarray .@hidenpc$[0],
+		"sphx001",
+		"mocf019",
+		"sphx01",
+		"sphx01-1";
+		
+	if ( !.start ) end;
+//killmonster "<map name>","<event label>"{,<type>};
+killmonster "in_sphinx1","All";
+mapwarp "in_sphinx1","payo2",89,116;
+.start = false;
+for ( .@k = 0; .@k < getarraysize(.@mapflag); .@k++){
+		removemapflag "in_sphinx1", .@mapflag[.@k];
+		}
+for ( .@h = 0; .@h < getarraysize(.@hidenpc$); .@h++) {
+		enablenpc .@hidenpc$[.@h];
+		}
+.start = false;
+	end;
+	
+	
+	
+OnJoinEvent:
+	mes " [ Event Status ] ";
+	switch ( .start ) {
+		case 1: .@status$ = "active"; break;
+		case 2: .@status$ = "on-going"; break;
+		default: .@status$ = "not active"; break;
+	}
+	mes "Event is currently ^ff0000"+ .@status$ +"^000000";
+	next;
+	switch(select(
+		"Running Event - "+ ((.start == 1) ? "^0000ffJoin Event":((.start == 2) ? "^0000ffEvent On-Going":"^ff0000Not Available"))+"^000000" )) {
+	case 1:
+		if ( !.start ) {
+			mes "Event is not available.";
+			close;
+		} else if ( .start == 2 ) {
+			mes "Event is on-going";
+			close;
+		}
+		if ( BaseLevel > 10 || Class != 0 ) {
+			mes "Only maks lvl 10 Novice can enter.";
+			close;
+		}
+		if (ismounting()) { mes "take off ur mount , play fair !";end;}
+		if (!#bandana) {
+		getitembound 5321,1,Bound_Account;
+		set #bandana,1;
+		}
+		percentheal -99,-99;
+		warp "in_sphinx1",288,11;
+		viewpoint 1,10,290,1,0xFF0000;
+		savepoint "payo2",89,116;
+	}
+	end;
+	
+	
+OnPCDieEvent:
+	if ( .start && strcharinfo(3) == "in_sphinx1" )
+		message strcharinfo(0),"@joinrun untuk mulai lagi.";
+	end;
+
+OnPCLoadMapEvent:
+	if ( .start && strcharinfo(3) == "in_sphinx1" ){
+		message strcharinfo(0),"Buatlah Bambu Runcing Untuk membunuh Penjajah ! Lihat Minimap saya beri anda petunjuk.";
+		viewpoint 1,7,293,1,0xFF0000;
+	end;
+	}
+}

@@ -1,0 +1,40 @@
+// IzludeChannelSystem
+//============================================================
+izlude,133,132,6	script	IzludeChannelSystem#izl	10123,{
+	mes "[Izlude Channel]";
+	mes "Izlude is a verly lively place is it not?";
+	mes "I am here to help make Izlude feel more smooth!";
+	mes "I can send you to another copy of Izlude.";
+	mes "Do you want to go to another copy?";
+	next;
+					switch (select(
+					"Maintown Izlude",
+					"Private Izlude A",
+					"Private Izlude B",
+					"Private Izlude C",
+					"Private Izlude D",
+					"Never Mind"
+				)) {
+			case 1:
+		warp "izlude",128,143;
+		end;
+			case 2:
+		warp "izlude_a",128,143;
+		end;
+			case 3:
+		warp "izlude_b",128,143;
+		end;
+			case 4:
+		warp "izlude_c",128,143;
+		end;
+			case 5:
+		warp "izlude_d",128,143;
+		end;
+			case 6:
+		close;
+		}
+	close;
+}
+
+
+

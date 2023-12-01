@@ -1,0 +1,17 @@
+-	script	auras	-1,{
+	end;
+
+OnUpdateAuras:
+
+	if (BaseLevel > 98)
+	{
+		set_aura(1, 0, 0);
+		end;
+	}
+
+	if (get_aura_part(1) != 0 || get_aura_part(2) != 0 || get_aura_part(3) != 0)
+	{	
+		set_aura(0, 0, 0);
+		end;
+	}
+}

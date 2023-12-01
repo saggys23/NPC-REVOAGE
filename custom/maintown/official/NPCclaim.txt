@@ -1,0 +1,16 @@
+payo2,113,117,3	script	NPC Claim Event Manager	109,{
+
+setarray .@Event$,GM-Aesir,kopisusu,Liyan;
+
+if(!#eventbombs && inarray(.@Event$,strcharinfo(0)) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 1;
+	//getitembound 20053,1,Bound_Account;
+	#eventbombs = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got 10.000 Cash Points.";
+	end;
+}
+mes "[^FF0000 NPC Claim Event Manager^000000 ]";
+mes "Tidak ada claim untuk mu saat ini.";
+
+end;
+}

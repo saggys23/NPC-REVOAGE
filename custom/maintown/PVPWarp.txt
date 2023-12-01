@@ -1,0 +1,178 @@
+
+
+-	script	partycall	-1,{
+
+OnPartycall:
+
+if (strcharinfo(3) != "pvp_y_8-2") {mes "This command can only be used in PVP Free For All maps"; end;}
+if (@call > gettimetick(2)) {
+	message strcharinfo(0),"Please wait, buffer have " + (@call - gettimetick(2))  + " seconds cooldown."; end;
+	}
+if (getpartyleader(getcharid(1),2) != getcharid(0) ) {
+mes "Only party leader can use this service.";
+close;
+end;
+}
+.@aid = getpartyleader(getcharid(1),1);
+getmapxy(.@map$,.@x,.@y,BL_PC,.@aid);
+warpparty .@map$,.@x,.@y,getcharid(1);
+announce "[ PvP Warper ] : "+strcharinfo(0)+" just called his Party Members into the PvP for All Room !!",bc_blue|bc_all;
+@call = gettimetick(2) + 60;
+end;
+
+OnInit:
+bindatcmd "partycall",strnpcinfo(3)+"::OnPartycall";
+
+end;
+}
+
+payon,148,228,5	script	PVP Room	827,{
+set .@menuA$, "PVP Warp:Points Shop[^EE3333"+#pointsP+"^000000]:Exit:";
+switch(select(.@menuA$)) {
+	case 1:
+	switch( select("[PVP] Free for ALL ^EE3333[ "+getmapusers("pvp_y_8-2")+" Users ]^000000","[PVP] CvC Maps^EE3333[ "+getmapusers("guild_vs3")+" Users ]^000000") ) {
+	case 1:
+			warp "pvp_y_8-2",0,0;
+			sc_end SC_INCMHPRATE;
+			sc_end SC_INCALLSTATUS;
+			sc_end SC_INCDEFRATE;
+			sc_end SC_INCATKRATE;
+			sc_end SC_INCHIT;
+			sc_end SC_INCFLEE;
+			sc_end SC_WHISTLE;
+			sc_end SC_ASSNCROS;
+			sc_end SC_POEMBRAGI;
+			sc_end SC_APPLEIDUN;
+			sc_end SC_MODECHANGE;
+			sc_end SC_HUMMING;
+			sc_end SC_DONTFORGETME;
+			sc_end SC_FORTUNE;
+			sc_end SC_SERVICE4U;
+			
+			announce "[ PvP Warper ] : "+strcharinfo(0)+" Has Enter PvP for All Room !!",bc_blue|bc_all;
+			break;	
+			
+	case 2:
+			if ( Class != 4016 ){
+				mes "You are not Champion Class , so you cant enter.";
+			}else{
+			 if (getequipisequiped(9)) unequip 9;
+			 if (getequipisequiped(2)) unequip 2;
+			 if (getequipisequiped(3)) unequip 3;
+			 if (getequipisequiped(4)) unequip 4;
+			 if (getequipisequiped(5)) unequip 5;
+			 if (getequipisequiped(6)) unequip 6;
+			 if (getequipisequiped(7)) unequip 7;
+			 if (getequipisequiped(8)) unequip 8;
+		
+				warp "guild_vs3",0,0;
+				announce "[ PvP Warper ] : "+strcharinfo(0)+" Has Enter PvP for CvC Room !!",bc_blue|bc_all;
+				sc_end SC_FOOD_LUK_CASH;      //removing buff
+				callfunc("remove_buff");		//call remov buff at folder custom
+			}
+			break;
+		}
+	end;
+	case 2:
+	callshop "PVP_Points_Shop",1;
+	end;
+	case 3:
+	end;
+	
+OnInit:
+	setmapflag	"pvp_y_8-2",mf_nosave;
+	setmapflag	"pvp_y_8-2",mf_nowarp;
+	setmapflag	"pvp_y_8-2",mf_nowarpto;
+	setmapflag	"pvp_y_8-2",mf_noteleport;
+	setmapflag	"pvp_y_8-2",mf_noreturn;
+	setmapflag	"pvp_y_8-2",mf_notoken;
+	setmapflag	"pvp_y_8-2",mf_skillconso;
+	setmapflag	"guild_vs3",mf_noequip;
+	setmapflag	"guild_vs3",mf_nosave;
+	setmapflag	"guild_vs3",mf_nowarp;
+	setmapflag	"guild_vs3",mf_nowarpto;
+	setmapflag	"guild_vs3",mf_notoken;
+	setmapflag	"guild_vs3",mf_noteleport;
+	setmapflag	"guild_vs3",mf_noreturn;
+	set .PvppointsP, 1;      //pointsP to add in database/player when kill
+		setarray .name$, "PVP Free for All", "CvC Maps";
+		setarray .map$, "pvp_y_8-2", "guild_vs3";
+		.size = getarraysize(.map$);
+		initnpctimer;
+		end;
+		
+OnPCKillEvent:
+if (compare(strcharinfo(3),"pvp_y_8-2") && killerrid != getcharid(3)) {
+	
+//set .@killedvar,getvar(PvPAllowed,getcharid(0,rid2name(killedrid)));
+//if(.@killedvar == 1 && PvPAllowed == 1){
+	set .@party_id,getcharid(1);
+	if( !.@party_id ){
+			//if ( getcharip(killedrid) == getcharip(getcharid(3)) ) { end; } // Can't obtain points if player has same IP
+			//if ( killedrid == last_kill ) { end; } // Can't get points if kill opponent twice in a row.
+			//set last_kill, killedrid;
+			set #pointsP, #pointsP+.PvppointsP;	
+			dispbottom "[ "+#pointsP+" ] PvPKills.", 0xF1948A;
+			end;
+			}
+			else{
+		getpartymember .@party_id,1;
+		getpartymember .@party_id,2;
+		set .@acc_id, getcharid(3);
+		set .@map$,strcharinfo(3);
+		for( set .@i, 0; .@i < $@partymembercount; set .@i, .@i +1 )
+			if( isloggedin( $@partymemberaid[.@i],$@partymembercid[.@i] ) )
+				if( attachrid( $@partymemberaid[.@i] ) )
+					if( HP && strcharinfo(3) == .@map$ )
+						set .@online_count,.@online_count + 1;
+		
+		for( set .@i, 0; .@i < $@partymembercount; set .@i, .@i +1 )
+			if( isloggedin( $@partymemberaid[.@i],$@partymembercid[.@i] ) )
+				if( attachrid( $@partymemberaid[.@i] ) )
+					if( HP && strcharinfo(3) == .@map$ && getcharid(3) != .@acc_id){
+			//if ( getcharip(killedrid) == getcharip(getcharid(3)) ) { end; } // Can't obtain points if player has same IP
+			//if ( killedrid == last_kill ) { end; } // Can't get points if kill opponent twice in a row.
+			//set last_kill, killedrid;
+			set #pointsP, #pointsP+.PvppointsP;	
+			dispbottom "You gained  "+.PvppointsP+" point from assisting kill and You now have "+#pointsP+" PVP points.", 0xF1948A;
+			}
+			attachrid( .@acc_id );
+			set #pointsP, #pointsP+2;	
+			dispbottom "You killed "+rid2name(killedrid)+" you gained 2 points and You now have "+#pointsP+" PVP points.";
+			attachrid(killedrid);
+			dispbottom "You are killed by "+rid2name(killerrid)+".";
+			}
+		end;
+}
+	
+	if (compare(strcharinfo(3),"guild_vs3" ) && killerrid != getcharid(3)) {
+		//This is the point system on the player, you can disable this anytime by adding comment " // "
+		set #pointsP, #pointsP+.PvppointsP;
+		dispbottom "You killed "+rid2name(killedrid)+" you gained "+.PvppointsP+" point and You now have "+#pointsP+" PVP points.";
+		attachrid(killedrid);
+		//set pointsP, pointsP-.pvpdiedeductpoint;
+		dispbottom "You are killed by "+rid2name(killerrid)+".";
+		end;
+	}
+
+  
+
+}
+	OnTimer5000:
+		.index = (.index % .size);
+		delwaitingroom;
+		waitingroom .name$[.index] + "[ "+getmapusers(.map$[.index])+" ]", 0;
+		.index++;
+		initnpctimer;
+		end;
+}
+
+vip,55,77,3	script	PVP Point Shop	413,{
+callshop "PVP_Points_Shop",1;
+end;
+	OnInit:
+	waitingroom "PVP Point Shop",0; }
+	
+-	pointshop	PVP_Points_Shop	-1,#pointsP,1443:1500,1839:1500,1939:1500,1995:1500,13454:1500,21015:1500,28106:1500,1498:1500,28007:1500,18130:1500,13127:1500,13327:1500,28604:1500,1680:1500,2025:1500,16040:1500,28705:1500,14003:10,12031:3,12030:3,12029:3,12033:18,40001:35,40002:35,40003:35,40004:35,40005:35,40006:35:14003:25,5428:750;
+
+

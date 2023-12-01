@@ -1,0 +1,13 @@
+// receiptsionist
+vip,65,50,4	script	Receptionist Nara	893,{
+	mes "[Receptionist Nara]";
+	mes "Welcome to the";
+	mes "Hall Room.";
+	mes "Is there anything i can help ?";
+	menu	"Point Shop",T1, "Refine Room",T2, "Branch Room",T3, "Quest Room",T4, "Rogue/Alche/Assassin/Ammuniton Shop",T5;
+	T1: warp("vip",55,73);end;
+	T2: warp("vip",68,266);end;
+	T3: warp("vip",68,254);end;
+	T4: warp("vip",77,267);end;
+	T5: warp("vip",72,63);end;
+}

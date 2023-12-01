@@ -1,0 +1,119 @@
+/*--
+-- Estrutura da tabela `item_cash_db`
+--
+
+DROP TABLE IF EXISTS `item_cash_db`;
+CREATE TABLE IF NOT EXISTS `item_cash_db` (
+  `tab` smallint(6) NOT NULL,
+  `item_id` smallint(5) UNSIGNED NOT NULL,
+  `price` mediumint(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tab`,`item_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;*/
+
+//Script modificado por bruno05
+// -------Creditos-----
+// -/\-
+// / \Carloskiller, 
+// 
+// // \\
+//**********
+
+prontera,153,164,4	script	Cash Shop	405,{
+	if(getgroupid() >= 99) goto Administrador;
+	end;
+	Administrador:
+	set .npc$,"[^0000CDCash Shop Manager^000000]";
+	mes .npc$;
+	mes "Hi ^FF4500"+ strcharinfo(0)+"^000000!!";
+	mes "I am responsible for managing the Cash Shop.";
+	mes "I can ^E78200Add ^000000 and ^C669D4Delete ^000000 items from your store.";
+	mes "What would you like to do?";
+	set @Menu$,"^FF0000[•]^000000 Add Item.:^8B4513[•]^000000 Delete Items:^006400[•]^000000 Reload CASH SHOP:";
+	switch(select(@Menu$)){
+		case 1:
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "In this area I can add items to the CASH Store.";
+			mes "Let's go to work?";
+			next; 
+			AdicionarItem:
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "Enter Category.";
+			mes "[^C65C110^000000] New";
+			mes "[^C65C111^000000] Hot";
+			mes "[^C65C112^000000] Limited";
+			mes "[^C65C113^000000] Rental Equipments";
+			mes "[^C65C114^000000] Gear's";
+			mes "[^C65C115^000000] Buff";
+			mes "[^C65C116^000000] Recovery";
+			mes "[^C65C117^000000] Etc";
+			mes "[^C65C118^000000] Special Offers";
+			input @cat,next;
+			if(@cat >= 9) {	mes "This Category, Does Not Exist.";next;goto AdicionarItem;}
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "Enter the Item ID";
+			input @id,next;
+			set @id1,0; set @id2,0;
+			query_sql ("SELECT `tab`,`item_id` FROM `item_cash_db` WHERE `item_id`="+@id,@id1,@id2);
+			if(@id == @id2) { mes "Sorry this item is already registered in the system";next;goto Administrador;}
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "Enter the price of the item. (Cash)";
+			input @qtd,next;
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "Item to add to Shop:";
+			mes	"^B00306Category^000000 - ^030C88Name^000000 - ^764305Price:";
+			mes "^B00306"+@cat+"^000000 - ^030C88"+getitemname(@id)+" - ^764305"+@qtd+" Cash's";
+			next;
+			if(select("^85B1F4[•]^000000 Yes","^FF0000[•]^000000 Cancel")==2) { close; }
+			query_sql ("INSERT INTO `item_cash_db` (tab,item_id,price) VALUES ("+@cat+","+@id+","+@qtd+")");
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "Your Item has been successfully registered.";
+			mes "Be sure to use ^13EFF7Reload^000000 for the modifications to take effect.";
+			if(select("^FF0000[•]^000000 Exit.","^85B1F4[•]^000000 Add Another Item")==2) { next;goto AdicionarItem;};
+			next;
+			goto ReloadDB;
+			end;
+		case 2:
+			next;
+			RemoverItem:
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "Enter item ID to remove.";
+			mes	"^B00306Category^000000 - ^030C88Name^000000 - ^764305Item ID^000000:";
+			.num_items = query_sql("SELECT `tab`, `item_id` FROM `item_cash_db` ORDER BY `tab` asc", .tab,.itemid );
+			for( .@i = 0; .@i < .num_items; .@i++ )
+			mes "[^B00306"+.tab[.@i]+"^000000] - [^030C88"+getitemname(.itemid[.@i])+"^000000] - (^764305"+.itemid[.@i]+"^000000)";		
+			input @id;
+			set @id1,0; set @id2,0;
+			query_sql ("SELECT `tab`,`item_id` FROM `item_cash_db` WHERE `item_id`="+@id,@id1,@id2);
+			next;
+			mes "[^00AAAACash Shop Manager^000000]";
+			if(!@id2) { mes "This item does not exist in Store."; next;goto Administrador; }
+			mes "Item to remove from Shop: ^030C88"+getitemname(@id)+"^000000";
+			mes "Item ID: ^257491"+@id+"^000000";
+			if(select("^85B1F4[•]^000000 To Remove","^FF0000[•]^000000 Cancel")==2) { close; }
+			query_sql ("DELETE FROM `item_cash_db` WHERE `item_id`="+@id);
+			mes "Item successfully removed.";
+			mes "Do you want to remove another item?";
+			if(select("^FF0000[•]^000000 No Thank you.","^85B1F4[•]^000000 Yes Thanks")==2) { next;goto RemoverItem; }
+			close;
+		case 3:
+			next;
+			mes "[^00AAAACash Shop Manager^000000]";
+			mes "This function will reload your database.";
+			mes "Using the command ^13EFF7@reloaditemdb^000000, makes your items appear in the Cash Shop.";
+			ReloadDB:
+			mes "Do you want to use the @relaoditemdb command now?";
+			if(select("^FF0000[•]^000000 No Thank you","^85B1F4[•]^000000 Yes Thanks")==1) { mes "Ok no problem, see ya.";close; };
+			next;
+			mes "Loading....";
+			mes "This may take a few seconds."," ";
+			sleep2 100;
+			atcommand "@reloaditemdb";
+			mes "all ready, sorry for the delay.";
+			mes "Don't forget to sign out and sign back in so you can see it store!";
+			mes "Thank you for using my services.";
+
+			end;
+			close;
+
+	}
+}

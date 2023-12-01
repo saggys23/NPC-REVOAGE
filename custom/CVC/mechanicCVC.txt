@@ -1,0 +1,214 @@
+cell_game,130,163,6	script	Staff CvC	484,{
+.@npcname$ = "[ Champion ]";
+.@unique_id$ = get_unique_id();
+setarray .@cvcplayer$,"felixpro","Ignite","KumahaAing","PULCHRA","Jade","Nouxt","4brgaming","Belly","Ehemmmm","Eina","IzzyStradlin","Jing","LLLL","Tuesday";
+if( getgroupid() >= 14) {
+warp "cell_game",150,150;
+end;
+}
+
+
+/*
+	if (inarray(.@cvcplayer$,strcharinfo(0)) == -1 && getd("$CVCs_" + .@unique_id$) > 0 || #CVC1package > 0 ) {
+		mes .@npcname$ ;
+		mes "You have already claimed your Free Megaphone.";
+		mes "";
+		mes "NOTE : 1 PC only can claim 1 Times";
+		close;
+		end;
+	} else if (inarray(.@cvcplayer$,strcharinfo(0)) == -1) {
+			getitembound 12221,3,Bound_Account;
+			setd "$CVCs_" + .@unique_id$,1;			//Change Size reset reward tercatat di MAPREG database
+			#CVC1package = 1; 
+			end;
+			}
+	*/
+	if ( .cvcstart == 1 ) {
+			mes .@npcname$;
+			mes "Battle is on-going";
+			end;
+		}		
+	else if (inarray(.@cvcplayer$,strcharinfo(0)) != -1) {
+			getmapxy(.@map$,.@x,.@y,BL_PC);
+			if( distance(.x,.y,.@x,.@y)>9 && .@map$==.map$ ) { 
+			mes .@npcname$;
+			mes "Do you want Exit Ring ?"; 
+			mes " ";
+			mes "NOTE : If you are not inside the Ring, please come to me closer to Enter.";
+			switch(select("Pull me out.: No.")) {
+		case 1:
+			warp "cell_game",135,158;
+			end;
+		case 2:
+			end;
+		}
+	}
+	mes .@npcname$;
+	mes "Are you already called by Moderator to Enter Ring?"; 
+	mes " ";
+	switch(select("Yes !:No, no:Back to Payon")) {
+		case 1:
+		query_sql("SELECT `last_unique_id` FROM `login` WHERE `account_id` = '"+getcharid(3)+"'", .@last_unique_id$);
+		query_sql("SELECT `char_id` FROM `cvcbound` WHERE `unique_id` = '"+.@last_unique_id$+"'", .@charbound);
+	if(.gepard){
+		if (.@charbound > 0) {
+			 if ( .@charbound != getcharid(0)) {
+			 mes "Detected multiple account!"; 
+			 announce ""+strcharinfo(0)+" detected multiple account.",0; //with charid "+.@charbound+".",0;
+			 end;
+			}
+		} else {
+			query_sql("INSERT INTO `cvcbound` (`unique_id`,`char_id`) VALUES ('"+.@last_unique_id$+"', '"+getcharid(0)+"')");
+		}
+	}
+			if (getequipisequiped(9)) unequip 9;
+			 if (getequipisequiped(2)) unequip 2;
+			 if (getequipisequiped(3)) unequip 3;
+			 if (getequipisequiped(4)) unequip 4;
+			 if (getequipisequiped(5)) unequip 5;
+			 if (getequipisequiped(6)) unequip 6;
+			 if (getequipisequiped(7)) unequip 7;
+			 if (getequipisequiped(8)) unequip 8;
+				percentheal 100,100;
+				warp "cell_game",150,150;
+				announce "[ CvC Tournament ] : "+strcharinfo(0)+" Has Enter CvC Tournament Ring !!",bc_all,0x70dbdb;
+				sc_end SC_FOOD_LUK_CASH;      //removing buff
+				callfunc("remove_buff");		//call remov buff at folder custom;
+				end;
+		case 2:
+			break;
+		case 3:
+			warp "payon",179,225;
+		}
+	end;
+	} else {
+		switch(select("Back to Payon:Cancel")) {
+		case 1:
+		warp "payon",179,225;
+		end;
+		case 2:
+			end;
+		}
+	}
+	end;
+
+
+OnInit: 
+	.gepard = true;
+	getmapxy(.map$,.x,.y,BL_NPC);
+	bindatcmd "startcvc", strnpcinfo(0)+"::OnStartCVC",1,14;
+	bindatcmd "stopcvc", strnpcinfo(0)+"::OnStopCVC",1,14;
+	if(.gepard){
+		query_sql("CREATE TABLE IF NOT EXISTS `cvcbound` (`unique_id` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0',`char_id` INT NOT NULL) ENGINE=MyISAM");
+	}
+	end;
+	
+OnStartCVC:
+			.cvcstart = 1;
+			mapannounce "rwc03", "After this announce, all disconnected players are dead !~", bc_blue;
+			sleep 2000;
+			mapannounce "cell_game", "Ready ! Battle Start in 10 Seconds!~", bc_blue;
+			sleep 5000;
+			mapannounce "cell_game", "Battle Start in 5 Seconds!~", bc_blue;
+			sleep 1000;
+			for ( .@i = 4; .@i > 0; --.@i ) {
+				mapannounce "cell_game", .@i +" !~", bc_blue;
+				sleep 1000;
+			}
+			mapannounce "cell_game", "Round Start !!! ", bc_blue;
+			pvpon "cell_game";
+			end;
+			
+OnStopCVC:
+		pvpoff "cell_game";
+		mapannounce "cell_game", "Wait, someone has disconnected from the game.", bc_blue;
+		.cvcstart = 0;
+		end;
+			
+OnPCKillEvent:
+.@map$ = strcharinfo(3);
+	if (.cvcstart == 1 && .@map$ == "cell_game" && killerrid != getcharid(3)) {
+		announce "[ CvC Tournament ] : Congrats "+strcharinfo(0)+" has won CvC Battle vs "+rid2name(killedrid)+".",bc_all,0x70dbdb;
+		pvpoff "cell_game";
+		.cvcstart = 0;
+		sleep 3000;
+		areawarp "cell_game",140,152,159,135,"cell_game",134,161,139,156;
+		end;
+	}
+}
+
+
+
+
+
+// NOTE KHUSUS JGN SAMPAI LUPA, ITEM TIDAK BS DI JUAL NPC DAN HARGANYA 1
+
+cell_game,135,163,3	script	Rental Accesory CvC	493,{
+.@npcname$ = "[ Rent Acc CvC ]";
+setarray .@cvcplayer$,"felixpro","Ignite","KumahaAing","PULCHRA","Jade","Nouxt","4brgaming","Belly","Ehemmmm","Eina","IzzyStradlin","Jing","LLLL","Tuesday";
+
+if (inarray(.@cvcplayer$,strcharinfo(0)) != -1) {
+if (@cvcaccc > 5 ) {
+mes .@npcname$;
+mes "You already take 5 Accesory";
+end;
+}
+if (!checkweight(512,10)) {
+mes .@npcname$;
+mes "Please Check ur Weight";
+end;
+}
+mes .@npcname$;
+mes "You only can take 5 Accesory , please choose wisely.";
+mes " ";
+mes "You have ^FF0000"+(5-@cvcaccc)+" ^000000left.";
+setarray .@cardid6,4103,4044,4064 ;
+setarray .@cardname6$,"Horong Card","Smokie Card","Zerom Card";
+setarray .@slot, 0,0,0,0;
+
+switch(select("Clip [1]:Glove [1]")) {
+		case 1:
+		.@weapon = 2607;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		case 2:
+		.@weapon = 2624;
+		.@slotcard = 1;
+		.@refine = 0;
+		goto CardAcc;
+		}
+	end;
+}
+else {
+	mes .@npcname$;
+	mes "Your Name not registered in this Battle.";
+	end;
+}
+	
+CardAcc:
+	for (.@c= 1; .@c < .@slotcard+1 ; .@c++) {
+		mes "Select Card for Slot"+ .@c +".";
+	.@menu$ = implode(.@cardname6$, ":");
+	.@i = select( .@menu$ ) - 1;
+	mes "You selected card : "+ .@cardname6$[.@i];
+	setarray .@slot[.@c], .@cardid6[.@i];
+	next;
+	switch(select("Take:Cancel")) {
+	case 1:
+	rentitem2 .@weapon,(1*24*60*60),1,.@refine,0,.@slot[1],.@slot[2],.@slot[3],.@slot[4];
+	@cvcaccc += 1;
+	case 2:
+	end;
+	}
+
+end;
+}
+}
+
+
+
+
+
+
+

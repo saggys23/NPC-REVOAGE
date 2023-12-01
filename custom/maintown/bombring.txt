@@ -1,0 +1,137 @@
+// Original script by Unknown
+// Edit by Mabuhay
+// Removed my timer cool downs and stuff.
+// Adjust to your time you wish for it to start.
+
+-	script	Event_Bombring	-1,{
+OnInit:
+	// item reward
+	setarray .item,
+		501, 10,
+		502, 5;
+
+	// @bombstart - gm manual start
+	bindatcmd "bombstart", strnpcinfo(0)+"::OnStart",99,99;
+	bindatcmd "bombgo", strnpcinfo(0)+"::OnGo",99,99;
+	
+	// @bomb - player join event
+	bindatcmd "bomb", strnpcinfo(0)+"::OnJoinEvent";
+	
+	// Mapflags
+	setarray .@mapflag,
+		mf_nowarp,
+		mf_nowarpto,
+		mf_noskill,
+		mf_noteleport,
+		mf_nomemo,
+		mf_nosave,
+		mf_noicewall,
+		mf_nobranch,
+		mf_noreturn,
+		mf_nopenalty,
+		mf_noitemconsumption;
+		//mf_nocommand,
+
+		//setmapflag "quiz_02", mf_nocommand,9;
+	for ( .@i = 0; .@i < getarraysize(.@mapflag); .@i++)
+		setmapflag "quiz_02", .@mapflag[.@i];
+	end;
+	
+OnJoinEvent:
+	mes " [ Event Status ] ";
+	switch ( .start ) {
+		case 1: .@status$ = "active"; break;
+		case 2: .@status$ = "on-going"; break;
+		default: .@status$ = "not active"; break;
+	}
+	mes "Event is currently ^ff0000"+ .@status$ +"^000000";
+	next;
+	switch(select(
+		"Bombring Event - "+ ((.start == 1) ? "^0000ffJoin Event":((.start == 2) ? "^0000ffEvent On-Going":"^ff0000Not Available"))+"^000000" )) {
+	case 1:
+		if ( !.start ) {
+			mes "Event is not available.";
+			close;
+		} else if ( .start == 2 ) {
+			mes "Event is on-going";
+			close;
+		}
+		sc_end SC_ALL;
+		sc_start SC_DECREASEAGI,600000,10;
+		percentheal 100,100;
+		warp "quiz_02",59,345;
+	}
+	end;
+
+OnStart:
+// Add your clock timers here.
+//OnClock0000: // 12 MN
+//OnClock0300: // 3 AM
+//OnClock0600: // 6 AM
+//OnClock1700: // 5 PM
+	if ( .start ) end;
+	.start = 1;
+	.round = 0;
+	killmonsterall "quiz_02";
+	setmapflag "quiz_02", .@mapflag[.@i];
+	announce "Bombring: We are going to have a Bombring event.",0;
+	sleep 10000;
+	announce "Bombring: For those who wants to join, use @bomb",0;
+	sleep 10000;
+	announce "Bombring: After 3 Minute Event will close.",0;
+	sleep 10000;
+	announce "Bombring: So please if you want to join. use @bomb",0;
+	sleep 30000;
+	announce "Bombring: The entry to the event is now closed.",bc_all,0x0ceedb;
+	if ( getmapusers("quiz_02") < 1 ) {
+		mapannounce "Bombring: Not enough participants.",bc_all,0x0ceedb;
+		.start = false;
+		mapwarp "quiz_02", "payon", 155, 239; // warp out.
+		end;
+	}
+	end;
+	
+OnGo:
+	.start = 2;
+	sleep 3500;
+	mapannounce "quiz_02","We're about to begin the event.",bc_map,0x0ceedb;
+	sleep 2500;
+	mapannounce "quiz_02","The rules are simple.",bc_map,0x0ceedb;
+	sleep 2000;
+	mapannounce "quiz_02","Event will run for 30 seconds for 5 total rounds.",bc_map,0x0ceedb;
+	sleep 2500;
+	mapannounce "quiz_02","All you have to do is avoid Bombrings and stay alive for 30 seconds.",bc_map,0x0ceedb;
+	sleep 2000;
+	mapannounce "quiz_02","That's all. Let's begin.",bc_map,0x0ceedb;
+	sleep 3000;
+	while ( .round < 5 ) {
+		.@count = getmapusers("quiz_02");
+		.round++;
+		mapannounce "quiz_02","Round "+.round,bc_map,0x0ceedb;
+		areamonster "quiz_02",48,334,71,357,"Run for you life!",1904, 8 * .@count * .round;
+		sleep 10000 - ( 1000*.round );
+	}
+	.@count = getmapusers("quiz_02");
+	if ( !.@count )
+		mapannounce "Bombring: No one survived the bombrings.",bc_all,0x0ceedb;
+	else if ( .@count ) {
+		.@size = getmapunits(BL_PC,"quiz_02",.@aid);
+		//.@amt = getarraysize(.item);
+		if ( .@size > 1 ) mapannounce "A lot players has won the Bombring Event.",bc_all,0x0ceedb;
+		for ( .@i = 0; .@i < getarraysize(.@aid); .@i++) {
+			attachrid .@aid[.@i];
+			if ( .@size == 1 ) announce ""+strcharinfo(0)+" has won the Bombring Event.",0x0ceedb;
+	getitem 19776,1;
+		}
+		detachrid;
+	}
+	.start = false;
+	sleep 5000;
+	mapwarp "quiz_02","payon",rand(155,239),rand(160,244);
+	end;
+	
+OnPCDieEvent:
+	if ( .start && strcharinfo(3) == "quiz_02" )
+		warp "payon",rand(155,239),rand(160,244);
+	end;
+}

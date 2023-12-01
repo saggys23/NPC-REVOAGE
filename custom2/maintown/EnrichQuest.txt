@@ -1,0 +1,59 @@
+// EnrichQuest
+//============================================================
+payo2,26,174,6	script	Enriched Ore Quest	726,{
+	callfunc "EnrichQuest","Enriched Ore Quest";
+	end;
+}
+
+
+// Ori/Elu Functions
+//============================================================
+function	script	EnrichQuest	{
+	if (checkweight(1201,1) == 0) {
+		mes "- Sepertinya inventory anda penuh!! -";
+		close;
+	}
+	.@npc_name$ = getarg(0);
+	mes "["+ .@npc_name$ +"]";
+	mes "Saya bisa membuatkan anda Enriched Ore.";
+	mes "^FF0000Oridecon^000000 atau ^FF0000Elunium^000000 100 Pcs dan tentu ^FF0000500.000 Zeny^000000 untuk biaya nya.";
+	next;
+	switch(select("Buat Enrich Oridecon:Buat Enrich Elunium:Apa itu Enriched Ore?")) {
+	case 1:
+		if (countitem(984) > 99 && Zeny >= 100) {
+			delitem 984,100;  //Ori
+			getitem 7620,1; // Enriched orimain
+			Zeny -= 500000; // Zeny Cost
+			mes "["+ .@npc_name$ +"]";
+			mes "You're welcome to come";
+			mes "back whenever you want.";
+			close;
+		}
+		else {
+			mes "["+ .@npc_name$ +"]";
+			mes "Bercanda lu bro?";
+			mes "Kembali lagi dengan 100 Batu dan 500.000z";
+			close;
+		}
+	case 2:
+		if (countitem(985) > 99 && Zeny >= 100) {
+			delitem 985,100;  //Elunium
+			getitem 7619,1; // enrich elu
+			Zeny -= 500000; // Zeny Cost
+			mes "["+ .@npc_name$ +"]";
+			mes "You're welcome to come";
+			mes "back whenever you want.";
+			close;
+		}
+		else {
+			mes "["+ .@npc_name$ +"]";
+			mes "Bercanda lu bro?";
+			mes "Kembali lagi dengan 100 Batu dan 500.000z";
+			close;
+		}
+	case 3:
+		mes "["+ .@npc_name$ +"]";
+		mes "Enriched ore kamu bisa gunakan untuk tingkat rate refine yg lebih besar";
+		close;
+	}
+}

@@ -1,0 +1,219 @@
+//===== rAthena Script ======================================= 
+//= HD Refiners
+//===== Description: =========================================
+//= [Official Conversion]
+//= Refiners that use HD ores to refine equipment. Upon
+//= failure, the equipment is not destroyed; rather, its
+//= refine level decreases by 1. The success rate is identical
+//= to that for Enriched ores.
+//= - "Blacksmith Mighty Hammer" only refines from +7~9.
+//= - "Basta" only refines from +10 and up.
+//===== Changelog: ===========================================
+//= 1.0 First version. [Euphy]
+//= 1.1 Removed re-roll behavior. [Secret]
+//============================================================
+
+// Blacksmith Mighty Hammer (+7~9) :: cash_smelting79
+//============================================================
+-	script	::MightyHammer	-1,{
+	disable_items;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "Unlike others, I am a blacksmith who refines a very limited number of items.";
+	mes "I refine only items that are ^CC0000+5 to +9^000000.";
+	next;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "My specialty is that even if my refining fails, the refine level decreases by 1 without losing the gear. Isn't it great?";
+	next;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "So lets kick this into overdrive, what d' ya say? What item do you want to refine?";
+	next;
+	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
+	for(set .@i,1; .@i<=10; set .@i,.@i+1)
+		set .@menu$, .@menu$ + ( getequipisequiped(.@indices[.@i]) ? getequipname(.@indices[.@i]) : F_getpositionname(.@indices[.@i]) +"-[Not equipped]" ) +":";
+	set .@part, .@indices[ select(.@menu$) ];
+	if (!getequipisequiped(.@part)) {
+		mes "[Blacksmith Mighty Hammer]";
+		switch(.@part) {
+		case EQI_HEAD_TOP:
+			mes "I'm a blacksmith, not a hairstylist.";
+			break;
+		case EQI_ARMOR:
+			mes "With my hammer, I will make you a star of the sky.";
+			break;
+		case EQI_HAND_L:
+		case EQI_HAND_R:
+			mes "Making artificial hands is not my specialty.";
+			break;
+		case EQI_GARMENT:
+			mes "Bring out the item so I can refine it!";
+			break;
+		case EQI_SHOES:
+			mes "Where is this foot odor coming from?";
+			break;
+		case EQI_ACC_L:
+		case EQI_ACC_R:
+			mes "Where is the accessory?";
+			break;
+		case EQI_HEAD_MID:
+			mes "What do you want me to refine?";
+			break;
+		case EQI_HEAD_LOW:
+			mes "Huh? What do you want me to do?";
+			break;
+		}
+		close;
+	}
+	if (!getequipisenableref(.@part)) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "This item can't be refined.";
+		close;
+	}
+	if (getequiprefinerycnt(.@part) < 5 || getequiprefinerycnt(.@part) > 9) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "I only handle items with refine levels from +5 to +9.";
+		close;
+	}
+	
+	// Blacksmith Blessing
+	switch( getequiprefinerycnt(.@part) ) {
+	case 4:
+		.@blacksmith_blessing_count = 1;
+		break;
+	case 5:
+		.@blacksmith_blessing_count = 2;
+		break;
+	case 6:
+		.@blacksmith_blessing_count = 2;
+		break;
+	case 7:
+		.@blacksmith_blessing_count = 3;
+		break;
+	case 8:
+		.@blacksmith_blessing_count = 3;
+		break;
+	case 9:
+		.@blacksmith_blessing_count = 4;
+		break;
+	}
+	
+	.@refineitemid = getequipid(.@part); // save id of the item
+	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
+	setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+	.@price = getequiprefinecost(.@part, REFINE_COST_HD, REFINE_ZENY_COST);
+	.@material = getequiprefinecost(.@part, REFINE_COST_HD, REFINE_MATERIAL_ID);
+	
+	mes "[Blacksmith Mighty Hammer]";
+	mes "In order to refine the gear you selected you need ^ff9999"+getitemname(.@material)+"^000000 and some zeny as a fee.";
+	mes "Do you have them ready?";
+	next;
+	if(select("Yes:No") == 2) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "I will wait until you are ready.";
+		close;
+	}
+	if (getequippercentrefinery(.@part) < 100) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "It looks like this item will likely fail to be refined.";
+		mes "Well, even if it fails, it only decreases by 1 refine level.";
+		mes "Would you like to continue refining?";
+		next;
+		
+		
+		switch(select("Use Blacksmith Blessing to refine", "Refine directly without Blessing", "Don't refine yet")){
+		case 1:
+			.@bless_who = 1;
+			break;
+		case 2:
+			break;
+		case 3:
+			mes "[Blacksmith Mighty Hammer]";
+			mes "Only those who overcome fear of failure will obtain a masterpiece.";
+			close;
+	}
+		/*if(select("Yes:No") == 2) {
+			mes "[Blacksmith Mighty Hammer]";
+			mes "Only those who overcome fear of failure will obtain a masterpiece.";
+			close;
+		}*/
+	}
+	
+	if ((.@bless_who && countitem(6635) < .@blacksmith_blessing_count) || countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "Didn't you just say you had everything ready?";
+		close;
+	}
+	/*
+	if (countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "Didn't you just say you had everything ready?";
+		close;
+	}*/
+	.@raterefine = getequippercentrefinery(.@part, true)*115/100;
+	if (.@bless_who) {
+		delitem 6635, .@blacksmith_blessing_count;
+		.@raterefine = getequippercentrefinery(.@part, true)*130/100;
+	}
+	delitem .@material,1;
+	set Zeny, Zeny-.@price;
+// WEEKLY QUEST			
+	.@selectIfCharExistQuery$ = "SELECT account_id FROM weeklyquest WHERE account_id = '"+getcharid(3)+"';";
+		if (query_sql(.@selectIfCharExistQuery$, .@accid) > 0) {
+			.@updaterecapQuery$ = "UPDATE `weeklyquest` SET `task7` = `task7` + 1 WHERE `account_id` = '"+getcharid(3)+"';";
+		} else {
+			.@updaterecapQuery$ = "INSERT INTO weeklyquest (`account_id` , `task7`) VALUES ('"+getcharid(3)+"','1');";
+	}
+		query_sql(.@updaterecapQuery$);
+// END
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
+		mes "[Blacksmith Mighty Hammer]";
+		emotion ET_FRET;
+		mes "Wait a second...";
+		mes "Do you think I'm stupid?!";
+		mes "You switched the item while I wasn't looking! Get out of here!";
+		close;
+	}
+
+	mes "[Blacksmith Mighty Hammer]";
+	mes "Tac! Tac! Tac!";
+	//mes "Pake blesing : "+.@blacksmith_blessing_count+" Rate : "+.@raterefine+"";
+	if (.@raterefine > rand(100)) {
+		successrefitem .@part;
+		if (getequipweaponlv(.@part) == 1 && getequiprefinerycnt(.@part) >= 8){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 2 && getequiprefinerycnt(.@part) >= 7){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 3 && getequiprefinerycnt(.@part) >= 6){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 4 && getequiprefinerycnt(.@part) >= 6){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (!getequipweaponlv(.@part) && getequiprefinerycnt(.@part) >= 6){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		next;
+		emotion ET_BEST;
+		mes "[Blacksmith Mighty Hammer]";
+		mes "The sound refreshes my mind everytime I hear it.";
+		mes "Here, have it. Refine succeeded flawlessly!";
+		close;
+	}
+	downrefitem .@part;
+	next;
+	emotion ET_HUK;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "Oops!!";
+	next;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "I am sure a person like you would never blame me for a decrease in refine level by 1. Hmm.";
+	close;
+}
+prt_in,59,54,3	duplicate(MightyHammer)	Mighty Hammer#prt	826
+morocc_in,65,30,3	duplicate(MightyHammer)	Mighty Hammer#morocc	826
+payon,148,176,3	duplicate(MightyHammer)	Mighty Hammer#pay	826
+alberta_in,16,56,3	duplicate(MightyHammer)	Mighty Hammer#alb	826
+yuno_in01,171,18,3	duplicate(MightyHammer)	Mighty Hammer#yuno	826
+ein_in01,22,82,3	duplicate(MightyHammer)	Mighty Hammer#ein	826
+lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	826
+vip,64,271,6	duplicate(MightyHammer)	HD Ore Refiner#vip	826
+// iRO NPC locations:
+// payon,174,133,4	duplicate(MightyHammer)	Mighty Hammer#im	826

@@ -1,0 +1,67 @@
+-	script	Lever#gd::gdlever	-1,{
+
+	set .@GID,GetCastleData(strnpcinfo(2),CD_GUILD_ID);
+
+	if (.@GID == 0) {
+		mes "[Ringing Voice]";
+		mes "'Those who overcome an ordeal shows a great deal of bravery... and will find their way to another ordeal.'";
+		close;
+	}
+
+	if (compare(strnpcinfo(2),"aldeg")) {
+		set .@destination$,"gld_dun02";
+		if (compare(strnpcinfo(2),"cas01")) setarray .@coordinates[0],32,122;
+		else if (compare(strnpcinfo(2),"cas02")) setarray .@coordinates[0],79,30;
+		else if (compare(strnpcinfo(2),"cas03")) setarray .@coordinates[0],165,38;
+		else if (compare(strnpcinfo(2),"cas04")) setarray .@coordinates[0],160,148;
+		else if (compare(strnpcinfo(2),"cas05")) setarray .@coordinates[0],103,169;
+	}
+	else if (compare(strnpcinfo(2),"gefg")) {
+		set .@destination$,"gld_dun04";
+		if (compare(strnpcinfo(2),"cas01")) setarray .@coordinates[0],39,258;
+		else if (compare(strnpcinfo(2),"cas02")) setarray .@coordinates[0],125,270;
+		else if (compare(strnpcinfo(2),"cas03")) setarray .@coordinates[0],268,251;
+		else if (compare(strnpcinfo(2),"cas04")) setarray .@coordinates[0],268,108;
+		else if (compare(strnpcinfo(2),"cas05")) setarray .@coordinates[0],230,35;
+	}
+	else if (compare(strnpcinfo(2),"payg")) {
+		set .@destination$,"gld_dun01";
+		if (compare(strnpcinfo(2),"cas01")) setarray .@coordinates[0],186,165;
+		else if (compare(strnpcinfo(2),"cas02")) setarray .@coordinates[0],54,165;
+		else if (compare(strnpcinfo(2),"cas03")) setarray .@coordinates[0],54,39;
+		else if (compare(strnpcinfo(2),"cas04")) setarray .@coordinates[0],186,39;
+		else if (compare(strnpcinfo(2),"cas05")) setarray .@coordinates[0],223,202;
+	}
+	else if (compare(strnpcinfo(2),"prtg")) {
+		set .@destination$,"gld_dun03";
+		if (compare(strnpcinfo(2),"cas01")) setarray .@coordinates[0],28,251;
+		else if (compare(strnpcinfo(2),"cas02")) setarray .@coordinates[0],164,268;
+		else if (compare(strnpcinfo(2),"cas03")) setarray .@coordinates[0],164,179;
+		else if (compare(strnpcinfo(2),"cas04")) setarray .@coordinates[0],268,203;
+		else if (compare(strnpcinfo(2),"cas05")) setarray .@coordinates[0],199,28;
+	}
+	// Add custom Guild Castles here.
+	else {
+		end;
+	}
+
+	mes "[Ringing Voice]";
+	mes "'Only the truly brave can take the test.'";
+	next;
+	mes " ";
+	mes "There's a small lever. Will you pull it?";
+	next;
+	if(select("Pull.:Don't pull.") == 1) {
+		if (getcharid(2) == .@GID) {
+			close2;
+			warp .@destination$,.@coordinates[0],.@coordinates[1];
+			end;
+		}
+		mes " ";
+		mes "Nothing happened.";
+		close;
+	}
+	close;
+}
+
+aldeg_cas01,211,181,0	duplicate(gdlever)	#aldeg_cas01	111

@@ -1,0 +1,14 @@
+payon,188,225,3	script	CVC Tournament Room	483,{
+
+mes "Do you want enter the room ? ";
+switch ( select("[Tournament] Enter Room ^EE3333[ "+getmapusers("cell_game")+" Users ]^000000", "No,thanks!" ) ) {
+
+case 1:
+warp "cell_game",135,158;
+end;
+case 2:
+end;
+
+OnInit: disablenpc strnpcinfo(0); end;
+}
+}

@@ -1,0 +1,39 @@
+//WoE Most Kill Announcer
+-	script	MK_Announcer	FAKE_NPC,{
+
+//OnAgitEnd:
+OnAgitEnd2:
+set .DateToday, gettimestr("%m%d%Y",21);
+set .@size, query_sql( "SELECT `char_id`, `playername`, `guild_id`, `date`, `kills` FROM `mostkill_gvg` WHERE `date` = '"+.DateToday+"' AND `kills` > 0 ORDER BY `kills` DESC limit "+ .MostKillTop, .UserID, .@UserName$, .UserGuild, .UserDate, .@UserKill );
+
+globalmes "---[ WoE Most Top Kills ]---";
+for (set .@c, 0; .@c < .@size; set .@c, .@c + 1)
+	globalmes "Top " +(.@c + 1) +". " + .@UserName$[.@c] +" -- Guild [ "+getguildname(.UserGuild[.@c])+" ] with " + .@UserKill[.@c] +" kill(s).";
+end;
+
+
+OnInit:
+set .MostKillTop, 5; // Max. Top WoE Most Kill Rank.
+end;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//WoE Guild Highest Kill Announcer
+-	script	MK_Announcer1	FAKE_NPC,{
+
+//OnAgitEnd:
+OnAgitEnd2:
+set .DateToday, gettimestr("%m%d%Y",21);
+set .@size, query_sql( "SELECT `guild_id`, SUM(`kills`) as 'Result' FROM `mostkill_gvg` WHERE `date` = '"+.DateToday+"' GROUP BY `guild_id` ORDER BY SUM(`kills`) DESC limit "+ .MostKillTop, .UserGuild, .@GuildKill );
+
+globalmes "---[ WoE Guild Highest Kills ]---";
+for (set .@c, 0; .@c < .@size; set .@c, .@c + 1)
+	globalmes "Top " +(.@c + 1) +" Guild [ "+getguildname(.UserGuild[.@c])+" ] with " + .@GuildKill[.@c] +" guild kill(s).";
+end;
+
+
+OnInit:
+set .MostKillTop, 5; // Max. Top WoE Most Kill Rank.
+end;
+}

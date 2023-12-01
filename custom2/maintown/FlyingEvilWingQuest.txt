@@ -1,0 +1,45 @@
+// EnrichQuest
+//============================================================
+payo2,31,125,6	script	Son of Perdition	494,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Saya butuh ruang !! -";
+		close;
+	}
+	mes "[Son of Perdition]";
+	mes "Apa yg kau mau?";
+	mes "Ah saya bs menebak, kamu mau melepaskan jiwa itu?";
+	next;
+	switch(select("Buatkan saya Flywing Evil Wing.:Apa yang kamu maksut.:End")) {
+	case 1:
+		if (countitem(3007) < 1){	
+		mes "[Son of Perdition]";
+			mes "Jgn main-main dengan saya !";
+			close;
+			}
+		if (countitem(2255) < 1){
+		mes "[Son of Perdition]";
+			mes "Jgn main-main dengan saya !";
+			close;
+			}
+		if (countitem(6417) < 15){	
+		mes "[Son of Perdition]";
+			mes "Jgn main-main dengan saya !";
+			close;
+			}
+			delitem 3007,1;
+			delitem 2255,1;
+			delitem 6417,15;
+			getitem 5376,1;
+			close;
+			
+	case 2:
+		mes "[Son of Perdition]";
+		mes "Bawakan saya ^FF00001pcs Evil Wing, 1pcs Breath of Evil Spirit, 15pcs Silvervine^000000.";
+		mes "Kamu bisa dapatkan Breath of Evil Spirit dari Devil Tower.";
+		end;
+	case 3:
+end;
+	}
+}
+
+

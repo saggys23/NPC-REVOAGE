@@ -1,0 +1,134 @@
+// Barricades
+
+
+-	script	ricwall	-1,{
+
+OnInit:
+	bindatcmd "stop3v3", strnpcinfo(0)+"::OnBreak",14,14;
+	bindatcmd "resume3v3", strnpcinfo(0)+"::OnResume",14,14;	
+	bindatcmd "start3v3", strnpcinfo(0)+"::OnStartRIC",14,14;
+
+
+	setwall "rwc03", 85, 47, 6, DIR_NORTH, 0, "3v3right";
+	setwall "rwc03", 16, 47, 6, DIR_NORTH, 0, "3v3left";
+				
+	//setwall "rwc03", 24, 47, 6, DIR_NORTH, 0, "3v3left";
+		//setwall "rwc03", 85, 52, 4, DIR_SOUTH, 0, "3v3left1";
+		//setwall "rwc03", 16, 47, 4, DIR_SOUTH, 0, "3v3right1";
+		
+	end;
+OnStartRIC:
+			mapannounce "rwc03", "Prepare time 1mins !~", bc_blue;
+			sleep 1000;
+			sleep 30000;
+			//mapannounce "rwc03", "2mins left !~", bc_blue;
+			//sleep 60000;
+			//sleep 1000;
+			//mapannounce "rwc03", "1mins left !~", bc_blue;
+			//sleep 55000;
+
+			//areawarp "rwc03",280,101,313,146,"rwc03",225,158; //warpkanan
+			//areawarp "rwc03",22,139,52,190,"rwc03",130,158; //warpkiri
+			
+		OnResume:
+			mapannounce "rwc03", "Battle start in 30sc, Buff and Get Ready !~", bc_blue;
+			initnpctimer;
+			end;
+			
+		OnTimer20000:
+			mapannounce "rwc03", "After this announce, all disconnected players are dead !~", bc_blue;
+			sleep 2000;
+			mapannounce "rwc03", "Playing time is 5mins. defeat the opponent team will win in time.", bc_blue;
+			sleep 3000;
+			for ( .@i = 5; .@i > 0; --.@i ) {
+				mapannounce "rwc03", .@i +" !~", bc_blue;
+				sleep 1000;
+			}
+			mapannounce "rwc03", "Round Start !!! ", bc_blue;
+			mapannounce "rwc03", "===== 5 minutes have left =====", bc_blue;
+			gvgon "rwc03";
+
+			delwall "3v3left";
+			//delwall "3v3left1";
+			delwall "3v3right";
+			//delwall "3v3right1";
+			end;
+			
+	OnTimer90000:
+		mapannounce "rwc03", "===== 4 minutes have left =====", bc_blue;
+		end;
+	OnTimer150000:
+		mapannounce "rwc03", "===== 3 minutes have left =====", bc_blue;
+		end;
+	OnTimer210000:
+		mapannounce "rwc03", "===== 2 minutes have left =====", bc_blue;
+		end;
+	OnTimer270000:
+		mapannounce "rwc03", "===== 1 minutes have left =====", bc_blue;
+		end;
+	OnTimer330000:
+		mapannounce "rwc03", "===== Battle End =====", bc_blue;
+		stopnpctimer;
+		gvgoff "rwc03";
+		goto OnInit;
+
+		
+	OnBreak:
+		gvgoff "rwc03";
+		mapannounce "rwc03", "===== Battle End =====", bc_blue;
+		setwall "rwc03", 85, 47, 6, DIR_NORTH, 0, "3v3right";
+		setwall "rwc03", 16, 47, 6, DIR_NORTH, 0, "3v3left";
+		stopnpctimer;
+		end;
+
+
+	
+		}
+	
+
+rwc03	mapflag	nomemo
+rwc03	mapflag	noteleport
+rwc03	mapflag	nosave
+rwc03	mapflag	nobranch
+rwc03	mapflag	noexppenalty
+rwc03	mapflag	nowarp
+
+
+coliseum	mapflag	nomemo
+coliseum	mapflag	noteleport
+coliseum	mapflag	nosave
+coliseum	mapflag	nobranch
+coliseum	mapflag	noexppenalty
+coliseum	mapflag	nowarp
+coliseum	mapflag	nowarpto
+
+
+coliseum,178,150,5	script	Warp Arena	827,{
+mes "Are you ready ??" ;
+	switch(select("Yes, here we go!:Wait a minute.")) {
+		case 1:
+				warp "rwc03",90,50;
+				announce "[ Warper Arena ] : "+strcharinfo(0)+" Has Enter PvP for 3vs3 Room !!",bc_blue|bc_all;
+				     //removing buff
+				callfunc("remove_buff3v3");		//call remov buff at folder custom
+				end;
+		
+		case 2:
+			end;
+			}
+		}
+		
+coliseum,120,150,5	script	Warp Arena 2	827,{
+mes "Are you ready ??" ;
+	switch(select("Yes, here we go!:Wait a minute.")) {
+		case 1:
+				warp "rwc03",10,50;
+				announce "[ Warper Arena ] : "+strcharinfo(0)+" Has Enter PvP for 3vs3 Room !!",bc_blue|bc_all;
+				     //removing buff
+				callfunc("remove_buff3v3");		//call remov buff at folder custom
+				end;
+		
+		case 2:
+			end;
+			}
+		}

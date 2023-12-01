@@ -1,0 +1,29 @@
+
+mora,60,150,3	script	Compensation NPC	831,{
+
+	.@unique_id$ = get_unique_id();
+
+	if(getd("$COMPE_" + .@unique_id$) > 0 || #COMPE > 0){			 //Change for reset reward #CBTpackage & getd size
+		mes "[Compensation NPC]";
+		mes "You have already claimed your Compensation.";
+		mes "";
+		mes "NOTE : 1 PC only can claim 1 Times";
+		close;
+		end;
+	}
+	setd "$COMPE_" + .@unique_id$,1;					//Change Size reset reward tercatat di MAPREG database
+	#COMPE = 1;   										//Change for reset reward
+	//$freebies_count -= 1;								//KALAU MAU SETTING JUMLAH MAX NYA
+	for (.@i = 0; .@i < getarraysize(.items); .@i += 2)
+		getitembound .items[.@i],.items[.@i+1],1;
+	//if ($freebies_count == 0)							//KALAU MAU SETTING JUMLAH MAX NYA
+		$reward_status = 1;
+	message strcharinfo(0),"[Compensation NPC] : Sorry for the inconvenience, have fun stay solid.";
+	end;
+	
+OnInit:
+	setarray .items, 3001,1,12210,2,12208,2;
+	waitingroom "Compensation Here !!!",0;
+	//$freebies_count = 100;								//Becarefull ON init command auto restock limit
+}
+

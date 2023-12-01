@@ -1,0 +1,126 @@
+
+/*
+DROP TABLE IF EXISTS `pvp_ranking`;
+
+CREATE TABLE IF NOT EXISTS `pvp_ranking` (
+`Char_ID` int(11) unsigned NOT NULL DEFAULT '0',
+`PlayerName` varchar(255) NULL DEFAULT '',
+`Kills` varchar(255) NULL DEFAULT '',
+`Deaths` varchar(255) NULL DEFAULT '',
+PRIMARY KEY (`Char_ID`)
+) ENGINE=MyISAM;
+*/
+
+payo2,83,106,6	script	PVP Warper & Shop	418,{
+	set .@menu$, "PVP Warp:Top "+.top+" Kills:Top "+.top+" Deaths:Points Shop:";
+	if (getgmlevel() == 99) { set .@menu$, .@menu$ + "Reset Data"; }
+	switch(select(.@menu$)) {
+	
+	case 1:
+
+			announce "[ PvP Warper ] : "+strcharinfo(0)+" has entered in PVP Room",bc_blue|bc_all;
+			warp "pvp_y_room",82,42;
+
+		end;
+			
+	case 2:
+	query_sql "CREATE TABLE IF NOT EXISTS `pvp_ranking` ( `Char_ID` int(11) unsigned NOT NULL DEFAULT '0', `PlayerName` varchar(255) NULL DEFAULT '', `Kills` varchar(255) NULL DEFAULT '', `Deaths` varchar(255) NULL DEFAULT '', PRIMARY KEY (`Char_ID`) ) ENGINE=MyISAM";
+	query_sql( "DELETE FROM `pvp_ranking` WHERE `PlayerName` NOT IN ( SELECT `name` FROM `char` )" ); 
+	set .@size, query_sql( "SELECT * FROM pvp_ranking WHERE Kills > 0 ORDER BY Kills DESC limit "+ .top, .@CharID, .@name$, .@Kills, .@Deaths);
+	
+	mes "[^FF0000^0000FFRank ^996600Top ^FF0000" + .top +"^000000]";
+	for (set .@c, 0; .@c < .@size; set .@c, .@c + 1)
+		mes "Top ^FF0000" +(.@c + 1) +"^000000: ^0000FF" + .@name$[.@c] +"^000000 | ^FF0000" + .@Kills[.@c] +"^000000 Kills | ^FF0000" + .@Deaths[.@c] +"^000000 Deaths .";
+	close;
+	break;
+	
+	case 3:
+	query_sql "CREATE TABLE IF NOT EXISTS `pvp_ranking` ( `Char_ID` int(11) unsigned NOT NULL DEFAULT '0', `PlayerName` varchar(255) NULL DEFAULT '', `Kills` varchar(255) NULL DEFAULT '', `Deaths` varchar(255) NULL DEFAULT '', PRIMARY KEY (`Char_ID`) ) ENGINE=MyISAM";
+	query_sql( "DELETE FROM `pvp_ranking` WHERE `PlayerName` NOT IN ( SELECT `name` FROM `char` )" ); 
+	set .@size, query_sql( "SELECT * FROM pvp_ranking WHERE Deaths > 0 ORDER BY Deaths DESC limit "+ .top, .@CharID, .@name$, .@Kills, .@Deaths);
+	
+	mes "[^FF0000^0000FFRank ^996600Top ^FF0000" + .top +"^000000]";
+	for (set .@c, 0; .@c < .@size; set .@c, .@c + 1)
+		mes "Top ^FF0000" +(.@c + 1) +"^000000: ^0000FF" + .@name$[.@c] +"^000000 | ^FF0000" + .@Kills[.@c] +"^000000 Kills | ^FF0000" + .@Deaths[.@c] +"^000000 Deaths .";
+	close;
+	break;
+	
+	case 4:
+	mes "[Master Krane]";
+	mes "Hi, "+strcharinfo(0)+"";
+	mes "Want to go shopping?";
+	next;
+	menu "PVP Shop",PVPShop,"Nope",ShopNope;
+	
+	PVPShop:
+	callshop "PVP_Points_Shop",1;
+	end;
+	
+	ShopNope:
+	mes "[Master Krane]";
+	mes "Well Okay";
+	close;
+
+	case 5:
+		mes "Good Day! Master.";
+		next;
+		menu "Are you sure?",yess,"Nope",noo;
+		yess:
+		query_sql("TRUNCATE TABLE `ragnarok`.`pvp_ranking`;");
+		mes "Woe Rank Reset Success";
+		close;
+
+		noo:
+		mes "Well Okay";
+		close;
+	break;
+	}
+	
+
+OnInit: // Script Configuration
+	set .top, 10;
+	set .PvppointsP, 1;      //pointsP to add in database/player when kill
+	set .PVPDeduct, 1;      //pointsP to add in database
+	set .pvpdiedeductpoint, 2; //pointsP to deduct when died
+	waitingroom "PVP Rank & Warp",0;
+	end;
+
+
+OnPCKillEvent:
+	if (killerrid != getcharid(3)) {
+	if (compare(strcharinfo(3),"pvp_y_8-2")) {
+
+		query_sql( "SELECT * FROM pvp_ranking WHERE `Char_ID` = '"+getcharid(0)+"'", .@CharID, .@Name$, .@Kills, .@Deaths);
+		set TotalPVP , .@Kills + .PvppointsP;
+		
+		if(getcharid(0) == .@CharID){
+		query_sql("UPDATE `pvp_ranking` SET `Kills` = '"+TotalPVP+"' WHERE `Char_ID` = '"+getcharid(0)+"'");
+		}else{	
+		query_sql("INSERT INTO `pvp_ranking` (`Char_ID`,`PlayerName`,`Kills`,`Deaths`) VALUES ('"+getcharid(0)+"', '"+strcharinfo(0)+"', '"+.PvppointsP+"', '"+.@Deaths+"')"); 
+		}
+		////////query for the deaths
+		query_sql( "SELECT `char_id`, `account_id` FROM `char` WHERE `account_id` =  '"+getcharid(3)+"' ", .@Cchar_id, .@Aid);
+		query_sql( "SELECT * FROM pvp_ranking WHERE `Char_ID` = '"+.@Cchar_id+"'", .@CharID, .@Name$, .@Kills, .@Deaths);
+		set TotalDie , .@Deaths + .PVPDeduct;
+		
+		if(.@CharID != .@Cchar_id){
+		query_sql("INSERT INTO `pvp_ranking` (`Char_ID`,`PlayerName`,`Kills`,`Deaths`) VALUES ('"+.@Cchar_id+"', '"+strcharinfo(0)+"', '0', '"+TotalDie+"')");
+		}else{
+		query_sql("UPDATE pvp_ranking SET Deaths = '"+TotalDie+"' WHERE `Char_ID` = '"+.@Cchar_id+"'");
+		}
+		
+		//This is the point system on the player, you can disable this anytime by adding comment " // "
+		set pointsP, pointsP+.PvppointsP;
+		dispbottom "You killed "+rid2name(killedrid)+" you gained "+.PvppointsP+" point and You now have "+pointsP+" PVP pointsP.";
+		attachrid(killedrid);
+		//set pointsP, pointsP-.pvpdiedeductpoint;
+		dispbottom "You are killed by "+rid2name(killerrid)+".";
+		end;
+		///////
+
+	}
+    }
+    end;
+}
+
+-	pointshop	PVP_Points_Shop	-1,pointsP,1202:5;

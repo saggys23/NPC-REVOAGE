@@ -1,0 +1,41 @@
+payon,166,221,3	script	Claim Event	833,{
+	
+setarray .@toppvp1$,"Suga","GM-Aesir";
+setarray .@toppvp2$,"HECTOR","GMdummy";
+setarray .@toppvp3$,"SinZiG","GMdummy1";	
+	
+
+.@nickname$ = strcharinfo(0);
+if (!checkweight(1483,10)) {
+mes "Please Check ur Weight";
+end;
+}
+
+if(!#rankpvp3 && inarray(.@toppvp1$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 300000;
+	getitem 6230,1;
+	getitembound 31373,1,Bound_Account;
+	#rankpvp3 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rank Rewards !";
+}
+if(!#rankpvp3 && inarray(.@toppvp2$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 200000;
+	getitem 6231,1;
+	getitembound 31373,1,Bound_Account;
+	#rankpvp3 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rank Rewards !";
+}
+if(!#rankpvp3 && inarray(.@toppvp3$,.@nickname$) != -1){
+	set #CASHPOINTS, #CASHPOINTS + 100000;
+	getitem 6456,1;
+	getitembound 31373,1,Bound_Account;
+	#rankpvp3 = true;
+	message strcharinfo(0),"[Claim Event Manager]: You just got your PVP Rank Rewards !";
+}
+
+	end;
+}
+
+
+
+

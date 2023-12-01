@@ -1,0 +1,107 @@
+// Barricades
+2012rwc_02,137,154,0	script	#bars01	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,137,155,0	script	#bars02	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,137,156,0	script	#bars03	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,137,157,0	script	#bars04	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,137,158,0	script	#bars05	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,216,154,0	script	#bars06	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,216,155,0	script	#bars07	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,216,156,0	script	#bars08	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,216,157,0	script	#bars09	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+2012rwc_02,216,158,0	script	#bars010	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+-	script	ricwall	-1,{
+OnInit:
+	bindatcmd "breakric", strnpcinfo(0)+"::OnBreak",14,14;
+	bindatcmd "resumeric", strnpcinfo(0)+"::OnResume",14,14;	
+	bindatcmd "ricstart", strnpcinfo(0)+"::OnStartRIC",14,14;
+	end;
+	
+OnStartRIC:	
+			mapannounce "2012rwc_02", "Prepare time 3mins !~", bc_blue;
+			sleep 1000;
+			//sleep 60000;
+			mapannounce "2012rwc_02", "2mins left !~", bc_blue;
+			//sleep 60000;
+			sleep 1000;
+			mapannounce "2012rwc_02", "1mins left !~", bc_blue;
+			
+	for ( .@j = 1; .@j < 11; .@j++ ){
+		enablenpc "#bars0"+.@j;
+		setwall "2012rwc_02", 137, 154, 4, DIR_NORTH, 0, "ricwallleft";
+		setwall "2012rwc_02", 216, 154, 4, DIR_NORTH, 0, "ricwallright";
+		setwall "2012rwc_02", 137, 158, 4, DIR_SOUTH, 0, "ricwallleft1";
+		setwall "2012rwc_02", 216, 158, 4, DIR_SOUTH, 0, "ricwallright1";
+	}	
+			//sleep 55000;
+
+			for ( .@i = 5; .@i > 0; --.@i ) {
+				mapannounce "2012rwc_02", .@i +" !~", bc_blue;
+				sleep 1000;
+			}
+			areawarp "2012rwc_02",280,101,313,146,"2012rwc_02",225,158; //warpkanan
+			areawarp "2012rwc_02",22,139,52,190,"2012rwc_02",130,158; //warpkiri
+		OnResume:
+			mapannounce "2012rwc_02", "Battle start in 30sc, Buff and Get Ready !~", bc_blue;
+			initnpctimer;
+			end;
+			
+		OnTimer20000:
+			mapannounce "2012rwc_02", "After this announce, all disconnected players are dead !~", bc_blue;
+			sleep 2000;
+			mapannounce "2012rwc_02", "Playing time is 7mins. defeat the opponent team will win in time.", bc_blue;
+			sleep 3000;
+			for ( .@i = 5; .@i > 0; --.@i ) {
+				mapannounce "2012rwc_02", .@i +" !~", bc_blue;
+				sleep 1000;
+			}
+			mapannounce "2012rwc_02", "Round Start !!! ", bc_blue;
+			mapannounce "2012rwc_02", "===== 7 minutes have left =====", bc_blue;
+			gvgon "2012rwc_02";
+			for ( .@j = 1; .@j < 11; .@j++ )
+				disablenpc "#bars0"+.@j;
+			delwall "ricwallleft";
+			delwall "ricwallleft1";
+			delwall "ricwallright";
+			delwall "ricwallright1";
+			end;
+			
+	OnTimer90000:
+		mapannounce "2012rwc_02", "===== 6 minutes have left =====", bc_blue;
+		end;
+	OnTimer150000:
+		mapannounce "2012rwc_02", "===== 5 minutes have left =====", bc_blue;
+		end;
+	OnTimer210000:
+		mapannounce "2012rwc_02", "===== 4 minutes have left =====", bc_blue;
+		end;
+	OnTimer270000:
+		mapannounce "2012rwc_02", "===== 3 minutes have left =====", bc_blue;
+		end;
+	OnTimer330000:
+		mapannounce "2012rwc_02", "===== 2 minutes have left =====", bc_blue;
+		end;
+	OnTimer390000:
+		mapannounce "2012rwc_02", "===== 1 minutes have left =====", bc_blue;
+		end;
+	OnTimer450000:
+		mapannounce "2012rwc_02", "===== Battle End =====", bc_blue;
+		stopnpctimer;
+		gvgoff "2012rwc_02";
+		end;	
+		
+	OnBreak:
+		gvgoff "2012rwc_02";
+		mapannounce "2012rwc_02", "Wait, someone has disconnected from the game.", bc_blue;
+		stopnpctimer;
+		end;
+
+
+	
+		}
+	
+	
+	
+	
+	
+	
+	
