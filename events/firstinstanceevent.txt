@@ -1,0 +1,9 @@
+
+mora,53,147,3	script	First Instance Event	719,{
+
+	bindatcmd "@jumpto tester",strnpcinfo(3) + "::OnAtcommand";
+	end;
+	OnAtcommand:
+		specialeffect2 EF_ANGEL2;
+		end;
+	}

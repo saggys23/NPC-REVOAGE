@@ -15,11 +15,9 @@
 -	script	::Airship_Staff_izlude	-1,{
 	mes "[Airship Staff]";
 	mes "Welcome! Would you like";
-	mes "to board the Airship that";
-	mes "departs on the flight which stops";
-	mes "in Juno and Rachel?";
+	mes "to board the Airship ?";
 	next;
-	if (select("Board the Airship to Juno/Rachel.:Cancel.") == 1) {
+	if (select("Board to The Airship:Cancel.") == 1) {
 		mes "[Airship Staff]";
 		mes "The boarding fee is";
 		mes "1,200 zeny. However, this";

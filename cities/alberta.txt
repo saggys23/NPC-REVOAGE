@@ -219,7 +219,7 @@ alberta,189,151,5	script	Fisk	4W_SAILOR,{
 		}
 		Zeny = Zeny - 500;
 		if (checkre(0))
-			warp "izlude",195,212;
+			warp "izlude",176,182;
 		else
 			warp "izlude",176,182;
 		end;

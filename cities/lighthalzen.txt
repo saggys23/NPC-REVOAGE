@@ -615,7 +615,7 @@ lighthalzen,182,102,3	script	Lucius#zen5	866,{
 				mes "you, youngster and take care.";
 				set $donatedzeny,0;
 				getitem 603,1; //Old_Blue_Box
-				getitem 12016,1; //Speed_Up_Potion
+				//getitem 12016,1; //Speed_Up_Potion
 			}
 			close;
 		}
