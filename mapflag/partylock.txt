@@ -34,3 +34,4 @@
 // Nidhoggr's Instance ============
 1@nyd	mapflag	partylock
 2@nyd	mapflag	partylock
+1@face	mapflag	partylock

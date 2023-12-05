@@ -26,4 +26,3 @@ teg_dun01	mapflag	nocostume
 teg_dun02	mapflag	nocostume
 arug_dun01	mapflag	nocostume
 schg_dun01	mapflag	nocostume
-

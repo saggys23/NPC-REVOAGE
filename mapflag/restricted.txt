@@ -16,7 +16,9 @@
 //= 1.3 Added Orc's Memory, Nidhoggur's Nest and towns restrictions. [Daegaladh]
 //= 1.4 Renewal split. [Euphy]
 //============================================================
-
+// Faceworm ====
+1@face	mapflag	restricted	6
+mvp_room	mapflag	restricted	6
 //Aldebaran Turbo Track
 alde_tt02	mapflag	restricted	1
 turbo_n_1	mapflag	restricted	1
@@ -26,7 +28,8 @@ turbo_n_16	mapflag	restricted	1
 turbo_e_4	mapflag	restricted	1
 turbo_e_8	mapflag	restricted	1
 turbo_e_16	mapflag	restricted	1
-
+2012rwc_02	mapflag	restricted	1
+guild_vs3	mapflag	restricted	1
 //Jail
 sec_pri	mapflag	restricted	2
 
@@ -96,6 +99,7 @@ moscovia	mapflag	restricted	7
 niflheim	mapflag	restricted	7
 prontera	mapflag	restricted	7
 payon	mapflag	restricted	7
+payo2	mapflag	restricted	7
 pay_arche	mapflag	restricted	7
 rachel	mapflag	restricted	7
 splendide	mapflag	restricted	7

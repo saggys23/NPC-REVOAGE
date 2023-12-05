@@ -687,3 +687,17 @@ alb2trea,59,69,5	script	Kafra Employee::kaf_alb2trea	117,{
 	savepoint "alb2trea",92,64,1,1;
 	callfunc "F_KafEnd",0,1,"at Sunken Ship";
 }
+
+
+vip,74,258,3	script	Kafra Employee::vip	116,{
+	cutin "kafra_01",2;
+	mes "[Kafra Employee]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	callfunc "F_Kafra",5,2,1,50,0;
+	savepoint "payon",156,232,1,1;
+	callfunc "F_KafEnd",0,1,"at Hall Room";
+}
