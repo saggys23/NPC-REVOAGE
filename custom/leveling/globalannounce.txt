@@ -1,0 +1,50 @@
+-	script	announcer05	-1,{
+OnClock0514:
+OnClock0614:
+OnClock0714:
+OnClock0814:
+OnClock0914:
+OnClock1014:
+OnClock1114:
+OnClock1214:
+OnClock1314:
+OnClock1414:
+OnClock1514:
+OnClock1614:
+OnClock1714:
+OnClock1814:
+OnClock1914:
+OnClock2014:
+OnClock2114:
+OnClock2214:
+OnClock2314:
+OnClock0014:
+OnClock0114:
+OnClock0214:
+	initnpctimer;
+	announce "Welcome to Age of Ragnarok !!!",bc_all,"0x70dbdb";
+	end;
+OnTimer5000:
+	announce "Transparancy GM Commands and MVP Card dropped list, and many upcomming feature transparancy program.",bc_all,"0x70dbdb";
+	end;
+OnTimer10000:
+	announce "Running Big Event : Mvp Collector &  Aragham Apprentices with total Prize worth for 50.000.000 IDR / 3500 USD.",bc_all,"0x70dbdb";
+	end;
+OnTimer15000:
+	announce "GE & BGR with total Prize worth Total 60 Juta IDR / 4000 USD & 15 Juta Cash Coin / 1000 USD #PastiCair.",bc_all,"0x70dbdb";
+	end;
+OnTimer20000:
+	announce "Brandnew Headgear box on IM,Get Black Devil Mask & other interesting headgear.",bc_all,"0x70dbdb";
+	end;
+OnTimer25000:
+	announce "Top up Reward: get rewards in multiples of 25k & 50k IDR top up (can be repeated) & Exclusive Costume with 250k IDR top up.Event Period 09~16 September 2022",bc_all,"0x70dbdb";
+	end;
+OnTimer30000:
+	announce "Hugel & Rachel Episode Update will be coming in September",bc_all,"0x70dbdb";
+	end;
+OnTimer35000:	
+	announce "Join our discord for further information LINK : https://discord.io/ageof",bc_all,"0x70dbdb";
+	stopnpctimer;
+	end;
+	}
+	

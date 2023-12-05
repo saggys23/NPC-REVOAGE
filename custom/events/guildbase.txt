@@ -1,0 +1,620 @@
+
+	
+
+
+prontera,139,98,6	script	PVP Room Base	827,{
+set .@menuA$, "PVP Warp:Points Shop[^EE3333"+#pointsP+"^000000]:Exit:";
+switch(select(.@menuA$)) {
+	case 1:
+	switch( select("[PVP] Free for ALL ^EE3333[ "+getmapusers("pvp_y_8-2")+" Users ]^000000","[PVP] CvC Maps^EE3333[ "+getmapusers("guild_vs3")+" Users ]^000000") ) {
+	case 1:
+			warp "pvp_y_8-2",0,0;
+			sc_end SC_INCMHPRATE;
+			sc_end SC_INCALLSTATUS;
+			sc_end SC_INCDEFRATE;
+			sc_end SC_INCATKRATE;
+			sc_end SC_INCHIT;
+			sc_end SC_INCFLEE;
+			sc_end SC_WHISTLE;
+			sc_end SC_ASSNCROS;
+			sc_end SC_POEMBRAGI;
+			sc_end SC_APPLEIDUN;
+			sc_end SC_MODECHANGE;
+			sc_end SC_HUMMING;
+			sc_end SC_DONTFORGETME;
+			sc_end SC_FORTUNE;
+			sc_end SC_SERVICE4U;
+			announce "[ PvP Warper ] : "+strcharinfo(0)+" Has Enter PvP for All Room !!",bc_blue|bc_all;
+			break;	
+			
+	case 2:
+			if ( Class != 4016 ){
+				mes "You are not Champion Class , so you cant enter.";
+			}else{
+			 if (getequipisequiped(9)) unequip 9;
+			 if (getequipisequiped(2)) unequip 2;
+			 if (getequipisequiped(3)) unequip 3;
+			 if (getequipisequiped(4)) unequip 4;
+			 if (getequipisequiped(5)) unequip 5;
+			 if (getequipisequiped(6)) unequip 6;
+			 if (getequipisequiped(7)) unequip 7;
+			 if (getequipisequiped(8)) unequip 8;
+		
+				warp "guild_vs3",0,0;
+				announce "[ PvP Warper ] : "+strcharinfo(0)+" Has Enter PvP for CvC Room !!",bc_blue|bc_all;
+				sc_end SC_FOOD_LUK_CASH;      //removing buff
+				callfunc("remove_buff");		//call remov buff at folder custom
+			}
+			break;
+		}
+	end;
+	case 2:
+	callshop "PVP_Points_Shop",1;
+	end;
+	case 3:
+	end;
+	}
+OnInit:
+		setarray .name$, "PVP Free for All", "CvC Maps";
+		setarray .map$, "pvp_y_8-2", "guild_vs3";
+		.size = getarraysize(.map$);
+		initnpctimer;
+		end;
+		
+OnTimer5000:
+		.index = (.index % .size);
+		delwaitingroom;
+		waitingroom .name$[.index] + "[ "+getmapusers(.map$[.index])+" ]", 0;
+		.index++;
+		initnpctimer;
+		end;
+}
+
+//EDEN
+
+amatsu,84,251,3	duplicate(Guild Storage)	Guild Storage#eden	10129
+
+amatsu,94,262,3	duplicate(Healer)	Healer#eden	616
+
+amatsu,97,258,3	shop	ToolDealer#eden	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+amatsu,90,262,6	duplicate(Warper)	Warper#eden	811
+
+amatsu,86,262,6	duplicate(PVP Room Base)	PVP Room Base#eden	827
+
+amatsu,86,251,6	duplicate(Premium Service)	Premium Service#eden	814
+
+
+amatsu,90,251,5	script	Kafra Employee::eden	116,{
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (strcharinfo(2) != "Eden" ) { next; mes "Sorry, this base only for Registered Guild"; break;}
+	savepoint "amatsu",91,257,1,1;
+	next;
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+// BK
+ayothaya,60,148,3	duplicate(Guild Storage)	Guild Storage#bk	10129
+ayothaya,73,146,3	duplicate(Healer)	Healer#bkguild	616
+
+ayothaya,76,144,3	shop	ToolDealer#bkguild	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+ayothaya,70,146,6	duplicate(Warper)	Warper#bkguild	811
+
+ayothaya,67,146,6	duplicate(PVP Room Base)	PVP Room Base#bkguild	827
+
+ayothaya,76,141,3	duplicate(Premium Service)	Premium Service#bkguild	814
+
+
+ayothaya,64,150,5	script	Kafra Employee::bkguild	116,{
+.@guild$ = strcharinfo(2);
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (.@guild$ == "WeKillYouDie" || .@guild$ == "KEHED" || .@guild$ == "BK" || .@guild$ == "WANIEUN" || .@guild$ == "PoweredByWeed") || .@guild$ == "GMTEST" { 
+	savepoint "ayothaya",70,140,0,0;
+	break;
+	}
+	next; 
+	mes "Sorry, this base only for Registered Guild"; 
+	break;
+
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+
+// Redhat
+
+jawaii,202,293,5	duplicate(Healer)	Healer#RedHat	616
+
+jawaii,196,293,5	shop	ToolDealer#RedHat	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+jawaii,207,293,3	duplicate(Warper)	Warper#RedHat	811
+
+jawaii,198,288,3	duplicate(PVP Room Base)	PVP Room Base#RedHat	827
+
+jawaii,209,288,3	duplicate(Premium Service)	Premium Service#RedHat	814
+
+
+jawaii,197,299,5	script	Kafra Employee::RedHat	116,{
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (strcharinfo(2) != "RedHat" ) { next; mes "Sorry, this base only for Registered Guild"; break;}
+	savepoint "jawaii",202,288,1,1;
+	next;
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+
+// Free2Pay
+
+geffen,123,203,3	duplicate(Healer)	Healer#f2p	616
+
+geffen,116,203,3	shop	ToolDealer#f2p	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+geffen,126,199,6	duplicate(Warper)	Warper#f2p	811
+
+geffen,113,200,6	duplicate(PVP Room Base)	PVP Room Base#f2p	827
+
+geffen,115,197,3	duplicate(Premium Service)	Premium Service#f2p	814
+
+
+geffen,125,196,5	script	Kafra Employee::f2p	116,{
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (strcharinfo(2) == "Free2Pay" ) { 
+	savepoint "geffen",120,200,0,0;
+	break;
+	}
+	next; 
+	mes "Sorry, this base only for Registered Guild"; 
+	break;
+
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+
+// kaumkiri
+gonryun,204,157,3	duplicate(Guild Storage)	Guild Storage#kaum	10129
+gonryun,217,151,3	duplicate(Healer)	Healer#kaum	616
+
+gonryun,222,144,3	shop	ToolDealer#kaum	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+gonryun,217,156,6	duplicate(Warper)	Warper#kaum	811
+
+gonryun,217,146,6	duplicate(PVP Room Base)	PVP Room Base#kaum	827
+
+gonryun,200,146,3	duplicate(Premium Service)	Premium Service#kaum	814
+
+
+gonryun,200,157,5	script	Kafra Employee::kaum	116,{
+.@guild$ = strcharinfo(2);
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (.@guild$ == "KaumKiri" || .@guild$ == "Leftist"  || .@guild$ == "HumbleGod" ){ 
+	savepoint "gonryun",210,151,0,0;
+	break;
+	}
+	next; 
+	mes "Sorry, this base only for Registered Guild"; 
+	break;
+
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+// Ngumpet
+
+amatsu,57,139,3	duplicate(Healer)	Healer#Ngumpet	616
+
+amatsu,60,132,3	shop	ToolDealer#Ngumpet	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+amatsu,53,139,6	duplicate(Warper)	Warper#Ngumpet	811
+
+amatsu,49,139,6	duplicate(PVP Room Base)	PVP Room Base#Ngumpet	827
+
+amatsu,46,136,3	duplicate(Premium Service)	Premium Service#Ngumpet	814
+
+
+amatsu,60,136,5	script	Kafra Employee::Ngumpet	116,{
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (strcharinfo(2) == "Ngumpet" ) { 
+	savepoint "amatsu",53,133,0,0;
+	break;
+	}
+	next; 
+	mes "Sorry, this base only for Registered Guild"; 
+	break;
+
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+
+// legion
+
+gonryun,45,103,3	duplicate(Healer)	Healer#legion	616
+
+gonryun,50,103,3	shop	ToolDealer#legion	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+gonryun,56,103,6	duplicate(Warper)	Warper#legion	811
+
+gonryun,55,92,6	duplicate(PVP Room Base)	PVP Room Base#legion	827
+
+gonryun,42,87,3	duplicate(Premium Service)	Premium Service#legion	814
+
+
+gonryun,44,94,5	script	Kafra Employee::legion	116,{
+.@guild$ = strcharinfo(2);
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (.@guild$ == "Legion" || .@guild$ == "GMTEST" ){ 
+	savepoint "gonryun",50,95,0,0;
+	break;
+	}
+	next; 
+	mes "Sorry, this base only for Registered Guild"; 
+	break;
+
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+
+
+
+// Tenjiku
+prontera,246,58,3	duplicate(Guild Storage)	Guild Storage#tenji	10129
+prontera,229,62,3	duplicate(Healer)	Healer#Tenjiku	616
+
+prontera,241,65,3	shop	ToolDealer#Tenjiku	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+prontera,237,67,6	duplicate(Warper)	Warper#Tenjiku	811
+
+prontera,231,64,6	duplicate(PVP Room Base)	PVP Room Base#Tenjiku	827
+
+prontera,246,62,3	duplicate(Premium Service)	Premium Service#Tenjiku	814
+
+
+prontera,234,65,5	script	Kafra Employee::Tenjiku	116,{
+.@guild$ = strcharinfo(2);
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (.@guild$ == "Tenjiku" || .@guild$ == "GMTEST" ){ 
+	savepoint "prontera",238,58,0,0;
+	break;
+	}
+	next; 
+	mes "Sorry, this base only for Registered Guild"; 
+	break;
+
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+// BRother
+amatsu,234,221,3	duplicate(Guild Storage)	Guild Storage#brother	10129
+amatsu,227,236,3	duplicate(Healer)	Healer#BRother	616
+
+amatsu,213,228,3	shop	ToolDealer#BRother	564,8048:-1,8042:-1,8043:-1,8044:3500,8045:3500,8047:5000,8046:15000,601:-1,602:-1,501:-1,502:-1,506:-1,504:-1,523:2000,533:400,579:-1,1750:-1,1751:-1,610:-1,645:-1,656:-1,657:-1,717:-1,716:1000,715:2000,1025:2000,12040:5000000,1065:-1,611:-1
+
+amatsu,231,228,6	duplicate(Warper)	Warper#BRother	811
+
+amatsu,216,220,6	duplicate(PVP Room Base)	PVP Room Base#BRother	827
+
+amatsu,238,231,3	duplicate(Premium Service)	Premium Service#BRother	814
+
+
+amatsu,234,225,5	script	Kafra Employee::BRother	116,{
+.@guild$ = strcharinfo(2);
+	cutin "kafra_01",2;
+	mes "[Kafra Leilah]";
+	mes "Welcome to the";
+	mes "Kafra Corporation.";
+	mes "The Kafra services";
+	mes "are always on your side.";
+	mes "How may I assist you?";
+	switch(select("Save","Use Storage","Cancel")){
+	case 1:
+	if (.@guild$ == "BRother" || .@guild$ == "GMTEST" ){ 
+	savepoint "amatsu",225,228,0,0;
+	break;
+	}
+	next; 
+	mes "Sorry, this base only for Registered Guild"; 
+	break;
+
+	callfunc "F_KafEnd",0,1,".";
+	case 2:
+	next;
+		mes "[Kafra Leilah]";
+		mes "In the future, please";
+		mes "ask the Kafra Employee on";
+		mes "duty if you wish to use";
+		mes "any of the Kafra Services.";
+		callfunc("F_CheckKafCode");    //check your storage password, if set
+		close2;
+		openstorage;
+		break;
+		
+	case 3:
+		mes "[Kafra Leilah]";
+		mes "^666666*Whew...*^000000";
+		mes "Great, because I'm";
+		mes "actually on my break";
+		mes "right now. Choosing";
+		mes "''Cancel'' was a good";
+		mes "move on your part.";
+		close2;
+		break;
+}
+	cutin "",255;
+	end;
+}
+
+
+
+// ROG
+louyang,210,108,3	duplicate(Guild Storage)	Guild Storage#rog	10129
+

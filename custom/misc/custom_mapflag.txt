@@ -1,0 +1,46 @@
+//CUSTOM MAPFLAG//
+1@face	mapflag	restricted	6
+
+vend_zone	mapflag	town
+vend_zone	mapflag	noicewall
+vend_zone	mapflag	nopenalty
+vend_zone	mapflag	nightenabled
+vend_zone	mapflag	nobranch
+vend_zone	mapflag	nomemo
+vend_zone	mapflag	noteleport
+vend_zone	mapflag	restricted	7
+
+payon	mapflag	noicewall
+payon	mapflag	nightenabled
+payon	mapflag	restricted	8
+
+guild_vs3	mapflag	pvp_noguild		
+
+alde_dun04	mapflag	pvp
+gon_dun01	mapflag	pvp	
+					 
+vip	mapflag	town
+vip	mapflag	noicewall
+vip	mapflag	nopenalty
+vip	mapflag	nightenabled
+vip	mapflag	nobranch
+vip	mapflag	nomemo
+vip	mapflag	noteleport
+vip	mapflag	restricted	7
+
+
+pay_fild11	mapflag	nomemo
+xmas_fild01	mapflag	nomemo
+mjolnir_04	mapflag	nomemo
+gef_fild14	mapflag	nomemo
+moc_fild17	mapflag	nomemo
+gef_fild10	mapflag	nomemo
+
+guildhall	mapflag	town
+guildhall	mapflag	noicewall
+guildhall	mapflag	nopenalty
+guildhall	mapflag	nightenabled
+guildhall	mapflag	nobranch
+guildhall	mapflag	nomemo
+guildhall	mapflag	noteleport
+guildhall	mapflag	restricted	7

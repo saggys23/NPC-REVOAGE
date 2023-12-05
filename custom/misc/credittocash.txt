@@ -1,0 +1,120 @@
+-	script	balance2cashpoint	-1,{
+
+OnPCLoginEvent:
+
+	query_sql("select balance from `cp_credits` WHERE account_id = " + getcharid(3) + "", .@balance);
+	.@bonusraffle = .@balance / 100000;
+	.@bonuscostume = .@balance/250000;
+		if (.@bonusraffle) {
+	.@selectIfCharExistQuery$ = "SELECT `ownednumber` from `raffle` where `charname` = '"+strcharinfo(0)+"';";
+		//.@selectIfCharExistQuery$ = "SELECT guild_id, char_id, `"+.listsql$[.@j]+"` FROM woe_restock WHERE char_id = '"+.@charid+"' AND guild_id = '"+.@guildidrid+"';";
+		//	if (query_sql(.@selectIfCharExistQuery$, .@guildid, .@char_id, .@sqlamount) > 0) { 
+			if (query_sql(.@selectIfCharExistQuery$, .@owned) > 0) {
+				.@updaterecapQuery$ = "UPDATE raffle SET `ownednumber` = ('"+(.@owned+.@bonusraffle)+"') WHERE charname = '"+strcharinfo(0)+"' ;";
+			} else {
+				.@updaterecapQuery$ = "INSERT INTO `raffle` (`charname`,`ownednumber`) VALUES ('"+strcharinfo(0)+"','"+.@bonusraffle+"');";
+				
+			}
+	query_sql(.@updaterecapQuery$);
+	}
+	
+	if (.@bonuscostume && !#bonustopup4) { 
+		getitembound 38015,1,Bound_Account; 
+		set #bonustopup4,1;
+		}
+	/* ==== BONUS TRIGER VARIABLE
+	.@bonuspot = .@balance/25000;
+	.@bonusbox = .@balance/50000;
+	.@bonuscostume = .@balance/250000;
+	
+	if (.@bonuspot) { 
+		#bonuspot = #bonuspot + .@bonuspot;
+	}
+	if (.@bonusbox) { 
+		#bonusbox = #bonusbox + .@bonusbox;
+	}
+	if (.@bonuscostume) { 
+		#bonuscostume = 1;
+	}*/
+	if (.@balance != 0) {
+		//.@balance = .@balance/100*115;  //bonus topup 15%
+		query_sql ("UPDATE `cp_credits` SET balance = 0 WHERE account_id = " + getcharid(3) + "");
+		set #CASHPOINTS,(#CASHPOINTS + .@balance);
+		query_sql "INSERT INTO `cp_redeemed` (`account_id`,`point`,`redemption_date`) VALUES ("+ getcharid(3) +", "+.@balance+", NOW())";
+		announce "Gain cash point: "+.@balance+"",bc_self, 0xADFFC5, FW_BOLD;
+		if (.@bonusraffle) announce "Congratulations, you just have new total raffle points "+(.@owned+.@bonusraffle)+" ",bc_self, 0xADFFC5, FW_BOLD;
+	}
+	end;
+}
+
+
+/* === NPC CLAIM BONUS ===
+payon,163,224,3	script	Claim Bonus	569,{
+if (!checkweight(1483,5)) {
+mes "Please Check ur Weight";
+end;
+}
+mes "You have "+(#bonuspot + #bonusbox)+" unclaimed bonus.";
+next;
+switch(select("Claim Bonus 25K["+#bonuspot+"]:Claim Bonus 50K["+#bonusbox+"]:Claim Bonus 250K:Goodbye!")){
+	case 1:
+		mes "Input amount of bonus you want to claim";
+		input .@amount;
+		if (.@amount == 0) end;
+		.@weight = .@amount*20;
+		if (!checkweight(12257,.@weight)) {
+		mes "Please Check ur Weight";
+		end;
+		}
+		if ( #bonuspot >= .@amount) {
+		getitembound 12257,.@amount*20,Bound_Account; 
+		#bonuspot = #bonuspot - .@amount;
+		end;
+		}
+		mes "You dont have any bonus or please input as much as u have.";
+		end;
+	case 2:
+		mes "Input amount of bonus you want to claim";
+		input .@amount;
+		if (.@amount == 0) end;
+		.@weight = .@amount*50;
+		if (!checkweight(12257,.@weight)) {
+		mes "Please Check ur Weight";
+		end;
+		}
+		if ( #bonusbox >= .@amount) {
+		getitembound 12029,.@amount*10,Bound_Account; 
+		getitembound 12030,.@amount*10,Bound_Account; 
+		getitembound 12031,.@amount*10,Bound_Account; 
+		getitembound 12033,.@amount*10,Bound_Account; 
+		getitembound 12215,.@amount*5,Bound_Account; 
+		getitembound 12216,.@amount*5,Bound_Account; 
+		#bonusbox = #bonusbox - .@amount;
+		end;
+		}
+		mes "You dont have any bonus or please input as much as u have.";
+		end;
+	case 3:
+		if (#bonuscostume && !#bonustopup3) { 
+		getitembound 38022,1,Bound_Account; 
+		set #bonustopup3,1;
+		end;
+		}
+		mes "You already claim or dont have bonus.";
+		end;
+	case 4:
+		end;
+}
+
+}
+*/
+/*
+12029,Gloomy_Box				10
+12030,Box_Of_Grudge				10
+12031,Sleepy_Box				10
+12033,Box_Of_Sunlight			10
+
+12215,Blessing_10_Scroll		5
+12216,Inc_Agi_10_Scroll			5
+
+12257,Cold_Medicine*/

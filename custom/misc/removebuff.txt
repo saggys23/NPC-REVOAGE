@@ -1,0 +1,29 @@
+function	script	remove_buff	{
+		.@last_buff = ( ( checkre(0) )? SC_FALLENEMPIRE:SC_FOOD_LUK_CASH );
+		__OnNextStatus:
+			if ( 
+			// add more if you need other buff not to be removed.
+				.@i != SC_PUSH_CART &&
+				.@i != SC_WEIGHTOVER50 && .@i != SC_WEIGHTOVER90 &&
+				.@i != SC_NOCHAT &&
+				.@i != SC_JEXPBOOST &&
+				.@i != SC_JAILED &&
+				.@i != SC_ITEMBOOST &&
+				.@i != SC_ASPDPOTION1 &&
+				.@i != SC_BLESSING &&
+				.@i != SC_INCREASEAGI &&
+				.@i != SC_CASH_PLUSEXP && .@i != SC_CASH_RECEIVEITEM && 
+				.@i != SC_CASH_BOSS_ALARM && .@i != SC_CASH_DEATHPENALTY && 
+				.@i != SC_LIFEINSURANCE && .@i != SC_EXPBOOST &&
+				.@i != SC_KSPROTECTED && 
+				.@i != SC_CASH_PLUSONLYJOBEXP
+				//.@i != SC_FOOD_STR_CASH && .@i != SC_FOOD_AGI_CASH && .@i != SC_FOOD_VIT_CASH &&
+				//.@i != SC_FOOD_DEX_CASH && .@i != SC_FOOD_INT_CASH && .@i != SC_FOOD_LUK_CASH
+			) {
+				sc_end .@i;
+			}
+			.@i++;
+			if ( .@i % 100 == 0 ) sleep2 1;
+			jump_zero( .@i >= .@last_buff,__OnNextStatus );
+		return;
+	}

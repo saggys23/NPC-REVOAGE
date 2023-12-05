@@ -1,0 +1,315 @@
+prtg_cas01,127,205,0	script	maklaw	111,{
+//		mes "[Ringing Voice]";
+//		mes "'Those who overcome an ordeal shows a great deal of bravery... and will find their way to another ordeal.'";
+//		close;
+//	}
+//	if (compare(strnpcinfo(2),"aldeg")) {
+//		set .@destination$,"guildhall";
+//		setarray .@coordinates[0],91,40;
+//	}
+//	else if (compare(strnpcinfo(2),"gefg")) {
+//		set .@destination$,"guildhall";
+//		setarray .@coordinates[0],91,40;
+//
+//	}
+//	else if (compare(strnpcinfo(2),"payg")) {
+//		set .@destination$,"guildhall";
+//		setarray .@coordinates[0],91,40;
+//
+//	}
+//	else if (compare(strnpcinfo(2),"prtg")) {
+//		set .@destination$,"guildhall";
+//		setarray .@coordinates[0],91,40;
+//
+//	}
+//	// Add custom Guild Castles here.
+//	else {
+//		end;
+//	}
+
+	if ( getcharid(2) != getcastledata( "prtg_cas01", 1 ) ) {
+		mes "your guild is not the owner of Krimhield castle";
+		close;
+	}
+	mes "[Guild Raid]";
+	mes "'Hanya sang pemberani yang bisa masuk.'";
+	next;
+	mes " ";
+	mes "Apakah kamu mau masuk?";
+	next;
+	if(select("Mau.:Tidak.") == 1) {
+		if ( getcharid(2) == getcastledata( "prtg_cas01", 1 ) ) {
+			warp "guildhall",91,40;
+			end;
+		}
+		mes " ";
+		mes "Oops.";
+		close;
+	}
+	close;
+}
+
+guildhall,91,40,0	script	Penjaga Pintu	50,{
+	mes "[Guild Raid]";
+	mes "'Mau kembali?'";
+	next;
+	if(select("Mau.:Tidak.") == 1) {
+		if ( getcharid(2) == getcastledata( "prtg_cas01", 1 ) ) {
+			warp "prtg_cas01",127,205;
+			end;
+		}
+		mes " ";
+		mes "Oops.";
+		close;
+	}
+	close;
+}
+
+-	script	TreasureWarp	-1,{
+	mes "[Penjaga Treasure Map]";
+	mes "Congratulations on beating the strong monsters.";
+	mes "Do you want to go to the treasure room now?";
+	next;
+	switch (select("Go into Treasure Room:Cancel")) {
+	case 1:
+		mes "[Penjaga Treasure Map]";
+		mes "I'll show you the secret path. Follow me...please.";
+		mes "When you want to return here, please press the secret switch.";
+		close2;
+		warp "prtg_cas01",15,209;
+		hideonnpc "Treasure Warp#01";
+		hideoffnpc "Penjaga Treasure Map#01";
+		end;
+	case 2:
+		mes "[Penjaga Treasure Map]";
+		mes "Ok, take your time.";
+		close;
+		
+	}
+}
+
+guildhall,91,53,4	duplicate(TreasureWarp)	Treasure Warp#01	116
+
+-	script	Penjaga Treasure Map	-1,{
+
+	mes "[Penjaga Treasure Map]";
+	mes "Halo Castle Owner.";
+	mes "The entrance to Treasure Map is currently occupied by monsters.";
+	mes "What do you want me to do?";
+	next;
+	switch ( select(.menu$) ) {
+	case 1:
+		mes "[Penjaga Treasure Map]";	
+		.@Delay = 30;	// Heal delay, in seconds
+		if (@HD > gettimetick(2)) {
+			message strcharinfo(0),"Please wait, healer have 30 seconds cooldown."; end;
+		}
+		@HD = gettimetick(2) + .@Delay;
+		
+		sc_end SC_STONE;
+		sc_end SC_SLOWDOWN;
+		sc_end SC_FREEZE;
+		sc_end SC_SLEEP;
+		sc_end SC_CURSE;
+		sc_end SC_SILENCE;
+		sc_end SC_CONFUSION;
+		sc_end SC_BLIND;
+		sc_end SC_BLEEDING;
+		sc_end SC_DECREASEAGI;
+		sc_end SC_POISON;
+		sc_end SC_HALLUCINATION;
+		sc_end SC_STRIPWEAPON;
+		sc_end SC_STRIPARMOR;
+		sc_end SC_STRIPHELM;
+		sc_end SC_STRIPSHIELD;
+		sc_end SC_CHANGEUNDEAD;
+		sc_end SC_ORCISH;
+		sc_end SC_BERSERK;
+		sc_end SC_SKE;
+		sc_end SC_SWOO;
+		sc_end SC_SKA;
+		percentheal 100,100;
+		specialeffect2 EF_HEAL;
+		mes "You are completely healed.";
+		close;
+	case 2:
+		if ( mobcount( "this", strnpcinfo(3)+"::OnMobDead" ) ) {
+			mes "[Penjaga Treasure Map]";
+			mes "I cannot summon another MVP when there are monsters around."; //error check
+			close;
+		} else {
+			copyarray .tmp[0],.mvpid[0],getarraysize(.mvpid);
+			.@size = 5;
+			while( .@size ) {
+				.@r = rand( .@size ); // pick random number
+				set .temp_mvpid[.@i], .tmp[.@r];
+				deletearray .tmp[.@r],1;
+				.@size--;
+				.@i++;
+			}
+		}
+		mes "Please get ready.";
+		next;
+		close2;
+		for(.@b=0; .@b < getarraysize(.temp_mvpid); .@b++){
+			monster "this", 0, 0, "--ja--", .temp_mvpid[.@b], 1, strnpcinfo(3)+"::OnMobDead";
+		}
+		hideonnpc "Penjaga Treasure Map#01";
+		hideonnpc "Penjaga Pintu";
+		end;
+	case 3:
+		if ( mobcount( "this", strnpcinfo(3)+"::OnMobDead" ) ) {
+			mes "[Penjaga Treasure Map]";
+			mes "I cannot summon another MVP when there are monsters around."; //error check
+			close;
+		} else {
+			copyarray .tmp[0],.bossid[0],getarraysize(.bossid);
+			.@size = 5;
+			while( .@size ) {
+				.@r = rand( .@size ); // pick random number
+				set .temp_bossid[.@i], .tmp[.@r];
+				deletearray .tmp[.@r],1;
+				.@size--;
+				.@i++;
+			}
+		}
+		mes "Please get ready.";
+		next;
+		close2;
+		for(.@b=0; .@b < getarraysize(.temp_mvpid); .@b++){
+			monster "this", 0, 0, "--ja--", .temp_bossid[.@b], 1, strnpcinfo(3)+"::OnMobDead";
+		}
+		end;
+		hideonnpc "Penjaga Treasure Map#01";
+	case 4:
+		mes "[Penjaga Treasure Map]";
+		mes "Are you sure you want to leave this room?";
+		next;
+		if ( select( "Yes:No") == 1 )
+			warp .respawnmap$, .respawnx, .respawny;
+		close;
+	}
+	close;
+
+OnEnterMap:
+	.@id = atoi( strnpcinfo(2) );
+	mapwarp strnpcinfo(4), .respawnmap$, .respawnx, .respawny;
+	killmonsterall strnpcinfo(4);
+	.@treasure = 0;
+	hideonnpc "Treasure Warp#01";
+	hideoffnpc "Penjaga Treasure Map#01";
+	end;
+
+OnMobDead:
+	.@treasure = 1;
+	hideoffnpc "Treasure Warp#01";
+	end;
+
+OnInit:
+	hideonnpc "Treasure Warp#01";
+	if ( !getstrlen( strnpcinfo(2) ) ) {
+
+//	Config ---------------------------------------------------------------------------------------
+
+	// Room rental time, in minutes.
+	// When time runs out, all players inside the room will be kicked out.
+	// Do NOT set this to zero!
+
+	//	Options setting inside MVP room
+	set .@menu[1], 1;	// Turn Heal option On/Off
+	set .@menu[2], 1;	// Turn MVP Summoning On/Off
+	set .@menu[3], 0;	// Turn Mini boss Summoning On/Off
+
+	// Respawn point when players leave the room
+	set .respawnmap$, "payon";
+	set .respawnx, 157;
+	set .respawny, 232;
+
+	setarray .mvpid[0],
+		1511,	//Amon Ra
+		1399,	//Baphomet
+		1272,	//Dark Lord
+		1046,	//Doppelganger
+		1389,	//Dracula
+		1112,	//Drake
+		1115,	//Eddga
+		1418,	//Evil Snake Lord
+		1252,	//Garm / Hatii
+		1086,	//Golden thief bug
+		1492,	//Incantation Samurai / Samurai Specter
+		1251,	//Knight of Windstorm / Stormy Knight
+		1373,	//Lord of Death / Lord of the Dead
+		1147,	//Maya
+		1059,	//Mistress
+		1150,	//Moonlight Flower
+		1087,	//Orc Hero
+		1190,	//Orc Lord
+		1038,	//Osiris
+		1157,	//Pharaoh
+		1159,	//Phreeoni
+		1583,	//Tao Gunka
+		1312;	//Turtle General
+
+	setarray .bossid[0],
+		1096,// Angeling
+		1388,// Archangeling
+		1795,// Bloody Knight
+		1830,// Bow Guardian
+		1839,// Byorgue
+		1309,// Cat O' Nine Tail
+		1283,// Chimera
+		1302,// Dark Illusion
+		1198,// Dark Priest
+		1582,// Deviling
+		1091,// Dragon Fly
+		1093,// Eclipse
+		1205,// Executioner
+		1783,// Galion
+		1592,// Gangster
+		1120,// Ghostring
+		1259,// Gryphon
+		1720,// Hydro
+		1090,// Mastering
+		1289,// Maya Purple
+		1262,// Mutant Dragon
+		1203,// Mysteltainn
+		1870,// Necromancer
+		1295,// Owl Baron
+		1829,// Sword Guardian
+		1204,// Tirfing
+		1089,// Toad
+		1092,// Vagabond Wolf
+		1765;// Valkyrie
+
+//	Config Ends ------------------------------------------------------------------------
+
+		.menu$ = ( .@menu[1] ? "Heal dulu bwang." : "" ) +":" ;
+		.menu$ = .menu$ + ( .@menu[2] ? "Bring the MVP Monsters to me" : "" ) +":";
+		.menu$ = .menu$ + ( .@menu[3] ? "Summon Mini-boss" : "" ) +":";
+		.menu$ = .menu$ + "Leave this room";
+		if ( .@menu[2] ) {
+			.@size = getarraysize( .mvpid );
+			for ( .@i = 0; .@i < .@size; .@i++ )
+				.mvpid_menu$ = .mvpid_menu$ + getmonsterinfo( .mvpid[.@i], MOB_NAME ) +":";
+		}
+		if ( .@menu[3] ) {
+			.@size = getarraysize( .bossid );
+			for ( .@i = 0; .@i < .@size; .@i++ )
+				.bossid_menu$ = .bossid_menu$ + getmonsterinfo( .bossid[.@i], MOB_NAME ) +":";
+		}
+	}
+	else {
+		mapannounce strnpcinfo(4), "An administrator has refreshed the server. Please re-register this room.", bc_map;
+		mapwarp strnpcinfo(4), .respawnmap$, .respawnx, .respawny;
+	}
+	end;
+}
+
+
+guildhall,91,53,4	duplicate(Penjaga Treasure Map)	Penjaga Treasure Map#01	116
+
+guildhall	mapflag	nowarpto
+guildhall	mapflag	nomemo
+guildhall	mapflag	noteleport
+guildhall	mapflag	nosave	SavePoint
+guildhall	mapflag	nopenalty

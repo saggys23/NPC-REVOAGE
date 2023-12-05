@@ -1,0 +1,11 @@
+payon,154,229,3	script	Dispel All 	909,{
+	mes "[ ^0065DFDISPEL ALL^000000 ]";
+	mes "Go?";
+	if (select("Yes!","No") == 2) close;
+	sc_end sc_all;
+	close;
+	
+	OnInit:
+	waitingroom "DISPEL ALL",0;
+	end;
+}

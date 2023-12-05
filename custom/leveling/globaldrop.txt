@@ -1,0 +1,10 @@
+-	script	sdfhrae	-1,{
+OnNpcKillEvent:
+.@rate = rand(10000);
+	//if ((strcharinfo(3) != "in_rogue ") && (strcharinfo(3) == "mora ") && (killedrid != 1419) || (killedrid != 1097)) { //sbd. in prontera, killed poring
+	if ((strcharinfo(3) != "in_rogue ") && (killedrid != 1419) || (killedrid != 1097)) { //sbd. in prontera, killed poring
+		if(.@rate< 25 ) getitem 8050,1;
+	end;
+	}
+end;
+}

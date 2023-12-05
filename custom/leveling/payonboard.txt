@@ -1,0 +1,159 @@
+//===== Atlantis Script ======================================
+//= iRO Bounty Boards : Payon City
+//===== By: ==================================================
+//= Ragno / AtlantisRO
+//===== Actual Version: ======================================
+//= 1.0.2 Removed += operations with strings.
+//= 1.0.1 Changed npc and monsters constants to numerical ids
+//= 1.0 Starting Release
+//===== General Description: =================================
+//= Hunting Quest designed by iRO:
+//=    http://irowiki.org/wiki/Bounty_Board_Quests
+//===== How to Use: ==========================================
+//= Uses function "F_Bounty_Board" to manage the Bounty Boards
+//= npc on cities.
+//= The function arguments are this:
+//= 	callfunc "F_Bounty_Board", MinLevel, MaxLevel, MsgHuntPlace, MsgOutLevel,
+//=			MonsterID, 		QuestID, 	BaseExp, 	JobExp{, 
+//=			MonsterID, 		QuestID, 	BaseExp, 	JobExp};
+//============================================================
+
+payo2,80,120,3	script	Bounty Board 1-50#pay1	837,{
+	mes "Pilih zona monster quest yg kamu inginkan";
+	switch(select("Payon", "Prontera","Geffen", "Byaland & Beach")){
+	case 1:
+	callfunc "F_Bounty_Board", 1, 50, 1, 1,
+		1076,	63006,	11123,		9012,	"pay_dun00",	// SKELETON
+		1015,	63007,	13056,		10102,	"pay_dun00",	// ZOMBIE
+		1014,	63001,	 9899,		9654,	"pay_fild01",	// SPORE
+		1077,	63008,	21000,		20014,	"pay_fild05", // POISONSPORE
+		1033,	63002,	19050,		18668,	"pay_fild07", // ELDERWILLOW
+		1060,	63003,	23050,		22356,	"pay_fild09", // BIGFOOT
+		1056,	63004,	16975,		14325,	"pay_fild09", // SMOKIE
+		1031,	63005,	13050,		11154,	"pay_fild04"; // POPORING
+	end;
+	
+	case 2:
+	callfunc "F_Bounty_Board", 1, 50, 1, 1,
+		1019,	63010,	24250,		22725,	"moc_fild02", // PECOPECO
+		1057,	63011,	22300,		20121,	"prt_fild03"; // YOYO
+
+	end;
+	
+	case 3:
+	callfunc "F_Bounty_Board", 1, 50, 1, 1,
+	
+		1103,	63009,	22144,		21044,	"mjolnir_01"; // CARAMELM
+	end;
+	
+	case 4:
+	callfunc "F_Bounty_Board", 1, 50, 1, 1,
+		1034,	63012,	15456,		 13565,	"beach_dun3", // THARAFROG
+		1068,	63013,	9995,		 8656,	"iz_dun01", // HYDRA
+		1067,	63014,	17989,		 16879,	"iz_dun02"; // CORNOTUS
+	end;
+}
+}
+//41-70 X2 EXP TABLE
+payo2,80,118,3	script	Bounty Board 41-75#pay2	837,{
+	mes "Pilih zona monster quest yg kamu inginkan";
+	switch(select("IzludeByaland", "Morocc","Payon", "Geffen", "Comodo", "Prontera", "Toy Factory")){
+	case 1:
+	callfunc "F_Bounty_Board", 41, 75, 1, 1,
+		1045,	63015,	61321,		66546,	"iz_dun03",	// MARC
+		1069,	63016,	57002,		54566,	"iz_dun03",	// SWORDFISH
+		1044,	63017,	48001,		46848,	"iz_dun02",	// OBEUNE
+		1144,	63018,	53002,		52332,	"iz_dun02"; // MARSE
+	end;
+	
+	case 2:
+	callfunc "F_Bounty_Board", 41, 75, 1, 1,
+		1146,	63019,	48469,		46563,	"in_sphinx2", // MATYR
+		1016,	63020,	49995,		50013,	"moc_pryd02", // ARCHERSKEL
+		1041,	63021,	54250,		53213,	"moc_pryd03", // MUMMY
+		1127,	63022,	62300,		61121,	"moc_fild17 ", // HODE
+		1165,	63023,	68300,		66121,	"moc_fild16"; // SANDMAN
+	end;
+	
+	case 3:
+	callfunc "F_Bounty_Board", 41, 75, 1, 1,
+		1026,	63024,	54000,		52321,	"pay_dun02", // MUNAK
+		1188,	63025,	58144,		56044,	"pay_dun02 ", // BONGUN
+		1170,	63026,	66250,		62725,	"pay_dun03", // SOHEE
+		1013,	63027,	44300,		40121,	"pay_fild02"; // WOLF
+	end;
+	
+	case 4:
+	callfunc "F_Bounty_Board", 41, 75, 1, 1,
+		1023,	63028,	50133,		 49345,	"gef_fild02", // ORCWARRIOR
+		1273,	63029,	56995,		 55656,	"gef_fild10", // ORCLADY
+		1177,	63030,	77989,		 76879,	"orcsdun02", // ZENORC
+		1153,	63031,	57989,		 56879,	"orcsdun01"; // ORCZOMBIE
+	end;
+	
+	case 5:
+	callfunc "F_Bounty_Board", 41, 75, 1, 1,
+		1271,	63032,	75456,		 73565,	"cmd_fild01"; // ALLIGATOR
+	end;
+	
+	case 6:
+	callfunc "F_Bounty_Board", 41, 75, 1, 1,
+		1099,	63033,	77456,		 75565,	"mjolnir_05"; // ARGIOPE
+	end;
+	
+	case 7:
+	callfunc "F_Bounty_Board", 41, 75, 1, 1,
+		1248,	63034,	55456,		 53565,	"xmas_dun02", // CRUISER
+		1249,	63035,	56995,		 58656,	"xmas_dun02", // MYSTCASE
+		1265,	63036,	47989,		 46879,	"xmas_dun01"; // COOKIE
+	end;
+	}
+	}
+	
+//70-99 x10 EXP TABLE	
+payo2,80,116,3	script	Bounty Board 71-99#pay3	837,{
+	mes "Pilih zona monster quest yg kamu inginkan";
+	switch(select("Geffen & Glast Heim", "Comodo & Beach","Sphinx", "Clock Tower Alde", "Turtle Dun")){
+	case 1:
+	callfunc "F_Bounty_Board", 71, 99, 1, 1,
+		1163,	63037,	215645,		225456,	"gl_knt01",	// RAYDRIC
+		1276,	63038,	168794,		142454,	"gl_knt01",	// RAYARCHER
+		1192,	63041,	170754,		164574,	"gl_chyard",	// WRAITH
+		1117,	63042,	198779,		186978,	"gl_church", // EVILDRUID
+		1197,	63043,	171110,		181214,	"gl_prison",	// ZOMBIEPRISON
+		1196,	63044,	152544,		171644,	"gl_prison1",	// SKIELPRISON
+		1257,	63045,	184546,		184564,	"gl_prison1"; // INJUSTICE
+	end;
+	
+	case 2:
+	callfunc "F_Bounty_Board", 71, 99, 1, 1,
+		1148,	63046,	397841,		398524,	"beach_dun", // MEDUSA
+		1278,	63047,	345487,		344564,	"beach_dun2", // STALACTIC
+		1206,	63048,	344414,		335464,	"cmd_fild03"; // ANOL
+	end;
+	
+	case 3:
+	callfunc "F_Bounty_Board", 71, 99, 1, 1,
+		1154,	63049,	220212,		212111,	"in_sphinx5", // PASANA
+		1149,	63050,	205464,		199891,	"in_sphinx4"; // MINO
+	end;
+	
+	case 4:
+	callfunc "F_Bounty_Board", 71, 99, 1, 1,
+		1193,	63051,	217879,		 198710,	"c_tower3", // ALARM
+		1269,	63052,	166995,		 155656,	"c_tower2", // CLOCK
+		1199,	63053,	127989,		 107679,	"c_tower1", // PUNK
+		1213,	63039,	197989,		 176879,	"alde_dun02", // HIGHORC
+		1189,	63040,	157989,		 136879,	"alde_dun02"; // ORCARCHER
+	end;
+	
+	case 5:
+	callfunc "F_Bounty_Board", 71, 99, 1, 1,
+		1322,	63054,	185456,		 173565,	"tur_dun01", // SPRINGRABBIT
+		1314,	63055,	230133,		 229345,	"tur_dun02", // PERMETER
+		1316,	63056,	236995,		 225656,	"tur_dun02", // SOLIDER
+		1319,	63057,	247989,		 246879,	"tur_dun03", // FREEZER
+		1318,	63058,	25989,		 236879,	"tur_dun03"; // HEATER
+	end;
+	}
+	}

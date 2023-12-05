@@ -1,0 +1,80 @@
+-	script	cashpoint	-1,{
+
+    OnInit:
+        bindatcmd "addcash",strnpcinfo(3)+"::OnAtcommand",99,99;
+		query_sql "CREATE TABLE IF NOT EXISTS `addcashlog` (`playername` TINYTEXT NOT NULL,`amount` INT NOT NULL, INDEX `playername` (`playername`(32)) ) ENGINE=MyISAM";
+        end;  
+	
+
+    OnAtcommand:
+        if (getgmlevel() < 20) end;
+
+        set .@AID, getcharid(3);        // save their RID
+
+        mes "Hello GM";
+
+        mes "Enter the char's name:";
+
+        input .@name$;
+
+        query_sql "SELECT `account_id`,`name` FROM `char` WHERE `name` = '"+escape_sql(.@name$)+"'", .@account_id,.@name$;
+
+        if (!.@account_id) {
+
+                mes "^FF0000This player doesn't exist!";
+
+                close;
+
+        }
+
+        mes "How many Cash points would you like give to^0000FF " + .@name$ + "^000000?";
+
+        input .@amt;
+
+        if (.@amt < 1) {
+
+                mes "Amount must be positive.";
+
+                close;
+
+        }
+
+       
+
+        mes " ";
+
+        mes "Give "+.@amt+" Cash points to "+.@name$+"?";
+
+        if(select("Yes:No")==2) close;
+
+       
+
+        if (attachrid(.@account_id)) {
+
+                set #CASHPOINTS, #CASHPOINTS + .@amt;
+
+                dispbottom "Gained "+.@amt+" Cash points. Total "+#CASHPOINTS+" points";
+
+        } else {
+
+                query_sql "SELECT COUNT(`account_id`) FROM `acc_reg_num` WHERE `key`='#CASHPOINTS' AND `account_id`='"+.@account_id+"'", .@update;
+
+                if (.@update)
+
+                        query_sql "UPDATE `acc_reg_num` SET `value` = (CAST(`value` AS UNSIGNED)+'"+.@amt+"') WHERE `key`='#CASHPOINTS' AND `account_id`='"+.@account_id+"'";
+						
+
+                else
+
+                        query_sql "INSERT INTO `acc_reg_num` (`key`,`value`,`index`,`account_id`) VALUES ('#CASHPOINTS',"+.@amt+",0,"+.@account_id+")";
+						
+        }
+		query_sql "INSERT INTO `addcashlog` (`playername`,`amount`) VALUES ('"+.@name$+"',"+.@amt+")";	
+		
+        attachrid(.@AID);
+
+        mes "Gave "+.@amt+" Cash points to "+.@name$+".";
+
+        close;
+ 
+}
