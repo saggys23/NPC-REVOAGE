@@ -31,3 +31,5 @@ jupe_area1,103,222,0	warp	gate#left2	2,4,jupe_gate,31,145
 jupe_gate,71,145,0	warp	gate#right1	2,4,jupe_area2,63,222
 jupe_area2,60,222,0	warp	gate#right2	2,4,jupe_gate,68,145
 jupe_gate,49,55,0	warp	gate#ele	4,2,jupe_ele_r,49,30
+juperos_02,130,150,0	warp	customjupwrp	1,1,jupe_core,149,280
+jupe_core,149,286,0	warp	customjupwrp2	1,1,juperos_02,130,145

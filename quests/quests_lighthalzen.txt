@@ -1848,7 +1848,7 @@ OnInit:
 	end;
 
 OnTouch_:
-	switch(rand(1,5)) {
+	switch(rand(1,4)) {
 	case 1:
 	case 2:
 		mes "^3355FF*SHHHHHHUK!*^000000";
