@@ -14,7 +14,7 @@
 //= 1.0 First / Optimized Version
 //============================================================
 
-prt_in,253,168,4	script	Alora	862,{
+itemmall,22,62,4	script	Alora	862,{
 
 // Mysterious Dyestuff
 	set .@dyeID, 6220;

@@ -18,7 +18,7 @@
 //= 1.7 Removed re-roll behavior. [Secret]
 //============================================================
 
-payon,157,146,6	script	Suhnbi#cash	85,{
+payon,148,181,3	script	Suhnbi#cash	85,{
 	disable_items;
 	mes "[Suhnbi]";
 	mes "I am the Armsmith";
@@ -26,7 +26,6 @@ payon,157,146,6	script	Suhnbi#cash	85,{
 	mes "armor and equipment, so let me";
 	mes "know what you want to refine.";
 	next;
-
 	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
 	for(set .@i,1; .@i<=10; set .@i,.@i+1) {
 		if (getequipisequiped(.@indices[.@i])) {
@@ -57,17 +56,219 @@ payon,157,146,6	script	Suhnbi#cash	85,{
 
 	.@refineitemid = getequipid(.@part); // save id of the item
 	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
+		setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
 	.@price = getequiprefinecost(.@part, REFINE_COST_ENRICHED, REFINE_ZENY_COST);
 	.@material = getequiprefinecost(.@part, REFINE_COST_ENRICHED, REFINE_MATERIAL_ID);
 
-	// Make sure you have the necessary items and Zeny to refine your items
-	// Determines chance of failure and verifies that you want to continue.
-	callsub S_RefineValidate,getequipweaponlv(.@part),.@material,.@price,.@part,.@refineitemid,.@refinerycnt;
+
+	mes "[Suhnbi]";
+	if (.@weapon_lvl)
+	mes "You want to refine a level "+ .@weapon_lvl +" weapon?";
+	mes "To refine that, you'll need to have one ^ff9999"+ getitemname(.@material) +"^000000 and "+ .@price +" zeny.";
+	mes "Would you like to continue?";
+	next;
+	
+	if(select("Yes:No") == 2) {
+		mes "[Shunbi]";
+		mes "I will wait until you are ready.";
+		close;
+	}
+	if (getequippercentrefinery(.@part) < 100) {
+				mes "[Suhnbi]";
+				mes "Giggle. Giggle. Oh, you have guts, daring to refine this.";
+				mes "You know it's pretty risky, don't you?";
+				next;
+				mes "If your defensive equipment is broken, you'll never be able to use it again.";
+				mes "Even your cards and your modifications will ^ff0000completely disappear^000000.";
+				//mes "Everything will disappear. As in... GONE!";
+				mes "Do you really wish to continue?";
+				next;
+		switch(select("Use Blacksmith Blessing to refine", "Refine directly without Blessing", "Don't refine yet")){
+		case 1:
+	// Blacksmith Blessing
+	switch( getequiprefinerycnt(.@part) ) {
+	case 4:
+		.@blacksmith_blessing_count = 1;
+		break;
+	case 5:
+		.@blacksmith_blessing_count = 2;
+		break;
+	case 6:
+		.@blacksmith_blessing_count = 2;
+		break;
+	case 7:
+		.@blacksmith_blessing_count = 3;
+		break;
+	case 8:
+		.@blacksmith_blessing_count = 3;
+		break;
+	case 9:
+		.@blacksmith_blessing_count = 4;
+		break;
+	}
+			.@bless_who = 1;
+			break;
+		case 2:
+			break;
+		case 3:
+			mes "[Suhnbi]";
+			mes "What nonsense. You waste my precious time.";
+			mes "Get lost, punk.";
+			close;
+	}
+
+	}
+	
+	if ((.@bless_who && countitem(6635) < .@blacksmith_blessing_count) || countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Suhnbi]";
+		mes "Are these all you have?";
+		mes "I'm very sorry, but I can't do anything without all the materials. Besides, I deserve some payments for my work, don't I?";
+		close;
+	}
+
+	.@raterefine = getequippercentrefinery(.@part, true);
+	if (.@bless_who) {
+		delitem 6635, .@blacksmith_blessing_count;
+		.@raterefine = getequippercentrefinery(.@part, true)*115/100;
+	}
+	
+	delitem .@material,1;
+	set Zeny, Zeny-.@price;
+// WEEKLY QUEST			
+	.@selectIfCharExistQuery$ = "SELECT account_id FROM weeklyquest WHERE account_id = '"+getcharid(3)+"';";
+		if (query_sql(.@selectIfCharExistQuery$, .@accid) > 0) {
+			.@updaterecapQuery$ = "UPDATE `weeklyquest` SET `task7` = `task7` + 1 WHERE `account_id` = '"+getcharid(3)+"';";
+		} else {
+			.@updaterecapQuery$ = "INSERT INTO weeklyquest (`account_id` , `task7`) VALUES ('"+getcharid(3)+"','1');";
+	}
+		query_sql(.@updaterecapQuery$);
+// END
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
+		mes "[Shunbi]";
+		emotion ET_FRET;
+		mes "Wait a second...";
+		mes "Do you think I'm stupid?!";
+		mes "You switched the item while I wasn't looking! Get out of here!";
+		close;
+	}
 
 	mes "[Suhnbi]";
 	mes "Clang! Clang! Clang!";
+	//mes "Pake blesing : "+.@blacksmith_blessing_count+" Rate : "+.@raterefine+"";
+	
+	if (.@raterefine > rand(100)) {
+		successrefitem .@part;
+		if (getequipweaponlv(.@part) == 1 && getequiprefinerycnt(.@part) >= 8){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 2 && getequiprefinerycnt(.@part) >= 7){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 3 && getequiprefinerycnt(.@part) >= 6){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 4 && getequiprefinerycnt(.@part) >= 6){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (!getequipweaponlv(.@part) && getequiprefinerycnt(.@part) >= 6){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		next;
+		emotion ET_BEST;
+		mes "[Suhnbi]";
+		mes "There you go! It's done.";
+		mes "It's been a while since I've made such a fine "+((getequipweaponlv(.@part))?"weapon":"armor")+". You must be happy because it has become stronger!";
+		close;
+	}
+	failedrefitem .@part;
+	next;
+	emotion (!rand(5))?ET_MONEY:ET_HUK;
+	mes "[Suhnbi]";
+	mes "Uuuuuuuuuummmmmph!!!";
+	next;
+	mes "[Suhnbi]";
+	mes "...";
+	mes ".....";
+	mes ".......Huhuhuhuhu~";
+	mes "........It was your choice and my ability, no regret.";
+	close;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+	// Make sure you have the necessary items and Zeny to refine your items
+	// Determines chance of failure and verifies that you want to continue.
+	
+	mes "[Suhnbi]";
+	mes "Clang! Clang! Clang!";
+	
+	
+// WEEKLY QUEST			
+	.@selectIfCharExistQuery$ = "SELECT account_id FROM weeklyquest WHERE account_id = '"+getcharid(3)+"';";
+		if (query_sql(.@selectIfCharExistQuery$, .@accid) > 0) {
+			.@updaterecapQuery$ = "UPDATE `weeklyquest` SET `task6` = `task6` + 1 WHERE `account_id` = '"+getcharid(3)+"';";
+		} else {
+			.@updaterecapQuery$ = "INSERT INTO weeklyquest (`account_id` , `task6`) VALUES ('"+getcharid(3)+"','1');";
+	}
+		query_sql(.@updaterecapQuery$);
+// END
 	if (getequippercentrefinery(.@part, true) > rand(100)) {
 		successrefitem .@part;
+		if (getequipweaponlv(.@part) == 1 && getequiprefinerycnt(.@part) >= 8){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 2 && getequiprefinerycnt(.@part) >= 7){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 3 && getequiprefinerycnt(.@part) >= 7){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (getequipweaponlv(.@part) == 4 && getequiprefinerycnt(.@part) >= 7){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
+		if (!getequipweaponlv(.@part) && getequiprefinerycnt(.@part) >= 7){
+		announce strcharinfo(0)+" has SUCCES refined ["+getequipname(.@part)+"] to +"+getequiprefinerycnt(.@part)+"!",bc_all,0x00FF00;}
 		next;
 		emotion ET_BEST;
 		mes "[Suhnbi]";
@@ -113,6 +314,27 @@ S_RefineValidate:
 	mes "Would you like to continue?";
 	next;
 	if(select("Yes:No") == 1) {
+	// Blacksmith Blessing
+	switch( getequiprefinerycnt(.@part) ) {
+	case 4:
+		.@blacksmith_blessing_count = 1;
+		break;
+	case 5:
+		.@blacksmith_blessing_count = 2;
+		break;
+	case 6:
+		.@blacksmith_blessing_count = 2;
+		break;
+	case 7:
+		.@blacksmith_blessing_count = 3;
+		break;
+	case 8:
+		.@blacksmith_blessing_count = 3;
+		break;
+	case 9:
+		.@blacksmith_blessing_count = 4;
+		break;
+	}
 		if (getequippercentrefinery(.@part) < 100) {
 			if (.@weapon_lvl) {
 				mes "[Suhnbi]";
@@ -129,12 +351,30 @@ S_RefineValidate:
 				mes "^ff0000Besides, the equipment will break!^000000";
 				mes "Are you sure you still want to continue?";
 				next;
-				if(select("Yes:No") == 2) {
+				switch(select("Use Blacksmith Blessing to refine", "Refine directly without Blessing", "Don't refine yet")){
+				case 1:
+					.@bless_who = 1;
+					break;
+				case 2:
+					break;
+				case 3:
 					mes "[Suhnbi]";
 					mes "Good.";
 					mes "Because if the weapon breaks from unreasonable refining, then I get a bad mood, too.";
 					close;
 				}
+				/*
+				if(select("Yes:No") == 2) {
+					mes "[Suhnbi]";
+					mes "Good.";
+					mes "Because if the weapon breaks from unreasonable refining, then I get a bad mood, too.";
+					close;
+				}*/
+				
+				
+				
+				
+				/*
 			} else {
 				mes "[Suhnbi]";
 				mes "Giggle. Giggle. Oh, you have guts, daring to refine this.";
@@ -145,17 +385,48 @@ S_RefineValidate:
 				//mes "Everything will disappear. As in... GONE!";
 				mes "Do you really wish to continue?";
 				next;
-				if(select("Yes:No") == 2) {
+			switch(select("Use Blacksmith Blessing to refine", "Refine directly without Blessing", "Don't refine yet")){
+				case 1:
+					.@bless_who = 1;
+					break;
+				case 2:
+					break;
+				case 3:
 					mes "[Suhnbi]";
 					mes "What nonsense. You waste my precious time.";
 					mes "Get lost, punk.";
 					close;
 				}
+				/*if(select("Yes:No") == 2) {
+					mes "[Suhnbi]";
+					mes "What nonsense. You waste my precious time.";
+					mes "Get lost, punk.";
+					close;
+				}*/
+				
+				
+				/*
 			}
 		}
+		.@raterefine = getequippercentrefinery(.@part, true);
+		//blacksmith blessing
+		if (.@bless_who) {
+			if ( countitem(6635) >= .@blacksmith_blessing_count ) {
+				delitem 6635, .@blacksmith_blessing_count;
+				.@raterefine = .@raterefine*115/100;
+			}
+				else {
+					mes "[Suhnbi]";
+					mes "Are these all you have?";
+					mes "I'm very sorry, but I can't do anything without all the materials. Besides, I deserve some payments for my work, don't I?";
+					close;
+				}
+		}
+
 		if (countitem(.@item_req) > 0 && Zeny > .@price) {
 			delitem .@item_req,1;
 			set Zeny, Zeny - .@price;
+
 
 			// anti-hack
 			if (callfunc("F_IsEquipIDHack", .@part, getarg(4)) ||
@@ -179,3 +450,5 @@ S_RefineValidate:
 	mes "I can't help it even if you're not happy about it...";
 	close;
 }
+*/
+vip,71,271,4	duplicate(Suhnbi#cash)	Enrich Refiner#vipshunbi	85

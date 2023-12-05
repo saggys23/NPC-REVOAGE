@@ -112,16 +112,15 @@
 					mes "It'd be a near miracle if I can actually pull this off.";
 					mes "Okay... Which weapon shall we try adding a Slot to?";
 					next;
-					switch(select("Gungnir:Poison Knife:Ice Pick:Sucsamad:Ginnungagap:Cutlas:Crescent Scythe:Survivor's Rod(DEX)"))
+					switch(select("Gungnir:Poison Knife:Sucsamad:Ginnungagap:Cutlas:Crescent Scythe:Survivor's Rod(DEX)"))
 					{
 						case 1: callfunc "Func_Socket", 1413, 1418,40,51,1000,984,5,999,10;
 						case 2: callfunc "Func_Socket", 1239,13016,40,51,1000,984,5,999,10;
-						case 3: callfunc "Func_Socket", 1230,13017,40,51,2000,984,5,999,10;
-						case 4: callfunc "Func_Socket", 1236,13018,40,51,1000,984,5,999,10;
-						case 5: callfunc "Func_Socket",13002,13019,40,51,1000,984,5,999,10;
-						case 6: callfunc "Func_Socket", 1135,13400,40,51,1000,984,5,999,10;
-						case 7: callfunc "Func_Socket", 1466, 1476,40,51,1000,984,5,999,10;
-						case 8: callfunc "Func_Socket", 1617, 1618,40,51,2000,984,5,999,10;
+						case 3: callfunc "Func_Socket", 1236,13018,40,51,1000,984,5,999,10;
+						case 4: callfunc "Func_Socket",13002,13019,40,51,1000,984,5,999,10;
+						case 5: callfunc "Func_Socket", 1135,13400,40,51,1000,984,5,999,10;
+						case 6: callfunc "Func_Socket", 1466, 1476,40,51,1000,984,5,999,10;
+						case 7: callfunc "Func_Socket", 1617, 1618,40,51,2000,984,5,999,10;
 					}
 			}
 		case 2:
@@ -339,7 +338,7 @@ function	script	Func_Socket	{
 			close;
 	}
 }
-
+vip,81,266,3	duplicate(SocketEnchant)	Seiyablem#hall	84
 payon,140,151,5	duplicate(SocketEnchant)	Seiyablem#pay	84
 lhz_in02,281,35,5	duplicate(SocketEnchant)	Seiyablem#lhz	84
 prt_in,33,70,5	duplicate(SocketEnchant)	Seiyablem#prt	84

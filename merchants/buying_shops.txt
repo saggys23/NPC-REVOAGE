@@ -15,89 +15,6 @@
 //= 1.1b Added missing weight checks. [Euphy]
 //============================================================ 
 
-// Black Marketeer (Buy Licenses - Non-Merchant Classes) :: qskill_buy_store
-//============================================================ 
-que_job01,68,84,1	script	Black Marketeer#Buying	881,{
-	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2400) {
-		mes "[Mr. Jass]";
-		mes "You're too greedy, even compared to someone like me!";
-		mes "Why don't you go lighten your bag first?";
-		close;
-	}
-	if (getskilllv("ALL_BUYING_STORE") == 1) {
-		mes "[Mr. Jass]";
-		mes "Hey, you already made a contract with Hugh.";
-		mes "I don't have any business with you.";
-		close;
-	}
-	mes "[Mr. Jass]";
-	mes "You must need something badly to come to find me.";
-	mes "What do you want?";
-	next;
-	switch(select("Bulk Buyer Shop License:Who are you?:Nothing, nothing!")) {
-	case 1:
-		mes "[Mr. Jass]";
-		mes "I knew it!";
-		mes "Sure, I can make it for you.";
-		mes "Mine looks just like the authentic one that Merchants get from that bastard Mr. Hugh!";
-		next;
-		mes "[Mr. Jass]";
-		mes "And my license is better 'cuz you don't need ta' learn any skills.";
-		mes "How many do you want?";
-		next;
-		mes "[Mr. Jass]";
-		mes "Just so you know, I can only make them in small quantities, up to 10 at a time.";
-		mes "It'll cost 500 zeny for each one.";
-		next;
-		while(1) {
-			input .@input;
-			mes "[Mr. Jass]";
-			if (.@input == 0) {
-				mes "Don't you need those licenses?";
-				close;
-			} else if (.@input > 10) {
-				mes "I can only make up to 10 at a time, you know.";
-				next;
-			} else {
-				mes "It'll cost "+(.@input*500)+" zeny.";
-				if (Zeny < (.@input*500)) {
-					mes "but you don't have enough money.";
-					next;
-					mes "[Mr. Jass]";
-					mes "Don't you know the basics of business? Everything has a price.";
-					mes "If you want something, you gotta pay for it.";
-				} else {
-					mes "Ha... Ha ha ha!";
-					mes "Mr. Hugh, I'll take over your license business. You'll see!";
-					mes "*Giggle Giggle*";
-					getitem 12548,.@input; //Buy_Market_Permit2
-					set Zeny,Zeny-(.@input*500);
-				}
-				close;
-			}
-		}
-	case 2:
-		mes "[Mr. Jass]";
-		mes "I left my hometown a long time ago.";
-		mes "It's meaningless to ask who I am because all I've got left now is my hatred.";
-		next;
-		mes "[Mr. Jass]";
-		mes "...";
-		mes "Hugh is a corrupt merchant with no sense of business ethics.";
-		mes "My sole purpose in life is to destroy Hugh.";
-		next;
-		mes "[Mr. Jass]";
-		mes "Aw, I drank too much... (*Hic*)";
-		mes "That's just the alohol talking.";
-		mes "Please forget anything I said.";
-		close;
-	case 3:
-		mes "[Mr. Jass]";
-		mes "Alright, alright! You don't have to yell.";
-		mes "Just leave me alone if you've got no business with me.";
-		close;
-	}
-}
 
 // Purchasing Team (Learn Skill - Merchant Classes)
 //============================================================ 
@@ -119,7 +36,7 @@ alberta_in,58,52,4	script	Purchasing Team#Buying	59,{
 				close;
 			}
 			mes "[Mr. Hugh]";
-			mes "It's 200 zeny for each Bulk Buyer Shop License, and you may purchase up to 50 at a time.";
+			mes "It's 20000 zeny for each Bulk Buyer Shop License, and you may purchase up to 50 at a time.";
 			mes "How many licenses do you need?";
 			next;
 			while(1) {
@@ -133,13 +50,13 @@ alberta_in,58,52,4	script	Purchasing Team#Buying	59,{
 					mes "Please enter a value of 50 or less.";
 					next;
 				} else {
-					mes "It'll cost "+(.@input*200)+" zeny for "+.@input+" licenses.";
-					if (Zeny < (.@input*200)) {
+					mes "It'll cost "+(.@input*20000)+" zeny for "+.@input+" licenses.";
+					if (Zeny < (.@input*20000)) {
 						mes "but you don't seem to have enough money.";
 					} else {
 						mes "Thank you for your patronage.";
 						getitem 6377,.@input; //Buy_Market_Permit
-						set Zeny,Zeny-(.@input*200);
+						set Zeny,Zeny-(.@input*20000);
 					}
 					close;
 				}
@@ -210,8 +127,9 @@ alberta_in,58,52,4	script	Purchasing Team#Buying	59,{
 				close;
 			}
 			mes "[Mr. Hugh]";
-			if (Zeny < 10000) {
-				mes "The registration fee is 10,000 zeny.";
+			if (Zeny < 100000) {
+				mes "The registration fee is 100,000 zeny.";
+				mes "and get free 5 Buy stall permit.";
 				mes "Please have the fee ready first.";
 				close;
 			} else {
@@ -223,7 +141,7 @@ alberta_in,58,52,4	script	Purchasing Team#Buying	59,{
 				mes .@name$+"....";
 				mes "I like your handwriting.";
 				mes "Okay, you're now approved to open the Bulk Buyer Shop.";
-				set Zeny,Zeny-10000;
+				set Zeny,Zeny-100000;
 				getitem 6377,5; //Buy_Stall_Permit
 				skill "ALL_BUYING_STORE",1,SKILL_PERM_GRANT;
 				next;
