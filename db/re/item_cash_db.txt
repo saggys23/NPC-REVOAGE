@@ -1,0 +1,213 @@
+// Cash Shop Database
+// Contains the items sold in the ingame cash shop.
+//
+// Structure of Database:
+// Type,ItemID,Price
+//
+// Type:
+//    0: New
+//    1: Hot
+//    2: Limited
+//    3: Rental
+//    4: Gear
+//    5: Buff
+//    6: Heal
+//    7: Other
+//    8: Sale
+//
+// Price:
+//    Item cost, in cash points (#CASHPOINTS).
+
+//    0: New
+0,35001,20000 //happiness egg
+0,35000,35000 //Headger Box
+0,3003,20000/Premium 7d
+0,3004,65000/Premium 30d
+0,6606,10000 // Cute_Cart_Remodel_Coupon
+0,7622,10000 // Hairstyle Coupon
+0,6046,20000 // Cloth Coupon
+0,14158,10000/Bubble Gum box
+0,14156,10000/BM Box
+0,13710,75000/Gympass box
+0,12472,1000/Convex Mirror
+0,12909,2000/Kafra Card Box
+0,12213,100000/Neuralizer
+0,12919,2000/Megaphone
+0,5393,50000/Valentine Hat
+0,5846,50000/Buzzy Ball Gam 20matk
+0,5132,50000/Angeling Hat 
+0,18600,50000/CEB
+0,18601,50000/RBH
+0,18652,50000/VanargrandHelm 
+0,5359,50000/Ship Captain Hat[1]
+0,5409,50000/Purple Cowboy Hat
+
+
+//    1: Hot
+1,12691,30000/Armor Card Album
+1,12698,30000/Weapon Card Album
+1,12690,30000/Headger Card Album
+1,12695,30000/Accesory Card Album
+1,12694,30000/Shoes Card Album
+1,12692,30000/Shield Card Album
+1,12693,30000/Garment Card Album
+1,17263,15000/3D Concentration
+1,17264,15000/3D Awakening Potion
+1,17265,15000/3D Berserk Potion
+1,12213,100000/Neuralizer
+1,14159,5000//F_Str_Dish_Box,Steamed Tongue Box
+1,14160,5000//F_Agi_Dish_Box,Steamed Scorpion Box
+1,14161,5000//F_Int_Dish_Box,Dragon Breath Cocktail Box
+1,14162,5000//F_Dex_Dish_Box,Hwergelmir's Tonic Box
+1,14163,5000//F_Luk_Dish_Box,Nine Tail Dish Box
+1,14164,5000//F_Vit_Dish_Box,Stew Of Immortality Box
+
+//    2: Limited
+2,35001,20000 //happiness egg
+2,35000,35000 //Headger Box
+2,2766,10000,// SwordsmanFigure
+2,2767,10000// Acolyte Figure
+2,2768,10000//Mage Figure
+2,2769,10000/Archer Figure
+2,2770,10000/Thief Figure
+2,2771,10000/Merchant Figure
+2,2751,25000/Academy Badge
+2,2888,25000/School Bag
+
+//    3: Rental
+3,17263,15000/3D Concentration
+3,17264,15000/3D Awakening Potion
+3,17265,15000/3D Berserk Potion
+3,17162,10000//Boarding Halter7D
+3,17314,20000//Unlimited GFW Box 1D
+3,14242,20000//Beholder_Ring_Box
+3,14243,20000//Hallow_Ring_Box
+3,14244,20000//Clamorous_Ring_Box
+3,14245,20000//Chemical_Ring_Box
+3,14246,20000//Insecticide_Ring_Box
+3,14247,20000//Fisher_Ring_Box
+3,14248,20000//Decussate_Ring_Box
+3,14249,20000//Bloody_Ring_Box
+3,14250,20000//Satanic_Ring_Box
+3,14251,20000//Dragoon_Ring_Box
+
+//    4: Gear
+4,5572,30000/Savage babe hat
+4,18612,30000/White Musang Hat
+4,18613,30000/Black Musang Hat
+4,5664,30000/Fillir Pinnions
+4,5546,30000/Aries Crown
+4,5305,30000/Pirate Dagger
+4,5574,30000/Well-Chewed Pencil
+4,5325,30000/Robo Eyes
+4,5151,30000/Note Headphone
+4,5286,50000/Pecopeco Hairband
+4,5361,30000/Gangster Scarf
+4,5530,30000/Raven Cap
+4,18666,30000/CD in Mouth
+4,5548,30000/Crimson Rose
+4,5389,30000/Angel Spirit
+4,5592,30000/Sigrun Wings
+4,5403,30000/Fish in mouth
+4,5483,30000/Odin Mask MVP ITEM
+4,5362,30000/Ninja Scroll
+4,5539,30000/Jaguar Hat
+4,5767,30000/Samurai Mask
+4,18754,30000/Blood Suckers
+4,18698,30000/Chessy snack in mouth
+4,5545,30000/Aries Diadem
+4,5135,30000/Cyclop Eyes
+4,5401,30000/Black Frame Glasses
+4,18694,30000/Red Hood
+4,5527,30000/Lunatik Hat
+4,5471,30000/Reginleaf Wing
+4,5393,50000/Valentine Hat
+4,5846,50000/Buzzy Ball Gam 20matk
+4,5132,50000/Angeling Hat 
+4,18600,50000/CEB
+4,18601,50000/RBH
+4,18652,50000/VanargrandHelm 
+4,5359,50000/Ship Captain Hat[1]
+4,5409,50000/Purple Cowboy Hat
+4,5447,30000/Frog Hat
+4,5380,30000/Fish head hat
+4,5211,30000/Dress Hat
+4,5594,30000/Donut in mouth
+4,18745,30000/Choco Stick in mouth
+4,2751,25000/Academy Badge
+4,2888,25000/School Bag
+4,18531,30000/Drooping premeter
+4,18542,30000/Benevolent Guardian
+4,18782,30000/Butterfly wing ear
+4,18842,30000/Hat of girl
+4,18857,30000/Curupia hat
+4,2888,25000/School Bag
+
+//Magician_Card_Box
+//Acolyte_Card_Box
+//Archer_Card_Box
+///Swordman_Card_Box
+//Thief_Card_Box
+//Merchant_Card_Box
+//Scuba Mask
+//Lord of death Helm 18574
+//Rainbow scarf
+//Umbala Spirit
+
+// 5: Scroll
+5,16666,4000/Magic Candy Box (10)
+5,12375,1000/Akaraje
+5,13858,4000/Pooping Candy (10)
+5,12298,2000/SP Consumption
+5,12684,1000/ASPD pot
+5,13720,5000/Regeneration Box
+5,12581,500/Bargain Hunter Catalog
+5,12548,1000/Buying Vending
+
+// 6: Consumable
+6,14002,2000/Advance WOE supply
+6,14158,10000/Bubble Gum box
+6,14156,10000/BM Box
+6,12213,100000/Neuralizer
+6,14159,5000//F_Str_Dish_Box,Steamed Tongue Box
+6,14160,5000//F_Agi_Dish_Box,Steamed Scorpion Box
+6,14161,5000//F_Int_Dish_Box,Dragon Breath Cocktail Box
+6,14162,5000//F_Dex_Dish_Box,Hwergelmir's Tonic Box
+6,14163,5000//F_Luk_Dish_Box,Nine Tail Dish Box
+6,14164,5000//F_Vit_Dish_Box,Stew Of Imm	
+
+//    7: Other
+7,6606,10000 // Cute_Cart_Remodel_Coupon
+7,7622,10000 // Hairstyle Coupon
+7,6046,20000 // Cloth Coupon
+7,6417,10000 // silvervine
+7,14158,10000/Bubble Gum box
+7,14156,10000/BM Box
+7,14178,7500/Token of siegfried box
+7,12919,2000/Megaphone
+7,12909,2000/Kafra Card Box
+7,3009,5000/Fire Bottle
+7,3010,3000/Acid bomb box
+7,3008,5000/Glistring box
+7,12581,500/Bargain Hunter Catalog
+7,12548,1000/Buying Vending
+7,13710,75000/Gympass box
+7,12472,1000/Convex Mirror
+
+7,12213,100000/Neuralizer
+
+//    8: Sale
+8,2766,10000,// SwordsmanFigure
+8,2767,10000// Acolyte Figure
+8,2768,10000//Mage Figure
+8,2769,10000/Archer Figure
+8,2770,10000/Thief Figure
+8,2771,10000/Merchant Figure
+8,2751,25000/Academy Badge
+8,2888,25000/School Bag
+
+
+
+//Heroic Stone
+
+//Anubis Hat MVP

@@ -1,0 +1,92 @@
+// Item Group Database
+//
+// Structure of Database:
+// GroupID,ItemID,Rate{,Amount,Random,isAnnounced,Duration,GUID,isBound,isNamed}
+//IG_Tresure_Box_WoE,12702,8	// Old Bleu Box
+
+//IG_Happiness_Egg
+//VeryRare :
+IG_Happiness_Egg,20761,4,1,1,1		//Costumes Happiness Wings
+//Rare : 
+IG_Happiness_Egg,31177,5,1,1,1	//C_Tail_Hat,
+IG_Happiness_Egg,20010,6,1,1,1		//C_Rainbow_Wing_Ears
+IG_Happiness_Egg,33001,6,1,1,1		//C.Happy Flapping Angel Wings
+IG_Happiness_Egg,20487,5,1,1,1		//C_Waltz_of_Flowers,Costume Waltz of Flowers
+IG_Happiness_Egg,6241,7,1,1,1	//HD Elunium = 1 
+IG_Happiness_Egg,6240,7,1,1,1		//HD Oridecon = 1 
+//Zonk :
+IG_Happiness_Egg,12202,18,10		//Str_Dish10_ @10pcs
+IG_Happiness_Egg,12203,18,10		//Agi_Dish10_ @10pcs
+IG_Happiness_Egg,12204,18,10		//Int_Dish10_ @10pcs
+IG_Happiness_Egg,12205,18,10		//Dex_Dish10_ @10pcs
+IG_Happiness_Egg,12206,18,10		//Luk_Dish10_ @10pcs
+IG_Happiness_Egg,12207,18,10		//Vit_Dish10_ @10pcs
+IG_Happiness_Egg,14158,18		//Bubble Gum Box = 1 box
+IG_Happiness_Egg,14156,18		//Battle Manual = 1 box
+IG_Happiness_Egg,6291,12		//E.Elunium = 1
+IG_Happiness_Egg,6292,12		//E.Oridecon = 1
+IG_Happiness_Egg,14535,18,10		//Medium Life Potion 10pcs
+IG_Happiness_Egg,14534,18,10		//Small Life Potion 10pcs
+IG_Happiness_Egg,12472,18,3		//Convex Mirror = 3 pcs
+IG_Happiness_Egg,12684,18,5		//ASPD_Potion 5 pcs
+IG_Happiness_Egg,12375,18,5		//Arakaje = 5 / 10 pcs
+IG_Happiness_Egg,13858,18		//Toktok Candy Box 10
+IG_Happiness_Egg,16666,18		//Magic_Candy_Box10
+IG_Happiness_Egg,6423,12		//silver
+IG_Happiness_Egg,6417,12		//seagod
+
+
+
+// HEADGER Box
+IG_HeadgerBox,18630,4,1,1,1//Dropping alicel ID 18630
+IG_HeadgerBox,18909,4,1,1,1//Isabella Brown [1] 18909
+IG_HeadgerBox,18908,5,1,1,1//Isabella Red [1] 18908
+IG_HeadgerBox,5800,5,1,1,1//Blush of Groom 5800
+IG_HeadgerBox,5377,5,1,1,1//Antique Pipe 5377
+IG_HeadgerBox,5572,10///Savage babe hat
+IG_HeadgerBox,18612,10///White Musang Hat
+IG_HeadgerBox,18613,10///Black Musang Hat
+IG_HeadgerBox,5664,10///Fillir Pinnions
+IG_HeadgerBox,5546,10///Aries Crown
+IG_HeadgerBox,5305,10///Pirate Dagger
+IG_HeadgerBox,5574,10///WellChewed Pencil
+IG_HeadgerBox,5325,10///Robo Eyes
+IG_HeadgerBox,5151,10///Note Headphone
+IG_HeadgerBox,5286,6///Pecopeco Hairband
+IG_HeadgerBox,5361,10///Gangster Scarf
+IG_HeadgerBox,5530,10//Raven Cap
+IG_HeadgerBox,18666,10//CD in Mouth
+IG_HeadgerBox,5548,10//Crimson Rose
+IG_HeadgerBox,5389,10//Angel Spirit
+IG_HeadgerBox,5592,10//Sigrun Wings
+IG_HeadgerBox,5403,10//Fish in mouth
+IG_HeadgerBox,5483,10//Odin Mask
+IG_HeadgerBox,5362,10//Ninja Scroll
+IG_HeadgerBox,5539,10//Jaguar Hat
+IG_HeadgerBox,5767,10//Samurai Mask
+IG_HeadgerBox,18754,10//Blood Suckers
+IG_HeadgerBox,18698,10//Chessy snack in mouth
+IG_HeadgerBox,5545,10//Aries Diadem
+IG_HeadgerBox,5135,10//Cyclop Eyes
+IG_HeadgerBox,5401,10//Black Frame Glasses
+IG_HeadgerBox,18694,10//Red Hood
+IG_HeadgerBox,5527,10//Lunatik Hat
+IG_HeadgerBox,5471,10//Reginleaf Wing
+IG_HeadgerBox,5393,6,1,1,1//Valentine Hat
+IG_HeadgerBox,5846,6,1,1,1//Buzzy Ball Gam 20matk
+IG_HeadgerBox,5132,6,1,1,1//Angeling Hat 
+IG_HeadgerBox,18600,6,1,1,1//CEB
+IG_HeadgerBox,18601,6,1,1,1//RBH
+IG_HeadgerBox,18652,6,1,1,1//VanargrandHelm 
+IG_HeadgerBox,5359,6,1,1,1//Ship Captain Hat[1]
+IG_HeadgerBox,5409,6,1,1,1//Purple Cowboy Hat
+IG_HeadgerBox,5447,10//Frog Hat
+IG_HeadgerBox,5380,10//Fish head hat
+IG_HeadgerBox,5211,10//Dress Hat
+IG_HeadgerBox,5594,10//Donut in mouth
+IG_HeadgerBox,18745,10//Choco Stick in mouth
+IG_HeadgerBox,18531,10//Drooping premeter
+IG_HeadgerBox,18542,10//Benevolent Guardian
+IG_HeadgerBox,18782,10//Butterfly wing ear
+IG_HeadgerBox,18842,10//Hat of girl
+IG_HeadgerBox,18857,10//Curupia hat
