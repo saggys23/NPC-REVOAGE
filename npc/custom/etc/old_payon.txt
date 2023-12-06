@@ -313,10 +313,10 @@ pa2_in01,131,77,4	script	Falcon Master#oldpay	59,{
 //in_hunter.gat,146,100,2	duplicate(Falcon Master)	Falcon Master	59
 
 // Shops ---------------------------------------------------------------
-pa2_in01,125,51,4	shop	Weapon Dealer#oldpay	77,1750:-1,1751:-1,1752:-1,1101:-1,1104:-1,1107:-1,1201:-1,1204:-1,1207:-1,1601:-1,1701:-1,1704:-1,1707:-1,1710:-1,1713:-1,1714:-1,1718:-1
+pa2_in01,125,51,4	shop	Weapon Dealer#oldpay	77,1750:-1,1751:-1,1101:-1,1104:-1,1107:-1,1201:-1,1204:-1,1207:-1,1601:-1,1701:-1,1704:-1,1707:-1,1710:-1,1713:-1,1714:-1,1718:-1
 pa2_in01,134,51,4	shop	Armor Dealer#oldpay	76,2401:-1,2403:-1,2405:-1,2501:-1,2503:-1,2505:-1,2208:-1,2211:-1,2212:-1,2301:-1,2303:-1,2305:-1,2321:-1,2328:-1,2332:-1,2309:-1,2330:-1
-pa2_in02,87,34,1	shop	Tool Dealer#oldpay	75,1750:-1,1751:-1,1752:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,525:-1,601:-1,602:-1,1065:-1,645:-1,656:-1,657:-1
-payo2,82,124,6	shop	Tool Dealer#oldpay2	88,8042:-1,8043:-1,1750:-1,1751:-1,1752:-1,579:-1,601:-1,602:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,657:-1,717:-1,716:800,715:1000,1065:-1,611:-1
+pa2_in02,87,34,1	shop	Tool Dealer#oldpay	75,1750:-1,1751:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,525:-1,601:-1,602:-1,1065:-1,645:-1,656:-1,657:-1
+payo2,82,124,6	shop	Tool Dealer#oldpay2	88,1750:-1,1751:-1,601:-1,602:-1,501:-1,502:-1,506:-1,645:-1,656:-1,657:-1,717:-1,716:800,715:1000,1065:-1,611:-1
 payo2,142,104,4	shop	Pet Merchant	125,537:-1,643:-1,10013:-1,10014:-1
 //pa2_in01,84,26,4	shop	Miner	48,1010:-1,1011:-1
 
@@ -2110,74 +2110,3 @@ pa2_in01,174,113,2	script	Marx Hansen#juiceold	86,{
 	}
 }
 
-
-//--------------------------- rurumuni thief sprinkle sand----------------
-
-payo2,91,77,3	script	Bag Seller#1	99,{
-	mes "[RuRumuni]";
-	mes "I am a humble merchant here";
-	mes "in Payon. I buy the leather";
-	mes "hides of animals brought in by";
-	mes "the hunters and make leather";
-	mes "pouches to sell. I grew up";
-	mes "around leather working and am quite good at it.";
-	next;
-	switch (skill_thief_1) {
-	case 0:
-		mes "[RuRumuni]";
-		mes "There is a thief guild in the";
-		mes "area of Morocc. I know one there";
-		mes "that sends me thieves in need";
-		mes "of items I make such as a";
-		mes "^3355FF' Leather Bag of Infinity '^000000.";
-		mes "They visit my store often.";
-		close;
-	case 1:
-		if ((countitem(952) > 0) && (countitem(1055) > 0) && (countitem(1025) > 0)) {
-			mes "[RuRumuni]";
-			mes "Ahhh... You have come for a leather bag.";
-			mes "Very good, very good.";
-			mes "I will make you the leather bag";
-			mes "right away if you wait just a bit.";
-			mes "TuTak TuTak Shyuku Shyuku Shyuku";
-			mes "- - - - -";
-			next;
-			mes "[RuRumuni]";
-			mes "Okay, here it is all done.";
-			mes "Take this leather bag";
-			mes "to the Thief guild's Alcouskou";
-			mes "If you take him this, he will";
-			mes "teach you the skill that you ";
-			mes "wish to learn.";
-			delitem 952,1; //Cactus_Needle
-			delitem 1055,1; //Earthworm_Peeling
-			delitem 1025,1; //Spiderweb
-			set skill_thief_1,2;
-			getitem 7042,1; //Leather_Bag_Of_Infinity
-			close;
-		}
-		mes "[RuRumuni]";
-		mes "Find Alcouskou of the thief guild";
-		mes "to place and order for a leather bag of infinity.";
-		mes "You should know that the leather bag of infinity";
-		mes "takes much time and skill to make.";
-		mes "In order to make such an item, you";
-		mes "must provide me with the materials.";
-		next;
-		mes "The items needed as materials are";
-		mes "these items. ..";
-		mes "^3355FF' Earthworm Peeling '^000000";
-		mes "^3355FF' Cobweb '^000000";
-		mes "^3355FF' Cactus Needle '^000000";
-		mes "I need one of each.";
-		close;
-	case 2:
-		mes "[RuRumuni]";
-		mes "Here is your leather bag of infinity.";
-		mes "Take this to the Thief guilds";
-		mes "Alcouskou and let him know ";
-		mes "that you are now ready to learn";
-		mes "the skill.";
-		close;
-	}
-}

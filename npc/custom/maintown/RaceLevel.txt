@@ -26,7 +26,7 @@
 // a SQL item_db.
 //=====================================================
 ///////////////////////////////////////////////////////
-mora,59,147,3	script	Race to Max Level	10255,{
+payo2,107,117,3	script	Claim Level 99	10255,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Sepertinya inventory anda penuh!! -";
 		close;
@@ -67,7 +67,7 @@ mora,59,147,3	script	Race to Max Level	10255,{
 	Begin:
 
 		mes "[ ^0099ccRace to Max Level^000000 ]";
-		mes "Hello, " + ((getgmlevel() >= .@gm_level) ? "master! What do you want to do today?" : "are you here for your reward? Remember, only the first one each job !");
+		mes "Hello, " + ((getgmlevel() >= .@gm_level) ? "master! What do you want to do today?" : "are you here for your reward?");
 		if (getgmlevel() >= .@gm_level) {
 			.@select$ = "Change rare item chance:Update rewards:Restart race:Test reward:View explanation:Show rewarded players:Cancel";
 			switch(select(.@select$)) {
@@ -313,9 +313,4 @@ mora,59,147,3	script	Race to Max Level	10255,{
 			mes .@i + 1 + ". " + getitemname(getelementofarray(getarg(0), .@i));
 		}
 	}
-	
-OnInit:
-waitingroom "Race Level 99",0;
-end;
-
 }

@@ -148,7 +148,7 @@ mes "Your cash points not enough,";
 mes ""+.@week+" cash point to use this feature.";
 close;
 }
-//set #CASHPOINTS, #CASHPOINTS - .@week;
+set #CASHPOINTS, #CASHPOINTS - .@week;
 atcommand "@vip +7d "+strcharinfo(0)+"";
 mes "[ Premium Service ]";
 mes "Enjoy your service.";
@@ -162,7 +162,7 @@ mes "Your cash points not enough,";
 mes ""+.@month+" cash point to use this feature.";
 close;
 }
-//set #CASHPOINTS, #CASHPOINTS - .@month;
+set #CASHPOINTS, #CASHPOINTS - .@month;
 atcommand "@vip +1m "+strcharinfo(0)+"";
 mes "[ Premium Service ]";
 mes "Enjoy your service.";

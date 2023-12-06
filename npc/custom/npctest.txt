@@ -1,5 +1,0 @@
-payon,155,218,6	script	testnpc	4_F_KAFRA1,{
-.@accountid = getcharid(3);
-mes ""+.@accountid+"";
-close;
-}

@@ -26,7 +26,7 @@ bindatcmd "partycall",strnpcinfo(3)+"::OnPartycall";
 end;
 }
 
-payon,148,228,5	script	PVP Room	827,{
+prontera,145,187,5	script	PVP Room	827,{
 set .@menuA$, "PVP Warp:Points Shop[^EE3333"+#pointsP+"^000000]:Exit:";
 switch(select(.@menuA$)) {
 	case 1:

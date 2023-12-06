@@ -4,7 +4,6 @@ goto Prem;
 }
 
 set .@Timer, vip_status(VIP_STATUS_EXPIRE);
-percentheal 100,100;
 mes "[ Premium Service ]";
 mes "Welcome "+strcharinfo(0)+",";
 mes "Please choose the menu.";
@@ -12,9 +11,27 @@ mes "^FF0000Your VIP Status will Expire at:^000000";
 mes gettimestr("%Y-%m/%d %H:%M:%S",21,vip_status(VIP_STATUS_EXPIRE));
 mes "^FF0000Time Left: ^000000" + callfunc("Time2Str",.@Timer);
 next;
-switch(select("Premium Broadcast:Buy items:No, thanks.")) {
+switch(select("Free Buff:Premium Broadcast:Buy items:No, thanks.")) {
 
 	case 1:
+		mes "[ Premium Service ]";
+		mes "Free Buffs ^FF0000All stat +4, ATK +12, MATK +15^000000";
+
+		menu "Give me the buffs",First;
+
+First:
+sc_start SC_STRFOOD,3600000,4;
+sc_start SC_AGIFOOD,3600000,4;
+sc_start SC_VITFOOD,3600000,4;
+sc_start SC_INTFOOD,3600000,4;
+sc_start SC_DEXFOOD,3600000,4;
+sc_start SC_LUKFOOD,3600000,4;
+sc_start SC_ATKPOTION,600000,12;
+sc_start SC_MATKPOTION,600000,15;
+close;
+
+
+	case 2:
 if (#delay > gettimetick(2)) {
     mes "=============================";
 	mes "Wait for 2 hours to pass before you can use this service again.";
@@ -50,7 +67,7 @@ no:
 	close;
 
 
-	case 2:
+	case 3:
 		mes "Choose items do you wants.";
 		goto item_list;
 
@@ -94,16 +111,16 @@ no:
 		close;
 	
 
-	case 3:
+	case 4:
 	mes "See you next time.";
 	close;
 	}
 
 
 Prem:
-set .@day,5000;
-set .@week,30000;
-set .@month,100000;
+set .@day,10000;
+set .@week,50000;
+set .@month,150000;
 if (getgroupid()>14) {
 mes "[ Premium Service ]";
 mes "Sorry,GM staff not allowed to use this feature.";
@@ -182,6 +199,7 @@ close;
 // --------------------------------------------------
 //	Duplicates:
 // --------------------------------------------------
+prontera,153,178,4	duplicate(Premium Service)	Premium Service#pron2	814
 payon,96,120,4	duplicate(Premium Service)	Premium Service#alb11	814
 alberta,33,240,4	duplicate(Premium Service)	Premium Service#alb	814
 aldebaran,146,116,4	duplicate(Premium Service)	Premium Service#alde	814
