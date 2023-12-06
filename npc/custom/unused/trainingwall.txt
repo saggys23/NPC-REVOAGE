@@ -1,0 +1,42 @@
+// Barricades
+new_1-1,68,113,0	script	#bars01	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+new_1-1,68,112,0	script	#bars02	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+new_1-1,68,111,0	script	#bars03	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+new_1-1,68,110,0	script	#bars04	1906,{ end; OnInit: disablenpc strnpcinfo(0); }
+
+
+-	script	newwall	-1,{
+OnInit:
+	bindatcmd "breakwall", strnpcinfo(0)+"::OnBreak",14,14;
+	bindatcmd "enablewall", strnpcinfo(0)+"::OnEnable",14,14;
+	end;
+	
+OnEnable:	
+
+	for ( .@j = 1; .@j <= 4; .@j++ ){
+		enablenpc "#bars0"+.@j;
+		setwall "new_1-1", 68, 110, 4, DIR_NORTH, 0, "newwaLL1";
+
+	}
+	end;
+	
+OnBreak:
+			for ( .@j = 1; .@j <= 4; .@j++ )
+				disablenpc "#bars0"+.@j;
+				delwall "newwaLL1";
+
+			end;
+	}
+	
+	
+	
+-	script	arriving	-1,{
+	OnPCLoginEvent:
+	if ( !#new_account ) {
+	announce "Hey "+strcharinfo(0)+" has just arrived! Welcome and have fun!",bc,0x33FF33|bc_all;
+	#new_account = 1;
+	}
+	else
+	dispbottom "Hello my friend, Welcome to the server, i hope you make a lot of friends and have fun, once more, welcome!!";
+	end;
+	}

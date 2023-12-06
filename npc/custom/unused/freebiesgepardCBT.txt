@@ -1,0 +1,53 @@
+//===== rAthena Script =======================================
+//= Freebies NPC with Gepard Function supported
+//===== By: ==================================================
+//= BeWan
+//https://rathena.org/board/profile/62232-bewan/
+//===== Current Version: =====================================
+//= 1.0
+//===== Description: =========================================
+//= this freebies npc is supported gepard function " unique_id "
+//= you can add multiple reward items
+//============================================================
+
+new_1-1,63,118,3	script	CBT Warm Up NPC	831,{
+
+	.@unique_id$ = get_unique_id();
+
+	if(getd("$CBT_" + .@unique_id$) > 0 || #CBTpackage > 0){			 //Change for reset reward #CBTpackage & getd size
+		mes "[CBT Warm Up NPC]";
+		mes "You have already claimed your CBT Warm Up Package.";
+		mes "";
+		mes "NOTE : 1 PC only can claim 1 Times";
+		close;
+		end;
+	}
+	
+	mes "[CBT Warm Up NPC]";
+	mes "This free pack only available on CBT Server only, For Warming UP !";
+	mes "- ^3355FF5.000.000z^000000";
+	mes "- Cash Point ^3355FF2.500.000^000000";
+	mes "- Field Manual 300% ^3355FF10 ^000000Pcs";
+	mes "- etc";
+	mes "";
+	mes "Enjoy ! Happy RO #jgnlupajobtrans";
+	mes "NOTE : 1 PC only can claim 1 Times";
+	next;
+	setd "$CBT_" + .@unique_id$,1;			//Change Size reset reward tercatat di MAPREG database
+	#CBTpackage = 1;   						//Change for reset reward
+	set #CASHPOINTS, #CASHPOINTS + 2500000;
+	Zeny += 5000000;
+	$freebies_count -= 1;
+	for (.@i = 0; .@i < getarraysize(.items); .@i += 2)
+		getitembound .items[.@i],.items[.@i+1],1;
+	if ($freebies_count == 0)
+		$reward_status = 1;
+	message strcharinfo(0),"[CBT Warm Up NPC]: You just got 5.000.000z & 2.500.000 Cash Points.";
+	end;
+	
+OnInit:
+	setarray .items, 6046,1,7622,1,7825,1,14545,10;
+	waitingroom "CLAIM HERE !!!",0;
+}
+
+payon,172,228,3	duplicate(CBT Warm Up NPC)	CBT Warm Up NPC#1	831
