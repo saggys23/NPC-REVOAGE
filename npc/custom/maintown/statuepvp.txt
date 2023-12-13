@@ -99,11 +99,11 @@ OnInit:
 	end;
 }
 
-payon,161,246,3	duplicate(pvp_ladder_statue)	pvp_ladder_statue#1	1_F_MARIA
-payon,164,246,3	duplicate(pvp_ladder_statue)	pvp_ladder_statue#2	1_F_MARIA
-payon,167,246,3	duplicate(pvp_ladder_statue)	pvp_ladder_statue#3	1_F_MARIA
+prontera,150,199,4	duplicate(pvp_ladder_statue)	pvp_ladder_statue#1	1_F_MARIA
+prontera,148,201,4	duplicate(pvp_ladder_statue)	pvp_ladder_statue#2	1_F_MARIA
+prontera,152,201,4	duplicate(pvp_ladder_statue)	pvp_ladder_statue#3	1_F_MARIA
 
-payon,161,246,5	script	 #top1pvp	111,{
+prontera,150,199,4	script	 #top1pvp	111,{
 OnInit:
 	initnpctimer;
 	end;
@@ -113,7 +113,7 @@ OnTimer2000:
 	end;
 }
 
-payon,164,246,5	script	 #top2pvp	111,{
+prontera,148,201,4	script	 #top2pvp	111,{
 OnInit:
 	initnpctimer;
 	end;
@@ -123,7 +123,7 @@ OnTimer2000:
 	end;
 }
 
-payon,167,246,5	script	 #top3pvp	111,{
+prontera,152,201,4	script	 #top3pvp	111,{
 OnInit:
 	initnpctimer;
 	end;
@@ -135,14 +135,7 @@ OnTimer2000:
 
 
 
-
-
-
-
-
-
-
-payon,169,243,3	script	PvP Ladder	418,{
+prontera,146,196,5	script	PvP Ladder	418,{
 	.@npcname$ = strnpcinfo(0);
 	while (true) {
 		mes "["+ .@npcname$ +"]";

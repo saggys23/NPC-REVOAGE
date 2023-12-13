@@ -17,20 +17,43 @@
 //= 3.0 Migrate/Integrate to Global Functions. [mazvi]
 //============================================================
 
-payo2,82,127,6	script	Platinum Skill NPC	612,{
-	mes "[Platinum Skill NPC]";
-	mes "I can give you the special skills available to your job.";
-	mes "Would you like these skills now?";
-	next;
-	if (select("Yes Please:No") == 2) {
+prontera,147,171,6	script	Platinum Skill NPC	612,{
+	if (PlatinumLearn) {
 		mes "[Platinum Skill NPC]";
-		mes "Have a nice day... >.>";
+		mes "You want to reLearn your Platinum Skill ?";
+		mes "Would you like these skills now?";
+		next;
+		if (select("Free Relearn Please, already paid:No") == 2) {
+			mes "[Platinum Skill NPC]";
+			mes "Have a nice day... >.>";
+			close;
+		} 
+		callfunc "F_GetPlatinumSkills";
+		mes "[Platinum Skill NPC]";
+		mes "There you go!";
+		close;
+	} else {
+		mes "[Platinum Skill NPC]";
+		mes "I can give you the special skills available to your job.";
+		mes "You need to pay 250,000z ^0055FFOR^000000 you can take Quest Manually.";
+		mes "Would you like these skills now?";
+		next;
+		if (select("Yes Please:No") == 2) {
+			mes "[Platinum Skill NPC]";
+			mes "Have a nice day... >.>";
+			close;
+		}
+		if (Zeny < 250000 ) {
+			message(strcharinfo(0),"Not enough Zeny !");
+			end;
+		}
+		Zeny -= 250000;
+		PlatinumLearn = true;
+		callfunc "F_GetPlatinumSkills";
+		mes "[Platinum Skill NPC]";
+		mes "There you go!";
 		close;
 	}
-	callfunc "F_GetPlatinumSkills";
-	mes "[Platinum Skill NPC]";
-	mes "There you go!";
-	close;
 }
 
 

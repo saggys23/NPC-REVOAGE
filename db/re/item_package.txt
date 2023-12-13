@@ -1130,7 +1130,7 @@ IG_New_Year_Scroll,12908,1500,1,1,0,0,0	// 1x Vit_Dish_Box
 IG_New_Year_Scroll,14232,950,1,1,0,0,0	// 1x Yggdrasilberry_Box_
 IG_New_Year_Scroll,17071,50,1,1,0,0,0	// 1x Superb_Fish_Box50
 IG_New_Year_Scroll,4145,1,1,2,1,0,0	// 1x Berzebub_Card
-IG_New_Year_Scroll,4480,1,1,2,1,0,0	// 1x Sealed_Kiel_Card
+//IG_New_Year_Scroll,4480,1,1,2,1,0,0	// 1x Sealed_Kiel_Card
 IG_New_Year_Scroll,4489,3,1,2,1,0,0	// 1x Sealed_Pharaoh_Card
 IG_New_Year_Scroll,2589,10,1,2,1,0,1	// 1x Fallen_Angel_Wing
 IG_New_Year_Scroll,18603,5,1,2,1,0,1	// 1x Black_Devil_Mask_
@@ -2052,9 +2052,9 @@ IG_Lucky_Egg_C10,12508,900,10,1,0,0,0	// 10x E_WOB_Schwaltz
 IG_Lucky_Egg_C10,12509,900,10,1,0,0,0	// 10x E_WOB_Rachel
 IG_Lucky_Egg_C10,12510,900,10,1,0,0,0	// 10x E_WOB_Local
 IG_Lucky_Egg_C10,18509,1,1,1,1,0,0	// 1x RWC2010_Indonesia
-IG_Lucky_Egg_C10,4480,1,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Lucky_Egg_C10,4480,1,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Lucky_Egg_C10,12549,800,1,1,0,0,0	// 1x White_Slim_Pot_Box2
-IG_Lucky_Egg_C10,4482,1,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
+//IG_Lucky_Egg_C10,4482,1,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
 IG_Lucky_Egg_C10,19511,150,1,1,1,0,0	// 1x Heart_Eye_Patch1
 IG_Lucky_Egg_C10,19512,150,1,1,1,0,0	// 1x Heart_Eye_Patch2
 IG_Lucky_Egg_C10,12373,400,1,1,0,0,0	// 1x Boy's_Naivety
@@ -2102,7 +2102,7 @@ IG_Lucky_Egg_C3,12406,800,2,1,0,0,0	// 2x Psychic_ArmorS
 IG_Lucky_Egg_C3,14232,800,1,1,0,0,0	// 1x Yggdrasilberry_Box_
 IG_Lucky_Egg_C3,16307,100,1,1,1,0,0	// 1x Upg_Buckler_Box
 IG_Lucky_Egg_C3,15008,200,1,1,1,0,0	// 1x Flame_Sprits_Armor__
-IG_Lucky_Egg_C3,4480,1,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Lucky_Egg_C3,4480,1,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Lucky_Egg_C3,5594,150,1,1,1,0,0	// 1x Donut_In_Mouth
 IG_Lucky_Egg_C3,5593,50,1,1,1,0,0	// 1x Rabbit_Bonnet_
 
@@ -2117,7 +2117,7 @@ IG_Lucky_Egg_C4,12265,720,3,1,0,0,0	// 3x Comp_Insurance
 IG_Lucky_Egg_C4,12405,720,10,1,0,0,0	// 10x Underripe_Yggseed
 IG_Lucky_Egg_C4,12406,720,2,1,0,0,0	// 2x Psychic_ArmorS
 IG_Lucky_Egg_C4,14232,720,1,1,0,0,0	// 1x Yggdrasilberry_Box_
-IG_Lucky_Egg_C4,4482,1,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
+//IG_Lucky_Egg_C4,4482,1,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
 IG_Lucky_Egg_C4,16132,200,1,1,1,0,0	// 1x Lunatic_Hat_Box
 IG_Lucky_Egg_C4,5502,200,1,1,1,0,0	// 1x Necromencer's_Hood
 IG_Lucky_Egg_C4,5365,200,1,1,1,0,0	// 1x Fried_Egg
@@ -2134,7 +2134,7 @@ IG_Lucky_Egg_C5,12405,900,10,1,0,0,0	// 10x Underripe_Yggseed
 IG_Lucky_Egg_C5,12406,900,2,1,0,0,0	// 2x Psychic_ArmorS
 IG_Lucky_Egg_C5,12928,900,5,1,0,0,0	// 5x J_Aspersio_5_Scroll
 IG_Lucky_Egg_C5,4411,1,1,1,1,0,0	// 1x Vanberk_Card
-IG_Lucky_Egg_C5,4481,1,1,1,1,0,0	// 1x Sealed_Ktullanux_Card
+//IG_Lucky_Egg_C5,4481,1,1,1,1,0,0	// 1x Sealed_Ktullanux_Card
 IG_Lucky_Egg_C5,12264,900,3,1,0,0,0	// 3x Comp_Bubble_Gum
 IG_Lucky_Egg_C5,12265,900,3,1,0,0,0	// 3x Comp_Insurance
 IG_Lucky_Egg_C5,12900,800,1,1,0,0,0	// 1x Battle_Manual_Box
@@ -2437,7 +2437,7 @@ IG_Tw_Rainbow_Scroll,12919,1450,1,1,0,0,0	// 1x Megaphone_Box
 IG_Tw_Rainbow_Scroll,6456,100,1,1,1,0,0	// 1x Guarantee_Weapon_5Up
 IG_Tw_Rainbow_Scroll,6457,100,1,1,1,0,0	// 1x Guarantee_Armor_5Up
 IG_Tw_Rainbow_Scroll,2202,5,1,1,1,0,0	// 1x Sunglasses_
-IG_Tw_Rainbow_Scroll,4487,15,1,1,1,0,0	// 1x Sealed_Ifrit_Card
+//IG_Tw_Rainbow_Scroll,4487,15,1,1,1,0,0	// 1x Sealed_Ifrit_Card
 IG_Tw_Rainbow_Scroll,4302,1,1,1,1,0,0	// 1x Tao_Gunka_Card
 IG_Tw_Rainbow_Scroll,18669,100,1,1,1,0,0	// 1x Cowhide_Hat
 IG_Tw_Rainbow_Scroll,5376,5,1,1,1,0,0	// 1x Satanic_Chain_P
@@ -2532,7 +2532,7 @@ IG_Scroll_Of_Death,13600,1100,1,1,0,0,0	// 1x Siegfried_Box5
 IG_Scroll_Of_Life,4302,1,1,1,1,0,0	// 1x Tao_Gunka_Card
 IG_Scroll_Of_Life,4493,5,1,1,1,0,0	// 1x Sealed_Tao_Card
 IG_Scroll_Of_Life,4336,15,1,1,1,0,0	// 1x Ungoliant_Card
-IG_Scroll_Of_Life,4482,50,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
+//IG_Scroll_Of_Life,4482,50,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
 IG_Scroll_Of_Life,18591,3,1,1,1,0,0	// 1x Mini_Glasses_
 IG_Scroll_Of_Life,2576,15,1,1,1,0,0	// 1x Bravery_Bag
 IG_Scroll_Of_Life,18534,50,1,1,1,0,0	// 1x Fancy_Phantom_Mask
@@ -2649,7 +2649,7 @@ IG_Scroll_Of_Holiness,12370,1100,1,1,0,0,0	// 1x Gril's_Naivety
 
 IG_Horned_Scroll,4135,1,1,1,1,0,0	// 1x Orc_Load_Card
 IG_Horned_Scroll,4536,5,1,1,1,0,0	// 1x Sealed_Atroce_Card
-IG_Horned_Scroll,4480,3,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Horned_Scroll,4480,3,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Horned_Scroll,4488,30,1,1,1,0,0	// 1x Sealed_D_Lord_Card
 IG_Horned_Scroll,18603,2,1,1,1,0,0	// 1x Black_Devil_Mask_
 IG_Horned_Scroll,18595,10,1,1,1,0,0	// 1x Horn_Of_Ancient
@@ -3015,7 +3015,7 @@ IG_Indigo_Scroll,14289,600,1,1,0,0,0	// 1x Cloth_Dye_Coupon_Box
 IG_Indigo_Scroll,12406,1138,10,1,0,0,0	// 10x Psychic_ArmorS
 IG_Indigo_Scroll,12103,500,1,1,0,0,0	// 1x Bloody_Dead_Branch
 IG_Indigo_Scroll,18712,150,1,1,1,0,0	// 1x Fan_In_Mouth
-IG_Indigo_Scroll,4480,1,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Indigo_Scroll,4480,1,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Indigo_Scroll,4544,15,1,1,1,0,0	// 1x SLD_Dark_Snake_Card
 IG_Indigo_Scroll,4148,1,1,1,1,0,0	// 1x Pharaoh_Card
 IG_Indigo_Scroll,1670,3,1,1,1,0,0	// 1x RWC_Memory_Staff
@@ -3096,7 +3096,7 @@ IG_Je_Un_Scroll,6234,30,1,1,1,0,0	// 1x Guarantee_Armor_7Up
 IG_Je_Un_Scroll,6230,30,1,1,1,0,0	// 1x Guarantee_Weapon_7Up
 IG_Je_Un_Scroll,18742,50,1,1,1,0,0	// 1x C_MoonStar_Accessory
 IG_Je_Un_Scroll,5585,30,1,1,1,0,0	// 1x Rune_Hairband
-IG_Je_Un_Scroll,4485,5,1,1,1,0,0	// 1x Sealed_Gloom_Card
+//IG_Je_Un_Scroll,4485,5,1,1,1,0,0	// 1x Sealed_Gloom_Card
 IG_Je_Un_Scroll,18759,30,1,1,1,0,0	// 1x Stretched_Nose_M
 IG_Je_Un_Scroll,18551,30,1,1,1,0,0	// 1x Galaxy_Circlet
 IG_Je_Un_Scroll,4137,1,1,1,1,0,0	// 1x Drake_Card
@@ -3423,7 +3423,7 @@ IG_Blessing_Lucky_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Blessing_Lucky_Scroll,6238,5,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Blessing_Lucky_Scroll,6239,5,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Blessing_Lucky_Scroll,4498,10,1,1,1,0,0	// 1x Sealed_Lady_Tanee_Card
-IG_Blessing_Lucky_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Blessing_Lucky_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Blessing_Lucky_Scroll,4047,1,1,1,1,0,0	// 1x Ghostring_Card
 IG_Blessing_Lucky_Scroll,4263,1,1,1,1,0,0	// 1x Incant_Samurai_Card
 
@@ -3498,7 +3498,7 @@ IG_Amora_Lucky_Scroll,6232,115,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Amora_Lucky_Scroll,6238,100,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Amora_Lucky_Scroll,6239,100,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Amora_Lucky_Scroll,4493,5,1,1,1,0,0	// 1x Sealed_Tao_Card
-IG_Amora_Lucky_Scroll,4480,5,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Amora_Lucky_Scroll,4480,5,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Amora_Lucky_Scroll,4135,1,1,1,1,0,0	// 1x Orc_Load_Card
 IG_Amora_Lucky_Scroll,4263,1,1,1,1,0,0	// 1x Incant_Samurai_Card
 
@@ -3523,7 +3523,7 @@ IG_Venus_Lucky_Scroll,6232,125,1,1,0,0,0	// 1x Guarantee_Armor_9Up
 IG_Venus_Lucky_Scroll,6238,100,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Venus_Lucky_Scroll,6239,100,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Venus_Lucky_Scroll,4499,10,1,1,1,0,0	// 1x Sealed_Samurai_Card
-IG_Venus_Lucky_Scroll,4485,10,1,1,1,0,0	// 1x Sealed_Gloom_Card
+//IG_Venus_Lucky_Scroll,4485,10,1,1,1,0,0	// 1x Sealed_Gloom_Card
 IG_Venus_Lucky_Scroll,4430,1,1,1,1,0,0	// 1x Ifrit_Card
 IG_Venus_Lucky_Scroll,4403,1,1,1,1,0,0	// 1x Kiel_Card
 
@@ -3548,7 +3548,7 @@ IG_Erzulie_Lucky_Scroll,6232,150,1,1,0,0,0	// 1x Guarantee_Armor_9Up
 IG_Erzulie_Lucky_Scroll,6238,100,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Erzulie_Lucky_Scroll,6239,100,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Erzulie_Lucky_Scroll,4488,10,1,1,1,0,0	// 1x Sealed_D_Lord_Card
-IG_Erzulie_Lucky_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Erzulie_Lucky_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Erzulie_Lucky_Scroll,4276,1,1,1,1,0,0	// 1x Lord_Of_Death_Card
 IG_Erzulie_Lucky_Scroll,4137,1,1,1,1,0,0	// 1x Drake_Card
 
@@ -3573,7 +3573,7 @@ IG_Majestic_Lucky_Scroll,6228,15,1,1,1,0,0	// 1x Guarantee_Weapon_9Up
 IG_Majestic_Lucky_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Majestic_Lucky_Scroll,6238,5,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Majestic_Lucky_Scroll,6239,5,1,1,1,0,0	// 1x Guarantee_Armor_11Up
-IG_Majestic_Lucky_Scroll,4485,10,1,1,1,0,0	// 1x Sealed_Gloom_Card
+//IG_Majestic_Lucky_Scroll,4485,10,1,1,1,0,0	// 1x Sealed_Gloom_Card
 IG_Majestic_Lucky_Scroll,4499,10,1,1,1,0,0	// 1x Sealed_Samurai_Card
 IG_Majestic_Lucky_Scroll,4374,1,1,1,1,0,0	// 1x Apocalips_H_Card
 IG_Majestic_Lucky_Scroll,4403,1,1,1,1,0,0	// 1x Kiel_Card
@@ -3694,7 +3694,7 @@ IG_Happy_Time_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Happy_Time_Scroll,6238,5,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Happy_Time_Scroll,6239,5,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Happy_Time_Scroll,4492,10,1,1,1,0,0	// 1x Sealed_Orc_Hero_Card
-IG_Happy_Time_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Happy_Time_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Happy_Time_Scroll,4407,1,1,1,1,0,0	// 1x Randgris_Card
 
 // Time_Travel_Scroll
@@ -3744,7 +3744,7 @@ IG_Solaris_Festival_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Solaris_Festival_Scroll,6238,5,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Solaris_Festival_Scroll,6239,5,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Solaris_Festival_Scroll,4539,10,1,1,1,0,0	// 1x Sealed_F_Bishop_Card
-IG_Solaris_Festival_Scroll,4487,10,1,1,1,0,0	// 1x Sealed_Ifrit_Card
+//IG_Solaris_Festival_Scroll,4487,10,1,1,1,0,0	// 1x Sealed_Ifrit_Card
 IG_Solaris_Festival_Scroll,4403,1,1,1,1,0,0	// 1x Kiel_Card
 
 // Midgard_Fes_Scroll
@@ -3812,7 +3812,7 @@ IG_Sweet_Midgard_Scroll,6230,225,1,1,1,0,0	// 1x Guarantee_Weapon_7Up
 IG_Sweet_Midgard_Scroll,6234,225,1,1,1,0,0	// 1x Guarantee_Armor_7Up
 IG_Sweet_Midgard_Scroll,6229,35,1,1,1,0,0	// 1x Guarantee_Weapon_8Up
 IG_Sweet_Midgard_Scroll,6233,35,1,1,1,0,0	// 1x Guarantee_Armor_8Up
-IG_Sweet_Midgard_Scroll,4485,20,1,1,1,0,0	// 1x Sealed_Gloom_Card
+//IG_Sweet_Midgard_Scroll,4485,20,1,1,1,0,0	// 1x Sealed_Gloom_Card
 IG_Sweet_Midgard_Scroll,4169,20,1,1,1,0,0	// 1x Dark_Illusion_Card
 IG_Sweet_Midgard_Scroll,4047,1,1,1,1,0,0	// 1x Ghostring_Card
 IG_Sweet_Midgard_Scroll,4302,1,1,1,1,0,0	// 1x Tao_Gunka_Card
@@ -3839,7 +3839,7 @@ IG_Winter_Midgard_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Winter_Midgard_Scroll,6238,5,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Winter_Midgard_Scroll,6239,5,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Winter_Midgard_Scroll,4493,10,1,1,1,0,0	// 1x Sealed_Tao_Card
-IG_Winter_Midgard_Scroll,4482,10,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
+//IG_Winter_Midgard_Scroll,4482,10,1,1,1,0,0	// 1x Sealed_B_Ygnizem_Card
 IG_Winter_Midgard_Scroll,4441,1,1,1,1,0,0	// 1x Fallen_Bishop_Card
 
 // Spring_Festival_Scroll
@@ -3864,7 +3864,7 @@ IG_Spring_Festival_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Spring_Festival_Scroll,6238,5,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Spring_Festival_Scroll,6239,5,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Spring_Festival_Scroll,4539,10,1,1,1,0,0	// 1x Sealed_F_Bishop_Card
-IG_Spring_Festival_Scroll,4487,10,1,1,1,0,0	// 1x Sealed_Ifrit_Card
+//IG_Spring_Festival_Scroll,4487,10,1,1,1,0,0	// 1x Sealed_Ifrit_Card
 IG_Spring_Festival_Scroll,4263,1,1,1,1,0,0	// 1x Incant_Samurai_Card
 
 // IdRO10th_Scroll
@@ -3909,7 +3909,7 @@ IG_Requiem_Scroll,6232,10,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Requiem_Scroll,6238,1,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Requiem_Scroll,6239,1,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_Requiem_Scroll,4384,15,1,1,1,0,0	// 1x Hydro_Card
-IG_Requiem_Scroll,4480,15,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Requiem_Scroll,4480,15,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Requiem_Scroll,4145,1,1,1,1,0,0	// 1x Berzebub_Card
 
 // Holy_Spirit_Scroll
@@ -3954,7 +3954,7 @@ IG_Garuda_Scroll,2985,150,1,1,0,0,1	// 1x Gyges_Ring
 IG_Garuda_Scroll,6228,15,1,1,1,0,0	// 1x Guarantee_Weapon_9Up
 IG_Garuda_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Garuda_Scroll,6238,1,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
-IG_Garuda_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Garuda_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Garuda_Scroll,4499,10,1,1,1,0,0	// 1x Sealed_Samurai_Card
 IG_Garuda_Scroll,4145,1,1,1,1,0,0	// 1x Berzebub_Card
 
@@ -4025,8 +4025,8 @@ IG_Blessing_Midgard_Scroll,6228,15,1,1,1,0,0	// 1x Guarantee_Weapon_9Up
 IG_Blessing_Midgard_Scroll,6232,15,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_Blessing_Midgard_Scroll,6238,5,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Blessing_Midgard_Scroll,6239,5,1,1,1,0,0	// 1x Guarantee_Armor_11Up
-IG_Blessing_Midgard_Scroll,4481,10,1,1,1,0,0	// 1x Sealed_Ktullanux_Card
-IG_Blessing_Midgard_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
+//IG_Blessing_Midgard_Scroll,4481,10,1,1,1,0,0	// 1x Sealed_Ktullanux_Card
+//IG_Blessing_Midgard_Scroll,4480,10,1,1,1,0,0	// 1x Sealed_Kiel_Card
 IG_Blessing_Midgard_Scroll,4407,1,1,1,1,0,0	// 1x Randgris_Card
 
 // Chronosian_Lucky_Scroll
@@ -4049,7 +4049,7 @@ IG_Chronosian_Lucky_Scroll,6228,125,1,1,0,0,0	// 1x Guarantee_Weapon_9Up
 IG_Chronosian_Lucky_Scroll,6232,125,1,1,0,0,0	// 1x Guarantee_Armor_9Up
 IG_Chronosian_Lucky_Scroll,6238,100,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_Chronosian_Lucky_Scroll,6239,100,1,1,1,0,0	// 1x Guarantee_Armor_11Up
-IG_Chronosian_Lucky_Scroll,4481,11,1,1,1,0,0	// 1x Sealed_Ktullanux_Card
+//IG_Chronosian_Lucky_Scroll,4481,11,1,1,1,0,0	// 1x Sealed_Ktullanux_Card
 IG_Chronosian_Lucky_Scroll,4047,8,1,1,1,0,0	// 1x Ghostring_Card
 IG_Chronosian_Lucky_Scroll,4374,2,1,1,1,0,0	// 1x Apocalips_H_Card
 IG_Chronosian_Lucky_Scroll,4302,1,1,1,1,0,0	// 1x Tao_Gunka_Card
@@ -4262,7 +4262,7 @@ IG_LastAngel_LuckyScroll,6232,125,1,1,1,0,0	// 1x Guarantee_Armor_9Up
 IG_LastAngel_LuckyScroll,6238,100,1,1,1,0,0	// 1x Guarantee_Weapon_11Up
 IG_LastAngel_LuckyScroll,6239,100,1,1,1,0,0	// 1x Guarantee_Armor_11Up
 IG_LastAngel_LuckyScroll,4499,10,1,1,1,0,0	// 1x Sealed_Samurai_Card
-IG_LastAngel_LuckyScroll,4485,10,1,1,1,0,0	// 1x Sealed_Gloom_Card
+//IG_LastAngel_LuckyScroll,4485,10,1,1,1,0,0	// 1x Sealed_Gloom_Card
 IG_LastAngel_LuckyScroll,4430,1,1,1,1,0,0	// 1x Ifrit_Card
 IG_LastAngel_LuckyScroll,4403,1,1,1,1,0,0	// 1x Kiel_Card
 

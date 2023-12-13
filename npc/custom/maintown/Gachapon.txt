@@ -6,7 +6,7 @@
 //===== Contact Info: ========================================
 //============================================================
 
-payon,166,217,3	script	Gachapon	563,{
+prontera,173,169,3	script	Gachapon	563,{
 	if (checkweight(2630,2) == 0) {
 		mes "- Please Check ur Weight!! -";
 		close;

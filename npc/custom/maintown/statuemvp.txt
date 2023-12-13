@@ -114,7 +114,7 @@ OnNPCKillEvent: // Logic to detect when a MvP is killed
 
 //---- MvP Ladder Info NPC
 
-payon,142,243,5	script	MVP Ladder	120,{
+prontera,165,196,3	script	MVP Ladder	655,{
 	.@npcname$ = strnpcinfo(0);
 	while (1) {
 		mes "["+ .@npcname$ +"]";
@@ -209,12 +209,12 @@ OnInit:
 	end;
 }
 
-payon,150,246,5	duplicate(mvp_ladder_statue)	mvp_ladder_statue#1	1_F_MARIA
-payon,147,246,5	duplicate(mvp_ladder_statue)	mvp_ladder_statue#2	1_F_MARIA
-payon,144,246,5	duplicate(mvp_ladder_statue)	mvp_ladder_statue#3	1_F_MARIA
+prontera,161,199,4	duplicate(mvp_ladder_statue)	mvp_ladder_statue#1	1_F_MARIA
+prontera,159,201,4	duplicate(mvp_ladder_statue)	mvp_ladder_statue#2	1_F_MARIA
+prontera,163,201,4	duplicate(mvp_ladder_statue)	mvp_ladder_statue#3	1_F_MARIA
 
 
-payon,150,246,5	script	 #top1	111,{
+prontera,161,199,4	script	 #top1	111,{
 OnInit:
 	initnpctimer;
 	end;
@@ -224,7 +224,7 @@ OnTimer2000:
 	end;
 }
 
-payon,147,246,5	script	 #top2	111,{
+prontera,159,201,4	script	 #top2	111,{
 OnInit:
 	initnpctimer;
 	end;
@@ -234,7 +234,7 @@ OnTimer2000:
 	end;
 }
 
-payon,144,246,5	script	 #top3	111,{
+prontera,163,201,4	script	 #top3	111,{
 OnInit:
 	initnpctimer;
 	end;

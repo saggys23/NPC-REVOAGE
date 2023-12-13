@@ -953,7 +953,7 @@ IG_BlueBox,7327,1	// Flashlight
 IG_BlueBox,7440,1	// Red Feather
 IG_BlueBox,7441,1	// Blue Feather
 IG_BlueBox,7442,1	// Cursed Seal
-IG_BlueBox,7443,1	// Three-Headed Dragon's Head
+//IG_BlueBox,7443,1	// Three-Headed Dragon's Head
 IG_BlueBox,7444,1	// Treasure Box
 IG_BlueBox,7445,1	// Green Bijou
 IG_BlueBox,7446,1	// Blue Bijou
@@ -961,7 +961,7 @@ IG_BlueBox,7447,1	// Red Bijou
 IG_BlueBox,7448,1	// Yellow Bijou
 IG_BlueBox,7449,1	// Bloody Page
 IG_BlueBox,7450,1	// Skeletal Armor Piece
-IG_BlueBox,7451,1	// Fire Dragon Scale
+//IG_BlueBox,7451,1	// Fire Dragon Scale
 IG_BlueBox,7452,1	// Yellow Spice
 IG_BlueBox,7453,1	// Sweet Sauce
 IG_BlueBox,7454,1	// Savory Sauce
@@ -1006,22 +1006,22 @@ IG_BlueBox,10017,3	// Bark Shorts
 IG_BlueBox,10018,3	// Monkey Circlet
 IG_BlueBox,10019,3	// Red Scarf
 IG_BlueBox,10020,3	// Grave Keeper's Sword
-IG_BlueBox,13000,1	// Jujube Dagger
-IG_BlueBox,13001,1	// Dragon Killer
-IG_BlueBox,13002,1	// Ginnungagap
-IG_BlueBox,13003,1	// Cowardice Blade
-IG_BlueBox,13004,1	// Cowardice Blade
-IG_BlueBox,13163,1	// Long Barrel
-IG_BlueBox,13164,1	// Long Barrel
-IG_BlueBox,13167,1	// Gate Keeper-DD
-IG_BlueBox,13168,1	// Thunder P
-IG_BlueBox,13170,2	// Lever Action Rifle
-IG_BlueBox,13200,1	// Bullet
-IG_BlueBox,13201,1	// Silver Bullet
-IG_BlueBox,13202,1	// Bloody Shell
-IG_BlueBox,13203,1	// Flare Sphere
-IG_BlueBox,13204,1	// Lightning Sphere
-IG_BlueBox,13205,1	// Poison Sphere
-IG_BlueBox,13206,1	// Blind Sphere
-IG_BlueBox,13207,1	// Freezing Sphere
-IG_BlueBox,13304,1	// Huuma Calm Mind
+//IG_BlueBox,13000,1	// Jujube Dagger
+//IG_BlueBox,13001,1	// Dragon Killer
+//IG_BlueBox,13002,1	// Ginnungagap
+//IG_BlueBox,13003,1	// Cowardice Blade
+//IG_BlueBox,13004,1	// Cowardice Blade
+//IG_BlueBox,13163,1	// Long Barrel
+//IG_BlueBox,13164,1	// Long Barrel
+//IG_BlueBox,13167,1	// Gate Keeper-DD
+//IG_BlueBox,13168,1	// Thunder P
+//IG_BlueBox,13170,2	// Lever Action Rifle
+//IG_BlueBox,13200,1	// Bullet
+//IG_BlueBox,13201,1	// Silver Bullet
+//IG_BlueBox,13202,1	// Bloody Shell
+//IG_BlueBox,13203,1	// Flare Sphere
+//IG_BlueBox,13204,1	// Lightning Sphere
+//IG_BlueBox,13205,1	// Poison Sphere
+//IG_BlueBox,13206,1	// Blind Sphere
+//IG_BlueBox,13207,1	// Freezing Sphere
+//IG_BlueBox,13304,1	// Huuma Calm Mind

@@ -548,8 +548,8 @@
 4153:18554,{ bonus2 bAddEle,Ele_Water,10; }
 4159:27082,{ autobonus "{ bonus bFlee,10; }",20,5000,BF_SHORT; }
 4163:5967,{ bonus bAspdRate,3; bonus bAspd,1; bonus2 bAddClass,Class_All,-5; if (getequiprefinerycnt(EQI_HAND_R) >= 10 && getiteminfo(getequipid(EQI_HAND_R),11) == 11) bonus bAspd,1; }
-4168:4169,{ bonus bMaxHPrate,30; bonus bMaxSPrate,30; bonus bDex,3; }
-4169:4488,{ if(getequiprefinerycnt(EQI_SHOES) >= 7) { bonus bMaxHPrate,15; bonus bMaxSPrate,15; } else { bonus bMaxHPrate,20; bonus bMaxSPrate,20; } }
+4168:4169,{ bonus bMaxHPrate,20; bonus bMaxSPrate,20; }
+4169:4488,{ bonus bMaxHPrate,10; bonus bMaxSPrate,10; }
 4172:4210:4230:4257:4272,{ bonus bAgi,5; bonus bStr,5; bonus bAspdRate,5; bonus bSpeedRate,25; bonus bSPDrainValue,1; if(BaseClass==Job_Thief) bonus bNoGemStone; }
 4178:4199:4234:4252:4297,{ bonus bAgi,5; bonus bDex,3; bonus bLongAtkRate,20; bonus bPerfectHitAddRate,20; if(BaseClass==Job_Archer) { bonus2 bExpAddRace,RC_Brute,5; bonus2 bComaRace,RC_Brute,100; } }
 4178:4234:4252:4297:4381,{ bonus bDex,5; bonus2 bSkillAtk,"CG_ARROWVULCAN",5; bonus2 bSkillAtk,"DC_THROWARROW",10; bonus2 bSkillAtk,"BA_MUSICALSTRIKE",10; if(BaseJob==Job_Bard||BaseJob==Job_Dancer) bonus3 bAutoSpellWhenHit,"CG_TAROTCARD",2,50; }

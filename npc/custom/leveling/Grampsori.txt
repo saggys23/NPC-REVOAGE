@@ -454,7 +454,7 @@ eabyss_03,116,24,3	duplicate(Return to Eden#template)	Return to Eden#eabyss03	70
 
 etur_dun03	mapflag	nomemo
 etur_dun03	mapflag	nosave
-etur_dun03	mapflag	NOICEWALL
+etur_dun03	mapflag	noicewall
 
 egef_dun03	mapflag	nomemo
 egef_dun03	mapflag	nosave

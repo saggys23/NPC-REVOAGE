@@ -1,4 +1,4 @@
-payon,148,232,6	script	Premium Service	814,{
+payon,148,232,6	script	Premium Service	532,{
 if (getgroupid()<4) {
 goto Prem;
 }
@@ -199,40 +199,40 @@ close;
 // --------------------------------------------------
 //	Duplicates:
 // --------------------------------------------------
-prontera,153,178,4	duplicate(Premium Service)	Premium Service#pron2	814
-payon,96,120,4	duplicate(Premium Service)	Premium Service#alb11	814
-alberta,33,240,4	duplicate(Premium Service)	Premium Service#alb	814
-aldebaran,146,116,4	duplicate(Premium Service)	Premium Service#alde	814
-amatsu,205,87,4	duplicate(Premium Service)	Premium Service#ama	814
-ayothaya,212,172,6	duplicate(Premium Service)	Premium Service#ayo	814
-comodo,191,161,4	duplicate(Premium Service)	Premium Service#com	814
-einbech,55,36,6	duplicate(Premium Service)	Premium Service#einbe	814
-einbroch,72,206,4	duplicate(Premium Service)	Premium Service#einbr	814
-geffen,127,66,4	duplicate(Premium Service)	Premium Service#gef	814
-gonryun,162,126,4	duplicate(Premium Service)	Premium Service#gon	814
-hugel,102,148,4	duplicate(Premium Service)	Premium Service#hug	814
-prontera,146,98,4	duplicate(Premium Service)	Premium Service#izl	814	//Pre-RE: (132,120)
-jawaii,248,134,4	duplicate(Premium Service)	Premium Service#jaw	814
-lighthalzen,154,104,4	duplicate(Premium Service)	Premium Service#lhz	814
-louyang,205,105,6	duplicate(Premium Service)	Premium Service#lou	814
-manuk,272,150,6	duplicate(Premium Service)	Premium Service#man	814
-mid_camp,216,286,4	duplicate(Premium Service)	Premium Service#mid	814
-morocc,146,89,4	duplicate(Premium Service)	Premium Service#mor	814
-moscovia,226,195,4	duplicate(Premium Service)	Premium Service#mos	814
-niflheim,199,180,4	duplicate(Premium Service)	Premium Service#nif	814
-payon,178,110,4	duplicate(Premium Service)	Premium Service#pay	814
-rachel,138,122,4	duplicate(Premium Service)	Premium Service#rac	814
-splendide,198,153,4	duplicate(Premium Service)	Premium Service#spl	814
-umbala,97,148,3	duplicate(Premium Service)	Premium Service#umb	814
-veins,211,120,4	duplicate(Premium Service)	Premium Service#ve	814
-xmas,142,139,6	duplicate(Premium Service)	Premium Service#xmas	814
-yuno,164,50,4	duplicate(Premium Service)	Premium Service#yuno	814
-pvp_y_room,88,83,4	duplicate(Premium Service)	Premium Service#pvp	814
+prontera,153,178,6	duplicate(Premium Service)	Premium Service#pron2	532
+payon,96,120,4	duplicate(Premium Service)	Premium Service#alb11	532
+alberta,33,240,4	duplicate(Premium Service)	Premium Service#alb	532
+aldebaran,146,116,4	duplicate(Premium Service)	Premium Service#alde	532
+amatsu,205,87,4	duplicate(Premium Service)	Premium Service#ama	532
+ayothaya,212,172,6	duplicate(Premium Service)	Premium Service#ayo	532
+comodo,191,161,4	duplicate(Premium Service)	Premium Service#com	532
+einbech,55,36,6	duplicate(Premium Service)	Premium Service#einbe	532
+einbroch,72,206,4	duplicate(Premium Service)	Premium Service#einbr	532
+geffen,127,66,4	duplicate(Premium Service)	Premium Service#gef	532
+gonryun,162,126,4	duplicate(Premium Service)	Premium Service#gon	532
+hugel,102,148,4	duplicate(Premium Service)	Premium Service#hug	532
+prontera,146,98,4	duplicate(Premium Service)	Premium Service#izl	532	//Pre-RE: (132,120)
+jawaii,248,134,4	duplicate(Premium Service)	Premium Service#jaw	532
+lighthalzen,154,104,4	duplicate(Premium Service)	Premium Service#lhz	532
+louyang,205,105,6	duplicate(Premium Service)	Premium Service#lou	532
+manuk,272,150,6	duplicate(Premium Service)	Premium Service#man	532
+mid_camp,216,286,4	duplicate(Premium Service)	Premium Service#mid	532
+morocc,146,89,4	duplicate(Premium Service)	Premium Service#mor	532
+moscovia,226,195,4	duplicate(Premium Service)	Premium Service#mos	532
+niflheim,199,180,4	duplicate(Premium Service)	Premium Service#nif	532
+payon,178,110,4	duplicate(Premium Service)	Premium Service#pay	532
+rachel,138,122,4	duplicate(Premium Service)	Premium Service#rac	532
+splendide,198,153,4	duplicate(Premium Service)	Premium Service#spl	532
+umbala,97,148,3	duplicate(Premium Service)	Premium Service#umb	532
+veins,211,120,4	duplicate(Premium Service)	Premium Service#ve	532
+xmas,142,139,6	duplicate(Premium Service)	Premium Service#xmas	532
+yuno,164,50,4	duplicate(Premium Service)	Premium Service#yuno	532
+pvp_y_room,88,83,4	duplicate(Premium Service)	Premium Service#pvp	532
 // --------------------------------------------------
 //	Duplicates (Renewal):
 // --------------------------------------------------
-brasilis,199,225,4	duplicate(Premium Service)	Premium Service#bra	814
-dewata,202,190,6	duplicate(Premium Service)	Premium Service#dew	814
-dicastes01,196,197,6	duplicate(Premium Service)	Premium Service#dic	814
-malangdo,137,116,6	duplicate(Premium Service)	Premium Service#mal	814
-malaya,228,195,4	duplicate(Premium Service)	Premium Service#ma	814
+brasilis,199,225,4	duplicate(Premium Service)	Premium Service#bra	532
+dewata,202,190,6	duplicate(Premium Service)	Premium Service#dew	532
+dicastes01,196,197,6	duplicate(Premium Service)	Premium Service#dic	532
+malangdo,137,116,6	duplicate(Premium Service)	Premium Service#mal	532
+malaya,228,195,4	duplicate(Premium Service)	Premium Service#ma	532

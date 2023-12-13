@@ -38,55 +38,380 @@ IG_Happiness_Egg,6417,12		//seagod
 
 
 // HEADGER Box
-IG_HeadgerBox,18630,4,1,1,1//Dropping alicel ID 18630
-IG_HeadgerBox,18909,4,1,1,1//Isabella Brown [1] 18909
-IG_HeadgerBox,18908,5,1,1,1//Isabella Red [1] 18908
-IG_HeadgerBox,5800,5,1,1,1//Blush of Groom 5800
-IG_HeadgerBox,5377,5,1,1,1//Antique Pipe 5377
-IG_HeadgerBox,5572,10///Savage babe hat
-IG_HeadgerBox,18612,10///White Musang Hat
-IG_HeadgerBox,18613,10///Black Musang Hat
-IG_HeadgerBox,5664,10///Fillir Pinnions
-IG_HeadgerBox,5546,10///Aries Crown
-IG_HeadgerBox,5305,10///Pirate Dagger
-IG_HeadgerBox,5574,10///WellChewed Pencil
-IG_HeadgerBox,5325,10///Robo Eyes
-IG_HeadgerBox,5151,10///Note Headphone
-IG_HeadgerBox,5286,6///Pecopeco Hairband
-IG_HeadgerBox,5361,10///Gangster Scarf
-IG_HeadgerBox,5530,10//Raven Cap
-IG_HeadgerBox,18666,10//CD in Mouth
-IG_HeadgerBox,5548,10//Crimson Rose
-IG_HeadgerBox,5389,10//Angel Spirit
-IG_HeadgerBox,5592,10//Sigrun Wings
-IG_HeadgerBox,5403,10//Fish in mouth
-IG_HeadgerBox,5483,10//Odin Mask
-IG_HeadgerBox,5362,10//Ninja Scroll
-IG_HeadgerBox,5539,10//Jaguar Hat
-IG_HeadgerBox,5767,10//Samurai Mask
-IG_HeadgerBox,18754,10//Blood Suckers
-IG_HeadgerBox,18698,10//Chessy snack in mouth
-IG_HeadgerBox,5545,10//Aries Diadem
-IG_HeadgerBox,5135,10//Cyclop Eyes
-IG_HeadgerBox,5401,10//Black Frame Glasses
-IG_HeadgerBox,18694,10//Red Hood
-IG_HeadgerBox,5527,10//Lunatik Hat
-IG_HeadgerBox,5471,10//Reginleaf Wing
-IG_HeadgerBox,5393,6,1,1,1//Valentine Hat
-IG_HeadgerBox,5846,6,1,1,1//Buzzy Ball Gam 20matk
-IG_HeadgerBox,5132,6,1,1,1//Angeling Hat 
-IG_HeadgerBox,18600,6,1,1,1//CEB
-IG_HeadgerBox,18601,6,1,1,1//RBH
-IG_HeadgerBox,18652,6,1,1,1//VanargrandHelm 
-IG_HeadgerBox,5359,6,1,1,1//Ship Captain Hat[1]
-IG_HeadgerBox,5409,6,1,1,1//Purple Cowboy Hat
-IG_HeadgerBox,5447,10//Frog Hat
-IG_HeadgerBox,5380,10//Fish head hat
-IG_HeadgerBox,5211,10//Dress Hat
-IG_HeadgerBox,5594,10//Donut in mouth
-IG_HeadgerBox,18745,10//Choco Stick in mouth
-IG_HeadgerBox,18531,10//Drooping premeter
-IG_HeadgerBox,18542,10//Benevolent Guardian
-IG_HeadgerBox,18782,10//Butterfly wing ear
-IG_HeadgerBox,18842,10//Hat of girl
-IG_HeadgerBox,18857,10//Curupia hat
+IG_HeadgerBox,18599,2,1,1,1//BDM All Stat 1
+IG_HeadgerBox,5800,3,1,1,1//Blush of Groom 5800
+IG_HeadgerBox,5377,3,1,1,1//Antique Pipe 5377
+IG_HeadgerBox,5388,6,1,1,1//Snake Hat
+IG_HeadgerBox,5151,6,1,1,1//Note HeadPhone
+IG_HeadgerBox,18842,6,1,1,1//Hat of girl
+IG_HeadgerBox,5211,12//Dress Hat
+IG_HeadgerBox,5283,12//Chick Hat
+IG_HeadgerBox,18559,12//Fatnir Skin
+IG_HeadgerBox,18600,12//CEB
+IG_HeadgerBox,18601,12//RBH
+IG_HeadgerBox,5664,12//Fillir Pinnions
+IG_HeadgerBox,5546,12//Aries Crown
+IG_HeadgerBox,5767,12//Samurai Mask
+IG_HeadgerBox,5359,12//Ship Captain Hat[1]
+IG_HeadgerBox,5409,12//Purple Cowboy Hat
+IG_HeadgerBox,18745,12//Choco Stick in mouth
+IG_HeadgerBox,5389,12//Angel Spirit
+IG_HeadgerBox,5572,35//Savage babe hat
+IG_HeadgerBox,18612,30//White Musang Hat
+IG_HeadgerBox,18613,30//Black Musang Hat
+IG_HeadgerBox,5305,30//Pirate Dagger
+IG_HeadgerBox,5361,30//Gangster Scarf
+IG_HeadgerBox,5530,30//Raven Cap
+IG_HeadgerBox,18666,30//CD in Mouth
+IG_HeadgerBox,18560,30//Fatnir Mask
+IG_HeadgerBox,5403,30//Fish in mouth
+IG_HeadgerBox,5483,30//Odin Mask MVP ITEM
+IG_HeadgerBox,5362,30//Ninja Scroll
+IG_HeadgerBox,5539,30//Jaguar Hat
+IG_HeadgerBox,18754,30//Blood Suckers
+IG_HeadgerBox,5545,30//Aries Diadem
+IG_HeadgerBox,5135,30//Cyclop Eyes
+IG_HeadgerBox,5401,30//Black Frame Glasses
+IG_HeadgerBox,18694,30//Red Hood
+IG_HeadgerBox,5527,30//Lunatik Hat
+IG_HeadgerBox,18531,30//Drooping premeter
+IG_HeadgerBox,18542,30//Benevolent Guardian
+IG_HeadgerBox,18782,30//Butterfly wing ear
+IG_HeadgerBox,18857,30//Curupia hat
+IG_HeadgerBox,5447,30//Frog Hat
+IG_HeadgerBox,5380,30//Fish head hat
+IG_HeadgerBox,18652,30//VanargrandHelm
+IG_HeadgerBox,5594,30//Donut in mouth 
+
+//IG_5thGacha_Egg
+//.IG_5thGacha_Egg,38049,1,1,1,1 			//AURA
+//.IG_5thGacha_Egg,20579,3,1,1,1 			//Wings
+//.IG_5thGacha_Egg,30002,2,1,1,1 			//Costume : 3rd/4th
+IG_5thGacha_Egg,12246,4,1,1,1 			//MCA
+IG_5thGacha_Egg,35003,5,1,1,1			//SCA
+IG_5thGacha_Egg,31432,6,1,1,1			//Costume Rare
+//.IG_5thGacha_Egg,31568,6,1,1,1			//Costume Rare
+//.IG_5thGacha_Egg,31620,6,1,1,1			//Costume Rare
+IG_5thGacha_Egg,31588,6,1,1,1			//Costume Rare
+//.IG_5thGacha_Egg,38035,4,1,1,1			//Garment 2nd 5%
+IG_5thGacha_Egg,3005,10,1,1,1			// Shining Gold Stone
+IG_5thGacha_Egg,6231,9,1,1,1,0,0,1		
+IG_5thGacha_Egg,6235,9,1,1,1,0,0,1
+//.IG_5thGacha_Egg,3101,5,1,1,1,0,0,1
+//.IG_5thGacha_Egg,3102,5,1,1,1,0,0,1
+IG_5thGacha_Egg,13710,7,1,1,0,0
+IG_5thGacha_Egg,12422,30,2,1
+IG_5thGacha_Egg,12425,30,2,1
+IG_5thGacha_Egg,3002,15,1,1
+IG_5thGacha_Egg,7619,30,1,1,0,0,0,0
+IG_5thGacha_Egg,7620,30,1,1,0,0,0,0
+IG_5thGacha_Egg,14003,30,3,1,0,0,0,0
+IG_5thGacha_Egg,7825,20,1,1,0,0,0,0
+//.IG_5thGacha_Egg,3107,20,1,1,0,0,0,0
+IG_5thGacha_Egg,6456,20,1,1,0,0,0,0
+IG_5thGacha_Egg,6457,20,1,1,0,0,0,0
+//.IG_5thGacha_Egg,40001,30,3,1
+//.IG_5thGacha_Egg,40002,30,3,1
+//.IG_5thGacha_Egg,40003,30,3,1
+//.IG_5thGacha_Egg,40004,30,3,1
+//.IG_5thGacha_Egg,40005,30,3,1
+//.IG_5thGacha_Egg,40006,30,3,1
+IG_5thGacha_Egg,13752,85,1,1
+IG_5thGacha_Egg,14104,85,1,1
+IG_5thGacha_Egg,12221,30,2,1
+IG_5thGacha_Egg,13746,80,1,1
+IG_5thGacha_Egg,3001,60,1,1
+IG_5thGacha_Egg,14082,85,1,1
+
+//IG_4thGacha_Egg
+
+//.IG_4thGacha_Egg,20571,2,1,1,1 			//Wings
+//.IG_4thGacha_Egg,30002,1,1,1,1 			//Costume : 3rd/4th
+IG_4thGacha_Egg,12246,3,1,1,1 			//MCA
+IG_4thGacha_Egg,35003,4,1,1,1			//SCA
+IG_4thGacha_Egg,20282,4,1,1,1			//Costume Rare
+IG_4thGacha_Egg,31452,5,1,1,1			//Costume Rare
+//.IG_4thGacha_Egg,38033,4,1,1,1			//Costume Rare
+IG_4thGacha_Egg,20246,5,1,1,1			//Costume Rare
+IG_4thGacha_Egg,20546,3,1,1,1			//Costume Fox
+IG_4thGacha_Egg,3005,10,1,1,1			// Shining Gold Stone
+IG_4thGacha_Egg,6231,9,1,1,1,0,0,1		
+IG_4thGacha_Egg,6235,9,1,1,1,0,0,1
+//.IG_4thGacha_Egg,3101,5,1,1,1,0,0,1
+//.IG_4thGacha_Egg,3102,5,1,1,1,0,0,1
+IG_4thGacha_Egg,13710,7,1,1,0,0
+IG_4thGacha_Egg,12422,30,2,1
+IG_4thGacha_Egg,12425,30,2,1
+IG_4thGacha_Egg,3002,15,1,1
+IG_4thGacha_Egg,7619,30,1,1,0,0,0,0
+IG_4thGacha_Egg,7620,30,1,1,0,0,0,0
+IG_4thGacha_Egg,14003,30,3,1,0,0,0,0
+IG_4thGacha_Egg,7825,20,1,1,0,0,0,0
+//.IG_4thGacha_Egg,3107,20,1,1,0,0,0,0
+IG_4thGacha_Egg,6456,20,1,1,0,0,0,0
+IG_4thGacha_Egg,6457,20,1,1,0,0,0,0
+//.IG_4thGacha_Egg,40001,30,3,1
+//.IG_4thGacha_Egg,40002,30,3,1
+//.IG_4thGacha_Egg,40003,30,3,1
+//.IG_4thGacha_Egg,40004,30,3,1
+//.IG_4thGacha_Egg,40005,30,3,1
+//.IG_4thGacha_Egg,40006,30,3,1
+IG_4thGacha_Egg,13752,85,1,1
+IG_4thGacha_Egg,14104,85,1,1
+IG_4thGacha_Egg,12221,30,2,1
+IG_4thGacha_Egg,13746,80,1,1
+IG_4thGacha_Egg,3001,60,1,1
+IG_4thGacha_Egg,14082,85,1,1
+
+//IG_3rdGacha_Egg
+
+IG_3rdGacha_Egg,20727,2,1,1,1 			//Costume: Brilliant Golden Wings
+//.IG_3rdGacha_Egg,30002,1,1,1,1 			//Costume : 3rd Look Version
+IG_3rdGacha_Egg,12246,3,1,1,1 			//MCA
+IG_3rdGacha_Egg,35003,4,1,1,1			//SCA
+IG_3rdGacha_Egg,20079,3,1,1,1			//C Forgotten Angel Wings
+IG_3rdGacha_Egg,20439,5,1,1,1			//Costume New Year Shine
+IG_3rdGacha_Egg,31566,4,1,1,1			//C Stall Of Dominion
+IG_3rdGacha_Egg,31405,5,1,1,1			//C. Eleanor Wig (Yellow)
+IG_3rdGacha_Egg,31614,5,1,1,1			//Costume Fox
+IG_3rdGacha_Egg,3005,10,1,1,1			// Shining Gold Stone
+IG_3rdGacha_Egg,6231,9,1,1,1,0,0,1		
+IG_3rdGacha_Egg,6235,9,1,1,1,0,0,1
+//.IG_3rdGacha_Egg,3101,5,1,1,1,0,0,1
+//.IG_3rdGacha_Egg,3102,5,1,1,1,0,0,1
+IG_3rdGacha_Egg,13710,7,1,1,0,0
+IG_3rdGacha_Egg,12422,30,2,1
+IG_3rdGacha_Egg,12425,30,2,1
+IG_3rdGacha_Egg,3002,15,1,1
+IG_3rdGacha_Egg,7619,30,1,1,0,0,0,0
+IG_3rdGacha_Egg,7620,30,1,1,0,0,0,0
+IG_3rdGacha_Egg,14003,30,3,1,0,0,0,0
+IG_3rdGacha_Egg,7825,20,1,1,0,0,0,0
+//.IG_3rdGacha_Egg,3107,20,1,1,0,0,0,0
+IG_3rdGacha_Egg,6456,20,1,1,0,0,0,0
+IG_3rdGacha_Egg,6457,20,1,1,0,0,0,0
+//.IG_3rdGacha_Egg,40013,30,3,1
+//.IG_3rdGacha_Egg,40014,30,3,1
+//.IG_3rdGacha_Egg,40015,30,3,1
+//.IG_3rdGacha_Egg,40016,30,3,1
+//.IG_3rdGacha_Egg,40017,30,3,1
+//.IG_3rdGacha_Egg,40018,30,3,1
+IG_3rdGacha_Egg,13752,85,1,1
+IG_3rdGacha_Egg,14104,85,1,1
+IG_3rdGacha_Egg,12221,30,2,1
+IG_3rdGacha_Egg,13746,80,1,1
+IG_3rdGacha_Egg,3001,60,1,1
+IG_3rdGacha_Egg,14082,85,1,1
+
+//IG_2thGacha_Egg
+
+IG_2thGacha_Egg,20761,2,1,1,1
+IG_2thGacha_Egg,30001,2,1,1,1
+IG_2thGacha_Egg,12246,3,1,1,1
+IG_2thGacha_Egg,35003,4,1,1,1
+IG_2thGacha_Egg,33001,3,1,1,1
+IG_2thGacha_Egg,20457,5,1,1,1
+IG_2thGacha_Egg,20404,4,1,1,1
+IG_2thGacha_Egg,31395,5,1,1,1
+IG_2thGacha_Egg,31040,5,1,1,1
+IG_2thGacha_Egg,31062,4,1,1,1
+IG_2thGacha_Egg,6231,7,1,1,1,0,0,1
+IG_2thGacha_Egg,6235,7,1,1,1,0,0,1
+//.IG_2thGacha_Egg,3101,5,1,1,1,0,0,1
+//.IG_2thGacha_Egg,3102,5,1,1,1,0,0,1
+IG_2thGacha_Egg,13710,7,1,1,0,0
+IG_2thGacha_Egg,12422,30,2,1
+IG_2thGacha_Egg,12425,30,2,1
+IG_2thGacha_Egg,3002,15,1,1
+IG_2thGacha_Egg,7619,30,1,1,0,0,0,0
+IG_2thGacha_Egg,7620,30,1,1,0,0,0,0
+IG_2thGacha_Egg,14003,30,3,1,0,0,0,0
+IG_2thGacha_Egg,7825,15,1,1,0,0,0,0
+IG_2thGacha_Egg,6456,15,1,1,0,0,0,0
+IG_2thGacha_Egg,6457,15,1,1,0,0,0,0
+//.IG_2thGacha_Egg,40013,30,3,1
+//.IG_2thGacha_Egg,40014,30,3,1
+//.IG_2thGacha_Egg,40015,30,3,1
+//.IG_2thGacha_Egg,40016,30,3,1
+//.IG_2thGacha_Egg,40017,30,3,1
+//.IG_2thGacha_Egg,40018,30,3,1
+IG_2thGacha_Egg,13752,85,1,1
+IG_2thGacha_Egg,14104,85,1,1
+IG_2thGacha_Egg,12221,30,2,1
+IG_2thGacha_Egg,13746,80,1,1
+IG_2thGacha_Egg,3001,60,1,1
+IG_2thGacha_Egg,14082,85,1,1
+
+//IG_1stGacha_Egg
+// GroupID,ItemID,Rate{,Amount,Random,isAnnounced,Duration,GUID,isBound,isNamed}
+IG_1stGacha_Egg,20572,2,1,1,1
+IG_1stGacha_Egg,30001,1,1,1,1
+IG_1stGacha_Egg,12246,2,1,1,1
+IG_1stGacha_Egg,35003,3,1,1,1
+IG_1stGacha_Egg,19573,7,1,1,1
+IG_1stGacha_Egg,31160,7,1,1,1
+IG_1stGacha_Egg,31040,7,1,1,1
+IG_1stGacha_Egg,31398,7,1,1,1
+IG_1stGacha_Egg,20255,7,1,1,1
+IG_1stGacha_Egg,31055,7,1,1,1
+IG_1stGacha_Egg,6231,5,1,1,1
+IG_1stGacha_Egg,6235,5,1,1,1
+IG_1stGacha_Egg,3101,5,1,1,1
+IG_1stGacha_Egg,3102,3,1,1,1
+IG_1stGacha_Egg,13710,4,1,1,1
+IG_1stGacha_Egg,12422,40,2,1
+IG_1stGacha_Egg,12425,40,2,1
+IG_1stGacha_Egg,17162,15,1,1
+IG_1stGacha_Egg,7619,30,1,1
+IG_1stGacha_Egg,7620,30,1,1
+IG_1stGacha_Egg,3001,25,1,1
+IG_1stGacha_Egg,6456,20,1,1
+IG_1stGacha_Egg,6457,20,1,1
+IG_1stGacha_Egg,12250,35,3,1
+IG_1stGacha_Egg,12251,35,3,1
+IG_1stGacha_Egg,12252,35,3,1
+IG_1stGacha_Egg,12253,35,3,1
+IG_1stGacha_Egg,12254,35,3,1
+IG_1stGacha_Egg,12255,35,3,1
+IG_1stGacha_Egg,12298,35,2,1
+IG_1stGacha_Egg,12221,65,2,1
+IG_1stGacha_Egg,14535,75,3,1
+IG_1stGacha_Egg,14534,75,3,1
+IG_1stGacha_Egg,14543,75,3,1
+IG_1stGacha_Egg,14541,75,3,1
+
+//StreamerBox
+IG_StreamerBox,20317,3,1,1,1		//Nekomimi Headphone
+IG_StreamerBox,20315,3,1,1,1		//C Analyze Hat
+IG_StreamerBox,19871,3,1,1,1		//Costume Musical Decoration
+IG_StreamerBox,35003,3,1,1,1		//Sealed Card ALbum
+//.IG_StreamerBox,3101,5,1,1,1,0,0,1	//Cash Point 50K
+IG_StreamerBox,3003,5,1,1,0,0,0,1	//Premium 7 hari
+IG_StreamerBox,7825,5,1,1,0,0,0,1			//Heroic Stone
+IG_StreamerBox,14545,8,2,1,0,0,1			//Battle Manual x3 (2)
+IG_StreamerBox,12412,8,2,1,0,0,1			//HE Bubble Gum (2)
+//.IG_StreamerBox,40013,20,3,1,0,0,1			//Dish 5 2x
+//.IG_StreamerBox,40014,20,3,1,0,0,1			//Dish 5 2x
+//.IG_StreamerBox,40015,20,3,1,0,0,1			//Dish 5 2x
+//.IG_StreamerBox,40016,20,3,1,0,0,1			//Dish 5 2x
+//.IG_StreamerBox,40017,20,3,1,0,0,1			//Dish 5 2x
+//.IG_StreamerBox,40018,20,3,1,0,0,1			//Dish 5 2x
+IG_StreamerBox,3001,30,1,1,0,0,1			//Premium 1 hari
+IG_StreamerBox,7619,30,1,1,0,0,1			//Enrich Elu
+IG_StreamerBox,7620,30,1,1,0,0,1			//Enrich Ori
+IG_StreamerBox,14003,30,2,1,0,0,1			//Elite Siege Box
+IG_StreamerBox,616,20,1,1,0,0,1			//Old Card Album
+
+////COSTUME BOX
+//Very rare :
+IG_CostumeBox,19433,3,1,1,1				//C_Resonate_Taegoo
+IG_CostumeBox,31177,3,1,1,1				//C_Tail_Hat,
+IG_CostumeBox,19661,3,1,1,1				//C_Sweet_Bonnet,Costume Sweet Bonnet
+//RARE:
+IG_CostumeBox,20338,5,1,1,1			//C_Colorful_Dancing_Octopus,
+IG_CostumeBox,20339,5,1,1,1			//C_Flower_Summer_Hat
+IG_CostumeBox,19660,5,1,1,1			//C_Coppola,Costume Coppola,
+IG_CostumeBox,31330,5,1,1,1			//C_Fallen_Angel_Valletta
+//Common :
+IG_CostumeBox,19531,12,1,1,0,0,0	//C_Cube_Mask,Costume
+IG_CostumeBox,19537,12,1,1,0,0,0	///C_Gryphon_Hat,Costume Gryphon Hat
+IG_CostumeBox,19540,12,1,1,0,0,0	//C_Rabbit_Earplug,Costume Rabbit Earplugs
+IG_CostumeBox,19541,12,1,1,0,0,0	//C_Romantic_White_Flower,
+IG_CostumeBox,19542,12,1,1,0,0,0	//C Devil whisper
+IG_CostumeBox,19553,12,1,1,0,0,0	//C_Assassin_Mask
+IG_CostumeBox,19582,12,1,1,0,0,0	//C_Cowboy_Hat,Costume Cowboy Hat,
+IG_CostumeBox,19583,12,1,1,0,0,0	//C_Zorro_Mask,Costume Zorro Mask,
+IG_CostumeBox,19584,12,1,1,0,0,0	//C_Pirate_Dagger
+IG_CostumeBox,19586,12,1,1,0,0,0	//C_Pink_Bunny_Band_J,
+IG_CostumeBox,19592,12,1,1,0,0,0	//C_Hibiscus,Costume Hibiscus
+IG_CostumeBox,19593,12,1,1,0,0,0	//C_Laurel_Wreath,
+IG_CostumeBox,19594,12,1,1,0,0,0	//C_Decorative_Geographer,C
+IG_CostumeBox,19595,12,1,1,0,0,0	//C_Dress_Hat_J,
+IG_CostumeBox,19663,12,1,1,0,0,0	//Wishing_Sky_Lantern
+IG_CostumeBox,19664,12,1,1,0,0,0	//C_Campus_Festival
+IG_CostumeBox,19665,12,1,1,0,0,0	//C_Poring_Cake_Hat
+IG_CostumeBox,19757,12,1,1,0,0,0	//C_Water_Lily_Crown
+IG_CostumeBox,19758,12,1,1,0,0,0	//C_Frog_King_Hat,
+IG_CostumeBox,19759,12,1,1,0,0,0	//C_Umbrella_Hat,
+
+
+
+
+// Magic Card Album
+IG_MagicCardAlbum,4047,1,1,1,1		// Ghostring Card
+IG_MagicCardAlbum,4054,1,1,1,1		// Angeling Card
+//IG_MagicCardAlbum,4163,3,1,1,1		// Gryphon Card
+IG_MagicCardAlbum,4169,3,1,1,1		// Dark Illusion Card
+IG_MagicCardAlbum,4174,1,1,1,1		// Deviling Card
+IG_MagicCardAlbum,4179,9,1,1,1		// Dragon Fly Card
+IG_MagicCardAlbum,4183,9,1,1,1		// Vagabond Wolf Card
+IG_MagicCardAlbum,4197,9,1,1,1		// Mastering Card
+//IG_MagicCardAlbum,4198,3,1,1,1		// Maya Purple Card
+IG_MagicCardAlbum,4203,9,1,1,1		// Mutant Dragonoid Card
+IG_MagicCardAlbum,4207,3,1,1,1		// Mysteltainn Card
+IG_MagicCardAlbum,4211,3,1,1,1		// Vocal card
+IG_MagicCardAlbum,4241,2,1,1,1		// Arc Angeling Card
+IG_MagicCardAlbum,4250,3,1,1,1		// Executioner Card
+IG_MagicCardAlbum,4254,3,1,1,1		// Tirfing Card
+IG_MagicCardAlbum,4266,9,1,1,1		// Eclipse Card
+IG_MagicCardAlbum,4284,9,1,1,1		// Chepet Card
+IG_MagicCardAlbum,4285,9,1,1,1		// Choco Card
+IG_MagicCardAlbum,4290,6,1,1,1		// Cat O' Nine Tails Card
+IG_MagicCardAlbum,4291,9,1,1,1		// Kobold Leader Card
+IG_MagicCardAlbum,4300,9,1,1,1		// Chimera Card
+IG_MagicCardAlbum,4306,9,1,1,1		// Toad Card
+IG_MagicCardAlbum,4320,3,1,1,1		// Bloody Knight Card
+//IG_MagicCardAlbum,4336,3,1,1,1		// Ungoliant Card
+//IG_MagicCardAlbum,4354,3,1,1,1		// Gemini-S58 Card
+//IG_MagicCardAlbum,4384,1,1,1,1		// Hydro Card
+//IG_MagicCardAlbum,4395,3,1,1,1		// Thanatos Maero Card
+//IG_MagicCardAlbum,4396,3,1,1,1		// Thanatos Odium Card
+//IG_MagicCardAlbum,4397,3,1,1,1		// Thanatos Despero Card
+
+
+
+
+//SEALED CARD ALBUM
+//Shoes
+IG_SealedCardAlbum,4488,3,1,1,1	//Sealed_D_Lord_Card
+IG_SealedCardAlbum,4490,3,1,1,1	//Sealed_M_Flower_Card
+IG_SealedCardAlbum,4495,3,1,1,1	//Sealed_Amon_Ra_Card
+IG_SealedCardAlbum,4504,3,1,1,1	//Sealed_Eddga_Card
+//IG_SealedCardAlbum,4498,2,1,1,1	//Sealed_Lady_Tanee_Card
+//IG_SealedCardAlbum,4482,3,1,1,1	//Sealed_B_Ygnizem_Card
+//Garment
+//IG_SealedCardAlbum,4508,2,1,1,1	//SLD_B_Katrinn_Card
+//IG_SealedCardAlbum,4509,2,1,1,1	//SLD_B_Katrinn_Card
+//Weapon
+//IG_SealedCardAlbum,4502,3,1,1,1	//Sealed_B_Harword_Card
+//IG_SealedCardAlbum,4540,3,1,1,1	//SLD_Lord_Of_Death_Card
+//IG_SealedCardAlbum,4491,3,1,1,1	//Sealed_B_Shecil_Card
+IG_SealedCardAlbum,4496,3,1,1,1	//Sealed_Drake_Card
+IG_SealedCardAlbum,4499,2,1,1,1	//Sealed_Samurai_Card
+IG_SealedCardAlbum,4494,2,1,1,1	//Sealed_TurtleG_Card
+IG_SealedCardAlbum,27211,2,1,1,1	//Sealed_Baphomet_Card
+IG_SealedCardAlbum,4483,3,1,1,1	//Sealed_Dracula_Card
+IG_SealedCardAlbum,4497,3,1,1,1	//Sealed_Knight_WS_Card
+IG_SealedCardAlbum,4537,3,1,1,1	//Sealed_Phreeoni_Card
+IG_SealedCardAlbum,4506,3,1,1,1	//Sealed_Doppelganger_Card
+//Armor
+//IG_SealedCardAlbum,4501,3,1,1,1	//Sealed_B_Magaleta_Card
+//IG_SealedCardAlbum,4493,2,1,1,1	//Sealed_Tao_Card
+IG_SealedCardAlbum,4500,3,1,1,1	//Sealed_Orc_Load_Card
+IG_SealedCardAlbum,4543,2,1,1,1	//SLD_Garm_Card
+//Acc
+IG_SealedCardAlbum,4505,2,1,1,1	//Sealed_Osiris_Card
+//HG
+//IG_SealedCardAlbum,4538,2,1,1,1	//Sealed_Bacsojin_Card
+IG_SealedCardAlbum,4484,2,1,1,1	//Sealed_Mistress_Card
+IG_SealedCardAlbum,4489,2,1,1,1	//Sealed_Pharaoh_Card
+IG_SealedCardAlbum,4544,2,1,1,1	//SLD_Dark_Snake_Card
+IG_SealedCardAlbum,4492,2,1,1,1	//Sealed_Orc_Hero_Card
+//IG_SealedCardAlbum,4541,2,1,1,1	//SLD_B_Katrinn_Card
+//IG_SealedCardAlbum,4503,2,1,1,1	//Sealed_Apocalips_H_Card
+//SHIELD
+IG_SealedCardAlbum,27212,2,1,1,1	//Sealed_Maya_Card
+
+
+
+

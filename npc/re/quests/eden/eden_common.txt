@@ -239,7 +239,6 @@ moc_para01,27,35,5	script	Secretary Lime Evenor	4_F_EDEN_OFFICER,{
 	}
 }
 prontera,124,76,3	duplicate(eto)	Eden Teleport Officer#1	729
-payo2,96,110,3	duplicate(eto)	Eden Teleport Officer#1	729
 moc_ruins,68,164,3	duplicate(eto)	Eden Teleport Officer#2	729
 geffen,132,66,3	duplicate(eto)	Eden Teleport Officer#3	729
 alberta,124,67,3	duplicate(eto)	Eden Teleport Officer#4	729
@@ -251,7 +250,6 @@ moc_prydb1,53,126,3	duplicate(eto)	Eden Teleport Officer#9	729
 alberta_in,75,39,3	duplicate(eto)	Eden Teleport Officer#10	729
 payon_in02,58,58,1	duplicate(eto)	Eden Teleport Officer#11	729
 payon,177,111,3	duplicate(eto)	Eden Teleport Officer#12	729
-payon,148,232,3	duplicate(eto)	Eden Teleport Officer#12	729
 que_ng,33,73,3	duplicate(eto)	Eden Teleport Officer#13	729
 que_ng,144,161,5	duplicate(eto)	Eden Teleport Officer#14	729
 yuno,144,189,5	duplicate(eto)	Eden Teleport Officer#15	729
@@ -269,7 +267,7 @@ moscovia,209,197,5	duplicate(eto)	Eden Teleport Officer#26	729
 brasilis,191,224,3	duplicate(eto)	Eden Teleport Officer#27	729
 dewata,192,193,5	duplicate(eto)	Eden Teleport Officer#28	729
 morocc,161,97,5	duplicate(eto)	Eden Teleport Officer#29	729
-izlude,131,148,4	duplicate(eto)	Eden Teleport Officer#30	729
+izlude,131,115,3	duplicate(eto)	Eden Teleport Officer#30	729
 izlude_a,131,148,4	duplicate(eto)	Eden Teleport Officer#30::eto_iz_a	729
 izlude_b,131,148,4	duplicate(eto)	Eden Teleport Officer#30::eto_iz_b	729
 izlude_c,131,148,4	duplicate(eto)	Eden Teleport Officer#30::eto_iz_c	729
@@ -277,6 +275,9 @@ izlude_d,131,148,4	duplicate(eto)	Eden Teleport Officer#30::eto_iz_d	729
 umbala,105,158,3	duplicate(eto)	Eden Teleport Officer#31	729
 malaya,225,218,1	duplicate(eto)	Eden Teleport Officer#32	729
 verus04,116,243,0	duplicate(eto)	Eden Teleport Officer#33	729
+prontera,163,184,3	duplicate(eto)	Eden Teleport Officer#34	729
+payon,148,232,3	duplicate(eto)	Eden Teleport Officer#35	729
+payo2,96,110,3	duplicate(eto)	Eden Teleport Officer#36	729
 
 moc_para01,30,10,0	script	#eden_out	45,1,1,{
 OnTouch:

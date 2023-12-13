@@ -218,3 +218,15 @@ JUMPINGCLAN	5
 // custom 
 IG_Happiness_Egg	10001
 IG_HeadgerBox	10002
+IG_CostumeBox	10003
+IG_QurbanBox	10004
+IG_RevoName	10005
+IG_SealedCardAlbum	10006
+IG_1stGacha_Egg	10007
+IG_StreamerBox	10008
+IG_2thGacha_Egg	10009
+IG_Box5	10010
+IG_3rdGacha_Egg	10011
+IG_4thGacha_Egg	10012
+IG_5thGacha_Egg	10013
+IG_Dish10_5	10014

@@ -1,5 +1,5 @@
 
-payon,142,221,6	script	Ripped Cabus#GymPasspayo	899,{
+prontera,147,168,6	script	Ripped Cabus#GymPasspayo	899,{
 	mes "[Ripped]";
 	mes "Hey, there. People aren't";
 	mes "as physically active as they";

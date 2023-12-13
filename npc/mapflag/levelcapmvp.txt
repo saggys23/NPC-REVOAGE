@@ -1,5 +1,5 @@
 //===== rAthena Script =======================================
-//= Mapflag: Disable Ice Wall.
+	//= 	: Disable Ice Wall.
 //===== By: ==================================================
 //= rAthena Dev Team
 //===== Current Version: =====================================
@@ -19,16 +19,16 @@
 moc_pryd06	mapflag	levelcap
 lhz_dun03	mapflag	levelcap
 ra_fild02	mapflag	levelcap
-ra_fild03   mapflag	levelcap
-ra_fild04   mapflag	levelcap
-ve_fild01   mapflag	levelcap 
-ve_fild02   mapflag	levelcap
-lou_dun03   mapflag	levelcap
+ra_fild03	mapflag	levelcap
+ra_fild04	mapflag	levelcap
+ve_fild01	mapflag	levelcap 
+ve_fild02	mapflag	levelcap
+lou_dun03	mapflag	levelcap
 prt_maze03	mapflag	levelcap
-gl_chyard   mapflag	levelcap
+gl_chyard	mapflag	levelcap
 abyss_03	mapflag	levelcap
-gef_dun02   mapflag	levelcap
-gef_dun01   mapflag	levelcap
+gef_dun02	mapflag	levelcap
+gef_dun01	mapflag	levelcap
 treasure02	mapflag	levelcap
 pay_fild11	mapflag	levelcap
 gon_dun03	mapflag	levelcap

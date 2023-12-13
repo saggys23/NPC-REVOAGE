@@ -2294,7 +2294,7 @@ Body:
       Skill:
         Plagiarism: true
         Reproduce: true
-    CastTime: 350
+    CastTime: 700
     
     Requires:
       SpCost:

@@ -451,9 +451,9 @@ aru_gld,78,47,0	warp	arug202	1,1,arug_cas02,139,31
 arug_cas02,393,324,0	warp	arug203	1,1,arug_cas02,139,31
 arug_cas03,141,40,0	warp	arug301	1,1,aru_gld,68,155
 aru_gld,68,150,0	warp	arug302	1,1,arug_cas03,141,45
-aru_gld,57,154,0	warp	arug302	1,1,arug_cas03,119,53
-aru_gld,78,154,0	warp	arug302	1,1,arug_cas03,164,53
-arug_cas03,321,52,0	warp	arug303	1,1,arug_cas03,141,45
+aru_gld,57,154,0	warp	arug303	1,1,arug_cas03,119,53
+aru_gld,78,154,0	warp	arug304	1,1,arug_cas03,164,53
+arug_cas03,321,52,0	warp	arug305	1,1,arug_cas03,141,45
 arug_cas04,141,40,0	warp	arug401	1,1,aru_gld,299,345
 aru_gld,289,347,0	warp	arug402	1,1,arug_cas04,141,45
 arug_cas04,321,52,0	warp	arug403	1,1,arug_cas04,141,45

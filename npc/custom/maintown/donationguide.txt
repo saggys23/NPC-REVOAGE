@@ -1,4 +1,4 @@
-payon,169,239,3	script	Donation Guide	807,{
+prontera,165,177,1	script	Donation Guide	807,{
 	mes "[ Donation Guide ]";
 	mes "Hello ! ^884EA0"+strcharinfo(0)+"^000000";
 	mes "Just Click the Link below.";

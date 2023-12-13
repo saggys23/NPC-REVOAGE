@@ -26,13 +26,14 @@ bindatcmd "partycall",strnpcinfo(3)+"::OnPartycall";
 end;
 }
 
-prontera,145,187,5	script	PVP Room	827,{
+prontera,148,184,5	script	PVP Room	827,{
 set .@menuA$, "PVP Warp:Points Shop[^EE3333"+#pointsP+"^000000]:Exit:";
 switch(select(.@menuA$)) {
 	case 1:
-	switch( select("[PVP] Free for ALL ^EE3333[ "+getmapusers("pvp_y_8-2")+" Users ]^000000","[PVP] CvC Maps^EE3333[ "+getmapusers("guild_vs3")+" Users ]^000000") ) {
+	switch( select("[PVP] Free for ALL ^EE3333[ "+getmapusers("pvp_y_8-2")+" Users ]^000000","[PVP] MonkVsMonk Maps^EE3333[ "+getmapusers("guild_vs3")+" Users ]^000000") ) {
 	case 1:
-			warp "pvp_y_8-2",0,0;
+			warp "pvp_y_room",82,42;
+			//warp "pvp_y_8-2",0,0;
 			sc_end SC_INCMHPRATE;
 			sc_end SC_INCALLSTATUS;
 			sc_end SC_INCDEFRATE;
@@ -54,7 +55,7 @@ switch(select(.@menuA$)) {
 			
 	case 2:
 			if ( Class != 4016 ){
-				mes "You are not Champion Class , so you cant enter.";
+				mes "Coming soon.";
 			}else{
 			 if (getequipisequiped(9)) unequip 9;
 			 if (getequipisequiped(2)) unequip 2;
@@ -86,14 +87,16 @@ OnInit:
 	setmapflag	"pvp_y_8-2",mf_noteleport;
 	setmapflag	"pvp_y_8-2",mf_noreturn;
 	setmapflag	"pvp_y_8-2",mf_notoken;
-	setmapflag	"pvp_y_8-2",mf_skillconso;
-	setmapflag	"guild_vs3",mf_noequip;
+	//setmapflag	"pvp_y_8-2",mf_skillconso;
+
+	//setmapflag	"guild_vs3",mf_noequip;
 	setmapflag	"guild_vs3",mf_nosave;
 	setmapflag	"guild_vs3",mf_nowarp;
 	setmapflag	"guild_vs3",mf_nowarpto;
 	setmapflag	"guild_vs3",mf_notoken;
 	setmapflag	"guild_vs3",mf_noteleport;
 	setmapflag	"guild_vs3",mf_noreturn;
+
 	set .PvppointsP, 1;      //pointsP to add in database/player when kill
 		setarray .name$, "PVP Free for All", "CvC Maps";
 		setarray .map$, "pvp_y_8-2", "guild_vs3";
@@ -173,6 +176,6 @@ end;
 	OnInit:
 	waitingroom "PVP Point Shop",0; }
 	
--	pointshop	PVP_Points_Shop	-1,#pointsP,1443:1500,1839:1500,1939:1500,1995:1500,13454:1500,21015:1500,28106:1500,1498:1500,28007:1500,18130:1500,13127:1500,13327:1500,28604:1500,1680:1500,2025:1500,16040:1500,28705:1500,14003:10,12031:3,12030:3,12029:3,12033:18,40001:35,40002:35,40003:35,40004:35,40005:35,40006:35:14003:25,5428:750;
+-	pointshop	PVP_Points_Shop	-1,#pointsP,12031:3,12030:3,12029:3;
 
 

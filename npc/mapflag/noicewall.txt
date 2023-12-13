@@ -144,6 +144,6 @@ poring_w01	mapflag	noicewall
 poring_w02	mapflag	noicewall
 
 // turn in
-eabyss_03	mapflag noicewall
-egef_dun03	mapflag noicewall
+eabyss_03	mapflag	noicewall
+egef_dun03	mapflag	noicewall
 etur_dun03	mapflag	noicewall

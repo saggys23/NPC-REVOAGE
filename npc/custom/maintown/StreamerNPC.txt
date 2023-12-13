@@ -6,7 +6,7 @@
 
 
 // ==== NPC Location ========================== // 
-payon,134,232,6	script	Stream Helper	10299,{
+prontera,171,176,3	script	Stream Helper	10299,{
 
 // === Configuration ========================== //
 	set .gms_level, 30;

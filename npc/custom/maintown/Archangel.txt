@@ -5,7 +5,7 @@
 //70 : Light White & Yellow 150 pcs, Light BP 125, 10 awak & conce, 1D Flywing, 20 butwing, 5 BM
 //90 : Costume Red And White Mochiring ID :20442, 1D Premi 3001, 200 PCS Light white pot 11501 250pcs, 11502 BP 200pcs
 
-payo2,100,118,3	script	Archangel	811,{
+prontera,147,173,6	script	Faraqueen	624,{
     setarray .Items20[0], 598,200,0,11502,25,0,14509,10,0,601,100,0,602,20,0,14592,3,0; // <item id>,<amount>,<refine>
 	setarray .Items40[0], 599,100,0,11500,100,0,11502,75,0,14510,10,0,14509,10,0,3012,1,0,602,20,0,12263,3,0; // <item id>,<amount>,<refine>
 	setarray .Items70[0], 11500,150,0,11501,100,0,11502,125,0,14510,10,0,14509,10,0,3011,1,0,602,20,0,12263,5,0; // <item id>,<amount>,<refine>

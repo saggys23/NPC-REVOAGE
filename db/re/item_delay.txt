@@ -20,6 +20,8 @@
 
 //Custom Item delay
 
+30584,5000
+
 12884,5000,SC_REUSE_LIMIT_H		//Inf Concen Pot
 12885,5000,SC_REUSE_LIMIT_H		//Inf Awak Pot
 12886,5000,SC_REUSE_LIMIT_H		//Inf Berserk Pot

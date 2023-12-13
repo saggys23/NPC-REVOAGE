@@ -2723,3 +2723,8 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
       TitleID: 1024
     Score: 10
+  - ID: 240021
+    Group: "AG_GOAL_ACHIEVE"
+    Name: "Become AOR's Official Streamer"
+    Reward:
+      TitleID: 1045

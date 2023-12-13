@@ -15,7 +15,7 @@
 //= 1.9 Migrate/Integrate to Global Functions Platinum Skills. [mazvi]
 //============================================================
 
-payon,145,225,6	script	Job Master	123,{
+prontera,163,189,6	script	Job Master	123,{
 function Get_Job_Equip;
 // Checks if the Player has the required level.
 // closes if not, returns if yes
@@ -335,7 +335,30 @@ mes .NPCName$;
 		lastJob = Class; // Saves the lastJob for rebirth
 	}
 
+// Job 2 Bayar 
+	if ( (eaclass()&EAJ_BASEMASK) != EAJ_NOVICE ) {
+		mes "Wait, I can change you but....";
+		mes "You need to pay 1,250,000z ^0055FFOR^000000 Just go to your Job change Guild and take Job Change Quest Manually.";
+	switch (select(
+		"Pay With Zeny",
+		"I dont have Zeny."
+	)) {
+	case 1:
+	if (.zeny > 0 && Zeny < .zeny ) {
+		message(strcharinfo(0),"Not enough Zeny, just take your jobchange Quest ! ! !");
+		end;
+	}
+	Zeny -= .zeny;
+	break;
+	
+	case 2:
+		message(strcharinfo(0),"Take your Quest Jobchange, follow Ratemyserver or Irowiki Guide to Jobchange.");
+		end;
+	}
 
+		lastJob = Class; // Saves the lastJob for rebirth
+	}
+//
 	mes "Congratulations ! ! !";
 	mes "You are now " + callfunc("F_InsertArticle", jobname(.@to_cls)) + "!";
 
@@ -490,18 +513,18 @@ OnInit:
 	
 	// Settings
 	.ThirdClass = false;			// Enable third classes?
-	.RebirthClass = true;			// Enable rebirth classes?
+	.RebirthClass = false;			// Enable rebirth classes?
 	.SecondExpanded = false;		// Enable new expanded second classes: Ex. Super Novice, Kagerou/Oboro, Rebellion?
 	.BabyNovice = false;	// Enable Baby novice classes? Disable it if you like player must have parent to get job baby.
 	.BabyClass = true;				// Enable Baby classes?
 	.BabyThird = false;				// Enable Baby third classes?
-	.BabyExpanded = true;			// Enable Baby Expanded classes: Ex. Baby Ninja, Baby Taekwon, etc.
+	.BabyExpanded = false;			// Enable Baby Expanded classes: Ex. Baby Ninja, Baby Taekwon, etc.
 	.BabySummoner = false;			// Enable Baby Summoner?
 	.LastJob = true;				// Enforce linear class changes?
 	.SkillPointCheck = true;		// Force player to use up all skill points?
 	.Platinum = false;				// Get platinum skills automatically?
-	.GetJobEquip = true;			// Get job equipment (mostly weapons) on job change?
-	.zeny = 2500000;					// Cost Trans
+	.GetJobEquip = false;			// Get job equipment (mostly weapons) on job change?
+	.zeny = 1250000;					// Cost Trans
 	// Level Requirements
 	setarray .Req_First[0],1,10; 		// Minimum base level, job level to turn into 1st class
 	setarray .Req_Second[0],1,40; 		// Minimum base level, job level to turn into 2nd class
