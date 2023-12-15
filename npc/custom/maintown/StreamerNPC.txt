@@ -10,7 +10,7 @@ prontera,171,176,3	script	Stream Helper	10299,{
 
 // === Configuration ========================== //
 	set .gms_level, 30;
-	setarray .@StreamerID, 2000703,2002676,2000007,2002164,2000005,2000050,2000026,2000197,2000460,2001726,2002186;
+	setarray .@StreamerID, 2000703,2002676,2000007,2002164,2000005,2000050,2000026,2000197,2000460,2001726,2002186,2000009,2000014;
 	set .@npc_name$, "[Stream Helper]";
 	
 // ==== NPC Talk ============================== //
@@ -54,7 +54,7 @@ prontera,171,176,3	script	Stream Helper	10299,{
 	mes "Selamat datang !";
 	mes "Apa yg bisa saya bantu?";
 	next;
-		switch(select("Claim Weekly Supply:Claim Streamer Headger:Exit")) {
+		switch(select("Claim Weekly Supply:Claim Streamer Headger:Claim Title:Exit")) {
 		//case 1:
 				//.@stats = query_sql("SELECT `status` FROM `streamerbox` WHERE `account_id` = "+.@talkerid+" AND `status` = 0", .@status);
 				//if (!.@stats) {
@@ -93,8 +93,14 @@ prontera,171,176,3	script	Stream Helper	10299,{
 			end;}
 			mes "ID Stream kamu sudah claim Headger.";
 			end;
-			
 		case 3:
+			mes .@npc_name$;
+			achievementremove(240021);
+			achievementadd(240021);
+			achievementcomplete(240021);
+			mes "Relogin untuk menggunakan titlenya ya.";
+			end;	
+		case 4:
 			end;
 		}			
 		

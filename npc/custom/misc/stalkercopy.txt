@@ -1,0 +1,77 @@
+-	script	Stalker	747,{
+if (!getskilllv(225)) goto End_Talk;
+	mes .name$;
+	mes "select which skill you want to be copy, your existing one will be overwrite";
+	next;
+	for ( set .@i,0; .@i < getarraysize(.skill$); set .@i, .@i +3 )
+		set .@menu$, .@menu$ + .skill$[.@i] +":";
+	set .@menu, select(.@menu$) -1;
+	if ( getskilllv(atoi(.skill$[.@menu * 3 +1])) ) {
+		mes .name$;
+		mes "you already copied that skill";
+		close;
+	}
+	mes .name$;
+	mes "are you sure you want to copy "+ .skill$[.@menu * 3] +"?";
+//	mes "you'll need to relogin again";
+	next;
+	if ( select ( "Yes", "No" ) == 2 ) close;
+	.@text$ = atoi( .skill$[.@menu * 3 +2] ) > 1 ? "-" + .skill$[.@menu * 3 +2] : "" ;
+	mes .name$;
+	mes "choose a level (1" + .@text$ + ")";
+	if ( input( .@input, 1, ( atoi( .skill$[.@menu * 3 +2] ) > 1 ? atoi( .skill$[.@menu * 3 +2] ) : 1 )) != 0 ) {
+		mes "wrong level";
+		close;
+	}
+	close2;
+	copyskill atoi(.skill$[.@menu *3 +1]),.@input;
+	/*
+	if(inarray(.Ground,atoi(.skill$[.@menu *3 +1]))>=0){
+		getmapxy(.@map$,.@x,.@y,BL_PC);
+		unitskillusepos getnpcid(0),atoi(.skill$[.@menu *3 +1]),.@input,.@x,.@y,0;
+	} else
+		unitskilluseid getnpcid(0),atoi(.skill$[.@menu *3 +1]),.@input,getcharid(3),0;
+	sleep 3000;
+	movenpc strnpcinfo(0),192,264;
+	*/
+	end;
+
+
+End_Talk:
+	mes .name$;
+	mes "Please make sure you have the skills required to copy a skills.";
+end;
+
+OnInit:
+	setarray .data[0],UNPC_STR,UNPC_AGI,UNPC_VIT,UNPC_INT,UNPC_DEX,UNPC_LUK,UNPC_ATKMIN,UNPC_ATKMAX,UNPC_MATKMIN,UNPC_MATKMAX;
+	setunitdata getnpcid(0),UNPC_LEVEL,99;
+	setunitdata getnpcid(0),UNPC_HIT,5000;
+	for(.@i=0;.@i<getarraysize(.data);.@i++)
+		setunitdata getnpcid(0),.data[.@i],150;
+	waitingroom "Stalker Plagiarism",0;
+	set .name$,"[ Stalker ]";
+	setarray .Ground[0],89,85,83;
+	setarray .skill$, 
+		// "< Remove >", 0, 0,
+		"Bowling Bash", 62, 10,
+//		"Flying Kick", 421, 7,
+		"Jupitel Thunder", 84, 10,
+//		"Raging Fire Dragon", 536, 5,
+		"Mammonite", 42, 10,
+//		"Lightning Spear of Ice", 537, 10,
+//		"North Wind", 542, 5,
+//		"Crimson Fire Blossom", 534, 10,
+		"Fire Bolt", 19, 10,
+		"Cold Bolt", 14, 10,
+		"Lightning Bolt", 20, 10,
+		"Frost Driver", 15, 10,
+		"Storm Gust", 89, 10,
+		"Lord of Vermilion", 85, 10,
+		"Meteor Storm", 83, 10,
+		"Bash", 5, 10,
+		"Bowling Bash", 62, 10,
+		"Triple Attack", 263, 10;
+end;
+}
+
+vip,68,67,3	duplicate(Stalker)	Stalker#01	747

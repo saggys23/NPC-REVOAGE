@@ -1,0 +1,313 @@
+
+
+
+
+
+
+prontera,140,159,0	script	Guarantee Card Quest	444,{
+	function F_Get_mob_count; function F_Get_mob_card; function F_delete_quest;
+	disable_items;
+	if(GCQ_CD > gettimetick(2)){
+		mes "Quest kami sedang cooldown. Aku tidak bisa membantumu sekarang.";
+		mes "Coba lagi " + gettimestr("%Y-%m/%d %H:%M:%S",21,GCQ_CD);
+		end;
+	}
+	if(GCQ_MOB){
+		.@COUNT = F_Get_mob_count(GCQ_MOB);
+		if(.@COUNT <= 0){
+			mes "Monster not found!,or the monster is blacklisted!";
+			mes "Something went wrong, would you like to delete the quest without cooldown penelty ?";
+			if(select("yes:no") == 2)
+				end;
+			F_delete_quest(false);
+			end;
+		}
+		if(GCQ_COUNT >= .@COUNT){
+			mes "Your quest is completed!";
+			.@CARD = F_Get_mob_card(GCQ_MOB);
+			if(.@CARD <= 0){
+				mes "something went wrong!";
+				mes "look like the card is not found or blacklisted";
+				mes "would you like to delete the quest without cooldown penelty ?";
+				if(select("yes:no") == 2)
+					end;
+				F_delete_quest(false);
+				end;
+			}
+			getitem(.@CARD,1);
+			F_delete_quest(true);
+			mes "Here you go!";
+			end;
+		}
+		mes "You have killed " + GCQ_COUNT + "/" + .@COUNT + " of " + getmonsterinfo(GCQ_MOB,MOB_NAME);
+		if(.delete_quest_option){
+			mes "Wound you like to delete the quest?";
+			if(select("No:No:Delete the quest:No") == 3){
+				clear;
+				mes "Are you sure you want to delete the quest?";
+				if(select("Yes:No") == 2)
+					end;
+				clear;
+				F_delete_quest(.delete_quest_cd);
+				mes "The quest is deleted!";
+				end;
+			}
+		}
+		end;
+	}
+	mes "[Anlakki]";
+	mes "Halo apa kabar?";
+	mes " ";
+	mes "Namaku Anlakki. Kamu kelihatannya capek yah mencari kartu monster? Hehe.";
+	next;
+	mes "[Anlakki]";
+	mes "Aku bisa membantu kamu mendapatkannya nih.";
+	mes " ";	
+	mes "Kamu cukup membantu aku membunuh monster.";
+	next;
+	mes "[Anlakki]";
+	mes "Jika setelahnya kamu masih belum mendapatkan kartunya, aku kasih deh kartunya.";
+	next;
+	mes "[Anlakki]";
+	mes "Kasian...";
+	mes "Kamu perlu bantuan?";
+	if(select("Iya banget, Bwang..:Ogah") == 2)
+		end;
+	clear;
+	mes "Please select the card type!";
+//	input .@m,1,99999;
+	switch(select("Weapon Cards","Headgear Cards","Armor Cards","Shield Cards","Garment Cards","Shoes Cards","Accessory Cards")){
+		case 1:
+			mes "Please select the card name!";
+			for ( set .@i,0; .@i < getarraysize(.card_weaponid); set .@i, .@i+1 ){
+				set .@menu$, .@menu$ + getitemname(.card_weaponid[.@i]) +":";
+			}
+			set .@a, select(.@menu$) -1;
+			set .@m, .card_weaponmid[.@a];
+			goto goo;
+		case 2:
+			mes "Please select the card name!";
+			for ( set .@i,0; .@i < getarraysize(.card_headgearid); set .@i, .@i+1 ){
+				set .@menu$, .@menu$ + getitemname(.card_headgearid[.@i]) +":";
+			}
+			set .@a, select(.@menu$) -1;
+			set .@m, .card_headgearmid[.@a];
+			goto goo;
+		case 3:
+			mes "Please select the card name!";
+			for ( set .@i,0; .@i < getarraysize(.card_armorid); set .@i, .@i+1 ){
+				set .@menu$, .@menu$ + getitemname(.card_armorid[.@i]) +":";
+			}
+			set .@a, select(.@menu$) -1;
+			set .@m, .card_armormid[.@a];
+			goto goo;
+		case 4:
+			mes "Please select the card name!";
+			for ( set .@i,0; .@i < getarraysize(.card_shieldid); set .@i, .@i+1 ){
+				set .@menu$, .@menu$ + getitemname(.card_shieldid[.@i]) +":";
+			}
+			set .@a, select(.@menu$) -1;
+			set .@m, .card_shieldmid[.@a];
+			goto goo;
+		case 5:
+			mes "Please select the card name!";
+			for ( set .@i,0; .@i < getarraysize(.card_garmentid); set .@i, .@i+1 ){
+				set .@menu$, .@menu$ + getitemname(.card_garmentid[.@i]) +":";
+			}
+			set .@a, select(.@menu$) -1;
+			set .@m, .card_garmentmid[.@a];
+			goto goo;
+		case 6:
+			mes "Please select the card name!";
+			for ( set .@i,0; .@i < getarraysize(.card_shoesid); set .@i, .@i+1 ){
+				set .@menu$, .@menu$ + getitemname(.card_shoesid[.@i]) +":";
+			}
+			set .@a, select(.@menu$) -1;
+			set .@m, .card_shoesmid[.@a];
+			goto goo;
+		case 7:
+			mes "Please select the card name!";
+			for ( set .@i,0; .@i < getarraysize(.card_accid); set .@i, .@i+1 ){
+				set .@menu$, .@menu$ + getitemname(.card_accid[.@i]) +":";
+			}
+			set .@a, select(.@menu$) -1;
+			set .@m, .card_accmid[.@a];
+			goto goo;
+	}
+goo:	
+	clear;
+	if((.@count = F_Get_mob_count(.@m)) <= 0){
+		mes "the monster not found or blacklisted!";
+		end;
+	}
+	.@card = F_Get_mob_card(.@m);
+//	if(inarray(.card_whitelist,.@card) == -1){
+//        mes "Sorry this card/monster is not allowed";
+//        end;
+//    }
+	mes "[Anlakki]";
+	mes "Kamu cukup bayar aku ^DC143C" + @GCQ_FEE + "^000000 Zeny.";
+	mes "Dan bunuh ^32CD32( " + .@count + " )^000000 " + getmonsterinfo(.@m,MOB_NAME);
+	mes "Ingat, questnya akan terdelete otomatis setelah kamu mendapatkan kartunya.!";
+	next;
+	mes "^DC143CWARNING^000000: Quest akan terdelete otomatis saat kamu mengambil(Pick) kartu yang sama dari lantai.";
+	mes "^DC143CWARNING^000000: Jangan drop/trade kartu yang sama selama quest.";
+	next;
+	mes "[Anlakki]";
+	mes "Kamu yakin mau ambil quest ini??";
+	if(select("yes:no") == 2)
+		end;
+	clear;
+	if(Zeny < @GCQ_FEE){
+		mes "you don't have " + @GCQ_FEE + " Zeny!";
+		end;
+	}
+	Zeny -= @GCQ_FEE;
+	GCQ_MOB = .@m;
+	GCQ_CARD = .@card;
+	mes "Quest Accepted!";
+end;
+
+OnNPCKillEvent:
+	if(GCQ_MOB == killedrid){
+		if(GCQ_COUNT < GCQ_COUNT_MAX){
+			GCQ_COUNT++;
+			dispbottom "Guarantee Card Quest (" + getmonsterinfo(GCQ_MOB,MOB_NAME) + " [" + GCQ_COUNT + "/" + GCQ_COUNT_MAX + "]).";
+			if(GCQ_COUNT == GCQ_COUNT_MAX){
+				dispbottom "Guarantee Card Quest (Complete).";
+			}
+		}
+	}
+end;
+
+OnItemPickupEvent:
+	if(GCQ_MOB && PickedItemID == GCQ_CARD){
+	if(GCQ_COUNT != GCQ_COUNT_MAX){
+		F_delete_quest(true);
+		dispbottom "Guarantee Card Quest (Complete).";
+		dispbottom "Guarantee Card Quest (Deleted).";
+	}
+	}
+end;
+
+	function	F_Get_mob_count	{
+		.@m = getarg(0);
+		.@size = query_sql("SELECT `mode` FROM `" + .mob_db$ + "` WHERE `ID` = '" + .@m + "'", .@mode);
+		if(!.@size){
+			.@size = query_sql("SELECT `mode` FROM `" + .mob_db_import$ + "` WHERE `ID` = '" + .@m + "'", .@mode);
+		}
+		if(!.@size || inarray(.mob_blacklist,.@m) != -1 || F_Get_mob_card(.@m) <= 0){
+			return -1;
+		}
+		if((.@mode&MD_MVP)){
+			@GCQ_FEE = .mvp_fee;
+			.@c = .mvp_count;
+		}else if((.@mode&MD_STATUS_IMMUNE)){
+			@GCQ_FEE = .boss_fee;
+			.@c = .boss_count;
+		}else{
+			@GCQ_FEE = .normal_fee;
+			.@c = .normal_count;
+		}
+		GCQ_COUNT_MAX = .@c;
+		return .@c;
+	}
+	
+	function	F_Get_mob_card	{
+		.@m = getarg(0);
+		.@size = query_sql("SELECT `DropCardid` FROM `" + .mob_db$ + "` WHERE `ID` = '" + .@m + "'", .@card);
+		if(!.@size){
+			.@size = query_sql("SELECT `DropCardid` FROM `" + .mob_db_import$ + "` WHERE `ID` = '" + .@m + "'", .@card);
+		}
+		if(!.@size || inarray(.card_blacklist,.@card) != -1){
+			return -1;
+		}
+		if(getiteminfo(.@card,2) != 6){
+			return 0;
+		}
+		return .@card;
+	}
+	
+	function	F_delete_quest	{
+		.@CD = getarg(0);
+		GCQ_MOB = 0;
+		GCQ_COUNT = 0;
+		GCQ_CARD = 0;
+		if(.@CD){
+			GCQ_CD = gettimetick(2) + (.cooldown * 60 * 60);
+		}
+		return true;
+	}
+
+OnInit:
+	.cooldown = 0;//quest cooldown in hours.
+	.delete_quest_option = true;//allow the player to delete the quest he have?
+	.delete_quest_cd = true;//if the player deleted the quest will he get the cooldown?
+	
+	//sql is required for this system to work (you have to make sure that your monsters tables are imported to your sql!)
+	.mob_db$ = "mob_db_re";//pre-re = 'mob_db' renewal = 'mob_db_re'
+	.mob_db_import$ = "mob_db2_re";//pre-re = 'mob_db2' renewal = 'mob_db2_re'
+	//blacklists
+	setarray .mob_blacklist,0;
+	setarray .card_blacklist,0;
+	setarray .card_whitelist,0;
+	
+	setarray .card_weaponid,4062,4043,4297,4082,4069,4004,4002,4020,4080,4072,4035,4076,4030,4055,4057,4126,4007,4024,4104,4005,4107,4068,4092,4111,4281;
+	setarray .card_weaponmid,1030,1237,1248,1106,1111,1113,1007,1005,1118,1040,1068,1138,1020,1141,1058,1149,1047,1161,1164,1062,1032,1001,1169,1065,1417;
+	
+	setarray .card_shieldid,4013,4074,4322,4045,4136,4066,4314,4058;
+	setarray .card_shieldmid,1097,1060,1213,1128,1132,1023,1216,1034;
+	
+	setarray .card_garmentid,4179,4088,4109,4133,4102;
+	setarray .card_garmentmid,1091,1119,1130,1163,1179;
+	
+	setarray .card_armorid,4114,4098,4141,4105,4099,4031,4008,4003;
+	setarray .card_armormid,1099,1110,1117,1045,1154,1019,1049,1008;
+	
+	setarray .card_shoesid,4070,4097,4100,4107;
+	setarray .card_shoesmid,1116,1146,1170,1032;
+	
+	setarray .card_shoesid,4070,4097,4100,4107;
+	setarray .card_shoesmid,1116,1146,1170,1032;
+
+	setarray .card_accid,4252,4040,4283,4027,4079,4084,4205,4077,4044,4022,4264,4051,4064;
+	setarray .card_accmid,1271,1018,1277,1070,1139,1142,1191,1158,1056,1014,1263,1057,1178;
+	
+	setarray .card_headgearid,4288,4041,4122,4052,4343,4195,4112,4127,4185,4223;
+	setarray .card_headgearmid,1267,1104,1109,1033,1628,1586,1140,1061,1195,1278;
+	
+	//zeny
+	.normal_fee = 1000000;
+	.boss_fee = 100000000;
+	.mvp_fee = 1000000000;
+	
+	//monsters count
+	.normal_count = 500;
+	.boss_count = 3000;
+	.mvp_count = 3000;
+end;
+}
+
+
+/*
+Enable with Autoloot
+
+/rathena/src/map/mob.cpp
+
+	if( test_autoloot ) {	//Autoloot.
+		struct party_data *p = party_search(sd->status.party_id);
+
+		if ((itemdb_search(ditem->item_data.nameid))->flag.broadcast &&
+			(!p || !(p->party.item & 2)) // Somehow, if party's pickup distribution is 'Even Share', no announcemet
+			)
+			intif_broadcast_obtain_special_item(sd, ditem->item_data.nameid, md->mob_id, ITEMOBTAIN_TYPE_MONSTER_ITEM);
++		pc_setparam(sd, SP_ITEMPICKUPID, ditem->item_data.nameid);
++		npc_script_event(sd, NPCE_ITEMPICKUP);
+		if (party_share_loot(party_search(sd->status.party_id),
+			sd, &ditem->item_data, sd->status.char_id) == 0
+		) {
+			ers_free(item_drop_ers, ditem);
+			return;
+		}
+	}
+*/

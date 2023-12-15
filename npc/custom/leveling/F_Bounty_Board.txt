@@ -70,34 +70,50 @@ ambil:
 			mes "[Bounty Board]";
 			mes "Kalahkan " + .@HuntAllList$ + " kembalilah bila selesai.";
 			close2;
-
-			if (vip_status(1)){
-				mes "Account kamu aktif ^FF0000Premium Service^000000";
-				mes "Anda ingin Warp ke lokasi Hunt Board?";
-				switch (select("Warp", "Nanti dulu.")){
-					case 1:
-						.@map$ = getarg(.@bounty+3); 		//MapWarp
-						warp .@map$,0,0;
-						end;
-					case 2:
-						break;
+			if(BaseLevel <61){
+				if (vip_status(1)){
+					mes "Account kamu aktif ^FF0000Premium Service^000000";
+					mes "Anda ingin Warp ke lokasi Hunt Board?";
+					mes "Anda cukup bayar ^FF000010.000zeny^000000 kepada saya.";
+					switch (select("Warp", "Nanti dulu.")){
+						case 1:
+//							if(Zeny < @GCQ_FEE){
+//								mes "Kamu tidak punya cukup Zeny.";
+//								end;
+//							}
+//							Zeny -= @GCQ_FEE;
+							.@map$ = getarg(.@bounty+3); 		//MapWarp
+							warp .@map$,0,0;
+							end;
+						case 2:
+							break;
+					}
+					end;
 				}
-				end;
 			}
 		}
 		mes "Kamu Sudah Memiliki Quest "+.@monster$+".";
 		mes "Silahkan cek Quest Window kamu^FF0000 ALT+U ^000000untuk info quest nya.";
-		if (vip_status(1)){
-		next;
-			mes "Account kamu aktif ^FF0000Premium Service^000000";
-			mes "Anda ingin Warp ke lokasi Hunt Board?";
-			switch (select("Warp", "Nanti dulu.")){
-				case 1:
-					.@map$ = getarg(.@bounty+3); 		//MapWarp
-					warp .@map$,0,0;
-					end;			
-				case 2:
-					end;
+		if(BaseLevel <61){
+			if (vip_status(1)){
+			next;
+				mes "Account kamu aktif ^FF0000Premium Service^000000";
+				mes "Anda ingin Warp ke lokasi Hunt Board?";
+				mes "Anda cukup bayar ^FF000010.000zeny^000000 kepada saya.";
+				switch (select("Warp", "Nanti dulu.")){
+					case 1:
+//						if(Zeny < @GCQ_FEE){
+//							mes "Kamu tidak punya cukup Zeny.";
+//							end;
+//						}
+//						Zeny -= @GCQ_FEE;
+						.@map$ = getarg(.@bounty+3); 		//MapWarp
+						warp .@map$,0,0;
+						
+						end;			
+					case 2:
+						end;
+				}
 			}
 		}
 		close;		
@@ -132,10 +148,10 @@ L_BountyOne:
 			.@vip_reward = select("^FF0000Terima Base & Job EXP^000000");
 		}
 		erasequest getarg(.@bounty);
-		if (Zeny + 3500 <= MAX_ZENY)
-			Zeny += 3500;
-		.@BaseExp = getarg(.@bounty+1);
-		.@JobExp = getarg(.@bounty+2);
+//		if (Zeny + 3500 <= MAX_ZENY)
+//			Zeny += 3500;
+		.@BaseExp = getarg(.@bounty+1)/2;
+		.@JobExp = getarg(.@bounty+2)/2;
 		switch(.@vip_reward){
 			case 2:
 				getexp .@BaseExp,0;

@@ -34,8 +34,8 @@ if(getgmlevel()>=20) {
 			}
 	}	
 }
-	if (checkquest(62837) != 2)
-		callsub S_GM_Notice;
+//	if (checkquest(62837) != 2)
+//		callsub S_GM_Notice;
 	setarray .@Timer, 60444, 60495, 60449, 60450, 60486, 60487;
 	for (.@i = 0; .@i < getarraysize(.@Timer); .@i++){
 		if (checkquest(.@Timer[.@i],PLAYTIME) == 2)
@@ -336,65 +336,65 @@ S_CheckLevel:
 	mes "Sorry, but I'm only giving this mission to Adventurers who are between level " + .@BaseMin[getarg(0)] + "-" + .@BaseMax[getarg(0)] + ".";
 	close;
 
-S_GM_Notice:
-	while(1){
-mes "[Gramps]";
-        mes "Tunggu sebentar! Aku memiliki pesan yang hanya akan saya tampilkan satu kali setelah Kamu menjawab beberapa pertanyaan dengan benar..";
-        next;
-        mes "[Gramps]";
-        mes "Informasi tentang tim GM!";
-        next;
-        mes "[Rules]";
-        mes "1. Kami tidak merekrut pemain untuk menjadi GM!";
-        next;
-        mes "[Rules]";
-        mes "2. Tim GM TIDAK AKAN PERNAH meminta kata sandi Kamu!";
-        next;
-        mes "[Rules]";
-        mes "3. Jika ada seseorang meminta uang/barang untuk menjaga akun Anda, mereka bukan anggota tim GM. JANGAN MEMBAYAR/MEMBERI MEREKA APAPUN!";
-        mes "Tim GM tidak akan pernah meminta Anda untuk menghubungi mereka di luar sistem tiket. Jika mereka menuntut melalui pesan instan atau media sosial, abaikan saja.!";
-        next;
-        mes "[Rules]";
-        mes "4. Tim GM TIDAK AKAN PERNAH meminta Kamu untuk menginstal dan menggunakan Teamviewer!";
-        next;
-        mes "[Rules]";
-        mes "5. Kamu akan selalu dapat melihat anggota tim GM di Public Chatroom jika mereka ada di sana. Mereka tidak memiliki cara khusus untuk menjadi tidak terlihat!";
-        next;
-        mes "[Rules]";
-        mes "6. Tim GM akan selalu bersedia menunjukkan sprite/baju GM. Jika mereka menolak, cuekin saja.";
-        next;
-        mes "[Questionaire # 1]";
-        mes "Apakah tim GM merekrut pemain untuk menjadi GM?";
-        next;
-        if (select("Ya", "Tidak") == 2){ .@n++; }
-        mes "[Questionaire # 2]";
-        mes "Apakah tim GM akan meminta kata sandi kepada Kamu?";
-        next;
-        if (select("Ya", "Tidak") == 2){ .@n++; }
-        mes "[Questionaire # 3]";
-        mes "Apakah tim GM akan meminta uang/barang dari Kamu dalam game atau melalui pesan instan atau media sosial?";
-        next;
-        if (select("Tidak", "Ya") == 1){ .@n++; }
-        mes "[Questionaire # 4]";
-        mes "Apakah Kamu harus menginstal Teamviewer karena diminta oleh GM?";
-        next;
-        if (select("Tidak", "Ya") == 1){ .@n++; }
-        mes "[Questionaire # 5]";
-        mes "Apakah anggota tim GM dapat tidak terlihat di ruang obrolan/Pub Chatroom?";
-        next;
-        if (select("Maybe", "Tidak", "Ya") == 2){ .@n++; }
-        mes "[Questionaire # 6]";
-        mes "Dapatkah Kamu meminta untuk melihat sprite GM untuk memverifikasi identitas GM?";
-		next;
-		if (select("Tidak", "Ya") == 2){ .@n++; }
-		if (.@n == 6)
-			break;
-		else
-			.@n = 0;
-	}
-	setquest 62837;
-	completequest 62837;
-	return;
+//S_GM_Notice:
+//	while(1){
+//mes "[Gramps]";
+//        mes "Tunggu sebentar! Aku memiliki pesan yang hanya akan saya tampilkan satu kali setelah Kamu menjawab beberapa pertanyaan dengan benar..";
+//        next;
+//        mes "[Gramps]";
+//        mes "Informasi tentang tim GM!";
+//        next;
+//        mes "[Rules]";
+//        mes "1. Kami tidak merekrut pemain untuk menjadi GM!";
+//        next;
+//        mes "[Rules]";
+//        mes "2. Tim GM TIDAK AKAN PERNAH meminta kata sandi Kamu!";
+//        next;
+//        mes "[Rules]";
+//        mes "3. Jika ada seseorang meminta uang/barang untuk menjaga akun Anda, mereka bukan anggota tim GM. JANGAN MEMBAYAR/MEMBERI MEREKA APAPUN!";
+//        mes "Tim GM tidak akan pernah meminta Anda untuk menghubungi mereka di luar sistem tiket. Jika mereka menuntut melalui pesan instan atau media sosial, abaikan saja.!";
+//        next;
+//        mes "[Rules]";
+//        mes "4. Tim GM TIDAK AKAN PERNAH meminta Kamu untuk menginstal dan menggunakan Teamviewer!";
+//        next;
+//        mes "[Rules]";
+//        mes "5. Kamu akan selalu dapat melihat anggota tim GM di Public Chatroom jika mereka ada di sana. Mereka tidak memiliki cara khusus untuk menjadi tidak terlihat!";
+//        next;
+//        mes "[Rules]";
+//        mes "6. Tim GM akan selalu bersedia menunjukkan sprite/baju GM. Jika mereka menolak, cuekin saja.";
+//        next;
+//        mes "[Questionaire # 1]";
+//        mes "Apakah tim GM merekrut pemain untuk menjadi GM?";
+//        next;
+//        if (select("Ya", "Tidak") == 2){ .@n++; }
+//        mes "[Questionaire # 2]";
+//        mes "Apakah tim GM akan meminta kata sandi kepada Kamu?";
+//        next;
+//        if (select("Ya", "Tidak") == 2){ .@n++; }
+//        mes "[Questionaire # 3]";
+//        mes "Apakah tim GM akan meminta uang/barang dari Kamu dalam game atau melalui pesan instan atau media sosial?";
+//        next;
+//        if (select("Tidak", "Ya") == 1){ .@n++; }
+//        mes "[Questionaire # 4]";
+//        mes "Apakah Kamu harus menginstal Teamviewer karena diminta oleh GM?";
+//        next;
+//        if (select("Tidak", "Ya") == 1){ .@n++; }
+//        mes "[Questionaire # 5]";
+//        mes "Apakah anggota tim GM dapat tidak terlihat di ruang obrolan/Pub Chatroom?";
+//        next;
+//        if (select("Maybe", "Tidak", "Ya") == 2){ .@n++; }
+//        mes "[Questionaire # 6]";
+//        mes "Dapatkah Kamu meminta untuk melihat sprite GM untuk memverifikasi identitas GM?";
+//		next;
+//		if (select("Tidak", "Ya") == 2){ .@n++; }
+//		if (.@n == 6)
+//			break;
+//		else
+//			.@n = 0;
+//	}
+//	setquest 62837;
+//	completequest 62837;
+//	return;
 
 OnInit:
 	setarray .Gramps_MapName$, "Turtle Dungeon", "Geffen Dungeon", "Abyss Dungeon";
@@ -515,3 +515,6 @@ odin_tem03	mapflag	levelcap
 jupe_core	mapflag	levelcap
 moc_fild22	mapflag	levelcap
 lhz_dun02	mapflag	levelcap
+
+moc_para01	mapflag	noicewall
+moc_para01	mapflag	restricted 7

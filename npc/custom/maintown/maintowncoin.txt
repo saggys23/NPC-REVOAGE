@@ -33,19 +33,10 @@ OnPointGet:
 		sleep2 .delay;
 	}
 	if(strcharinfo(3) == "prontera") {
-	@consecutive_timer++;
-	.@time_string$ = Time2Str( @consecutive_timer * ( .timer / 1000 ) );
-	dispbottom "You received "+.points+" Free Prontera Coin(s) by staying in maintown for 1 hour.";
-	getitem 3014,1;
-//	@consecutive_bonus++;
-
-	//Check for consecutive timer.
-	if(@consecutive_bonus == .cdelay) {
-		@consecutive_bonus = 0;
-		#KAFRAPOINTS = #KAFRAPOINTS + .cpoints;
-		dispbottom "You receive a bonus "+.cpoints+" Free Point(s) by playing for minimum 3 hours consecutively!!!";
-		dispbottom "Current Balance = "+#KAFRAPOINTS+" Free Point(s)";
-	}
+		@consecutive_timer++;
+		.@time_string$ = Time2Str( @consecutive_timer * ( .timer / 1000 ) );
+		dispbottom "You received "+.points+" Free Prontera Coin(s) by staying in maintown for 1 hour.";
+		getitem 3014,1;
 	}
 OnPCLoginEvent:
 	addtimer .timer,"hourlypoints3::OnPointGet";
@@ -62,6 +53,6 @@ OnInit:
 	.cdelay  = 3;          //Delay before receiving the consecutive bonus. ( Default: 3 [ { ~ 3 Hours } *Using default timer ] )
 	.cpoints = 10;         //Points gained for consecutive time online. ( Default: 10 )
 	.points  = 1;          //Normal points gained. ( Default: 1 )
-	.delay   = 1000;       //Delay for idle re-check check. ( Default: 1000 [ = 1 Second ] )
+	.delay   = 3000;       //Delay for idle re-check check. ( Default: 1000 [ = 1 Second ] )
 	.idle    = 60*5;       //Player is idle after not moving for this many seconds. ( Default: 60*5 [ = 5 Minutes ] )
 }

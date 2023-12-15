@@ -35,8 +35,8 @@ alberta,245,45,3	duplicate(Girl_louyang)	Girl#0lou	815
 
 // quests/quests_alberta.txt
 //============================================================
-alberta,247,122,4	duplicate(Sailor_alberta)	Sailor#tur	709
-alberta,248,89,4	duplicate(Turtle_Scholar_alberta)	Turtle Island Scholar	121
+alberta,244,118,4	duplicate(Sailor_alberta)	Sailor#tur	709
+//alberta,248,89,4	duplicate(Turtle_Scholar_alberta)	Turtle Island Scholar	121
 
 // quests/skills/merchant_skills.txt
 //============================================================

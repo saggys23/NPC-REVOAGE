@@ -1,0 +1,28 @@
+//// ItemUse&Pickup.diff [rathena/akkarin]
+//-	script	onusetest	-1,{
+//	end;
+//OnItemUseEvent:
+//	dispbottom "Found item use event"; dispbottom "Using on "+ UsedItemID;
+//	switch(UsedItemID){
+//		case 501: dispbottom "You used a Red Potion!"; break;
+//	}
+//	end;
+//}
+//
+//-	script	ondroptest	-1,{
+//	end;
+//OnItemDropEvent:
+//	dispbottom "Found item drop event"; dispbottom "Dropped "+ DroppedItemQTY +"x "+ getitemname(DroppedItemID);
+//	end;
+//}
+//
+//-	script	onpickuptest	-1,{
+//	end;
+//OnItemPickupEvent:
+//	dispbottom "Found item pickup event";
+//	switch(PickedItemID){
+//		case 501: dispbottom "Oh look.. a Red Potion!"; break;
+//		default: dispbottom "Found something else.."; break;
+//	}
+//	end;
+//}

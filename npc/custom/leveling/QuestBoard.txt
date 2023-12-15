@@ -18,142 +18,141 @@
 //=			MonsterID, 		QuestID, 	BaseExp, 	JobExp};
 //============================================================
 
-prontera,164,173,6	script	Bounty Board 1-50#pay1	837,{
+prontera,164,173,6	script	Bounty Board 1-40#pay1	837,{
 	mes "Pilih zona monster quest yg kamu inginkan";
 	switch(select("Payon", "Prontera","Geffen", "Byaland & Beach")){
 	case 1:
-	callfunc "F_Bounty_Board", 1, 50, 1, 1,
-		1076,	63006,	11123/2,		9012/2,	"pay_dun00",	// SKELETON
-		1015,	63007,	13056/2,		10102/2,	"pay_dun00",	// ZOMBIE
-		1014,	63001,	 9899/2,		9654/2,	"pay_fild01",	// SPORE
-		1077,	63008,	21000/2,		20014/2,	"pay_fild05", // POISONSPORE
-		1033,	63002,	19050/2,		18668/2,	"pay_fild07", // ELDERWILLOW
-		1060,	63003,	23050/2,		22356/2,	"pay_fild09", // BIGFOOT
-		1056,	63004,	16975/2,		14325/2,	"pay_fild09", // SMOKIE
-		1031,	63005,	13050/2,		11154/2,	"pay_fild04"; // POPORING
+	callfunc "F_Bounty_Board", 1, 40, 1, 1,
+		1076,	63006,	11123,		9012,	"pay_dun00",	// SKELETON
+		1015,	63007,	13056,		10102,	"pay_dun00",	// ZOMBIE
+		1014,	63001,	 9899,		9654,	"pay_fild01",	// SPORE
+		1077,	63008,	21000,		20014,	"pay_fild05", // POISONSPORE
+		1033,	63002,	19050,		18668,	"pay_fild07", // ELDERWILLOW
+		1060,	63003,	23050,		22356,	"pay_fild09", // BIGFOOT
+		1056,	63004,	16975,		14325,	"pay_fild09", // SMOKIE
+		1031,	63005,	13050,		11154,	"pay_fild04"; // POPORING
 	end;
 	
 	case 2:
-	callfunc "F_Bounty_Board", 1, 50, 1, 1,
-		1019,	63010,	24250/2,		22725/2,	"moc_fild02", // PECOPECO
-		1057,	63011,	22300/2,		20121/2,	"prt_fild03"; // YOYO
+	callfunc "F_Bounty_Board", 1, 40, 1, 1,
+		1019,	63010,	24250,		22725,	"moc_fild02", // PECOPECO
+		1057,	63011,	22300,		20121,	"prt_fild03"; // YOYO
 
 	end;
 	
 	case 3:
-	callfunc "F_Bounty_Board", 1, 50, 1, 1,
-	
-		1103,	63009,	22144/2,		21044/2,	"mjolnir_01"; // CARAMELM
+	callfunc "F_Bounty_Board", 1, 40, 1, 1,
+		1103,	63009,	22144,		21044,	"mjolnir_01"; // CARAMELM
 	end;
 	
 	case 4:
-	callfunc "F_Bounty_Board", 1, 50, 1, 1,
-		1034,	63012,	15456/2,		 13565/2,	"beach_dun3", // THARAFROG
-		1068,	63013,	9995/2,		 8656/2,	"iz_dun01", // HYDRA
-		1067,	63014,	17989/2,		 16879/2,	"iz_dun02"; // CORNOTUS
+	callfunc "F_Bounty_Board", 1, 40, 1, 1,
+		1034,	63012,	15456,		 13565,	"beach_dun3", // THARAFROG
+		1068,	63013,	9995,		 8656,	"iz_dun01", // HYDRA
+		1067,	63014,	17989,		 16879,	"iz_dun02"; // CORNOTUS
 	end;
 }
 }
-//41-70 X2 EXP TABLE
-prontera,164,171,6	script	Bounty Board 41-75#pay2	837,{
+//41-60 X2 EXP TABLE
+prontera,164,171,6	script	Bounty Board 41-60#pay2	837,{
 	mes "Pilih zona monster quest yg kamu inginkan";
 	switch(select("IzludeByaland", "Morocc","Payon", "Geffen", "Comodo", "Prontera", "Toy Factory")){
 	case 1:
-	callfunc "F_Bounty_Board", 41, 75, 1, 1,
-		1045,	63015,	61321/2,		66546/2,	"iz_dun03",	// MARC
-		1069,	63016,	57002/2,		54566/2,	"iz_dun03",	// SWORDFISH
-		1044,	63017,	48001/2,		46848/2,	"iz_dun02",	// OBEUNE
-		1144,	63018,	53002/2,		52332/2,	"iz_dun02"; // MARSE
+	callfunc "F_Bounty_Board", 41, 60, 1, 1,
+		1045,	63015,	61321,		66546,	"iz_dun03",	// MARC
+		1069,	63016,	57002,		54566,	"iz_dun03",	// SWORDFISH
+		1044,	63017,	48001,		46848,	"iz_dun02",	// OBEUNE
+		1144,	63018,	53002,		52332,	"iz_dun02"; // MARSE
 	end;
 	
 	case 2:
-	callfunc "F_Bounty_Board", 41, 75, 1, 1,
-		1146,	63019,	48469/2,		46563/2,	"in_sphinx2", // MATYR
-		1016,	63020,	49995/2,		50013/2,	"moc_pryd02", // ARCHERSKEL
-		1041,	63021,	54250/2,		53213/2,	"moc_pryd03", // MUMMY
-		1127,	63022,	62300/2,		61121/2,	"moc_fild17", // HODE
-		1165,	63023,	68300/2,		66121/2,	"moc_fild16"; // SANDMAN
+	callfunc "F_Bounty_Board", 41, 60, 1, 1,
+		1146,	63019,	48469,		46563,	"in_sphinx2", // MATYR
+		1016,	63020,	49995,		50013,	"moc_pryd02", // ARCHERSKEL
+		1041,	63021,	54250,		53213,	"moc_pryd03", // MUMMY
+		1127,	63022,	62300,		61121,	"moc_fild17", // HODE
+		1165,	63023,	68300,		66121,	"moc_fild16"; // SANDMAN
 	end;
 	
 	case 3:
-	callfunc "F_Bounty_Board", 41, 75, 1, 1,
-		1026,	63024,	54000/2,		52321/2,	"pay_dun02", // MUNAK
-		1188,	63025,	58144/2,		56044/2,	"pay_dun02 ", // BONGUN
-		1170,	63026,	66250/2,		62725/2,	"pay_dun03", // SOHEE
-		1013,	63027,	44300/2,		40121/2,	"pay_fild02"; // WOLF
+	callfunc "F_Bounty_Board", 41, 60, 1, 1,
+		1026,	63024,	54000,		52321,	"pay_dun02", // MUNAK
+		1188,	63025,	58144,		56044,	"pay_dun02 ", // BONGUN
+		1170,	63026,	66250,		62725,	"pay_dun03", // SOHEE
+		1013,	63027,	44300,		40121,	"pay_fild02"; // WOLF
 	end;
 	
 	case 4:
-	callfunc "F_Bounty_Board", 41, 75, 1, 1,
-		1023,	63028,	50133/2,		 49345/2,	"gef_fild02", // ORCWARRIOR
-		1273,	63029,	56995/2,		 55656/2,	"gef_fild10", // ORCLADY
-		1177,	63030,	77989/2,		 76879/2,	"orcsdun02", // ZENORC
-		1153,	63031,	57989/2,		 56879/2,	"orcsdun01"; // ORCZOMBIE
+	callfunc "F_Bounty_Board", 41, 60, 1, 1,
+		1023,	63028,	50133,		 49345,	"gef_fild02", // ORCWARRIOR
+		1273,	63029,	56995,		 55656,	"gef_fild10", // ORCLADY
+		1177,	63030,	77989,		 76879,	"orcsdun02", // ZENORC
+		1153,	63031,	57989,		 56879,	"orcsdun01"; // ORCZOMBIE
 	end;
 	
 	case 5:
-	callfunc "F_Bounty_Board", 41, 75, 1, 1,
-		1271,	63032,	75456/2,		 73565/2,	"cmd_fild01"; // ALLIGATOR
+	callfunc "F_Bounty_Board", 41, 60, 1, 1,
+		1271,	63032,	75456,		 73565,	"cmd_fild01"; // ALLIGATOR
 	end;
 	
 	case 6:
-	callfunc "F_Bounty_Board", 41, 75, 1, 1,
-		1099,	63033,	77456/2,		 75565/2,	"mjolnir_05"; // ARGIOPE
+	callfunc "F_Bounty_Board", 41, 60, 1, 1,
+		1099,	63033,	77456,		 75565,	"mjolnir_05"; // ARGIOPE
 	end;
 	
 	case 7:
-	callfunc "F_Bounty_Board", 41, 75, 1, 1,
-		1248,	63034,	55456/2,		 53565/2,	"xmas_dun02", // CRUISER
-		1249,	63035,	56995/2,		 58656/2,	"xmas_dun02", // MYSTCASE
-		1265,	63036,	47989/2,		 46879/2,	"xmas_dun01"; // COOKIE
+	callfunc "F_Bounty_Board", 41, 60, 1, 1,
+		1248,	63034,	55456,		 53565,	"xmas_dun02", // CRUISER
+		1249,	63035,	56995,		 58656,	"xmas_dun02", // MYSTCASE
+		1265,	63036,	47989,		 46879,	"xmas_dun01"; // COOKIE
 	end;
 	}
 	}
 	
-//70-99 x10 EXP TABLE	
-prontera,164,169,6	script	Bounty Board 71-99#pay3	837,{
+//61-80 x10 EXP TABLE	
+prontera,164,169,6	script	Bounty Board 61-80#pay3	837,{
 	mes "Pilih zona monster quest yg kamu inginkan";
 	switch(select("Geffen & Glast Heim", "Comodo & Beach","Sphinx", "Clock Tower Alde", "Turtle Dun")){
 	case 1:
-	callfunc "F_Bounty_Board", 71, 99, 1, 1,
-		1163,	63037,	215645/2,		225456/2,	"gl_knt01",	// RAYDRIC
-		1276,	63038,	168794/2,		142454/2,	"gl_knt01",	// RAYARCHER
-		1192,	63041,	170754/2,		164574/2,	"gl_chyard",	// WRAITH
-		1117,	63042,	198779/2,		186978/2,	"gl_church", // EVILDRUID
-		1197,	63043,	171110/2,		181214/2,	"gl_prison",	// ZOMBIEPRISON
-		1196,	63044,	152544/2,		171644/2,	"gl_prison1",	// SKIELPRISON
-		1257,	63045,	184546/2,		184564/2,	"gl_prison1"; // INJUSTICE
+	callfunc "F_Bounty_Board", 61, 80, 1, 1,
+		1163,	63037,	215645,		225456,	"gl_knt01",	// RAYDRIC
+		1276,	63038,	168794,		142454,	"gl_knt01",	// RAYARCHER
+		1192,	63041,	170754,		164574,	"gl_chyard",	// WRAITH
+		1117,	63042,	198779,		186978,	"gl_church", // EVILDRUID
+		1197,	63043,	171110,		181214,	"gl_prison",	// ZOMBIEPRISON
+		1196,	63044,	152544,		171644,	"gl_prison1",	// SKIELPRISON
+		1257,	63045,	184546,		184564,	"gl_prison1"; // INJUSTICE
 	end;
 	
 	case 2:
-	callfunc "F_Bounty_Board", 71, 99, 1, 1,
-		1148,	63046,	397841/2,		398524/2,	"beach_dun", // MEDUSA
-		1278,	63047,	345487/2,		344564/2,	"beach_dun2", // STALACTIC
-		1206,	63048,	344414/2,		335464/2,	"cmd_fild03"; // ANOL
+	callfunc "F_Bounty_Board", 61, 80, 1, 1,
+//		1148,	63046,	397841,		398524,	"beach_dun", // MEDUSA
+		1278,	63047,	345487,		344564,	"beach_dun2", // STALACTIC
+		1206,	63048,	344414,		335464,	"cmd_fild03"; // ANOL
 	end;
 	
 	case 3:
-	callfunc "F_Bounty_Board", 71, 99, 1, 1,
-		1154,	63049,	220212/2,		212111/2,	"in_sphinx5", // PASANA
-		1149,	63050,	205464/2,		199891/2,	"in_sphinx4"; // MINO
+	callfunc "F_Bounty_Board", 61, 80, 1, 1,
+//		1154,	63049,	220212,		212111,	"in_sphinx5", // PASANA
+		1149,	63050,	205464,		199891,	"in_sphinx4"; // MINO
 	end;
 	
 	case 4:
-	callfunc "F_Bounty_Board", 71, 99, 1, 1,
-		1193,	63051,	217879/2,		 198710/2,	"c_tower3", // ALARM
-		1269,	63052,	166995/2,		 155656/2,	"c_tower2", // CLOCK
-		1199,	63053,	127989/2,		 107679/2,	"c_tower1", // PUNK
-		1213,	63039,	197989/2,		 176879/2,	"alde_dun02", // HIGHORC
-		1189,	63040,	157989/2,		 136879/2,	"alde_dun02"; // ORCARCHER
+	callfunc "F_Bounty_Board", 61, 80, 1, 1,
+		1193,	63051,	217879,		 198710,	"c_tower3", // ALARM
+		1269,	63052,	166995,		 155656,	"c_tower2", // CLOCK
+		1199,	63053,	127989,		 107679,	"c_tower1", // PUNK
+		1213,	63039,	197989,		 176879,	"alde_dun02", // HIGHORC
+		1189,	63040,	157989,		 136879,	"alde_dun02"; // ORCARCHER
 	end;
 	
 	case 5:
-	callfunc "F_Bounty_Board", 71, 99, 1, 1,
-		1322,	63054,	185456/2,		 173565/2,	"tur_dun01", // SPRINGRABBIT
-		1314,	63055,	230133/2,		 229345/2,	"tur_dun02", // PERMETER
-		1316,	63056,	236995/2,		 225656/2,	"tur_dun02", // SOLIDER
-		1319,	63057,	247989/2,		 246879/2,	"tur_dun03", // FREEZER
-		1318,	63058,	25989/2,		 236879/2,	"tur_dun03"; // HEATER
+	callfunc "F_Bounty_Board", 61, 80, 1, 1,
+		1322,	63054,	185456,		 173565,	"tur_dun01", // SPRINGRABBIT
+		1314,	63055,	230133,		 229345,	"tur_dun02", // PERMETER
+		1316,	63056,	236995,		 225656,	"tur_dun02", // SOLIDER
+		1319,	63057,	247989,		 246879,	"tur_dun03", // FREEZER
+		1318,	63058,	25989,		 236879,	"tur_dun03"; // HEATER
 	end;
 	}
 	}

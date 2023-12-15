@@ -1,0 +1,245 @@
+
+-	shop	card_shoptrade	-1,909:-1
+
+prontera,135,154,6	script	AOR Card Trader	90,{
+	if(getgmlevel() >=99){goto Admin_Panel;}
+	goto CheckShop;
+CheckShop:
+	mes "[Card Trader]";
+	mes "Hi, "+strcharinfo(0)+"!";
+	mes "What can I do for you?";
+	next;
+	switch(select(" > Information: > Trade in cards: > Point shop (^0055FF"+getd(.Points$)+"^000000): > Leave")) {
+	case 1:
+		mes "[Card Trader]";
+		mes "Do you find that you've got";
+		mes "useless cards lying around?";
+		mes "I'll be glad to take them off";
+		mes "your hands!";
+		next;
+		mes "[Card Trader]";
+		mes "I'll give you ^0055FF"+.Points[0]+" Point"+((.Points[0] == 1)?"":"s")+"^000000 for each";
+		mes "card you give me, and";
+		mes "^0055FF"+.Points[1]+" Points^000000 for MVP cards.";
+		mes "You can trade those points";
+		mes "for items later on.";
+		mes "How does that sound?";
+		//emotion e_cash;
+		close;
+	case 2:
+		mes "[Card Trader]";
+		mes "Select the cards you";
+		mes "want to trade in.";
+		if (.Level) {
+			mes " ";
+			mes "They must be dropped";
+			mes "by monsters of level";
+			mes .Level+" and above.";
+		}
+		deletearray @sold_nameid[0],getarraysize(@sold_nameid);
+		callshop "card_shoptrade",2;
+		npcshopattach "card_shoptrade";
+		close;
+		end;
+	case 3:
+		mes "[Card Trader]";
+		mes "You have ^0055FF"+getd(.Points$)+"^000000 Point"+((getd(.Points$) == 1)?".":"s.");
+		callshop "card_shoptrade",1;
+		npcshopattach "card_shoptrade";
+		end;
+	case 4:
+		mes "[Card Trader]";
+		mes "*yawn*";
+		mes "See you later!";
+		//emotion e_yawn;
+		close;		
+	}
+
+OnSellItem:
+	mes "Cards to sell:";
+	mes "-----------------------------------";
+	for(set .@i,0; .@i<getarraysize(@sold_nameid); set .@i,.@i+1)
+		if (@sold_nameid[.@i] > 4000 && @sold_nameid[.@i] < 4700) {
+			if (.Level) {
+				query_sql("SELECT `LV` FROM `mob_db` WHERE `DropCardid` = "+@sold_nameid[.@i],.@lv);
+				if (.@lv < .Level) {
+					dispbottom getitemname(@sold_nameid[.@i])+" is under the minimum level.";
+					continue;
+				}
+			}
+			set .@card_id[getarraysize(.@card_id)], @sold_nameid[.@i];
+			set .@card_amt[getarraysize(.@card_amt)], @sold_quantity[.@i];
+			set .@mvp, compare(.MVP$,""+@sold_nameid[.@i]);
+			mes ((.@mvp)?"  ^FF0000":"  ^777777")+@sold_quantity[.@i]+"x "+getitemname(@sold_nameid[.@i])+"^000000";
+			set .@card_total, .@card_total+(@sold_quantity[.@i]*((.@mvp)?.Points[1]:.Points[0]));
+		}
+	deletearray @sold_nameid[0], getarraysize(@sold_nameid);
+	deletearray @sold_quantity[0], getarraysize(@sold_quantity);
+	if (!.@card_id) {
+		mes "  ^777777(none)^000000";
+		//emotion e_swt;
+		close;
+	}
+	mes " ";
+	mes "---------- Total: ^0055FF"+.@card_total+" pt.^000000 -------";
+	next;
+	if(select(" > ^0055FFComplete trade...^000000: > ^777777Cancel^000000") == 2) {
+		mes "[Card Trader]";
+		mes "Oh, okay...";
+		//emotion e_hmm;
+		close;
+	}
+	for(set .@i,0; .@i<getarraysize(.@card_id); set .@i,.@i+1)
+		delitem .@card_id[.@i],.@card_amt[.@i];
+	setd .Points$, getd(.Points$)+.@card_total;
+	mes "[Card Trader]";
+	mes "All done!";
+	//emotion e_ho;
+	close;
+
+OnBuyItem:
+	for(set .@i,0; .@i<getarraysize(@bought_nameid); set .@i,.@i+1)
+		for(set .@j,0; .@j<getarraysize(.Shop); set .@j,.@j+2)
+			if (@bought_nameid[.@i] == .Shop[.@j]) {
+				set .@cost, .@cost+(.Shop[.@j+1]*@bought_quantity[.@i]);
+				break;
+			}
+	if (.@cost > getd(.Points$)) {
+		mes "[Card Trader]";
+		mes "You don't have enough Points.";
+		//emotion e_omg;
+	}
+	else {
+		mes "Items purchased:";
+		mes "-----------------------------------";
+		for(set .@i,0; .@i<getarraysize(@bought_nameid); set .@i,.@i+1) {
+			getitem @bought_nameid[.@i], @bought_quantity[.@i];
+			mes "  ^777777"+@bought_quantity[.@i]+"x "+getitemname(@bought_nameid[.@i])+"^000000";
+		}
+		mes " ";
+		mes "---------- Total: ^0055FF"+.@cost+" pt.^000000 -------";
+		setd .Points$, getd(.Points$)-.@cost;
+		//emotion e_cash;
+	}
+	deletearray @bought_nameid[0], getarraysize(@bought_nameid);
+	deletearray @bought_quantity[0], getarraysize(@bought_quantity);
+	close;
+
+Admin_Panel:
+	mes "MENU GM ONLY";
+	mes " ";
+	mes "Change Items input: MONDAY/TUESDAY/WEDNESDAY/THURSDAY/FRIDAY/SATURDAY/SUNDAY";
+	next;
+	switch(select("Check Shop:Change Items:Cancel")){
+		case 1:
+			clear;
+			goto CheckShop;
+		case 2:
+			mes "[Item Sale]";
+			mes "Please Wait for a while..";
+			mes "Randomizing the items now..";
+			input .@HARI$;
+			goto OnChangeItems;
+		case 3:
+			end;
+	}
+end;
+
+OnMinute00:	//CHANGE HERE FOR MINUTE
+for(.@a=0;.@a<getarraysize(.Time);.@a++){
+	if(gettime(3)==.Time[.@a]){
+		for(.@i=0;.@i<getarraysize(.Days);.@i++){
+			if(gettime(DT_DAYOFWEEK)==.Days[.@i]){
+				set .@HARI$, gettime(DT_DAYOFWEEK);
+				goto OnChangeItems;
+			}
+		}
+	}
+}
+end;
+
+OnChangeItems:
+	mes .@HARI$;
+	for(set .@i,0; .@i<getarraysize(.Shop); set .@i,.@i+2){
+		npcshopdelitem "card_shoptrade",.Shop[.@i];
+	}
+	deletearray .Shop;
+	if(.@HARI$ == "MONDAY" ){	//WEAPON CARD			
+	setarray .Shop[0],		 
+		4140,100,4172,100,4062,25,4043,25,4297,25,4082,25,4069,25,4004,25,4002,25,4020,25,4072,25,4035,25,4006,25,4076,25,4030,25,4055,25,4057,25,4126,25,4106,25,4255,25,4085,25,4007,25,4024,25,4104,25,4005,25,4107,25,4068,25,4312,25,4117,25,4092,25,4037,25,4086,25,4111,25,4049,25,4029,25,4096,25,4281,25;
+	}
+	if(.@HARI$ == "TUESDAY" ){		//SHIELD CARD
+	setarray .Shop[0],		
+		4013,25,4074,25,4322,25,4045,25,4136,25,4066,25,4314,25,4253,100,4012,25,4058,25;
+	}
+	if(.@HARI$ == "WEDNESDAY" ){		//GARMENT CARD
+	setarray .Shop[0],		
+		4129,25,4285,25,4179,25,4178,25,4056,25,4088,25,4303,100,4109,25,4095,25,4108,25,4159,25,4375,100,4133,25,4210,25,4102,25;
+	}
+	if(.@HARI$ == "THURSDAY" ){  		//ARMOR CARD   
+	setarray .Shop[0],		
+		4234,50,4114,25,4233,25,4119,25,4213,25,4170,25,4098,25,4279,25,4141,25,4191,25,4201,25,4105,25,4099,25,4031,25,4315,25,4008,25,4001,25,4003,25,4021,25,4014,25,4101,25,4216,25,4078,25,4220,25;
+	}
+	if(.@HARI$ == "FRIDAY" ){			//FOOTGEAR CARD
+	setarray .Shop[0],		
+		4245,100,4290,100,4070,25,4160,100,4151,100,4097,25,4199,50,4100,25,4107,25,4257,50;
+	}
+	if(.@HARI$ == "SATURDAY" ){		//HG CARD
+	setarray .Shop[0],		
+		4288,25,4041,25,4296,25,4169,100,4122,25,4343,25,4195,25,4188,100,4112,25,4206,25,4127,25,4311,25,4185,25,4223,25,4229,100,4010,25;
+	}
+	if(.@HARI$ == "SUNDAY" ){		//ACC CARD
+	setarray .Shop[0],		
+		4252,25,4237,25,4262,25,4040,25,4283,25,4331,25,4103,25,4321,25,4091,25,4027,25,4079,25,4084,25,4205,25,4036,25,4093,25,4256,25,4238,100,4237,100,4077,25,4073,25,4048,25,4033,25;
+	}
+	set .@HARI$, gettime(DT_DAYOFWEEK);
+	for(set .@i,0; .@i<getarraysize(.Shop); set .@i,.@i+2)
+		npcshopadditem "card_shoptrade",.Shop[.@i],.Shop[.@i+1];
+	announce "Card Trader list has been Changed! Come Check out the Items!",0;
+end;
+
+OnInit:
+	set .Level,0;   		// Minimum monster level to trade corresponding cards.
+	set .Points$,"#Card_Points";	// Variable to store points.
+	set .@HARI$, gettime(DT_DAYOFWEEK);
+	setarray .Points[0],1,5;	// Points per <normal card>,<MVP card>
+	set .MVP$,			// List of MVP cards.
+	  "4121,4123,4128,4131,4132,4134,4135,4137,4142,4143,4144,4145,4146,4147,4148,4168,4236,"+
+	  "4241,4263,4276,4302,4305,4318,4324,4330,4342,4357,4359,4361,4363,4365,4399,4403,4407";
+		
+	setarray .Days[0],0,1,2,3,4,5,6; //everyday
+	setarray .Time[0],0;	//00AM
+	if(gettime(DT_DAYOFWEEK) == MONDAY ){	//WEAPON CARD			
+	setarray .Shop[0],		 
+		4140,100,4172,100,4062,25,4043,25,4297,25,4082,25,4069,25,4004,25,4002,25,4020,25,4072,25,4035,25,4006,25,4076,25,4030,25,4055,25,4057,25,4126,25,4106,25,4255,25,4085,25,4007,25,4024,25,4104,25,4005,25,4107,25,4068,25,4312,25,4117,25,4092,25,4037,25,4086,25,4111,25,4049,25,4029,25,4096,25,4281,25;
+	}
+	if(gettime(DT_DAYOFWEEK) == TUESDAY ){		//SHIELD CARD
+	setarray .Shop[0],		
+		4013,25,4074,25,4322,25,4045,25,4136,25,4066,25,4314,25,4253,100,4012,25,4058,25;
+	}
+	if(gettime(DT_DAYOFWEEK) == WEDNESDAY ){		//GARMENT CARD
+	setarray .Shop[0],		
+		4129,25,4285,25,4179,25,4178,25,4056,25,4088,25,4303,100,4109,25,4095,25,4108,25,4159,25,4375,100,4133,25,4210,25,4102,25;
+	}
+	if(gettime(DT_DAYOFWEEK) == THURSDAY ){  		//ARMOR CARD   
+	setarray .Shop[0],		
+		4234,50,4114,25,4233,25,4119,25,4213,25,4170,25,4098,25,4279,25,4141,25,4191,25,4201,25,4105,25,4099,25,4031,25,4315,25,4008,25,4001,25,4003,25,4021,25,4014,25,4101,25,4216,25,4078,25,4220,25;
+	}
+	if(gettime(DT_DAYOFWEEK) == FRIDAY ){			//FOOTGEAR CARD
+	setarray .Shop[0],		
+		4245,100,4290,100,4070,25,4160,100,4151,100,4097,25,4199,50,4100,25,4107,25,4257,50;
+	}
+	if(gettime(DT_DAYOFWEEK) == SATURDAY ){		//HG CARD
+	setarray .Shop[0],		
+		4288,25,4041,25,4296,25,4169,100,4122,25,4343,25,4195,25,4188,100,4112,25,4206,25,4127,25,4311,25,4185,25,4223,25,4229,100,4010,25;
+	}
+	if(gettime(DT_DAYOFWEEK) == SUNDAY ){		//ACC CARD
+	setarray .Shop[0],		
+		4252,25,4237,25,4262,25,4040,25,4283,25,4331,25,4103,25,4321,25,4091,25,4027,25,4079,25,4084,25,4205,25,4036,25,4093,25,4256,25,4238,100,4237,100,4077,25,4073,25,4048,25,4033,25;
+	}	
+	npcshopdelitem "card_shoptrade",909;
+	for(set .@i,0; .@i<getarraysize(.Shop); set .@i,.@i+2){
+		npcshopadditem "card_shoptrade",.Shop[.@i],.Shop[.@i+1];
+	}
+	end;
+}

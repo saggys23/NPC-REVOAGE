@@ -1,0 +1,204 @@
+//===== rAthena Script =======================================
+//= tr0n's Questboard
+//===== By: ==================================================
+//= tr0n
+//===== Current Version: =====================================
+//= 1.6.6
+//===== Description: =========================================
+//= Easily add collection and hunting quests.
+//===== Changelogs: ==========================================
+// 1.0.0 Release
+// 1.1.0 Added zeny reward
+// 1.2.0 Rewrote checkmob and killcounter
+// 1.3.1 Added level restriction
+// 1.3.4 Added Reward Item Amount
+// 1.4.4 Added Quest delay
+// 1.5.4 Added repeatable Quests
+// 1.6.4 Added party support
+// 1.6.5 Bug fixes for party support
+// 1.6.6 Bug fixes for delay time does not appear [mazvi]
+//============================================================
+
+
+
+-	script	Questboard2	4_BOARD3,{
+
+OnCollectionStart:
+	if(c_run==true){
+		mes "[^FF7700Compendium Manager^000000]";
+		mes "^0000FF"+getd("." + currentquest$ + "_collectionname$")+"^000000";
+		mes "--------------------------------";
+		set .@size, getarraysize(getd("."+ currentquest$ + "_collectionitem"));
+		for( set .@j, 0; .@j < .@size; set .@j,.@j+2){
+			mes "^FF0000"+getitemname(getd("."+currentquest$+"_collectionitem["+.@j+"]"))+" - "+countitem(getd("."+currentquest$+"_collectionitem["+.@j+"]"))+"/"+getd("."+currentquest$+"_collectionitem["+(.@j+1)+"]")+" ea.^000000";
+		}
+		mes "--------------------------------";
+		mes "[Reward]";
+		mes "Item: ^0000FF"+((getd("." +currentquest$+"_collectionprize"))?getitemname(getd("." +currentquest$+"_collectionprize"))+" - "+getd("." +currentquest$+"_collectionamount")+" ea.^000000":"Nothing^000000");
+		next;
+		if(select("Finish:Abort") == 2){
+			mes "[^FF7700Compendium Manager^000000]";
+			mes "Quest aborted.";
+			set currentquest$, "";
+			set c_run, false;
+			close;
+		}
+		goto L_checkitems;
+	}
+
+	mes "[^FF7700Compendium Manager^000000]";
+	mes "Select category:";
+	next;
+
+	switch(select((.collection)?"Collection Quests":"",
+				  (.hunting)?"Hunting Quests":"",
+				  "Exit")) {
+
+	case 1:
+		if(#Mission_Delay < 3){
+			set .@collectmenu$, "";
+			for( set .@i,0; .@i < .collectionquestcount; set .@i,.@i+1){
+				if (.@i) set .@collectmenu$,.@collectmenu$+":";
+				set .@collectmenu$, .@collectmenu$ + "[" + getd("." +(.@i+1)+"_collectionmin") + " - " + getd("." +(.@i+1)+"_collectionmax") + "] " + getd("." + (.@i+1) + "_collectionname$");
+			}
+			set .@selection,select(.@collectmenu$);
+			if(.quest_repeat == true){
+				if(gettimetick(2) < getd(.@selection + "_collection_delay")){
+					mes "[^FF7700Compendium Manager^000000]";
+					mes "You have to wait ^0000FF"+Time2Str(getd(.@selection + "_collection_delay"))+"^000000 to do this quest again.";
+					close;
+				}
+			}
+			else{
+				if(getd(.@selection + "_collection_repeat") == true){
+					mes "[^FF7700Compendium Manager^000000]";
+					mes "You already did this quest.";
+					mes "Please choose another one.";
+					close;
+				}
+			}
+			mes "[^FF7700Compendium Manager^000000]";
+			mes "^0000FF"+getd("." + .@selection + "_collectionname$")+"^000000";
+			mes "--------------------------------";
+			set .@size, getarraysize(getd("."+ .@selection + "_collectionitem"));
+			for( set .@j, 0; .@j < .@size; set .@j,.@j+2){
+				mes "^FF0000"+getitemname(getd("."+.@selection+"_collectionitem["+.@j+"]"))+" - "+getd("."+.@selection+"_collectionitem["+(.@j+1)+"]")+" ea.^000000";
+			}
+			mes "--------------------------------";
+			mes "[Reward]";
+			mes "^0000FF25 Compendium Experience Points^000000";
+			next;
+			if(select("Accept:Decline") == 2){
+				close;
+			}
+			if(BaseLevel >= getd("." +.@selection+"_collectionmin") && BaseLevel <= getd("." +.@selection+"_collectionmax")){
+				mes "[^FF7700Compendium Manager^000000]";
+				mes "Quest accepted.";
+				set c_run, true;
+				set currentquest$, .@selection;
+				#Mission_Delay++;
+				close;
+			}
+			else{
+				mes "[^FF7700Compendium Manager^000000]";
+				mes "You don't have the required";
+				mes "level to do this quest.";
+				close;
+			}
+		}
+		mes "You have taken "+(#Mission_Delay)+"/3 mission(s)";
+		end;
+		
+	case 2:
+		close;
+	}
+	end;
+
+L_checkitems:
+	set .@size, getarraysize(getd("."+currentquest$+"_collectionitem"));
+	for( set .@k,0; .@k < .@size; set .@k,.@k+2){
+		if(countitem(getd("."+currentquest$+"_collectionitem["+.@k+"]"))>=getd("."+currentquest$+"_collectionitem["+(.@k+1)+"]")){
+			set .@checkitem,.@checkitem+2;
+		}
+	}
+	if(.@checkitem<.@size){
+		mes "[^FF7700Compendium Manager^000000]";
+		mes "You don't have everything.";
+		close;
+	}
+	for( set .@delcount,0; .@delcount < .@size; set .@delcount,.@delcount+2){
+		delitem getd("."+currentquest$+"_collectionitem["+.@delcount+"]"),getd("."+currentquest$+"_collectionitem["+(.@delcount+1)+"]");
+	}
+	mes "[^FF7700Compendium Manager^000000]";
+	mes "Congratulation! Here is your Reward.";
+	doevent("compendium_core::OnGetExpGather");
+	#collection2++;
+	skilleffect 459,0;
+	skilleffect 34,0;
+	skilleffect 380,0;
+	setd(currentquest$ + "_collection_delay"),gettimetick(2)+.quest_delay;
+	setd(currentquest$ + "_collection_repeat"),true;
+	set currentquest$, "";
+	set c_run, false;
+	close;
+
+OnInit:
+
+	function AddCollection;
+
+	//Activate/Deactivate quest categories (true/1 - activated, false/0 - deactivated)
+	set .collection, true;
+
+	//Quest Delay (seconds)
+	//24 hours = 86400 seconds
+	set .quest_delay, 0;
+
+	//Activate/Deactivate repeatable quests (true/1 - activated, false/0 - deactivated)
+	set .quest_repeat, true;
+
+	//Activate/Deactivate party support (true/1 - activated, false/0 - deactivated)
+	set .party_support, true;
+
+	//Max range for party support (+- x & y coordinations)
+	set .party_range, 25;
+
+	//Checks if quests are loaded (prevents out of index)
+	if(.questsloaded==true) end;
+	set .questsloaded, true;
+
+	//Add Collection Quests here (You can add as many required items as you want)
+	//AddCollection("<Quest Name>",<Min Lvl>,<Max Lvl>,<Reward|Item ID>,<Reward|Item Amount>,<Zeny Reward>,<Base EXP>,<Job EXP>,<Item ID>,<Item Amount>,...);
+	AddCollection("Red Potion Collection",1,99,502,1,0,0,0,501,10);
+
+	//Add Hunting Quests here (You can add as many required mobs as you want)
+	//AddHunting("<Quest Name>",<Min Lvl>,<Max Lvl>,<Reward|Item ID>,<Reward|Item Amount>,<Zeny Reward>,<Base EXP>,<Job EXP>,<Monster ID>,<Monster Amount>,...);
+	end;
+
+
+	function AddCollection{
+		set .collectionquestcount,.collectionquestcount+1;
+		setd ("." +.collectionquestcount+"_collectionname$", getarg(0));
+		setd ("." +.collectionquestcount+"_collectionmin", getarg(1));
+		setd ("." +.collectionquestcount+"_collectionmax", getarg(2));
+		setd ("." +.collectionquestcount+"_collectionprize", getarg(3));
+		setd ("." +.collectionquestcount+"_collectionamount", getarg(4));
+		setd ("." +.collectionquestcount+"_collectionzeny", getarg(5));
+		set .@argcount, 6;
+		set .@size, getarraysize(getd("."+ .collectionquestcount + "_collectionexp"));
+		setd ("." +.collectionquestcount+"_collectionexp["+.@size+"]",getarg(.@argcount)); 
+		setd ("." +.collectionquestcount+"_collectionexp["+(.@size+1)+"]",getarg(.@argcount+1)); 
+		set .@argcount, .@argcount+2;
+		set .@size, getarraysize(getd("."+ .collectionquestcount + "_collectionitem"));
+		while(getarg(.@argcount,-1)!=-1 && getarg(.@argcount+1,-1)!=-1){
+			setd ("."+.collectionquestcount+"_collectionitem["+.@size+"]",getarg(.@argcount)); 
+			setd ("."+.collectionquestcount+"_collectionitem["+(.@size+1)+"]",getarg(.@argcount+1));
+			set .@argcount,.@argcount+2;
+			set .@size, .@size+2;
+		}
+		return;
+	}
+
+
+}
+
+payon,148,214,5	duplicate(Questboard2)	Collectioncompe	4_BOARD3

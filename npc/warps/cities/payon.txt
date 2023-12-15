@@ -58,8 +58,8 @@ payon,151,127,0	warp	payonwarp028	2,2,payon_in01,56,53
 payon_in01,56,50,0	warp	payonwarp029	2,2,payon,151,124
 
 // -- Middle Castle --
-vip,65,43,0	warp	vip01	4,1,payon,155,245
-payon,155,248,0	warp	vip02	4,1,vip,65,46
+vip,65,43,0	warp	vip01	4,1,prontera,156,191
+//payon,155,248,0	warp	vip02	4,1,vip,65,46
 vip,84,49,0	warp	vip03	4,1,vip,63,265
 vip,58,265,0	warp	vip04	4,1,vip,77,49
 

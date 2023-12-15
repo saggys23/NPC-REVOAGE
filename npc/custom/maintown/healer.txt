@@ -13,22 +13,58 @@
 //= 1.1 Aligned coordinates with @go.
 //============================================================
 
--	script	Healer	-1,{
-
-	.@Price = 0;	// Zeny required for heal
+//-	script	Healer	-1,{
+prontera,153,188,6	script	Healer	904,{
+	function Display_Timer;
+	$PriceCharity = 7500;	// Zeny required for heal
 	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
 	.@Delay = 5;	// Heal delay, in seconds
 
 	if (@HD > gettimetick(2)) {
 		message strcharinfo(0),"Please wait, buffer have 5 seconds cooldown."; end;
 		}
-	if (.@Price) {
-		message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",.@Price) + " Zeny.";
-		if (Zeny < .@Price)
+	if ($PriceCharity) {
+		message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",$PriceCharity) + " Zeny.";
+		mes "[Healer]";
+		mes	"Healing costs " + callfunc("F_InsertComma",$PriceCharity) + " Zeny.";
+		mes " ";
+		mes "This amount would be used for the server's charity point each time you use my service.";
+		next;
+		mes "[Healer]";
+		mes " ";
+//		mes "You can check the accumulated charity point by talking to NPC ^0055FFCharity Manager^000000 at Prontera 141, 188.";
+		mes "The total amount I collected is : ^0000CD[" + $totaldonate + "]^000000 Zeny.";
+		if (Zeny < $PriceCharity)
 			end;
 		if (select("^0055FFHeal^000000:^777777Cancel^000000") == 2)
 			end;
-		Zeny -= .@Price;
+		Zeny -= $PriceCharity;
+		set $totaldonate, $totaldonate + $PriceCharity;
+		message strcharinfo(0), "Thank you for donating " + callfunc("F_InsertComma",$PriceCharity) + "zeny!";
+		message strcharinfo(0), "We appreciate your generosity.";
+		if ($totaldonate == 3000000) {
+			if((.@time_left) == 0){
+			announce "Charity Manager: The total amount I collected is : [" + $totaldonate + "] Zeny. 2M more until Charity Event.",0;
+			}
+		}
+		if ($totaldonate == 3997500) {
+			if((.@time_left) == 0){
+			announce "Charity Manager: The total amount I collected is : [" + $totaldonate + "] Zeny. 1M more until Charity Event.",0;
+			}
+		}
+		if ($totaldonate == 4500000) {
+			if((.@time_left) == 0){
+			announce "Charity Manager: The total amount I collected is : [" + $totaldonate + "] Zeny. 500K more until Charity Event.",0;
+			}
+		}
+		if ($totaldonate >= 5000000) {
+			if((.@time_left) == 0){
+			announce "Charity Manager: The total amount I collected is : [" + $totaldonate + "] Zeny. Charity Event will start.",0;
+//			$donation_timer = gettimetick(2) + 86400;	// 86400 seconds = 2 days
+			$donation_timer = gettimetick(2) + 1800;	// 86400 seconds = 2 days
+			donpcevent strnpcinfo(3) + "::OnInit";
+			}
+		}
 	}
 	specialeffect2 EF_HEAL2;
 	percentheal 100,100;
@@ -72,34 +108,34 @@
 		if ( .@icount ) message strcharinfo(0), "Identified Total "+ .@icount +" Items.";
 	if (getgroupid() >4) {
 	//spirit
-		switch ( basejob ) {
-			  case Job_Alchemist:	set .@spirit, 445; break;
-			  case Job_Monk:	 set .@spirit, 447; break;
-			  case Job_Star_Gladiator:  set .@spirit, 448; break;
-			  case Job_Sage:	 set .@spirit, 449; break;
-			  case Job_Crusader:	set .@spirit, 450; break;
-			  case Job_SuperNovice:   set .@spirit, 451; break;
-			  case Job_Knight:	set .@spirit, 452; break;
-			  case Job_Wizard:	set .@spirit, 453; break;
-			  case Job_Priest:	set .@spirit, 454; break;
-			  case Job_Bard: case Job_Dancer: set .@spirit, 455; break;
-			  case Job_Rogue:	 set .@spirit, 456; break;
-			  case Job_Assassin:	set .@spirit, 457; break;
-			  case Job_Blacksmith:   set .@spirit, 458; break;
-			  case Job_Hunter:	set .@spirit, 460; break;
-			  case Job_Soul_Linker:   set .@spirit, 461; break;
-			  default:
-		if ( upper == 1 && baselevel < 70 )
-				set .@spirit, 494;
-			}
-			
-			if ( .@spirit ) {
-			  sc_start4 sc_spirit, 350000, 5, .@spirit,0,0;
-			  skilleffect .@spirit, 5;
-	}
+	//	switch ( basejob ) {
+	//		  case Job_Alchemist:	set .@spirit, 445; break;
+	//		  case Job_Monk:	 set .@spirit, 447; break;
+	//		  case Job_Star_Gladiator:  set .@spirit, 448; break;
+	//		  case Job_Sage:	 set .@spirit, 449; break;
+	//		  case Job_Crusader:	set .@spirit, 450; break;
+	//		  case Job_SuperNovice:   set .@spirit, 451; break;
+	//		  case Job_Knight:	set .@spirit, 452; break;
+	//		  case Job_Wizard:	set .@spirit, 453; break;
+	//		  case Job_Priest:	set .@spirit, 454; break;
+	//		  case Job_Bard: case Job_Dancer: set .@spirit, 455; break;
+	//		  case Job_Rogue:	 set .@spirit, 456; break;
+	//		  case Job_Assassin:	set .@spirit, 457; break;
+	//		  case Job_Blacksmith:   set .@spirit, 458; break;
+	//		  case Job_Hunter:	set .@spirit, 460; break;
+	//		  case Job_Soul_Linker:   set .@spirit, 461; break;
+	//		  default:
+	//	if ( upper == 1 && baselevel < 70 )
+	//			set .@spirit, 494;
+	//		}
+	//		
+	//		if ( .@spirit ) {
+	//		  sc_start4 sc_spirit, 350000, 5, .@spirit,0,0;
+	//		  skilleffect .@spirit, 5;
+	//}
 		if( getbrokenid(1) ) repairall;
-		skilleffect 361,0;
-		sc_start SC_GLORIA,30000,5;
+	//	skilleffect 361,0;
+	//	sc_start SC_GLORIA,30000,5;
 		sc_start SC_ANGELUS,240000,10;
 		sc_start SC_MAGNIFICAT,60000,5;
 		while ( getbrokenid(1) ) {
@@ -108,14 +144,49 @@
 		}
 		if ( .@rcount )
 		message strcharinfo(0), "Repaired "+ .@rcount +" Items.";
-	sc_start SC_ASSUMPTIO,100000,5;
-	specialeffect2 375;
+	//sc_start SC_ASSUMPTIO,100000,5;
+	//specialeffect2 375;
 	percentheal 100,100;
 	}
 	if (.@Delay)
 		@HD = gettimetick(2) + .@Delay;
 		
 	end;
+
+function Display_Timer {
+	.@time = getarg(0);
+	.@hour = .@time / 3600;
+	.@mins = ( .@time % 3600 ) / 60;
+	.@secs = .@time % 60;
+	.@string$ = (.@hour ? .@hour + " hour" : "");
+	.@string$ += (.@string$ != "" ? " " : "") + (.@mins ? .@mins + " min" + (.@mins > 1 ? "s" : "" ) : "");
+	.@string$ += (.@string$ != "" ? " " : "") + (.@secs + " sec") + (.@secs > 1 ? "s" : "" );
+	return .@string$;
+}
+
+OnInit:
+	if ($totaldonate < 5000000){
+		end;
+	}
+	.@time_left = $donation_timer - gettimetick(2);
+	if (.@time_left <= 0){
+		$totaldonate = 0;
+	}
+	else {
+		// unhide npc
+		while (.@time_left > 0) {
+			waitingroom Display_Timer( .@time_left ),0;
+			sleep 1000;
+			delwaitingroom;
+			.@time_left--;
+		}
+		// hidenpc
+		set $totaldonate, 0;
+		$donation_timer = 0;
+		announce "Charity Manager: Charity Event for 2 Days has ended. Don't forget to donate to activate.",0;
+		sleep 3000;
+		announce "Charity Manager: Thank you for your generosity.",0;
+	}
 }
 
 
@@ -143,7 +214,7 @@ moscovia,220,191,4	duplicate(Healer)	Healer#mos	904
 //niflheim,212,182,5	duplicate(Healer)	Healer#nif	904
 payon,179,106,4	duplicate(Healer)	Healer#pay	904
 payon,166,232,4	duplicate(Healer)	Healer#pay2	904
-prontera,153,188,6	duplicate(Healer)	Healer#prt	904
+//prontera,153,188,6	duplicate(Healer)	Healer#prt	904
 rachel,125,116,6	duplicate(Healer)	Healer#rac	904
 splendide,201,153,4	duplicate(Healer)	Healer#spl	904
 thor_camp,249,74,4	duplicate(Healer)	Healer#thor	904

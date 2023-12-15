@@ -1,18 +1,18 @@
-payon,143,232,6	script	Vending Warper	837,{
-menu   	" ~ Warp",warpme,
-    	" ~ Cancel",closedah;
-	warpme:
-	warp "vend_zone",100,100;
-	end;
-	closedah:
-	end;
+//payon,143,232,6	script	Vending Warper	837,{
+//menu   	" ~ Warp",warpme,
+//    	" ~ Cancel",closedah;
+//	warpme:
+//	warp "vend_zone",100,100;
+//	end;
+//	closedah:
+//	end;
+//
+//	OnInit:
+//	waitingroom "Vending Zone",0; 
+//	}
 
-	OnInit:
-	waitingroom "Vending Zone",0; 
-	}
 
-
-vend_zone,100,104,3	script	Vending Helper#1	757,{
+prontera,155,117,3	script	Vending Helper#1	757,{
 	for (.@i = 1; .@i <= .count; .@i++) {
 		getmapxy(.@map$, .@x, .@y, BL_NPC, "#vend_slot"+.@i);
 		if (!getareausers(.map$, .@x, .@y, .@x, .@y) && .@x > 1 && .@y > 1) {
@@ -41,209 +41,102 @@ OnInit:
 	
 	set .count, 1;
 
-	
 
 //GARIS X 1			
-	//setarray .y_lineBA, 54, 145;
-	//set .x_line_sizeB, 30;
-	//set .y_line_sizeB, getarraysize(.y_lineBA);
-	//for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
-		//set .x_lineB, 56;
-		//for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
-			//if (checkcell(.map$,  .x_lineB,.y_lineBA[.@c], cell_chkpass)) {
-				//movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[.@c];
-				//setcell .map$,  .x_lineB, .y_lineBA[.@c], .x_lineB, .y_lineBA[.@c], cell_novending, 0;
-				//set .count, .count + 1;
-				//set .x_lineB, .x_lineB+3;
-			//}
-		//}
-//GARIS X 2			
-	//setarray .y_lineBA, 59, 140;
-	//set .x_line_sizeB, 25;
-	//set .y_line_sizeB, getarraysize(.y_lineBA);
-	//for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
-		//set .x_lineB, 59;
-		//for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
-			//if (checkcell(.map$,  .x_lineB,.y_lineBA[.@c], cell_chkpass)) {
-			//if (.x_lineB >= 96 && .x_lineB <= 103) set .x_lineB, .x_lineB+6;
-				//movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[.@c];
-				//setcell .map$,  .x_lineB, .y_lineBA[.@c], .x_lineB, .y_lineBA[.@c], cell_novending, 0;
-				//set .count, .count + 1;
-				//set .x_lineB, .x_lineB+3;
-			//}
-		//}
-//GARIS X 3			
-	setarray .y_lineBA, 64, 135;
-	set .x_line_sizeB, 22;
-	set .y_line_sizeB, getarraysize(.y_lineBA);
-	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
-		set .x_lineB, 65;
-		for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
-			if (checkcell(.map$,  .x_lineB,.y_lineBA[.@c], cell_chkpass)) {
-			if (.x_lineB >= 96 && .x_lineB <= 103) set .x_lineB, .x_lineB+6;
-				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[.@c];
-				setcell .map$,  .x_lineB, .y_lineBA[.@c], .x_lineB, .y_lineBA[.@c], cell_novending, 0;
-				set .count, .count + 1;
-				set .x_lineB, .x_lineB+3;
-			}
-		}
-//GARIS X 4		
-	setarray .y_lineBA, 74, 125;
+	setarray .y_lineBA, 166, 111;
 	set .x_line_sizeB, 14;
 	set .y_line_sizeB, getarraysize(.y_lineBA);
-	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
-		set .x_lineB, 77;
+//	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
+		set .x_lineB, 166;
 		for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
-			if (checkcell(.map$,  .x_lineB,.y_lineBA[.@c], cell_chkpass)) {
-			if (.x_lineB >= 96 && .x_lineB <= 103) set .x_lineB, .x_lineB+6;
-				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[.@c];
-				setcell .map$,  .x_lineB, .y_lineBA[.@c], .x_lineB, .y_lineBA[.@c], cell_novending, 0;
+			if (checkcell(.map$,  .x_lineB,.y_lineBA[1], cell_chkpass)) {
+				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[1];
+				setcell .map$,  .x_lineB, .y_lineBA[1], .x_lineB, .y_lineBA[1], cell_novending, 0;
 				set .count, .count + 1;
 				set .x_lineB, .x_lineB+3;
 			}
-		}
+//		}
 		
-//GARIS X 5	
-	setarray .y_lineBA, 79, 120;
-	set .x_line_sizeB, 12;
-	set .y_line_sizeB, getarraysize(.y_lineBA);
-	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
-		set .x_lineB, 80;
-		for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
-			if (checkcell(.map$,  .x_lineB,.y_lineBA[.@c], cell_chkpass)) {
-			if (.x_lineB >= 96 && .x_lineB <= 103) set .x_lineB, .x_lineB+6;
-				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[.@c];
-				setcell .map$,  .x_lineB, .y_lineBA[.@c], .x_lineB, .y_lineBA[.@c], cell_novending, 0;
-				set .count, .count + 1;
-				set .x_lineB, .x_lineB+3;
-			}
-		}
-		
-//GARIS X 6		
-	setarray .y_lineBA, 86, 113;
+//GARIS X 2			
+	setarray .y_lineBA, 145, 111;
 	set .x_line_sizeB, 8;
 	set .y_line_sizeB, getarraysize(.y_lineBA);
-	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
-		set .x_lineB, 86;
+//	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
+		set .x_lineB, 145;
 		for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
-			if (checkcell(.map$,  .x_lineB,.y_lineBA[.@c], cell_chkpass)) {
-			if (.x_lineB >= 96 && .x_lineB <= 103) set .x_lineB, .x_lineB+6;
-				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[.@c];
-				setcell .map$,  .x_lineB, .y_lineBA[.@c], .x_lineB, .y_lineBA[.@c], cell_novending, 0;
+			if (checkcell(.map$,  .x_lineB,.y_lineBA[1], cell_chkpass)) {
+				if (.x_lineB >= 118 && .x_lineB <= 121) set .x_lineB, .x_lineB-4;
+				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[1];
+				setcell .map$,  .x_lineB, .y_lineBA[1], .x_lineB, .y_lineBA[1], cell_novending, 0;
+				set .count, .count + 1;
+				set .x_lineB, .x_lineB-3;
+			}
+//		}		
+		
+//GARIS X 3
+	setarray .y_lineBA, 145, 125;
+	set .x_line_sizeB, 15;
+	set .y_line_sizeB, getarraysize(.y_lineBA);
+//	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
+		set .x_lineB, 145;
+		for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
+			if (checkcell(.map$,  .x_lineB,.y_lineBA[1], cell_chkpass)) {
+//				if (.x_lineB >= 118 && .x_lineB <= 121) set .x_lineB, .x_lineB-4;
+				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[1];
+				setcell .map$,  .x_lineB, .y_lineBA[1], .x_lineB, .y_lineBA[1], cell_novending, 0;
+				set .count, .count + 1;
+				set .x_lineB, .x_lineB-3;
+			}
+//		}		
+
+//GARIS X 4			
+	setarray .y_lineBA, 166, 125;
+	set .x_line_sizeB, 15;
+	set .y_line_sizeB, getarraysize(.y_lineBA);
+//	for (set .@c, 0; .@c < .y_line_sizeB; set .@c, .@c + 1){
+		set .x_lineB, 166;
+		for (set .@z, 0; .@z < .x_line_sizeB; set .@z, .@z + 1)
+			if (checkcell(.map$,  .x_lineB,.y_lineBA[1], cell_chkpass)) {
+				movenpc "#vend_slot"+.count, .x_lineB, .y_lineBA[1];
+				setcell .map$,  .x_lineB, .y_lineBA[1], .x_lineB, .y_lineBA[1], cell_novending, 0;
 				set .count, .count + 1;
 				set .x_lineB, .x_lineB+3;
 			}
-		}
-		
-//GARIS Y 1			
-	//setarray .x_lineA, 54, 145;
-	//set .y_line_sizeA, 30;
-	//set .x_line_sizeA, getarraysize(.x_lineA);
-	//for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
-		//set .y_lineB, 56;
-		//for (set .@z, 0; .@z < .y_line_sizeA; set .@z, .@z + 1)
-			//if (checkcell(.map$, .x_lineA[.@c], .y_lineB, cell_chkpass)) {
-				//movenpc "#vend_slot"+.count, .x_lineA[.@c], .y_lineB;
-				//setcell .map$, .x_lineA[.@c], .y_lineB, .x_lineA[.@c], .y_lineB, cell_novending, 0;
-				//set .count, .count + 1;
-				//set .y_lineB, .y_lineB+3;
-			//}
-		//}
-		
-//GARIS Y 2		
-	//setarray .x_lineA, 59, 140;
-	//set .y_line_sizeA, 24;
-	//set .x_line_sizeA, getarraysize(.x_lineA);
-	//for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
-		//set .y_lineB, 62;
-		//for (set .@z, 0; .@z < .y_line_sizeA; set .@z, .@z + 1)
-			//if (checkcell(.map$, .x_lineA[.@c], .y_lineB, cell_chkpass)){
-			//if (.y_lineB == 98) set .y_lineB, .y_lineB+6;
-				//movenpc "#vend_slot"+.count, .x_lineA[.@c], .y_lineB;
-				//setcell .map$, .x_lineA[.@c], .y_lineB, .x_lineA[.@c], .y_lineB, cell_novending, 0;
-				//set .count, .count + 1;
-				//set .y_lineB, .y_lineB+3;
-			//}
-		//}
-		
-//GARIS Y 3		
-	setarray .x_lineA, 64, 135;
-	set .y_line_sizeA, 20;
-	set .x_line_sizeA, getarraysize(.x_lineA);
-	for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
-		set .y_lineB, 68;
-		for (set .@z, 0; .@z < .y_line_sizeA; set .@z, .@z + 1)
-			if (checkcell(.map$, .x_lineA[.@c], .y_lineB, cell_chkpass)){
-			if (.y_lineB >= 96 && .y_lineB <= 103) set .y_lineB, .y_lineB+6;
-				movenpc "#vend_slot"+.count, .x_lineA[.@c], .y_lineB;
-				setcell .map$, .x_lineA[.@c], .y_lineB, .x_lineA[.@c], .y_lineB, cell_novending, 0;
-				set .count, .count + 1;
-				set .y_lineB, .y_lineB+3;
-			}
-		}
-			
-//GARIS Y 4		
-	setarray .x_lineA, 74, 125;
-	set .y_line_sizeA, 14;
-	set .x_line_sizeA, getarraysize(.x_lineA);
-	for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
-		set .y_lineB, 75;
-		for (set .@z, 0; .@z < .y_line_sizeA; set .@z, .@z + 1)
-			if (checkcell(.map$, .x_lineA[.@c], .y_lineB, cell_chkpass)){
-			if (.y_lineB >= 96 && .y_lineB <= 103) set .y_lineB, .y_lineB+10;
-				movenpc "#vend_slot"+.count, .x_lineA[.@c], .y_lineB;
-				setcell .map$, .x_lineA[.@c], .y_lineB, .x_lineA[.@c], .y_lineB, cell_novending, 0;
-				set .count, .count + 1;
-				set .y_lineB, .y_lineB+3;
-			}
-		}
-
-
-//GARIS Y 5 bawah	
-	setarray .x_lineA, 79, 120;
-	set .y_line_sizeA, 5;
-	set .x_line_sizeA, getarraysize(.x_lineA);
-	for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
-		set .y_lineB, 81;
-		for (set .@z, 0; .@z < .y_line_sizeA; set .@z, .@z + 1)
-			if (checkcell(.map$, .x_lineA[.@c], .y_lineB, cell_chkpass)){
-				movenpc "#vend_slot"+.count, .x_lineA[.@c], .y_lineB;
-				setcell .map$, .x_lineA[.@c], .y_lineB, .x_lineA[.@c], .y_lineB, cell_novending, 0;
-				set .count, .count + 1;
-				set .y_lineB, .y_lineB+3;
-			}
-		}
+//		}		
 		
 //GARIS Y 5 atas	
-	setarray .x_lineA, 79, 120;
-	set .y_line_sizeA, 5;
+	setarray .x_lineA, 164, 72;
+	set .y_line_sizeA, 34;
 	set .x_line_sizeA, getarraysize(.x_lineA);
-	for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
-		set .y_lineB, 106;
+//	for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
+		set .y_lineB, 40;
 		for (set .@z, 0; .@z < .y_line_sizeA; set .@z, .@z + 1)
-			if (checkcell(.map$, .x_lineA[.@c], .y_lineB, cell_chkpass)){
-				movenpc "#vend_slot"+.count, .x_lineA[.@c], .y_lineB;
-				setcell .map$, .x_lineA[.@c], .y_lineB, .x_lineA[.@c], .y_lineB, cell_novending, 0;
+			if (checkcell(.map$, .x_lineA[0], .y_lineB, cell_chkpass)){
+			if (.y_lineB >= 68 && .y_lineB <= 70) set .y_lineB, .y_lineB+4;
+			if (.y_lineB >= 36 && .y_lineB <= 39) set .y_lineB, .y_lineB+3;
+				movenpc "#vend_slot"+.count, .x_lineA[0], .y_lineB;
+				setcell .map$, .x_lineA[0], .y_lineB, .x_lineA[0], .y_lineB, cell_novending, 0;
 				set .count, .count + 1;
-				set .y_lineB, .y_lineB+3;
+				set .y_lineB, .y_lineB+2;
 			}
-		}
+//		}	
 		
 //GARIS Y 6		
-	setarray .x_lineA, 86, 113;
-	set .y_line_sizeA, 6;
+	setarray .x_lineA, 147, 72;
+	set .y_line_sizeA, 34;
 	set .x_line_sizeA, getarraysize(.x_lineA);
-	for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
-		set .y_lineB, 89;
+//	for (set .@c, 0; .@c < .x_line_sizeA; set .@c, .@c + 1){
+		set .y_lineB, 40;
 		for (set .@z, 0; .@z < .y_line_sizeA; set .@z, .@z + 1)
-			if (checkcell(.map$, .x_lineA[.@c], .y_lineB, cell_chkpass)){
-			if (.y_lineB >= 96 && .y_lineB <= 103) set .y_lineB, .y_lineB+6;
-				movenpc "#vend_slot"+.count, .x_lineA[.@c], .y_lineB;
-				setcell .map$, .x_lineA[.@c], .y_lineB, .x_lineA[.@c], .y_lineB, cell_novending, 0;
+			if (checkcell(.map$, .x_lineA[0], .y_lineB, cell_chkpass)){
+			if (.y_lineB >= 68 && .y_lineB <= 70) set .y_lineB, .y_lineB+4;
+			if (.y_lineB >= 36 && .y_lineB <= 39) set .y_lineB, .y_lineB+3;
+				movenpc "#vend_slot"+.count, .x_lineA[0], .y_lineB;
+				setcell .map$, .x_lineA[0], .y_lineB, .x_lineA[0], .y_lineB, cell_novending, 0;
 				set .count, .count + 1;
-				set .y_lineB, .y_lineB+3;
+				set .y_lineB, .y_lineB+2;
 			}
-		}	
+//		}	
 	npctalk "Vending Spot : "+.count;
 	donpcevent "::OnSetup";
 	end;
@@ -285,509 +178,509 @@ OnSetup:
 }
 
 // Add more if needed.
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot1	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot2	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot3	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot4	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot5	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot6	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot7	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot8	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot9	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot10	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot11	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot12	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot13	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot14	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot15	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot16	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot17	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot18	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot19	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot20	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot21	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot22	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot23	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot24	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot25	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot26	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot27	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot28	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot29	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot30	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot31	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot32	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot33	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot34	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot35	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot36	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot37	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot38	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot39	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot40	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot41	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot42	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot43	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot44	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot45	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot46	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot47	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot48	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot49	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot50	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot51	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot52	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot53	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot54	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot55	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot56	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot57	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot58	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot59	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot60	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot61	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot62	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot63	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot64	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot65	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot66	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot67	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot68	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot69	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot70	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot71	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot72	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot73	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot74	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot75	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot76	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot77	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot78	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot79	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot80	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot81	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot82	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot83	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot84	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot85	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot86	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot87	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot88	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot89	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot90	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot91	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot92	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot93	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot94	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot95	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot96	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot97	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot98	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot99	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot100	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot101	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot102	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot103	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot104	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot105	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot106	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot107	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot108	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot109	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot110	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot111	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot112	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot113	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot114	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot115	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot116	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot117	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot118	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot119	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot120	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot121	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot122	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot123	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot124	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot125	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot126	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot127	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot128	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot129	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot130	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot131	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot132	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot133	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot134	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot135	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot136	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot137	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot138	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot139	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot140	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot141	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot142	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot143	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot144	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot145	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot146	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot147	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot148	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot149	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot150	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot151	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot152	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot153	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot154	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot155	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot156	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot157	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot158	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot159	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot160	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot161	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot162	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot163	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot164	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot165	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot166	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot167	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot168	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot169	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot170	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot171	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot172	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot173	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot174	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot175	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot176	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot177	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot178	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot179	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot180	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot181	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot182	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot183	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot184	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot185	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot186	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot187	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot188	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot189	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot190	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot191	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot192	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot193	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot194	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot195	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot196	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot197	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot198	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot199	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot200	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot1	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot2	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot3	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot4	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot5	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot6	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot7	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot8	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot9	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot10	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot11	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot12	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot13	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot14	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot15	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot16	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot17	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot18	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot19	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot20	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot21	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot22	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot23	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot24	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot25	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot26	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot27	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot28	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot29	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot30	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot31	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot32	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot33	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot34	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot35	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot36	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot37	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot38	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot39	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot40	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot41	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot42	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot43	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot44	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot45	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot46	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot47	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot48	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot49	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot50	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot51	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot52	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot53	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot54	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot55	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot56	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot57	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot58	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot59	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot60	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot61	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot62	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot63	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot64	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot65	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot66	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot67	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot68	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot69	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot70	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot71	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot72	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot73	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot74	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot75	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot76	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot77	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot78	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot79	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot80	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot81	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot82	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot83	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot84	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot85	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot86	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot87	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot88	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot89	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot90	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot91	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot92	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot93	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot94	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot95	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot96	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot97	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot98	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot99	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot100	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot101	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot102	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot103	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot104	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot105	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot106	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot107	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot108	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot109	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot110	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot111	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot112	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot113	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot114	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot115	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot116	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot117	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot118	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot119	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot120	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot121	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot122	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot123	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot124	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot125	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot126	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot127	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot128	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot129	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot130	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot131	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot132	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot133	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot134	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot135	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot136	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot137	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot138	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot139	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot140	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot141	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot142	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot143	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot144	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot145	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot146	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot147	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot148	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot149	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot150	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot151	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot152	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot153	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot154	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot155	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot156	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot157	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot158	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot159	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot160	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot161	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot162	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot163	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot164	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot165	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot166	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot167	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot168	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot169	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot170	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot171	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot172	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot173	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot174	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot175	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot176	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot177	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot178	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot179	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot180	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot181	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot182	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot183	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot184	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot185	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot186	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot187	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot188	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot189	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot190	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot191	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot192	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot193	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot194	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot195	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot196	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot197	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot198	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot199	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot200	858
 
 
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot201	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot202	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot203	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot204	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot205	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot206	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot207	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot208	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot209	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot210	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot211	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot212	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot213	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot214	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot215	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot216	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot217	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot218	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot219	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot220	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot221	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot222	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot223	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot224	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot225	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot226	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot227	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot228	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot229	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot230	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot231	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot232	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot233	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot234	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot235	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot236	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot237	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot238	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot239	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot240	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot241	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot242	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot243	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot244	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot245	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot246	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot247	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot248	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot249	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot250	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot251	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot252	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot253	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot254	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot255	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot256	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot257	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot258	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot259	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot260	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot261	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot262	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot263	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot264	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot265	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot266	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot267	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot268	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot269	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot270	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot271	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot272	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot273	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot274	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot275	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot276	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot277	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot278	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot279	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot280	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot281	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot282	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot283	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot284	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot285	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot286	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot287	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot288	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot289	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot290	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot291	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot292	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot293	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot294	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot295	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot296	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot297	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot298	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot299	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot201	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot202	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot203	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot204	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot205	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot206	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot207	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot208	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot209	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot210	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot211	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot212	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot213	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot214	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot215	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot216	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot217	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot218	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot219	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot220	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot221	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot222	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot223	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot224	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot225	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot226	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot227	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot228	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot229	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot230	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot231	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot232	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot233	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot234	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot235	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot236	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot237	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot238	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot239	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot240	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot241	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot242	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot243	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot244	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot245	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot246	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot247	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot248	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot249	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot250	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot251	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot252	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot253	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot254	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot255	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot256	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot257	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot258	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot259	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot260	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot261	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot262	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot263	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot264	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot265	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot266	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot267	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot268	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot269	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot270	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot271	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot272	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot273	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot274	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot275	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot276	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot277	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot278	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot279	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot280	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot281	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot282	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot283	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot284	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot285	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot286	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot287	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot288	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot289	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot290	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot291	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot292	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot293	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot294	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot295	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot296	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot297	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot298	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot299	858
 
 
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot300	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot301	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot302	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot303	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot304	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot305	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot306	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot307	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot308	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot309	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot310	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot311	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot312	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot313	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot314	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot315	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot316	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot317	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot318	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot319	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot320	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot321	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot322	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot323	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot324	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot325	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot326	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot327	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot328	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot329	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot330	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot331	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot332	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot333	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot334	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot335	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot336	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot337	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot338	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot339	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot340	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot341	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot342	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot343	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot344	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot345	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot346	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot347	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot348	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot349	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot350	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot351	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot352	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot353	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot354	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot355	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot356	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot357	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot358	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot359	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot360	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot361	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot362	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot363	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot364	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot365	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot366	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot367	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot368	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot369	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot370	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot371	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot372	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot373	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot374	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot375	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot376	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot377	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot378	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot379	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot380	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot381	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot382	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot383	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot384	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot385	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot386	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot387	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot388	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot389	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot390	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot391	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot392	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot393	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot394	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot395	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot396	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot397	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot398	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot399	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot400	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot300	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot301	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot302	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot303	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot304	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot305	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot306	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot307	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot308	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot309	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot310	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot311	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot312	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot313	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot314	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot315	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot316	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot317	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot318	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot319	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot320	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot321	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot322	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot323	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot324	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot325	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot326	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot327	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot328	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot329	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot330	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot331	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot332	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot333	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot334	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot335	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot336	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot337	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot338	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot339	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot340	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot341	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot342	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot343	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot344	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot345	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot346	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot347	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot348	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot349	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot350	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot351	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot352	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot353	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot354	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot355	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot356	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot357	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot358	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot359	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot360	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot361	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot362	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot363	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot364	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot365	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot366	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot367	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot368	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot369	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot370	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot371	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot372	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot373	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot374	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot375	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot376	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot377	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot378	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot379	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot380	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot381	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot382	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot383	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot384	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot385	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot386	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot387	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot388	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot389	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot390	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot391	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot392	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot393	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot394	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot395	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot396	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot397	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot398	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot399	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot400	858
 
 
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot401	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot402	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot403	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot404	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot405	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot406	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot407	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot408	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot409	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot410	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot411	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot412	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot413	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot414	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot415	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot416	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot417	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot418	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot419	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot420	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot421	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot422	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot423	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot424	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot425	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot426	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot427	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot428	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot429	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot430	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot431	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot432	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot433	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot434	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot435	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot436	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot437	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot438	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot439	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot440	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot441	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot442	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot443	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot444	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot445	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot446	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot447	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot448	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot449	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot450	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot451	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot452	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot453	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot454	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot455	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot456	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot457	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot458	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot459	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot460	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot461	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot462	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot463	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot464	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot465	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot466	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot467	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot468	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot469	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot470	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot471	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot472	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot473	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot474	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot475	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot476	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot477	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot478	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot479	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot480	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot481	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot482	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot483	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot484	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot485	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot486	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot487	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot488	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot489	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot490	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot491	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot492	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot493	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot494	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot495	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot496	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot497	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot498	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot499	858
-vend_zone, 1, 1, 4	duplicate(vend_slot)	#vend_slot500	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot401	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot402	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot403	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot404	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot405	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot406	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot407	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot408	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot409	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot410	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot411	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot412	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot413	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot414	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot415	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot416	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot417	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot418	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot419	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot420	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot421	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot422	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot423	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot424	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot425	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot426	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot427	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot428	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot429	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot430	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot431	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot432	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot433	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot434	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot435	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot436	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot437	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot438	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot439	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot440	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot441	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot442	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot443	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot444	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot445	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot446	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot447	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot448	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot449	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot450	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot451	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot452	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot453	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot454	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot455	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot456	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot457	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot458	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot459	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot460	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot461	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot462	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot463	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot464	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot465	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot466	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot467	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot468	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot469	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot470	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot471	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot472	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot473	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot474	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot475	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot476	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot477	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot478	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot479	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot480	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot481	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot482	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot483	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot484	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot485	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot486	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot487	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot488	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot489	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot490	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot491	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot492	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot493	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot494	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot495	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot496	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot497	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot498	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot499	858
+prontera, 1, 1, 4	duplicate(vend_slot)	#vend_slot500	858

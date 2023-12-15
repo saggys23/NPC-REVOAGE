@@ -1,0 +1,156 @@
+
+
+-	script	compegather1	553,{
+
+OnGather:
+	mes "[ Compendium Manager ]";
+	mes "Today Collect Item List : ";
+	@collectdaily = 0;
+	.@i= .random;
+//	mes "Item : ^FF0000"+.questitem[.@i+2]+"^000000x ^0000FF"+getitemname(.questitem[.@i+1])+" ^000000[ID:"+.questitem[.@i+1]+"]";
+	mes "Item : ^FF0000"+.questitem[.@i+1]+"^000000x ^0000FF"+getitemname(.questitem[.@i])+" ^000000[ID:"+.questitem[.@i]+"]";
+//	if (countitem(.questitem[.@i+1]) >= .questitem[.@i+2]) @collectdaily = @collectdaily+1; 	
+	if (countitem(.questitem[.@i]) >= .questitem[.@i+1]) @collectdaily = @collectdaily+1; 
+	next;
+	switch(select("~ Complete Daily Quest:~ Wait, I still need some items!")){
+		case 1:
+			.@date = gettime(DT_DAYOFMONTH);
+			if (#collection1 >= .@date) {
+			mes "[^FF7700Compendium Manager^000000]";
+			mes "You have completed the daily mission today, or just relogin if you haven't."; 
+			break;
+			}
+			if (@collectdaily == 1) {
+//				delitem .questitem[.@i+1],.questitem[.@i+2];
+				delitem .questitem[.@i],.questitem[.@i+1];
+				set #collection1, .@date;
+				#Mission_Delay++;
+				mes "[^FF7700Compendium Manager^000000]";
+				mes "Congratulation! Here is your Reward.";
+				doevent("compendium_core::OnGetExpGather");
+				skilleffect 459,0;
+				skilleffect 34,0;
+				skilleffect 380,0;
+				break;
+			} else { 
+				mes "[^FF7700Compendium Manager^000000]"; 
+				mes "Are you try to trick me?!"; 
+				break;
+			}
+		case 2:
+			break;
+	}
+	end;
+
+OnHour00:
+.random = (rand(1,40)*2)-1;
+end;
+
+OnInit:
+	.random = (rand(1,40)*2)-1;
+	setarray .questitem[1],
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100;
+			
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			
+			
+			end;
+}
+
+-	script	compegather2	553,{
+
+OnGather:
+	mes "[ Compendium Manager ]";
+	mes "Today Collect Item List : ";
+	@collectdaily = 0;
+	.@i= .random;
+//	mes "Item : ^FF0000"+.questitem[.@i+2]+"^000000x ^0000FF"+getitemname(.questitem[.@i+1])+" ^000000[ID:"+.questitem[.@i+1]+"]";
+	mes "Item : ^FF0000"+.questitem[.@i+1]+"^000000x ^0000FF"+getitemname(.questitem[.@i])+" ^000000[ID:"+.questitem[.@i]+"]";
+//	if (countitem(.questitem[.@i+1]) >= .questitem[.@i+2]) @collectdaily = @collectdaily+1; 	
+	if (countitem(.questitem[.@i]) >= .questitem[.@i+1]) @collectdaily = @collectdaily+1; 
+	next;
+	switch(select("~ Complete Daily Quest:~ Wait, I still need some items!")){
+		case 1:
+			.@date = gettime(DT_DAYOFMONTH);
+			if (#collection2 >= .@date) {
+			mes "[^FF7700Compendium Manager^000000]";
+			mes "You have completed the daily mission today, or just relogin if you haven't."; 
+			break;
+			}
+			if (@collectdaily == 1) {
+//				delitem .questitem[.@i+1],.questitem[.@i+2];
+				delitem .questitem[.@i],.questitem[.@i+1];
+				set #collection2, .@date;
+				#Mission_Delay++;
+				mes "[^FF7700Compendium Manager^000000]";
+				mes "Congratulation! Here is your Reward.";
+				doevent("compendium_core::OnGetExpGather");
+				skilleffect 459,0;
+				skilleffect 34,0;
+				skilleffect 380,0;
+				break;
+			} else { 
+				mes "[^FF7700Compendium Manager^000000]"; 
+				mes "Are you try to trick me?!"; 
+				break;
+			}
+		case 2:
+			break;
+	}
+	end;
+
+OnHour00:
+//.random = rand(1,51)*6;
+.random = (rand(1,42)*2)-1;
+end;
+
+OnInit:
+	.random = (rand(1,42)*2)-1;
+	setarray .questitem[1],
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100,
+			911,100,538,100,1056,75,942,100,7006,75,931,100,1099,75,953,100,1042,100,1057,75,7033,75,1031,75,7004,100;
+			
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			//,7054,100
+			
+			
+			
+			
+			end;
+}
+
+
+
+
+payon,143,214,5	duplicate(compegather1)	Compegather	553
+payon,143,210,5	duplicate(compegather2)	Compegather	553

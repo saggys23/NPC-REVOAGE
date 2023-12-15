@@ -211,7 +211,7 @@ einbroch,72,206,4	duplicate(Premium Service)	Premium Service#einbr	532
 geffen,127,66,4	duplicate(Premium Service)	Premium Service#gef	532
 gonryun,162,126,4	duplicate(Premium Service)	Premium Service#gon	532
 hugel,102,148,4	duplicate(Premium Service)	Premium Service#hug	532
-prontera,146,98,4	duplicate(Premium Service)	Premium Service#izl	532	//Pre-RE: (132,120)
+//prontera,146,98,4	duplicate(Premium Service)	Premium Service#izl	532	//Pre-RE: (132,120)
 jawaii,248,134,4	duplicate(Premium Service)	Premium Service#jaw	532
 lighthalzen,154,104,4	duplicate(Premium Service)	Premium Service#lhz	532
 louyang,205,105,6	duplicate(Premium Service)	Premium Service#lou	532
