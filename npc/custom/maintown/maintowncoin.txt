@@ -27,7 +27,7 @@ OnPointGet:
 //	while(checkvending() >= 1 || checkchatting() == 1 || checkidle() >= .idle) {
 	while(checkvending() >= 1) {
 		if( .@mes$ == "" ) {
-			dispbottom set( .@mes$, "The hourly points event stopped because you were vending, chatting, or idle!" );
+			dispbottom set( .@mes$, "The hourly points event stopped because you were vending !" );
 			set @hourly_points_timer, 0;
 		}
 		sleep2 .delay;

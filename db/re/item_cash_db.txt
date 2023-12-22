@@ -20,7 +20,7 @@
 
 //    0: New
 0,35004,15000//Gacha egg
-0,35000,40000 //Headger Box
+0,35000,35000 //Headger Box
 0,3001,10000//Premium 1d
 0,3003,50000//Premium 7d
 0,3004,150000//Premium 30d
@@ -70,6 +70,9 @@
 
 //    3: Rental
 3,17162,10000//Boarding Halter7D
+3,14017,50000 //7D Allin one
+3,13802,10000 //1D BDB
+3,13783,50000 //7D BSB
 3,17263,10000//3D Concentration
 3,17264,15000//3D Awakening Potion
 3,17265,20000//3D Berserk Potion
